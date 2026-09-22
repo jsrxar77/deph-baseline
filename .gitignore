@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+
+# Rendered audio — large, and fully regenerable from the .strudel source via
+# node tools/sounds/render.mjs (see docs/sync-pipeline.md). Not worth tracking in git.
+media/*/sync/*.wav
+tools/visuals/public/*-audio.wav

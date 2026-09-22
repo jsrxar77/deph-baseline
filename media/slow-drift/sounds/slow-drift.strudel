@@ -1,0 +1,128 @@
+// "Slow Drift" — a generative ambient piece in the style of Brian Eno's tape-loop pieces
+// (Music for Airports, Discreet Music): four voices built from independent, mutually-prime
+// loop lengths (17, 19, 23, 13 cycles), so within any section the texture keeps recombining
+// instead of repeating. No drums, no fixed beat, anywhere.
+//
+// On top of that, arrange() lays out a ~6 minute arc — intro, development, climax,
+// deceleration, outro — as five sections per voice. Each voice is its own arrange() timeline
+// (not one arrange() of pre-mixed sections) so every instrument stays visible on its own
+// layer to the inspector (npm run inspect -- meditative.strudel --summary/--roll).
+//
+// Where a section fades, it's a real continuous ramp (saw/isaw over the whole section),
+// not a volume step — the arc should feel like the loops drifting into and out of earshot,
+// never like a mix fader move.
+
+setcpm(30) // 1 cycle = 2s. Section lengths below are chosen so the piece totals 360s (6:00).
+
+// Single source of truth for every voice's pitch material — mirrors this composition's
+// media/slow-drift/slow-drift.deph.yaml `key` field. Every scale()-based voice below builds its
+// octave-specific scale string from ROOT/KEY_SUFFIX rather than hardcoding a key anywhere else,
+// so changing the piece's mood is these two lines, not a search-and-replace across four voices.
+// Single-quoted on purpose: Strudel auto-runs every *double*-quoted string literal through its
+// mini-notation parser at parse time (even ones never used as a pattern), and a literal starting
+// with `:` isn't valid mini-notation — tested, this breaks with double quotes here.
+const ROOT = 'C';
+const KEY_SUFFIX = ':major';
+const KEY = ROOT + KEY_SUFFIX; // "C:major" — for reference/logging only, not used in any pattern call
+const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX; // e.g. scaleAt(4) => "C4:major"
+
+// Rebalanced from the original 24/40/56/36/24 split: the intro+development runway to reach full
+// texture was ~2:08, which read as visually/musically inert for too long once paired with an
+// audio-reactive video. Intro and development are now half as long; the freed time went into
+// climax and deceleration, so the piece stays 360s (6:00) but spends much more of it dense/loud.
+const T = { intro: 12, dev: 24, climax: 72, decel: 48, outro: 24 }; // 24+48+144+96+48 = 360s
+
+// ---- voices --------------------------------------------------------------
+// Each builder takes a gain — a plain number, or a continuous gain-pattern (saw/isaw/sine
+// ramps) for sections that fade — so one definition covers every section of that voice.
+
+// Voice A — low drone, the floor of the piece. Root/fifth alternation (scale degrees 0 and 4,
+// not literal note names), ~34s per note (.slow(17) at 2s/cycle), always present somewhere in
+// the piece.
+const drone = (g, lpfHz = 500) =>
+  n("<0 4>")
+    .scale(scaleAt(2))
+    .slow(17)
+    .s("sine")
+    .attack(6).release(10).sustain(1)
+    .gain(g)
+    .lpf(lpfHz)
+    .room(0.9).size(0.95)
+    .pan(0.35);
+
+// Voice D — sub pulse, barely audible. Anchors the piece without ever becoming a beat.
+const sub = (g) =>
+  n("0")
+    .scale(scaleAt(1))
+    .slow(19)
+    .s("sine")
+    .attack(4).release(8).sustain(1)
+    .gain(g)
+    .lpf(200);
+
+// Voice B — mid pad, a sparse major-9 phrase (root, 3rd, 5th, 7th, 9th — diatonic degrees
+// 0,2,4,6,8, not 0,4,7,11,14: scale() counts scale steps, not semitones). `wide` layers a quiet
+// octave-up echo on top for the climax — more air, not more notes.
+const pad = (g, wide = false) => {
+  const base = n("0 ~ ~ 2 ~ ~ ~ 4 ~ ~ 6 ~ ~ ~ 8 ~")
+    .scale(scaleAt(4))
+    .slow(23)
+    .s("triangle")
+    .attack(3).release(6).sustain(0.4)
+    .gain(g)
+    .lpf(sine.slow(41).range(700, 1600))
+    .room(0.85).size(0.9)
+    .pan(sine.slow(29).range(0.2, 0.8));
+  return wide ? base.superimpose((x) => x.add(note(12)).gain(0.5)) : base;
+};
+
+// Voice C — sparse high bells, the "generative events" layer. `density` is the degradeBy
+// probability (lower = more notes survive); climax uses a lower value so more of the phrase
+// is heard, without changing the phrase itself.
+const bells = (g, density = 0.5) =>
+  n("0 ~ 4 ~ ~ 7 ~ 9 ~ ~ 12 ~ ~ 14 ~ ~")
+    .scale(scaleAt(5))
+    .slow(13)
+    .degradeBy(density)
+    .s("sine")
+    .attack(0.05).release(3).sustain(0.2)
+    .gain(g)
+    .lpf(4000)
+    .room(0.95).size(0.95)
+    .pan(perlin.range(0, 1));
+
+// ---- arrangement -----------------------------------------------------------
+// Every voice is arranged over the same five section lengths; a silent section is just
+// `silence` — no drone/pad/bells means that voice contributes nothing there, not zero-gain.
+
+$: arrange(
+  [T.intro, drone(saw.slow(T.intro).range(0.08, 0.22))], // fades in from a soft floor, not true silence
+  [T.dev, drone(0.22, 650)],
+  [T.climax, drone(0.32, 900)], // climax = more presence and a more open filter, not louder attack
+  [T.decel, drone(0.2, 550)],
+  [T.outro, drone(isaw.slow(T.outro).range(0, 0.18))], // fades back to nothing
+)
+
+$: arrange(
+  [T.intro, silence],
+  [T.dev, sub(sine.slow(T.dev).range(0.05, 0.16))], // enters gradually partway into development
+  [T.climax, sub(0.18)],
+  [T.decel, sub(isaw.slow(T.decel).range(0, 0.14))],
+  [T.outro, silence],
+)
+
+$: arrange(
+  [T.intro, silence],
+  [T.dev, pad(saw.slow(T.dev).range(0.07, 0.2))], // enters early in development, fading up from a floor
+  [T.climax, pad(0.26, true)], // wide: quiet octave-up echo layered on top
+  [T.decel, pad(isaw.slow(T.decel).range(0, 0.16))],
+  [T.outro, silence],
+)
+
+$: arrange(
+  [T.intro, silence],
+  [T.dev, silence], // held back until the climax so it reads as an arrival, not a texture
+  [T.climax, bells(0.2, 0.3)], // denser: more of the phrase survives degradeBy
+  [T.decel, bells(0.14, 0.7)], // thinning out
+  [T.outro, silence],
+)

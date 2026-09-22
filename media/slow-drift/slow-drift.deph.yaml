@@ -1,0 +1,28 @@
+name: slow-drift
+title: Slow Drift
+created: 2026-09-22
+key: C:major
+tempo:
+  cpm: 30 # setcpm(30) in sounds/slow-drift.strudel — 1 cycle = 2s. Single source of truth
+          # is the .strudel file itself; this mirrors it for tools that don't parse Strudel.
+arc:
+  - { name: intro, cycles: 12 }
+  - { name: development, cycles: 24 }
+  - { name: climax, cycles: 72 }
+  - { name: deceleration, cycles: 48 }
+  - { name: outro, cycles: 24 }
+# Rebalanced from the original 24/40/56/36/24 — the audio-reactive video made the ~2:08 runway to
+# full texture read as inert; freed time went into climax/deceleration, so total_cycles is unchanged.
+total_cycles: 180 # 360s = 6:00 exactly, at cpm 30
+domains:
+  sound:
+    status: done
+    file: sounds/slow-drift.strudel
+    variant: sounds/slow-drift-loop-only.strudel # unarranged, 4-voice comparison version
+  visual:
+    status: in-progress # first working pass: WebGL Julia-set visualizer, audio-reactive, real audio.wav wired in
+    entry: tools/visuals/src/compositions/slow-drift/ # not visuals/ — see the visuals-compose skill for why
+  sync:
+    status: in-progress # audio.wav done; frames.json + manifest.json (video keyframes) not built yet
+    output: sync/ # audio.wav rendered via tools/sounds/render.mjs (synth-only, 48kHz, 364s incl. 4s tail)
+doc: slow-drift.md

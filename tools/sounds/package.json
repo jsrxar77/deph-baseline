@@ -1,0 +1,25 @@
+{
+  "name": "strudel-sounds-tools",
+  "version": "1.0.0",
+  "description": "Headless Node tooling for deph's media/<name>/sounds/ Strudel compositions (inspector, and eventually the sync pipeline)",
+  "scripts": {
+    "inspect": "node inspect.mjs",
+    "render": "node render.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@strudel/core": "^1.2.6",
+    "@strudel/mini": "^1.2.6",
+    "@strudel/tonal": "^1.2.6",
+    "@strudel/transpiler": "^1.2.6",
+    "@strudel/webaudio": "^1.3.0",
+    "node-web-audio-api": "^2.2.0"
+  },
+  "engines": {
+    "node": ">=22.15"
+  }
+}
