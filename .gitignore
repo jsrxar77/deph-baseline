@@ -5,3 +5,9 @@ node_modules/
 # node tools/sounds/render.mjs (see docs/sync-pipeline.md). Not worth tracking in git.
 media/*/sync/*.wav
 tools/visuals/public/*-audio.wav
+
+# Rendered videos — several GB each, fully regenerable with `npx remotion render` (see the
+# visuals-compose skill). Kept next to their composition in media/<name>/renders/, never in git.
+media/*/renders/*.mp4
+media/*/renders/*.mov
+media/*/renders/*.webm

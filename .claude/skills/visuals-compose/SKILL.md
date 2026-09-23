@@ -13,17 +13,26 @@ drift apart.
 
 ## Where the code actually goes (correction to the original plan)
 
-**Not `media/<name>/visuals/`.** That was the original plan (mirroring `media/<name>/sounds/`), but
+**Not in `media/<name>/visuals/`.** That was the original plan (mirroring `media/<name>/sounds/`), but
 Remotion's bundler (Rspack/webpack, configured in `tools/visuals/remotion.config.ts`) resolves
-`node_modules` by walking up from each source file's own directory — a file outside `tools/visuals/`
-entirely can never find `tools/visuals/node_modules`, so `import ... from "remotion"` fails with
-`Module not found`, both in `tsc` and in the actual bundler (tested: identical error from both).
+`node_modules` from a source file's **real path**, so a file under `media/` can never find
+`tools/visuals/node_modules`. Tested twice: importing `remotion` from a file outside `tools/visuals/`
+fails with `Module not found` (identical from `tsc` and the bundler); and a symlink from `tools/` into
+`media/` (real code in `media/`) resolved `remotion` and `react` but failed on `@remotion/media-utils`.
 
 **Actual location: `tools/visuals/src/compositions/<name>/`** — a subfolder per composition, inside
-the engine's own source tree, so normal module resolution works. `media/<name>/visuals/` still exists
-per the composition folder scaffold, but for now stays empty (or holds non-code notes/references,
-never the component code itself) — this is a known, deliberate deviation from the folder's original
-intent, not an oversight.
+the engine's own source tree, so normal module resolution works.
+
+**`media/<name>/visuals/` is a symlink to it, in that direction only.** When you create the code folder,
+replace the scaffold's empty `media/<name>/visuals/` directory with a relative link:
+
+```
+rmdir media/<name>/visuals && ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals
+```
+
+The bundler never sees the link (it only reads `tools/`), git stores it as a tiny file, and opening the
+composition's folder shows its sound, visual, sync and renders side by side. Never put code in the link's
+`media/` side or make the link point into `media/`.
 
 Register the composition in `tools/visuals/src/Composition.tsx` (import from
 `./compositions/<name>/...`) and make sure `tools/visuals/src/Root.tsx` renders it.
@@ -145,6 +154,21 @@ tiling them into one contact sheet (`ffmpeg ... hstack/vstack`) — a single fra
   (-log of the last step, direction of the last step) instead of a threshold-based one.
 - Any angle used as a palette phase should span an integer number of palette cycles (`k / (2π)`), or the
   `atan` branch cut leaves a visible seam.
+
+## Where the compiled video goes: `media/<name>/renders/`
+
+Render final videos from `tools/visuals/` straight into the composition's own folder:
+
+```
+npx remotion render <CompositionId> ../../media/<name>/renders/<name>.mp4
+```
+
+`renders/` is git-ignored (`media/*/renders/*.mp4|mov|webm`): a 6-minute 1080p60 file is 2-3 GB. Not
+`sync/` (that is the audio/video bridge data), and not `~/Movies` or the Desktop, which are outside the
+project — a file left on the Desktop vanished once, and a render can fail with `ENOSPC` when the disk fills
+(clear intermediates first; renders need a few GB of temp space plus the output). Only one render should run
+at a time: two writing the same output file corrupt each other, and `pkill -f` on the command string can miss
+the node child — list with `ps -eo pid,lstart,command | grep "[.]bin/remotion render"` and kill by PID.
 
 ## Encoding for YouTube (codec check)
 

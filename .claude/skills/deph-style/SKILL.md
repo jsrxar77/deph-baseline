@@ -134,6 +134,11 @@ Entry format: `date — decision — reason/evidence — where it lives`.
 - 2026-09-23 — Video encoding aligned with YouTube's recommended format (yuv420p, limited range, BT.709 tags in
   `remotion.config.ts`) — the render was yuvj420p full-range/untagged; existing `slow-drift-v2.mp4` predates the
   fix — `visuals-compose`.
+- 2026-09-23 — Compiled videos live in `media/<name>/renders/` (git-ignored), not `~/Movies` — composition-first
+  layout: everything of a piece lives in its own folder — `CLAUDE.md`, `visuals-compose`, `deph-compose`.
+- 2026-09-23 — `media/<name>/visuals` is a symlink to `tools/visuals/src/compositions/<name>` (never the other way
+  round) — tested: real code in `media/` fails to resolve packages like `@remotion/media-utils` — user asked whether
+  a symlink could work — `CLAUDE.md`, `visuals-compose`, `deph-compose`.
 
 ## Entry template
 

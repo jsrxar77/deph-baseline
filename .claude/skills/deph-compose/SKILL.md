@@ -36,13 +36,16 @@ media/<name>/
   sounds/
   visuals/
   sync/
+  renders/             (compiled final videos; git-ignored — see the visuals-compose skill)
 ```
 
-Always create all three subfolders together, even if only one domain was requested — an audio-only piece
+Always create all four subfolders together, even if only one domain was requested — an audio-only piece
 today may get a visual later, and `strudel-sync` expects `sync/` to already exist rather than creating
-top-level structure itself (it only writes files, not folders). `visuals/` is created too for
-consistency, but stays empty in practice — see the `visuals-compose` skill for where the actual Remotion
-code goes instead (`tools/visuals/src/compositions/<name>/`, not here; found by testing, not planned).
+top-level structure itself (it only writes files, not folders). `visuals/` is created too, as an empty directory: the real Remotion code lives in
+`tools/visuals/src/compositions/<name>/` (the bundler can't resolve `node_modules` from `media/`), and
+`visuals-compose` later replaces this empty directory with a symlink to it
+(`ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals`). Compiled videos go in
+`renders/`.
 
 The yaml — see `media/slow-drift/slow-drift.deph.yaml` for a filled-in example:
 

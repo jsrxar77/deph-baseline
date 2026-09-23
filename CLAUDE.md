@@ -25,14 +25,21 @@ inside that piece's own folder, rather than grouped by media type across the who
     folder already scopes everything to a single piece.
   - **`media/<name>/sounds/`** — the Strudel side: `<name>.strudel` plus any variant files (e.g. an
     unarranged comparison version). This is where `strudel-compose` writes.
-  - **`media/<name>/visuals/`** — reserved by the scaffold but, in practice, stays empty. The original
-    plan was for this to hold the actual Remotion composition code, mirroring `sounds/`; that turned out
-    not to work — Remotion's bundler can't resolve `node_modules` for a file outside `tools/visuals/`'s
-    own tree (tested directly, not assumed). The real code lives in
-    `tools/visuals/src/compositions/<name>/` instead — see the `visuals-compose` skill for the full
-    reasoning and the other corrections found alongside it (audio wiring, WebGL renderer config).
+  - **`media/<name>/visuals/`** — a **symlink** to the real Remotion code,
+    `../../tools/visuals/src/compositions/<name>` (relative), so opening the composition's folder shows its
+    whole visual side. The code itself cannot live here: Remotion's bundler resolves `node_modules` from a
+    file's real path, and a file under `media/` cannot find `tools/visuals/node_modules` (tested with a
+    symlink from `tools/` into `media/`: `remotion` and `react` resolved, but `@remotion/media-utils` failed
+    with `Module not found`). The link points the other way, into `tools/`, which the bundler never sees.
+    Until a visual exists the folder is just an empty directory; `visuals-compose` replaces it with the
+    link when it creates the code folder. See that skill for the other corrections found alongside it
+    (audio wiring, WebGL renderer config, YouTube color format).
   - **`media/<name>/sync/`** — rendered bridge output for this piece: `audio.wav`, `frames.json`,
     `manifest.json`. Not built yet; see `docs/sync-pipeline.md`. This is where `strudel-sync` writes.
+  - **`media/<name>/renders/`** — the piece's compiled final videos (`.mp4`), rendered with
+    `npx remotion render <CompositionId> ../../media/<name>/renders/<name>.mp4` from `tools/visuals/`.
+    Git-ignored (several GB each, regenerable). Not `sync/`, which is the audio/video bridge data, and not
+    `~/Movies` or the Desktop, which sit outside the project (a file left on the Desktop vanished once).
 - **`/docs`** — cross-cutting documentation only: the composing workflow (`composition-workflow.md`), the
   audio/video sync pipeline spec (`sync-pipeline.md`), the visuals-bridge overview
   (`visuals-bridge.md`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
