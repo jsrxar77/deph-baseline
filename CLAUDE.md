@@ -57,7 +57,10 @@ inside that piece's own folder, rather than grouped by media type across the who
   - `strudel-sync` — rendering a finished piece to audio + frame-numbered keyframes in `sync/`.
   - `visuals-compose` — building the actual Remotion composition (in `tools/visuals/src/compositions/`,
     wiring in the real `audio.wav`).
-  Not one catch-all skill; each covers exactly one step of the pipeline above.
+  - `deph-style` — not a pipeline step: the accumulating record of deph's evolving style (what the user liked
+    and rejected and why, measured findings, how they like to work, open questions, a dated decision log).
+    Read it before proposing a creative direction; **append to it after every user-guided creative decision.**
+  Apart from `deph-style`, no catch-all skill; each covers exactly one step of the pipeline above.
 - `test.strudel` at the project root is the inspector's own scratch fixture, not a composition — it
   stays at the root, not under `/media`.
 
@@ -156,7 +159,11 @@ Renders the *whole* piece (not a preview window — `--cycles` is required, use 
 `total_cycles`) through the real Strudel audio engine (`superdough`) via `node-web-audio-api`'s
 `OfflineAudioContext`, no browser. Synth-only for now (samples like `s("bd")` aren't supported yet — no
 piece composed so far has needed them). `--tail` (default 3s) leaves room for a release/reverb decay
-after the last event to finish. Output goes to that composition's `sync/` folder — see the `strudel-sync`
+after the last event to finish. The renderer guards against an intermittent engine lockup (output frozen
+on one repeating 128-sample block): it waits for reverb impulse responses to finish generating, suppresses
+node cleanup during the render, refuses to write a file where that block repeats for 2+ seconds, and
+re-runs itself up to 3 times — and it warns if two voices with different reverb `size` share an `orbit`
+(give each its own `.orbit(n)`; see `strudel-compose`). Output goes to that composition's `sync/` folder — see the `strudel-sync`
 skill and `docs/sync-pipeline.md` for the full pipeline (including what's still missing: `frames.json`/
 `manifest.json` for the video side).
 

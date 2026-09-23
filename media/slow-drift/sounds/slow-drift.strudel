@@ -26,6 +26,14 @@ const KEY_SUFFIX = ':major';
 const KEY = ROOT + KEY_SUFFIX; // "C:major" — for reference/logging only, not used in any pattern call
 const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX; // e.g. scaleAt(4) => "C4:major"
 
+// Tuning: A4 = 432 Hz instead of the standard 440. Strudel converts every note to Hz with A4 = 440
+// baked in, so the whole piece is shifted by the semitone distance between the two references
+// (12 * log2(432/440) = -0.3177 semitones, about -31.8 cents). `tune()` is applied to every pitched
+// voice's note pattern below; the binaural layer at the bottom is specified in Hz from the same A4.
+const A4 = 432;
+const TUNE = 12 * Math.log2(A4 / 440);
+const tune = (p) => p.add(note(TUNE));
+
 // Rebalanced from the original 24/40/56/36/24 split: the intro+development runway to reach full
 // texture was ~2:08, which read as visually/musically inert for too long once paired with an
 // audio-reactive video. Intro and development are now half as long; the freed time went into
@@ -40,21 +48,25 @@ const T = { intro: 12, dev: 24, climax: 72, decel: 48, outro: 24 }; // 24+48+144
 // not literal note names), ~34s per note (.slow(17) at 2s/cycle), always present somewhere in
 // the piece.
 const drone = (g, lpfHz = 500) =>
-  n("<0 4>")
+  tune(n("<0 4>")
     .scale(scaleAt(2))
-    .slow(17)
+    .slow(17))
     .s("sine")
     .attack(6).release(10).sustain(1)
     .gain(g)
     .lpf(lpfHz)
-    .room(0.9).size(0.95)
+    // .orbit(n) on every voice that uses reverb: superdough keeps ONE reverb per orbit and regenerates
+    // its impulse response whenever an event with a different `size` arrives. Voices with different
+    // sizes (drone 0.95, pad 0.9, bells 6) sharing the default orbit made that reverb swap under
+    // everything already ringing — and in the headless render it froze the engine into a steady tone.
+    .room(0.9).size(0.95).orbit(1)
     .pan(0.35);
 
 // Voice D — sub pulse, barely audible. Anchors the piece without ever becoming a beat.
 const sub = (g) =>
-  n("0")
+  tune(n("0")
     .scale(scaleAt(1))
-    .slow(19)
+    .slow(19))
     .s("sine")
     .attack(4).release(8).sustain(1)
     .gain(g)
@@ -64,14 +76,19 @@ const sub = (g) =>
 // 0,2,4,6,8, not 0,4,7,11,14: scale() counts scale steps, not semitones). `wide` layers a quiet
 // octave-up echo on top for the climax — more air, not more notes.
 const pad = (g, wide = false) => {
-  const base = n("0 ~ ~ 2 ~ ~ ~ 4 ~ ~ 6 ~ ~ ~ 8 ~")
+  const base = tune(n("0 ~ ~ 2 ~ ~ ~ 4 ~ ~ 6 ~ ~ ~ 8 ~")
     .scale(scaleAt(4))
-    .slow(23)
+    .slow(23))
     .s("triangle")
-    .attack(3).release(6).sustain(0.4)
+    // decay was never set explicitly — defaulted to superdough's own 0.05s (same finding as
+    // bells, see that voice's comments), meaning gain went attack(3s, a slow rise)->peak->
+    // decay(0.05s)->sustain(0.4) as a hard, near-instant drop right after the slow build-up. That
+    // contrast (gentle for 3s, then a snap) is exactly the shape of a "clap"-sounding artifact on a
+    // technically clean signal. decay(1.5) gives the drop from peak to sustain real time to happen.
+    .attack(3).decay(1.5).release(6).sustain(0.4)
     .gain(g)
     .lpf(sine.slow(41).range(700, 1600))
-    .room(0.85).size(0.9)
+    .room(0.85).size(0.9).orbit(2) // own orbit — see drone
     .pan(sine.slow(29).range(0.2, 0.8));
   return wide ? base.superimpose((x) => x.add(note(12)).gain(0.5)) : base;
 };
@@ -79,17 +96,105 @@ const pad = (g, wide = false) => {
 // Voice C — sparse high bells, the "generative events" layer. `density` is the degradeBy
 // probability (lower = more notes survive); climax uses a lower value so more of the phrase
 // is heard, without changing the phrase itself.
-const bells = (g, density = 0.5) =>
-  n("0 ~ 4 ~ ~ 7 ~ 9 ~ ~ 12 ~ ~ 14 ~ ~")
+//
+// FM bell synthesis, not a plain sine: a bare sine (or a sine + reverb) is a pure tone, and a pure
+// tone is exactly what a real bell *isn't* — a struck bell rings with an inharmonic cluster of
+// partials, not integer-related overtones. Two layered FM operators at different non-integer
+// ratios (not one) for a denser partial spectrum — a single carrier+modulator pair reads as a
+// simple "buzz", real bell patches (classic DX7 designs included) stack more than one. Both layers
+// share one `notes` pattern (built once, `degradeBy` applied once) rather than each calling
+// `degradeBy` independently — Strudel patterns are pure functions of position, so two separate
+// `degradeBy(density)` calls on identical pattern structure would *probably* pick the same events,
+// but sharing one pattern object removes that doubt entirely instead of relying on an assumption.
+//
+// fmattack(0.012), not 0: an FM modulation index that jumps from 0 to full in a single sample is a
+// genuine discontinuity (a "zip" artifact, a known FM synthesis gotcha), audible as a harsh
+// click/glitch on every hit — this was reported directly and confirmed as the likely cause (no
+// waveform clipping was found on any hit when checked, which pointed at a frequency-domain
+// discontinuity rather than an amplitude one). A real struck object's transient also isn't
+// mathematically instantaneous, so 12ms costs nothing perceptually.
+//
+// Kept subtler than the other three voices on purpose (lower gain here, not just quieter — see the
+// arrange() calls below) — this is a "generative events" accent layer, not a fifth main voice.
+const bells = (g, density = 0.5) => {
+  // Pedal on G, sparse: degrees 4,5,4,2 (G A G E). G is the anchor (half the notes) and it is also the
+  // drone's own second note, so the bells hover on something already in the harmony; A and E are its
+  // neighbors, never more than a third away. Four notes per pass, one every 4 steps (~6.5s), thinned by
+  // degradeBy. Chosen by measurement, not by ear: against the pad (C E G B D, plus an octave-up copy in
+  // the climax) the previous phrase C E G E put 2 of 21 bell hits a semitone away from a sounding pad
+  // note (bell C against pad B); this one puts 0 there. It also has no C and no third-above-root
+  // arpeggio shape, so it doesn't read as a major-triad lullaby. Earlier phrases: an arpeggio
+  // (0 4 7 9 12 14) that climbed in wide leaps, then 0 2 4 2 (too tuneful, 2 semitone rubs).
+  const notes = tune(n("4 ~ ~ ~ 5 ~ ~ ~ 4 ~ ~ ~ 2 ~ ~ ~")
     .scale(scaleAt(5))
     .slow(13)
-    .degradeBy(density)
-    .s("sine")
-    .attack(0.05).release(3).sustain(0.2)
-    .gain(g)
-    .lpf(4000)
-    .room(0.95).size(0.95)
-    .pan(perlin.range(0, 1));
+    .degradeBy(density));
+
+  const strike = (p) =>
+    p
+      .s("sine")
+      // decay was never set explicitly — defaulted to superdough's own 0.05s (confirmed by reading
+      // registerSynthSounds' default ADSR array), so gain snapped attack(0.05)->peak->decay(0.05)
+      // ->sustain(0.15) in two fast, back-to-back stages: a sharp "snap" shape, not a swell. That's
+      // the most likely source of a perceived "clap"/glitch on each hit even though two separate
+      // waveform checks (a raw clipping/jump scan, and a level-rise scan across a real multi-note
+      // phrase) found no actual digital artifact — every anomaly traced back to either the natural
+      // FM attack transient or a legitimate next-note onset, not a rendering defect. A real decay
+      // gives the peak-to-sustain transition room to be a transition, not a snap.
+      //
+      // Follow-up: even with a real decay, the strike still read as "seco"/"cortante" (dry, cutting)
+      // rather than giving a "pedal" impression (notes ringing into and blending with each other) —
+      // reported directly after the clap fix. The remaining cause was the envelope's *shape*, not a
+      // defect: attack(0.05)->decay(0.3) rises fast then drops hard down to a low sustain(0.15) —
+      // that steep rise-then-drop is itself a percussive "pluck" contour, independent of how long the
+      // release tail afterward is. sustain(0.35)/decay(0.6) softens that drop so the strike doesn't
+      // fall away right after impact, and delayfeedback(0.25 -> 0.45 below) makes the echoes actually
+      // overlap and accumulate into a wash instead of thinning out fast — that overlap is the literal
+      // mechanism of a sustain pedal (strings/notes ringing together), not just a longer tail.
+      .attack(0.05).decay(0.6).release(6).sustain(0.35) // release 4.5 -> 6: fewer bells, each rings longer
+      .fmattack(0.012).fmdecay(0.35).fmsustain(0.06).fmenv('exp') // the clang fades faster than the tone
+      .lpf(2800)
+      // `size` is the reverb's actual decay time in seconds (confirmed by reading
+      // superdough's reverbGen.mjs), not an abstract 0-1 knob — 0.95 was under a second of tail,
+      // which is why heavy `room` send still read as dry. 6s is a real ring-out, not a mistake.
+      .room(0.95).size(9).orbit(3) // size 6 -> 9s tail (sparser bells, more space); own orbit — see drone
+      // A long, non-metric delay for extra space without implying a beat (this piece has none on
+      // purpose) — time isn't a round musical fraction. feedback raised 0.25 -> 0.45 specifically for
+      // the "pedal" overlap above; still comfortably below runaway/self-oscillation territory.
+      .delay(0.4).delaytime(1.13).delayfeedback(0.55) // more/longer echoes to fill the gaps; 1.13s still not a musical fraction
+      .pan(perlin.range(0, 1)); // evaluated per layer — a little natural width between the two
+
+  return stack(
+    // Integer fmh, on purpose: a measured single hit with the previous ratios (1.4 and 2.4, Chowning's
+    // metallic bell) had strong partials at 0.4x, 2.4x and 3.4x the note's frequency, only ~20 dB below
+    // the note itself. Those are not scale tones — for an E5 the 0.4x partial lands near 259 Hz, a
+    // slightly sharp C4, right on top of the pad's C4 and the binaural carrier. It was reported as
+    // "something isn't right with the bells" and traced to this, not to the notes. With fmh 2 and 3 the
+    // spectrum is only 1x and 3x (the note and its twelfth: a B over an E), all harmonic (about 1 cent
+    // from a true harmonic vs about 260 cents before) and the loudness is unchanged (-27.1 vs -27.4 dB RMS).
+    // Trade: a warmer glass/singing-bowl tone instead of a metallic struck bell.
+    strike(notes.fm(1.0).fmh(2)).gain(g), // primary
+    strike(notes.fm(0.5).fmh(3)).gain(g * 0.5), // secondary, quieter — adds the twelfth
+  );
+};
+
+// Voice E — binaural layer: a sine hard-left and a sine hard-right whose frequencies differ by `beatHz`.
+// Through headphones each ear gets its own tone and the brain perceives a slow pulse at the
+// difference; on speakers the two just mix into an ordinary slow amplitude beat. Carrier is C4 in the
+// piece's own tuning (so it sits on the pad's root, not against it), split symmetrically (+/- half the
+// beat) so the pair stays centered on pitch. Deliberately DRY (no room/delay): the reverb sums both
+// channels, which would smear exactly the left/right separation the effect depends on. One long note
+// per section (.slow(cycles)) so nothing retriggers; attack/release overlap the sections into a
+// crossfade. Beat moves down the arc, alpha -> theta: 10, 8, 6, 5, 4 Hz.
+const CARRIER = A4 * Math.pow(2, -9 / 12); // C4 with A4 = 432 -> 256.87 Hz
+const binaural = (beatHz, cycles, g) =>
+  stack(
+    freq(CARRIER - beatHz / 2).s("sine").pan(0),
+    freq(CARRIER + beatHz / 2).s("sine").pan(1),
+  )
+    .slow(cycles)
+    .attack(4).release(6).sustain(1)
+    .gain(g);
 
 // ---- arrangement -----------------------------------------------------------
 // Every voice is arranged over the same five section lengths; a silent section is just
@@ -112,17 +217,37 @@ $: arrange(
 )
 
 $: arrange(
-  [T.intro, silence],
-  [T.dev, pad(saw.slow(T.dev).range(0.07, 0.2))], // enters early in development, fading up from a floor
+  // Enters during the intro now, not just development — a listener landing on this within the
+  // first few seconds should hear more than a single bare drone; kept very quiet (0.02-0.07) so
+  // it's texture, not a second "main" voice competing with the drone this early.
+  [T.intro, pad(saw.slow(T.intro).range(0.02, 0.07))],
+  [T.dev, pad(saw.slow(T.dev).range(0.07, 0.2))], // continues fading up from where intro left off
   [T.climax, pad(0.26, true)], // wide: quiet octave-up echo layered on top
   [T.decel, pad(isaw.slow(T.decel).range(0, 0.16))],
   [T.outro, silence],
 )
 
 $: arrange(
-  [T.intro, silence],
+  // A brief "cold open" teaser — 2 cycles (4s) of the same bell phrase heard properly at the
+  // climax, at a lower degradeBy so a hit or two survives — then back to silence for the rest of
+  // intro/development. Retention hook for a first-time listener (esp. on YouTube, where the first
+  // few seconds decide whether they stay) without diluting the climax's own arrival: the bells are
+  // still silent for over a minute after this before returning for real.
+  // Gains lowered twice now (0.16→0.10→0.06 teaser, 0.2→0.13→0.08 climax, 0.14→0.09→0.055 decel) —
+  // still reported as too prominent after the first reduction. This is meant to be a subtle accent
+  // layer, not a fifth voice competing for attention. Ratios between sections kept the same.
+  [2, bells(0.06, 0.3)],
+  [T.intro - 2, silence],
   [T.dev, silence], // held back until the climax so it reads as an arrival, not a texture
-  [T.climax, bells(0.2, 0.3)], // denser: more of the phrase survives degradeBy
-  [T.decel, bells(0.14, 0.7)], // thinning out
+  [T.climax, bells(0.08, 0.3)], // denser: more of the phrase survives degradeBy
+  [T.decel, bells(0.055, 0.7)], // thinning out
   [T.outro, silence],
+)
+
+$: arrange(
+  [T.intro, binaural(10, T.intro, 0.03)],
+  [T.dev, binaural(8, T.dev, 0.045)],
+  [T.climax, binaural(6, T.climax, 0.05)],
+  [T.decel, binaural(5, T.decel, 0.045)],
+  [T.outro, binaural(4, T.outro, 0.03)],
 )

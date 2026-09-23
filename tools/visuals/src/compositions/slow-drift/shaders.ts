@@ -29,6 +29,8 @@ uniform float uHigh;       // 0-1, high energy (bells/transients)
 uniform float uColorOffset; // slow, continuous palette phase cycle
 uniform float uIterBase;   // base iteration depth, before uHigh modulation
 uniform vec2 uSeed;        // fixed per-composition Julia-constant anchor
+uniform vec2 uCam;         // camera center in fractal space (framing.ts)
+uniform float uSignature;  // 1 = creation-torus ripple on, 0 = off (see SIGNATURE_ENABLED in FractalVisualizer.tsx)
 
 const int MAX_ITER = 340; // hard cap so uHigh modulation can't blow the render budget
 
@@ -50,24 +52,38 @@ vec3 palette(float t) {
   return mix(c4, c1, (tt - 0.85) / 0.15);
 }
 
-// Returns (smoothIterationRatio, insideSet ? 1.0 : 0.0, orbitTrapDistance).
+// Returns (smoothIterationCount, insideSet ? 1.0 : 0.0, orbitTrapDistance). The count is absolute
+// (not divided by iterMax): far-away points escape in a few iterations and near-boundary points take
+// many, so a color cycle over the raw count draws contour bands that hug the set's shape at EVERY
+// distance. Dividing by iterMax (the earlier version) squashed all exterior points into one tiny
+// range of the palette, which is what left the space around the fractal as flat, empty gradient.
 vec3 juliaEscape(vec2 uv, vec2 c, float iterMax) {
   vec2 z = uv;
-  float trap = 1000.0;
+  vec2 dz = vec2(1.0, 0.0);
+  float step2 = 1.0;
   for (int j = 0; j < MAX_ITER; j++) {
-    if (float(j) >= iterMax) {
-      return vec3(1.0, 1.0, trap); // stayed inside the set
-    }
-    z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
-    trap = min(trap, dot(z, z));
+    if (float(j) >= iterMax) break;
+    vec2 zNext = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
+    dz = zNext - z;
+    step2 = dot(dz, dz);
+    z = zNext;
     float d2 = dot(z, z);
-    if (d2 > 4.0) {
+    if (d2 > 256.0) {
       float logZn = log(d2) * 0.5;
       float nu = log(logZn / log(2.0)) / log(2.0);
-      return vec3((float(j) + 1.0 - nu) / iterMax, 0.0, trap);
+      return vec3(float(j) + 1.0 - nu, 0.0, 0.0);
     }
+    // Converged to an attracting point (threshold sits above float32 rounding noise, ~1e-14).
+    if (step2 < 1e-12) break;
   }
-  return vec3(1.0, 1.0, trap);
+  // Interior. Two continuous dynamical quantities, both smooth across the whole basin even when the
+  // orbit converges too slowly to ever stop (|multiplier| near 1 — which is exactly when the basin is
+  // huge and the frame would otherwise be one flat color, leaving only the signature rings visible):
+  //   x = how far the orbit still is from settling (-log of its last step), which contours the basin
+  //       around its attractor, and
+  //   z = the direction of that last step, which winds around the attractor and, combined with x,
+  //       draws spiral arms rather than plain rings.
+  return vec3(-log(max(step2, 1e-14)), 1.0, atan(dz.y, dz.x));
 }
 
 float hash(vec2 p) {
@@ -86,12 +102,21 @@ vec4 colorAt(vec2 uv, vec2 c, float iterMax) {
   vec3 result = juliaEscape(uv, c, iterMax);
   vec3 deepBg = vec3(0.0196, 0.0196, 0.0314); // #050508 obsidiana profunda
   if (result.y > 0.5) {
-    float band = fract(result.z * 0.22 + uTime * 0.015);
-    vec3 tint = palette(band * 1.4 + uColorOffset * 0.6);
-    return vec4(mix(deepBg, tint, 0.35 + 0.4 * band), 1.0);
+    // Interior: palette cycles over the convergence count (see juliaEscape), same language as the
+    // exterior bands, so a frame that lands inside a large basin still carries color and rhythm.
+    // Exactly 2 palette cycles around the full angle (2/(2*pi)) so there is no seam at the atan branch cut.
+    float phase = result.x * 0.11 + result.z * 0.31831 + uTime * 0.012 + uColorOffset;
+    vec3 tint = palette(phase);
+    float ring = 0.5 + 0.5 * smoothstep(0.0, 1.0, fract(result.x * 0.6));
+    return vec4(mix(deepBg, tint, 0.4 + 0.5 * ring), 1.0);
   }
-  vec3 col = palette(result.x * 2.2 + uColorOffset);
-  float presence = smoothstep(0.04, 0.4, result.x);
+  // Exterior: palette cycles over the absolute escape count (contour bands hugging the set), with a
+  // gentle brightness ripple from the orbit trap so the bands read as filigree, not flat stripes.
+  float bandPhase = result.x * 0.085 + uColorOffset;
+  vec3 col = palette(bandPhase);
+  col *= 0.72 + 0.28 * smoothstep(0.0, 1.0, fract(result.x * 0.5));
+  // Only the very far, near-instant-escape region counts as "open sky" for the signature's gating.
+  float presence = smoothstep(1.0, 5.0, result.x);
   return vec4(col, presence);
 }
 
@@ -105,7 +130,7 @@ void main() {
   // visible shape of its own — see the presence-gating below. Screen-space, before this piece's own
   // zoom/growth transform, so the waves stay a consistent size/speed regardless of how zoomed the
   // content is. See tools/visuals/src/signature/phaseRings.ts.
-  vec2 touch = dephRingTouch(base, uTime);
+  vec2 touch = dephRingTouch(base, uTime) * uSignature;
   float crest = touch.x;
   float slope = touch.y;
   float distFromCenter = length(base);
@@ -140,14 +165,16 @@ void main() {
   // slow autonomous breathing are the only things moving the camera now; uBass no longer touches it.
   float arcT = uTime / 364.0;
   float growth = smoothstep(0.0, 0.55, arcT) * (1.0 - 0.25 * smoothstep(0.85, 1.0, arcT));
-  float zoom = mix(2.4, 1.25, growth) + 0.05 * sin(uTime * 0.05);
+  float zoom = mix(1.05, 0.5, growth) * (1.0 + 0.05 * sin(uTime * 0.05));
 
   float iterMax = uIterBase + uHigh * 40.0;
 
   // Chromatic aberration: evaluate the fractal three times at a tiny radial offset per channel —
   // affordable again now that there's one fractal to render, not three. Sampled from ripple, not
   // raw base, so the wave's disturbance actually distorts what's drawn, not just its highlight.
-  vec2 uv = ripple * zoom;
+  // Camera target comes from framing.ts (uCam): a precomputed continuous path that keeps the frame on
+  // the richest part of the set as c drifts — see that file for why a fixed target doesn't work.
+  vec2 uv = ripple * zoom + uCam;
   float aberration = 0.0018 * length(ripple);
   vec2 dir = length(ripple) > 0.0001 ? normalize(ripple) : vec2(0.0);
 
@@ -169,7 +196,7 @@ void main() {
 
   // Vignette.
   float d = length(gl_FragCoord.xy / uResolution - 0.5);
-  color *= smoothstep(0.95, 0.3, d);
+  color *= smoothstep(1.25, 0.45, d);
 
   // Procedural grain.
   float grain = (hash(gl_FragCoord.xy + uTime * 61.0) - 0.5) * 0.03;

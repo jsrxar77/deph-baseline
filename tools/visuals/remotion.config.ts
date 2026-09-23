@@ -16,3 +16,9 @@ Config.overrideBundlerConfig(enableTailwind);
 // GL backend is null, which fails to acquire a WebGL context in headless Chrome — angle fixes it.
 // See https://www.remotion.dev/docs/troubleshooting/webgl2-context
 Config.setChromiumOpenGlRenderer("angle");
+
+// YouTube's recommended upload format: H.264 High, yuv420p, limited (TV) range, tagged BT.709. Without
+// these the render came out as yuvj420p (full range) with untagged/bt470bg color, which YouTube can
+// interpret with shifted contrast and saturation — noticeable on this palette's very dark tones.
+Config.setPixelFormat("yuv420p");
+Config.setColorSpace("bt709");

@@ -125,6 +125,40 @@ part of the signature — don't re-derive a different cycle length per compositi
 piece's own tempo has nothing to do with it (it coincidentally matches "Slow Drift"'s 30cpm, which is
 not a rule future pieces need to satisfy).
 
+## Fractal visuals: fill the frame, and keep the camera on interesting ground
+
+Lessons from making the Slow Drift Julia fractal fill the whole screen (details in
+`media/slow-drift/slow-drift.md`). Test by rendering stills at ~8 moments across the whole piece and
+tiling them into one contact sheet (`ffmpeg ... hstack/vstack`) — a single frame hides the failures.
+
+- **Color the exterior by the absolute escape count**, not `count / maxIter` — dividing squashes the whole
+  outside into one flat slice of the palette (the "empty gradient around the shape" look).
+- **A drifting parameter needs a moving camera.** Neither the origin nor the repelling fixed point stays
+  on rich ground. Use a camera path scored by near-boundary structure, computed **once at module load**
+  (deterministic → identical in every parallel render worker; per-frame state is forbidden) and
+  hill-climbed with a speed limit. Choosing the argmax independently per frame made the camera jump.
+- **Julia sets are point-symmetric (z → -z):** search one side only, or equal candidates on both sides
+  average to the dead center.
+- **A flat interior lets the signature rings masquerade as fractal structure.** If a huge smooth basin
+  shows perfectly concentric rings, check whether they are just `dephRingTouch` on a flat surface. When
+  the multiplier is near 1 orbits never converge, so give the interior a continuous dynamical measure
+  (-log of the last step, direction of the last step) instead of a threshold-based one.
+- Any angle used as a palette phase should span an integer number of palette cycles (`k / (2π)`), or the
+  `atan` branch cut leaves a visible seam.
+
+## Encoding for YouTube (codec check)
+
+Checked against YouTube's recommended upload settings (MP4, H.264 High, progressive, 2 B-frames, AAC-LC
+stereo at 48 kHz, moov atom at the front, BT.709, yuv420p; about 8 Mbps for 1080p up to 30 fps and 12 Mbps
+for 48-60 fps). Remotion's defaults met most of it (H.264 High, AAC-LC 48 kHz stereo, faststart, 60 fps),
+but with `Config.setVideoImageFormat("jpeg")` the output was **yuvj420p (full range) with untagged/bt470bg
+color** — not what YouTube expects. `remotion.config.ts` now sets `setPixelFormat("yuv420p")` and
+`setColorSpace("bt709")`; verified with a short render: `pix_fmt=yuv420p`, `color_range=tv`, all three color
+tags `bt709`. Check any new render with `ffprobe -show_entries stream=pix_fmt,color_space,color_range`.
+The default bitrate is far above the recommendation (about 41 Mbps average at crf 18-22 because the film
+grain is expensive to compress; a 6-minute 1080p60 file was 1.9-2.9 GB). YouTube accepts and re-encodes it,
+but the upload is heavy: `--crf=25` or a later ffmpeg re-encode brings it down.
+
 ## Before finishing: reconcile the whole yaml
 
 Update `media/<name>/<name>.deph.yaml`'s `domains.visual` — `status` (`in-progress` for a first working

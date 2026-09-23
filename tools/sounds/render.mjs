@@ -13,6 +13,7 @@
 // (default 3s).
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { evalStrudel } from './eval-strudel.mjs';
 import { audioBufferToWavBuffer } from './wav.mjs';
 
@@ -37,6 +38,19 @@ globalThis.window = globalThis.window || new EventTarget();
 globalThis.document = globalThis.document || new EventTarget();
 
 const { superdough, setAudioContext, registerSynthSounds } = await import('superdough');
+
+// superdough frees each note's nodes from an `onended` callback (releaseAudioNode -> disconnect()).
+// In a real-time context that reclaims memory; in an offline render — which runs as fast as the CPU
+// allows — those callbacks fire on the JS thread while the audio thread is mid-render, and the
+// concurrent graph edits intermittently lock the engine up (output stuck repeating one 128-sample
+// block, heard as a steady tone to the end of the file). Nothing needs freeing in a render that ends
+// soon anyway, so disconnect() becomes a no-op *only while the main render is running*.
+let renderInProgress = false;
+const realDisconnect = AudioNode.prototype.disconnect;
+AudioNode.prototype.disconnect = function (...a) {
+  if (renderInProgress) return undefined;
+  return realDisconnect.apply(this, a);
+};
 
 function parseArgs(argv) {
   const args = { file: undefined, cycles: undefined, out: undefined, tail: 3, sampleRate: 48000 };
@@ -82,8 +96,34 @@ async function main() {
     `${args.file}: ${haps.length} events over ${args.cycles} cycles at ${cps} cps (${+(cps * 60).toFixed(2)} cpm)`,
   );
 
+  // One reverb (ConvolverNode) exists per orbit, and superdough regenerates its impulse response
+  // whenever an event with a different `size` arrives on that orbit. That's tolerable live (events
+  // arrive just-in-time) but wrong here: every event is scheduled up front, so voices with different
+  // sizes sharing an orbit fight over one IR for the whole piece. Flag it rather than render it silently.
+  const sizesByOrbit = new Map();
+  for (const { value } of haps) {
+    if (!(value.room > 0)) continue;
+    const orbit = value.orbit ?? 1;
+    if (!sizesByOrbit.has(orbit)) sizesByOrbit.set(orbit, new Set());
+    sizesByOrbit.get(orbit).add(value.roomsize ?? value.size ?? 'default');
+  }
+  for (const [orbit, sizes] of sizesByOrbit) {
+    if (sizes.size > 1) {
+      console.error(
+        `WARNING: orbit ${orbit} has reverb sizes ${[...sizes].join(', ')} — voices with different \`size\` must each use their own .orbit(n), or the shared reverb is regenerated mid-piece (wrong tails, and it can freeze the render).`,
+      );
+    }
+  }
+
   const durationSec = args.cycles / cps + args.tail;
   const ctx = new OfflineAudioContext(2, Math.ceil(durationSec * args.sampleRate), args.sampleRate);
+  const convolvers = [];
+  const createConvolver = ctx.createConvolver.bind(ctx);
+  ctx.createConvolver = (...a) => {
+    const c = createConvolver(...a);
+    convolvers.push(c);
+    return c;
+  };
   setAudioContext(ctx);
   registerSynthSounds();
 
@@ -93,8 +133,23 @@ async function main() {
     await superdough(hap.value, t, dur, cps);
   }
 
+  // superdough builds each reverb's impulse response asynchronously (its own OfflineAudioContext,
+  // assigned to convolver.buffer in a callback). If the main render starts first, the buffer gets
+  // assigned mid-render and the engine can lock up, looping one 128-sample block (a steady tone)
+  // for the rest of the file — observed intermittently. Wait until every reverb actually has its IR.
+  const irDeadline = Date.now() + 60000;
+  while (convolvers.some((c) => c.buffer == null)) {
+    if (Date.now() > irDeadline) {
+      console.error('ERROR: timed out waiting for reverb impulse responses to generate.');
+      process.exit(1);
+    }
+    await new Promise((r) => setTimeout(r, 25));
+  }
+
   console.error('rendering...');
+  renderInProgress = true;
   const buffer = await ctx.startRendering();
+  renderInProgress = false;
 
   const ch0 = buffer.getChannelData(0);
   let peak = 0;
@@ -102,6 +157,34 @@ async function main() {
     const v = Math.abs(ch0[i]);
     if (v > peak) peak = v;
   }
+  // Detect the engine-lockup failure mode: non-silent audio that repeats one 128-sample render
+  // block unchanged for 2+ seconds. Music never does that; refuse to write a corrupt file.
+  const BLOCK = 128;
+  const minRun = args.sampleRate * 2;
+  let run = 0;
+  for (let i = 0; i + BLOCK < ch0.length; i++) {
+    if (ch0[i] === ch0[i + BLOCK] && Math.abs(ch0[i]) > 1e-4) {
+      if (++run >= minRun) {
+        const attempt = Number(process.env.DEPH_RENDER_ATTEMPT ?? 1);
+        console.error(
+          `render is corrupt — a 128-sample block repeats from ~${((i - run) / args.sampleRate).toFixed(1)}s (engine lockup), attempt ${attempt}/3.`,
+        );
+        if (attempt >= 3) {
+          console.error(`ERROR: still corrupt after 3 attempts. Not writing ${args.out}.`);
+          process.exit(1);
+        }
+        // A fresh process gets a clean engine and audio graph; the lockup is intermittent.
+        const retry = spawnSync(process.execPath, process.argv.slice(1), {
+          stdio: 'inherit',
+          env: { ...process.env, DEPH_RENDER_ATTEMPT: String(attempt + 1) },
+        });
+        process.exit(retry.status ?? 1);
+      }
+    } else if (ch0[i] !== ch0[i + BLOCK]) {
+      run = 0;
+    }
+  }
+
   if (peak < 1e-4) {
     console.error(`WARNING: rendered audio is silent (peak=${peak}) — check the pattern actually has audible events.`);
   }

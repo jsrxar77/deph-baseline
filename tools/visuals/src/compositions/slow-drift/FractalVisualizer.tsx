@@ -3,11 +3,11 @@ import { AbsoluteFill, staticFile, useCurrentFrame, useVideoConfig } from "remot
 import { Audio } from "@remotion/media";
 import { FRAGMENT_SHADER, VERTEX_SHADER } from "./shaders";
 import { useAudioBands } from "./useAudioBands";
+import { JULIA_SEED, frameCenter } from "./framing";
 
-// Fixed Julia-constant anchor for this composition. Not derived from anything musical — it's a
-// visual seed. Swapped from the original (-0.687, 0.312) — too static/blob-like — to a classic
-// chaotic-boundary constant known for lively, spiraling filament structure ("more movement").
-const JULIA_SEED: [number, number] = [-0.7269, 0.1889];
+// deph's creation-torus signature (3/6/9/12 rings). Switched off to judge the fractal on its own; set
+// back to true to restore the brand layer — nothing else depends on it.
+const SIGNATURE_ENABLED = false;
 
 const ITER_BASE = 150; // higher than the first pass — denser filament detail, "more fractal"
 
@@ -80,7 +80,7 @@ export const FractalVisualizer: React.FC = () => {
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
 
     const uniforms: Record<string, WebGLUniformLocation | null> = {};
-    for (const name of ["uResolution", "uTime", "uBass", "uMid", "uHigh", "uColorOffset", "uIterBase", "uSeed"]) {
+    for (const name of ["uResolution", "uTime", "uBass", "uMid", "uHigh", "uColorOffset", "uIterBase", "uSeed", "uCam", "uSignature"]) {
       uniforms[name] = gl.getUniformLocation(program, name);
     }
 
@@ -106,6 +106,9 @@ export const FractalVisualizer: React.FC = () => {
     gl.uniform1f(uniforms.uColorOffset, (timeInSeconds / 55) % 1);
     gl.uniform1f(uniforms.uIterBase, ITER_BASE);
     gl.uniform2f(uniforms.uSeed, JULIA_SEED[0], JULIA_SEED[1]);
+    const cam = frameCenter(timeInSeconds);
+    gl.uniform2f(uniforms.uCam, cam[0], cam[1]);
+    gl.uniform1f(uniforms.uSignature, SIGNATURE_ENABLED ? 1 : 0);
 
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   });
