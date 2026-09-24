@@ -106,11 +106,8 @@ Help on 2026-09-24 unless marked otherwise.
   background colour). Source copy for Remotion: `tools/visuals/public/deph-avatar-source.jpg`. Checked inside
   YouTube's circular crop. Re-render: `node scripts/make-avatar-mask.mjs` (only if the portrait changes) then
   `npx remotion still DephAvatar --output=../../docs/youtube-channel/avatar.jpg`, from `tools/visuals/`.
-  Two variants exist, chosen by the composition's `background` prop: `avatar.jpg` (fractal background,
-  composition `DephAvatar`) and `avatar-black.jpg` (plain deph obsidian `#050508`, composition `DephAvatarBlack`;
-  render with `npx remotion still DephAvatarBlack --output=../../docs/youtube-channel/avatar-black.jpg`). The
-  user asked to try black after seeing the fractal one; the choice between them is still open (black reads better
-  at small size and matches the dark banner; the fractal one carries the videos' visual language).
+  **Chosen by the user on 2026-09-24: the fractal-background version** (`avatar.jpg`). A plain black background was
+  tried as an alternative and not chosen; its file and composition were removed.
 - **Profile picture (earlier proposal):** the creation-torus mark — four concentric rings (3/6/9/12) in the Deep Decay palette on
   obsidian `#050508`; simple enough to read at avatar size. **Banner:** a wide fractal frame from a piece with
   "deph — generative ambient" small in the centre safe area. Banner rules (YouTube Help): minimum 2048x1152,
@@ -135,8 +132,9 @@ YouTube allows up to 14 links on the Home tab; fewer, live links look more caref
 1. **Series playlist** "deph — generative ambient" (title: *All pieces*) — create it in Studio before the first upload.
 2. **GitHub repo** `https://github.com/jsrxar77/deph-baseline` (title: *The code (Strudel + Remotion)*) — fits the
    code-made identity; place it after the playlist. The repo is **public** (checked 2026-09-24 through the GitHub API), has
-   no description, and only its first commit is pushed, so before linking it: add a short description and an English
-   README, and push the local commits (the user decides when).
+   no description; the commits are pushed. An English `README.md` now exists (2026-09-24, not pushed until the user
+   approves). Still to do on GitHub itself (Settings > About, which Claude cannot set without a token): description
+   *Generative ambient music and fractal visuals, made as code (Strudel + Remotion)* and website = the channel URL.
 Not as links: the contact email (use the profile's contact field); social profiles that will not be kept up; link
 shorteners; anything selling health products. Future: Spotify / Apple Music / Bandcamp once a distributor is set up
 (the Slow Drift master is ready for it).

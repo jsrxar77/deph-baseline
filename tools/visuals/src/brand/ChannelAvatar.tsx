@@ -23,25 +23,18 @@ const cutout: React.CSSProperties = {
   maskSize: "100% 100%",
 };
 
-export type AvatarProps = { background: "fractal" | "black" };
-
-export const ChannelAvatar: React.FC<AvatarProps> = ({ background }) => (
+export const ChannelAvatar: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: "#050508" }}>
-    {/* 1. background: the fractal (slightly defocused and darkened so the figure stays the subject) or plain
-        deph obsidian black. Both variants are rendered; the user picks. */}
-    {background === "fractal" ? (
-      <>
-        <AbsoluteFill style={{ filter: "blur(2.5px) brightness(0.8) saturate(1.05)" }}>
-          <Sequence from={-FRACTAL_MOMENT_SECONDS * FPS}>
-            <FractalVisualizer />
-          </Sequence>
-        </AbsoluteFill>
-        {/* a soft dark halo behind the head, to separate it from the fractal */}
-        <AbsoluteFill
-          style={{ background: "radial-gradient(ellipse 38% 50% at 50% 48%, rgba(5,5,8,0.55) 40%, rgba(5,5,8,0) 100%)" }}
-        />
-      </>
-    ) : null}
+    {/* 1. background: the fractal, slightly defocused and darkened so the figure stays the subject */}
+    <AbsoluteFill style={{ filter: "blur(2.5px) brightness(0.8) saturate(1.05)" }}>
+      <Sequence from={-FRACTAL_MOMENT_SECONDS * FPS}>
+        <FractalVisualizer />
+      </Sequence>
+    </AbsoluteFill>
+    {/* a soft dark halo behind the head, to separate it from the fractal */}
+    <AbsoluteFill
+      style={{ background: "radial-gradient(ellipse 38% 50% at 50% 48%, rgba(5,5,8,0.55) 40%, rgba(5,5,8,0) 100%)" }}
+    />
 
     {/* 2. the portrait, cut out with the mask */}
     <AbsoluteFill style={cutout}>

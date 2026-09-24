@@ -162,8 +162,8 @@ Entry format: `date — decision — reason/evidence — where it lives`.
   (defocused, tinted original background) was rejected: "the face is fine, but I want a background more in line with
   what we are doing"; the expression can't be changed without an image generator — `docs/youtube-channel.md`,
   `DephAvatar`, `make-avatar-mask.mjs`.
-- 2026-09-24 — Profile picture variant with a plain black background (`avatar-black.jpg`) alongside the fractal one — the
-  user asked to try black instead of the fractal; final choice pending — `docs/youtube-channel.md`.
+- 2026-09-24 — Profile picture: the user tried a plain black background and chose the **fractal** one; the black variant was
+  removed — `docs/youtube-channel.md`.
 - 2026-09-24 — Video thumbnail made in Remotion (`DephThumbnailSlowDrift`): fractal frame, dark gradient on the left, heavy
   **SLOW DRIFT** + **432 Hz · BINAURAL** — no thumbnail-generation skill exists, so thumbnails follow the same
   code-made approach as the banner and avatar; checked at sidebar size — `slow-drift.youtube.md`, `youtube-publish`.
@@ -171,6 +171,9 @@ Entry format: `date — decision — reason/evidence — where it lives`.
   for the extras seen in the six-font comparison (Optima, Didot, Futura, Copperplate, DIN Alternate, Menlo — none chosen):
   brand chip with the ring mark + series number, cyan rule, facts line, headphones cue, empty bottom-right for YouTube's
   duration badge — so all covers look alike with a recognizable touch — `youtube-publish`, `VideoThumbnail.tsx`.
+- 2026-09-24 — README.md written for the public repository (what deph is, the pipeline, how to rebuild a piece, the
+  432 Hz / binaural note stated as fact). Left out on purpose until the user decides: any mention of AI assistance, and
+  the licence ("not chosen yet") — `README.md`.
 
 ## Entry template
 
