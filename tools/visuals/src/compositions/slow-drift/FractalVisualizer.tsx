@@ -1,13 +1,17 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
-import { AbsoluteFill, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { AbsoluteFill, cancelRender, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Audio } from "@remotion/media";
 import { FRAGMENT_SHADER, VERTEX_SHADER } from "./shaders";
 import { useAudioBands } from "./useAudioBands";
 import { JULIA_SEED, frameCenter } from "./framing";
+import { activeBells, parseBellHits, type BellHit } from "./bellPulses";
 
 // deph's creation-torus signature (3/6/9/12 rings). Switched off to judge the fractal on its own; set
 // back to true to restore the brand layer — nothing else depends on it.
 const SIGNATURE_ENABLED = false;
+
+// Bell pulses driven by frames.json; set to false to see the fractal without them.
+const BELL_PULSES_ENABLED = true;
 
 const ITER_BASE = 150; // higher than the first pass — denser filament detail, "more fractal"
 
@@ -51,6 +55,18 @@ export const FractalVisualizer: React.FC = () => {
   const bands = useAudioBands(frame);
   const glStateRef = useRef<GLState | null>(null);
   const [diagnostic, setDiagnostic] = useState<string | null>(null);
+  const [bellHits, setBellHits] = useState<BellHit[]>([]);
+  const [framesHandle] = useState(() => delayRender("Loading frames.json"));
+
+  useEffect(() => {
+    fetch(staticFile("slow-drift-frames.json"))
+      .then((r) => r.json())
+      .then((events) => {
+        setBellHits(parseBellHits(events));
+        continueRender(framesHandle);
+      })
+      .catch((e) => cancelRender(e));
+  }, [framesHandle]);
 
   const canvasRef = useCallback((node: HTMLCanvasElement | null) => {
     if (!node) return;
@@ -80,7 +96,7 @@ export const FractalVisualizer: React.FC = () => {
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
 
     const uniforms: Record<string, WebGLUniformLocation | null> = {};
-    for (const name of ["uResolution", "uTime", "uBass", "uMid", "uHigh", "uColorOffset", "uIterBase", "uSeed", "uCam", "uSignature"]) {
+    for (const name of ["uResolution", "uTime", "uBass", "uMid", "uHigh", "uColorOffset", "uIterBase", "uSeed", "uCam", "uSignature", "uBells"]) {
       uniforms[name] = gl.getUniformLocation(program, name);
     }
 
@@ -109,13 +125,17 @@ export const FractalVisualizer: React.FC = () => {
     const cam = frameCenter(timeInSeconds);
     gl.uniform2f(uniforms.uCam, cam[0], cam[1]);
     gl.uniform1f(uniforms.uSignature, SIGNATURE_ENABLED ? 1 : 0);
+    gl.uniform4fv(uniforms.uBells, BELL_PULSES_ENABLED ? activeBells(bellHits, timeInSeconds) : new Float32Array(24));
 
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   });
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#050508" }}>
-      <Audio src={staticFile("slow-drift-audio.wav")} />
+      {/* Playback uses the loudness-mastered file; the audio-reactive analysis (useAudioBands) keeps reading
+          the raw slow-drift-audio.wav on purpose — the reactivity was tuned against its levels, and the
+          master is a constant +7.6 dB gain that would change how strongly the picture responds. */}
+      <Audio src={staticFile("slow-drift-master.wav")} />
       <canvas ref={canvasRef} width={width} height={height} style={{ width: "100%", height: "100%" }} />
       {diagnostic ? (
         <div style={{ position: "absolute", top: 24, left: 28, color: "red", fontFamily: "monospace", fontSize: 20, maxWidth: "90%" }}>

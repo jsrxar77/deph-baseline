@@ -484,3 +484,15 @@ Trade-off, stated plainly: this is a warm glass / singing-bowl tone, no longer a
 it turns out too plain, `fmh 2.01` / `3.005` (variant "shimmer", ~3 cents from harmonic) adds a slow
 beating shimmer without out-of-scale pitches. Not rendered in the full piece.
 Full render re-checked: no frozen block, no clipping (peak 0.354), 368 s.
+
+**Bell pulses from exact event data.** Remotion has no rhythm detection: a frame is a pure function of its
+number, the audio just plays on the same timeline, and the only thing our code derived from the sound was
+smoothed energy per frequency band. To react to a specific bell, `tools/sounds/frames.mjs` now writes
+`sync/frames.json` (every event with its exact frame) and `sync/manifest.json`, checked against the rendered
+audio (the first 8 bell onsets land within 0-10 ms of the strongest energy rise at that note's frequency).
+`bellPulses.ts` turns the 21 bell hits into pulses: each lifts the fractal's surface where it sounds (x from
+the bell's own stereo pan, y from its pitch) as a soft swell plus a faint cool glow, ~0.3 s rise and ~2.6 s
+fade, up to 6 overlapping. Subtle by design, and never a shape of its own. A/B stills of the first bell
+(78.5 s) show a soft haze appearing around its position 0.5-1 s later that is absent in the control frame.
+Switch: `BELL_PULSES_ENABLED` in `FractalVisualizer.tsx`. Playback uses `sync/audio-master.wav` (-16 LUFS);
+the audio-reactive analysis keeps reading the raw `audio.wav`.

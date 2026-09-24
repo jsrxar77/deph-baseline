@@ -155,6 +155,27 @@ tiling them into one contact sheet (`ffmpeg ... hstack/vstack`) — a single fra
 - Any angle used as a palette phase should span an integer number of palette cycles (`k / (2π)`), or the
   `atan` branch cut leaves a visible seam.
 
+## Reacting to exact events: frames.json (not the spectrum)
+
+`useAudioBands` only knows energy per frequency band — it cannot tell when a bell starts or which note it is.
+For anything tied to a specific sound, read `frames.json` (see `strudel-sync`): every event has its exact
+`seconds`/`frame`, plus `note` (MIDI), `pan`, `gain`. Load it once with `delayRender`/`continueRender` +
+`fetch(staticFile("<name>-frames.json"))`, and compute the effect as a pure function of `frame`. Slow Drift's
+`bellPulses.ts` does this: each bell lifts the fractal's surface where it sounds — x from the bell's own stereo
+`pan`, y from its pitch — as a soft swell (a small lens-like bulge of the sampling coordinates) plus a faint
+cool glow, ~0.3 s attack and a ~2.6 s fade matching the bell's tail. Up to 6 pulses overlap (`uBells[6]`).
+Rules that carry over from the signature: it must never be a visible shape of its own (no ring or disc, only an
+effect on the content), and it stays subtle. Filter events by their `$:` layer index (`$3` = bells here, a
+coupling to the piece's layer order that `manifest.json`'s per-layer summary lets you check).
+
+## Two audio files: play the master, analyze the raw
+
+`public/<name>-master.wav` (loudness-mastered, see `strudel-sync`) is what `<Audio>` plays;
+`public/<name>-audio.wav` (raw render) is what `useAudioBands`/`calculateMetadata` read. The reactive
+mapping was tuned against the raw levels, and the master is a constant gain (Slow Drift: +7.6 dB, about 2.4x
+in amplitude) that would silently change how strongly the picture reacts. Both files have the identical
+length, so the timeline stays aligned. Both are git-ignored (`tools/visuals/public/*.wav`).
+
 ## Where the compiled video goes: `media/<name>/renders/`
 
 Render final videos from `tools/visuals/` straight into the composition's own folder:

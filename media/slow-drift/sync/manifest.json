@@ -1,0 +1,45 @@
+{
+  "source": "media/slow-drift/sounds/slow-drift.strudel",
+  "cps": 0.5,
+  "cpm": 30,
+  "totalCycles": 180,
+  "fps": 60,
+  "sampleRate": 48000,
+  "durationSeconds": 368,
+  "totalFrames": 22080,
+  "frames": "frames.json",
+  "audio": "audio.wav",
+  "layers": {
+    "$0": {
+      "events": 13,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "$2": {
+      "events": 52,
+      "sounds": [
+        "triangle"
+      ]
+    },
+    "$4": {
+      "events": 10,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "$1": {
+      "events": 9,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "$3": {
+      "events": 42,
+      "sounds": [
+        "sine"
+      ]
+    }
+  },
+  "generatedAt": "2026-09-23T20:26:35.345Z"
+}

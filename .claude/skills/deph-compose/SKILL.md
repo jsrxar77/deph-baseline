@@ -33,6 +33,7 @@ Create, in this order:
 media/<name>/
   <name>.deph.yaml
   <name>.md            (a short stub — the domain skill that does the real work fills this in)
+  <name>.youtube.md    (publish pack stub — filled by the youtube-publish skill once a video exists)
   sounds/
   visuals/
   sync/

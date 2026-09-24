@@ -30,6 +30,7 @@ uniform float uColorOffset; // slow, continuous palette phase cycle
 uniform float uIterBase;   // base iteration depth, before uHigh modulation
 uniform vec2 uSeed;        // fixed per-composition Julia-constant anchor
 uniform vec2 uCam;         // camera center in fractal space (framing.ts)
+uniform vec4 uBells[6];    // active bell pulses: x, y (screen space), age in seconds, amplitude (0 = unused)
 uniform float uSignature;  // 1 = creation-torus ripple on, 0 = off (see SIGNATURE_ENABLED in FractalVisualizer.tsx)
 
 const int MAX_ITER = 340; // hard cap so uHigh modulation can't blow the render budget
@@ -139,6 +140,24 @@ void main() {
   // the ripple reads as a subtle surface disturbance, not a violent warp.
   vec2 ripple = base + radialDir * slope * 0.012;
 
+  // Bell pulses (bellPulses.ts): each bell lifts the fractal's surface where it sounds — a soft swell that
+  // pulls the sampling toward the bell's position (a lens-like bulge, not a ring) plus a gentle cool glow.
+  // Fast-ish rise, then a long fade matching the bell's own tail. Never a shape of its own: it only
+  // exists as an effect on the fractal, and it is deliberately subtle.
+  float bellGlow = 0.0;
+  for (int k = 0; k < 6; k++) {
+    vec4 bell = uBells[k];
+    if (bell.w > 0.0) {
+      vec2 toBell = base - bell.xy;
+      float d = length(toBell);
+      float radius = 0.11 + 0.32 * (1.0 - exp(-bell.z / 2.2));
+      float soft = exp(-(d * d) / (radius * radius));
+      float env = smoothstep(0.0, 0.3, bell.z) * exp(-bell.z / 2.6) * bell.w;
+      bellGlow += soft * env;
+      ripple -= (d > 0.0001 ? toBell / d : vec2(0.0)) * soft * env * 0.018;
+    }
+  }
+
   // Autonomous drift — the main source of visible change, fast enough to matter within seconds.
   // Amplitude is deliberately small: the Mandelbrot-set boundary (where c has to sit for the Julia
   // set to be visually rich) is infinitely thin, and uSeed sits right on it — a larger amplitude
@@ -193,6 +212,8 @@ void main() {
   // Directional relief shading — signed, so one side of each ripple is lit and the other shadowed,
   // like real light catching a wave crossing a water surface.
   color += slope * presence * 0.025;
+
+  color += bellGlow * vec3(0.55, 0.85, 1.0) * 0.32;
 
   // Vignette.
   float d = length(gl_FragCoord.xy / uResolution - 0.5);

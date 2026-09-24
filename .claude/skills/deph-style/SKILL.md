@@ -25,6 +25,7 @@ How to use this file:
   loop lengths with no common factor, so the texture never repeats exactly.
 - Arc-shaped: intro, development, climax, deceleration, outro. Slow Drift is 6:00 (12/24/72/48/24 cycles
   at 30 cpm), rebalanced once so it reaches full texture sooner (viewers leave early on YouTube).
+- The published copy lives in `docs/youtube-channel.md` and each `<name>.youtube.md`.
 - Promotion angles chosen so far: tuned to A=432 Hz, binaural layer "best with headphones". Keep claims
   factual: no good evidence that 432 Hz or binaural beats improve mood or health, so never promise effects
   (YouTube also restricts health claims). The user agreed with stating them as technical facts.
@@ -79,8 +80,8 @@ How to use this file:
   frame check, and say plainly what was and wasn't verified. Several "it sounds wrong" reports were traced
   to measurable causes (missing decay, reverb `size` in seconds, shared reverb, non-scale FM partials,
   render-engine lockup) rather than taste.
-- **Re-render and re-sync after every sound change** (`sync/audio.wav` and `tools/visuals/public/`), and
-  keep the docs (`media/<name>/<name>.md`, the skills) current in the same turn.
+- **Re-render, master and re-sync after every sound change** (`sync/audio.wav`, `sync/audio-master.wav`,
+  and both copies in `tools/visuals/public/`), and keep the docs (`media/<name>/<name>.md`, the skills) current in the same turn.
 - The user prefers to see results: stills/contact sheets across the whole piece, the Studio at
   `localhost:3100`, and a compiled mp4 in `~/Movies/` (not the Desktop; a file there vanished once).
 - Be honest about trade-offs and side effects (e.g. "the C anchor got weaker", "less metallic, more glass").
@@ -99,9 +100,11 @@ How to use this file:
   untried "C and G only" phrase; `0 2 0 1` if C should return as the anchor.
 - Bell timbre "shimmer" variant (`fmh` 2.01 / 3.005) if the glass tone proves too plain.
 - Keep the creation-torus signature off, bring it back as-is, or bring it back much subtler?
-- The full compiled video has not yet been reviewed by the user end to end.
-- A YouTube description/title for the piece has not been written.
-- Note-level audio/video sync (`frames.json` / `manifest.json`) is still unbuilt (see `docs/sync-pipeline.md`).
+- The full compiled video has not yet been reviewed by the user end to end (with bell pulses, master, color fix).
+- Bell pulse strength/shape (glow 0.32, bulge 0.018, 2.6 s fade) is a first guess; extend the same idea to the pad
+  or drone entrances only if the user asks.
+- Slow Drift's YouTube pack is drafted (`slow-drift.youtube.md`) but waits on the user: primary language, channel/links,
+  thumbnail choice and text, AI-tools transparency line, publish date.
 
 ## Decision log (append newest at the bottom)
 
@@ -139,6 +142,35 @@ Entry format: `date — decision — reason/evidence — where it lives`.
 - 2026-09-23 — `media/<name>/visuals` is a symlink to `tools/visuals/src/compositions/<name>` (never the other way
   round) — tested: real code in `media/` fails to resolve packages like `@remotion/media-utils` — user asked whether
   a symlink could work — `CLAUDE.md`, `visuals-compose`, `deph-compose`.
+- 2026-09-23 — Loudness master: constant gain to -16 LUFS / -1 dBTP, no compression (measured -23.6 LUFS, TP -9,
+  LRA 15.9 before; -16.0 / -1.4 / 15.9 after); video plays the master, reactivity analyzes the raw — YouTube does
+  not raise quiet files, so the piece would have played ~9 dB softer than typical — `tools/sounds/master.mjs`.
+- 2026-09-23 — Note-level sync built: `frames.json`/`manifest.json` (tools/sounds/frames.mjs), and bell pulses in the
+  video — the user asked for it after learning Remotion has no rhythm detection, only our spectrum bands; pulse
+  position from the bell's pan and pitch, soft swell + faint glow, subtle by the earlier lessons (no visible rings,
+  no strobe) — onsets verified 0-10 ms against the audio — `bellPulses.ts`, `visuals-compose`.
+- 2026-09-23 — YouTube publishing formalized: a `youtube-publish` skill, channel copy in `docs/youtube-channel.md`, and a
+  per-piece pack `media/<name>/<name>.youtube.md` (yaml `publish` domain) built whenever a video is rendered — the
+  user asked for it to be done for every publication, with EN/ES, hashtags and channel positioning; rules re-verified
+  on YouTube Help (hashtags: 3 shown, over 60 ignored; chapters; thumbnails; disclosure only for realistic content) —
+  honesty rules kept: 432 Hz and binaural as facts, never health effects — `youtube-publish`.
+- 2026-09-24 — Channel banner made from the piece itself (`DephBanner`, fractal at 5:00 + `deph` / `GENERATIVE AMBIENT`
+  in Avenir Next, inside YouTube's safe area) so the channel image is the same visual language as the videos —
+  brand images live in `docs/youtube-channel/` — `docs/youtube-channel.md`.
+- 2026-09-24 — Profile picture: keep the user's illustrated portrait and its softened face, and replace its original
+  blue/purple torus background with the Slow Drift fractal (portrait cut out with a colour-based mask) — first try
+  (defocused, tinted original background) was rejected: "the face is fine, but I want a background more in line with
+  what we are doing"; the expression can't be changed without an image generator — `docs/youtube-channel.md`,
+  `DephAvatar`, `make-avatar-mask.mjs`.
+- 2026-09-24 — Profile picture variant with a plain black background (`avatar-black.jpg`) alongside the fractal one — the
+  user asked to try black instead of the fractal; final choice pending — `docs/youtube-channel.md`.
+- 2026-09-24 — Video thumbnail made in Remotion (`DephThumbnailSlowDrift`): fractal frame, dark gradient on the left, heavy
+  **SLOW DRIFT** + **432 Hz · BINAURAL** — no thumbnail-generation skill exists, so thumbnails follow the same
+  code-made approach as the banner and avatar; checked at sidebar size — `slow-drift.youtube.md`, `youtube-publish`.
+- 2026-09-24 — Thumbnail template fixed for every piece: the user liked the original typeface (Avenir Next Bold) and asked
+  for the extras seen in the six-font comparison (Optima, Didot, Futura, Copperplate, DIN Alternate, Menlo — none chosen):
+  brand chip with the ring mark + series number, cyan rule, facts line, headphones cue, empty bottom-right for YouTube's
+  duration badge — so all covers look alike with a recognizable touch — `youtube-publish`, `VideoThumbnail.tsx`.
 
 ## Entry template
 

@@ -5,8 +5,9 @@ Remotion-ready keyframes, landing in `media/<name>/sync/` for the Remotion engin
 read. See
 `docs/visuals-bridge.md` for why this pairing makes sense at all. **Status: Phases 1 and 2 (below) are
 done — `tools/sounds/render.mjs` renders a synth-only piece to a real `audio.wav`, verified end-to-end on
-"Slow Drift". `frames.json`/`manifest.json` generation (the video-keyframe half of the bridge) and real
-sample playback (Phase 3) are not built yet.**
+"Slow Drift" — and `tools/sounds/frames.mjs` now generates `frames.json`/`manifest.json` (the video-keyframe
+half of the bridge), verified against the rendered audio (bell onsets within 0-10 ms). `tools/sounds/master.mjs`
+adds a loudness master. Real sample playback (Phase 3) is not built yet.**
 
 ## Rendering strategy: the real Strudel engine, in Node, no browser
 

@@ -23,6 +23,10 @@ inside that piece's own folder, rather than grouped by media type across the who
   - **`media/<name>/<name>.md`** — the composition's doc: arc/duration table, voices, key, design
     decisions and issues found while building it. One file, not a `pieces/` subfolder — a composition
     folder already scopes everything to a single piece.
+  - **`media/<name>/<name>.youtube.md`** — the composition's YouTube publish pack (titles, description,
+    chapters, hashtags, tags, thumbnail brief, upload checklist), tracked in git. Built and kept current by
+    the `youtube-publish` skill; its status is tracked in the yaml under `publish`. The channel-wide copy
+    (positioning, channel description, standard footer, open decisions) is in `docs/youtube-channel.md`.
   - **`media/<name>/sounds/`** — the Strudel side: `<name>.strudel` plus any variant files (e.g. an
     unarranged comparison version). This is where `strudel-compose` writes.
   - **`media/<name>/visuals/`** — a **symlink** to the real Remotion code,
@@ -34,15 +38,17 @@ inside that piece's own folder, rather than grouped by media type across the who
     Until a visual exists the folder is just an empty directory; `visuals-compose` replaces it with the
     link when it creates the code folder. See that skill for the other corrections found alongside it
     (audio wiring, WebGL renderer config, YouTube color format).
-  - **`media/<name>/sync/`** — rendered bridge output for this piece: `audio.wav`, `frames.json`,
-    `manifest.json`. Not built yet; see `docs/sync-pipeline.md`. This is where `strudel-sync` writes.
+  - **`media/<name>/sync/`** — rendered bridge output for this piece: `audio.wav` (raw render),
+    `audio-master.wav` (loudness master), `frames.json` (every event with its exact frame number) and
+    `manifest.json`. See `docs/sync-pipeline.md`. This is where `strudel-sync` writes. The `.wav` files are
+    git-ignored; the two small JSON files are tracked.
   - **`media/<name>/renders/`** — the piece's compiled final videos (`.mp4`), rendered with
     `npx remotion render <CompositionId> ../../media/<name>/renders/<name>.mp4` from `tools/visuals/`.
     Git-ignored (several GB each, regenerable). Not `sync/`, which is the audio/video bridge data, and not
     `~/Movies` or the Desktop, which sit outside the project (a file left on the Desktop vanished once).
 - **`/docs`** — cross-cutting documentation only: the composing workflow (`composition-workflow.md`), the
   audio/video sync pipeline spec (`sync-pipeline.md`), the visuals-bridge overview
-  (`visuals-bridge.md`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
+  (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `DephBanner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
 - **`/tools`** — domain-first, one subfolder per domain, each its own npm project (own `package.json`,
   `package-lock.json`, `node_modules`; there's no project-root `package.json`). `tools/sounds/` holds
   every Strudel/audio tool (the inspector today; the render/sync pipeline once it's built) — it reads and
@@ -64,6 +70,9 @@ inside that piece's own folder, rather than grouped by media type across the who
   - `strudel-sync` — rendering a finished piece to audio + frame-numbered keyframes in `sync/`.
   - `visuals-compose` — building the actual Remotion composition (in `tools/visuals/src/compositions/`,
     wiring in the real `audio.wav`).
+  - `youtube-publish` — the last step of the pipeline: builds and maintains each composition's YouTube publish
+    pack once a video exists (honest claims, verified YouTube rules, EN/ES). **Whenever a video is rendered or
+    changes, create or refresh the pack**; Claude never uploads anything.
   - `deph-style` — not a pipeline step: the accumulating record of deph's evolving style (what the user liked
     and rejected and why, measured findings, how they like to work, open questions, a dated decision log).
     Read it before proposing a creative direction; **append to it after every user-guided creative decision.**
@@ -171,8 +180,38 @@ on one repeating 128-sample block): it waits for reverb impulse responses to fin
 node cleanup during the render, refuses to write a file where that block repeats for 2+ seconds, and
 re-runs itself up to 3 times — and it warns if two voices with different reverb `size` share an `orbit`
 (give each its own `.orbit(n)`; see `strudel-compose`). Output goes to that composition's `sync/` folder — see the `strudel-sync`
-skill and `docs/sync-pipeline.md` for the full pipeline (including what's still missing: `frames.json`/
-`manifest.json` for the video side).
+skill and `docs/sync-pipeline.md` for the full pipeline.
+
+## Video keyframes: `frames.json` and `manifest.json`
+
+```
+node tools/sounds/frames.mjs <file.strudel> --cycles N --out-dir media/<name>/sync [--fps 60] [--audio media/<name>/sync/audio.wav]
+```
+
+Evaluates the piece exactly like `render.mjs` and writes every event with its exact time (`seconds`, and
+`frame` as a float at the given fps) plus its raw parameters (`note` as MIDI, `pan`, `gain`, ...), and a
+manifest (cps, fps, duration and frames from the real audio length, per-layer summary). The cycles ->
+seconds -> frames conversion exists only in this script. Verified for Slow Drift: bell onsets in
+`frames.json` match the strongest energy rise in the rendered audio to within 0-10 ms (8 of 8 checked).
+The video reads a copy at `tools/visuals/public/<name>-frames.json` (git-ignored). Regenerate it after
+every sound change, together with the render and the master. Slow Drift uses it for the bell pulses
+(`bellPulses.ts`).
+
+
+## Mastering a rendered piece (loudness)
+
+```
+node tools/sounds/master.mjs media/<name>/sync/audio.wav --out media/<name>/sync/audio-master.wav [--lufs -16] [--ceiling -1]
+```
+
+The raw render is quiet (Slow Drift: -23.6 LUFS, true peak -9 dBFS); YouTube normalizes toward about -14 LUFS
+and lowers loud files but does not raise quiet ones, so an unmastered piece plays noticeably softer than
+others. `master.mjs` (needs ffmpeg) measures integrated loudness and true peak, applies ONE constant gain to
+reach the target (default -16 LUFS, a ceiling of -1 dBTP), and verifies the result. No compression or EQ, so
+the piece's dynamics are untouched (Slow Drift: LRA 15.9 LU before and after); a transparent limiter engages
+only if the gain would push peaks over the ceiling. Keep `audio.wav` (raw) as the source of truth; the master
+is derived and regenerated after every sound change. Both are git-ignored. Playback in the video uses the
+master; the audio-reactive analysis keeps reading the raw file (see `visuals-compose`).
 
 ## Inspector internals and portability
 

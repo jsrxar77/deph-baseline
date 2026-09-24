@@ -11,8 +11,8 @@ Strudel knowledge needed on that side. Full spec, status, and the reasoning behi
 `docs/sync-pipeline.md`. This skill is the short, actionable version; keep both in sync if either
 changes.
 
-**Status: Phases 1 and 2 done — audio rendering is real and working.** `frames.json`/`manifest.json`
-generation (the video-keyframe half) and sample playback (Phase 3) aren't built yet. Read
+**Status: audio rendering, the loudness master and the `frames.json`/`manifest.json` keyframes are all built
+and working.** Only sample playback (Phase 3) isn't. Read
 `docs/sync-pipeline.md` for the full detail; this skill is the short, actionable version.
 
 ## Rendering audio: use the script, don't re-derive the approach
@@ -45,6 +45,16 @@ When looking up sample URLs or manifests, read `@strudel/webaudio`'s actual inst
 real manifest location rather than guessing a plausible-looking GitHub path — a guessed path cost real
 time here already (see `docs/sync-pipeline.md` for what the wrong guesses looked like).
 
+## Loudness master (after every render)
+
+After `render.mjs` writes `sync/audio.wav`, run `node tools/sounds/master.mjs media/<name>/sync/audio.wav --out
+media/<name>/sync/audio-master.wav` and copy the master to `tools/visuals/public/<name>-master.wav` (the raw
+file goes to `public/<name>-audio.wav` as before). Default target -16 LUFS integrated, -1 dBTP ceiling; one
+constant gain, no compression, so the piece's own dynamics are kept. Check the printed before/after: loudness
+within 0.5 LU of target, true peak under the ceiling, LRA unchanged. The master has the same length and sample
+rate, so it stays sample-aligned with the raw render. Details and rationale in `CLAUDE.md` ("Mastering a
+rendered piece").
+
 ## Time conversion: exactly one implementation
 
 ```
@@ -76,8 +86,10 @@ media/<name>/sync/
 2. Render a synth-only piece end-to-end to `audio.wav` — done (`tools/sounds/render.mjs`).
 3. Extend to real sample playback (fetch + decode, already confirmed feasible), with a local cache — not
    started; no composed piece has needed it yet.
-4. `frames.json`/`manifest.json` generation (the video-keyframe half of the output format below) — not
-   started.
+4. `frames.json`/`manifest.json` generation — done (`tools/sounds/frames.mjs`; see `CLAUDE.md`, "Video
+   keyframes"). Run after every render: `node tools/sounds/frames.mjs <piece> --cycles N --out-dir
+   media/<name>/sync --audio media/<name>/sync/audio.wav`, then copy `frames.json` to
+   `tools/visuals/public/<name>-frames.json`.
 
 ## Where things go
 
@@ -89,7 +101,7 @@ verified, the same way `media/<name>/<name>.md` records what was found while bui
 ## Before finishing: reconcile the whole yaml, not just your own status
 
 `domains.sync.status` is `in-progress` once `audio.wav` exists but `frames.json`/`manifest.json` don't
-yet (today's state for every rendered piece), and `done` only once all three do — don't jump straight to
+yet, and `done` only once all three do (Slow Drift: done) — don't jump straight to
 `done` just because the audio render succeeded. Also re-read `media/<name>/<name>.deph.yaml` and check
 whether the render surfaced anything that should update other fields too — e.g. if `tempo.cpm` was still
 `null` there (sound domain finished without reconciling it, or the piece's tempo changed since), fill it

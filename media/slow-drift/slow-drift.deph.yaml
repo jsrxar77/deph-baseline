@@ -20,9 +20,13 @@ domains:
     file: sounds/slow-drift.strudel
     variant: sounds/slow-drift-loop-only.strudel # unarranged, 4-voice comparison version
   visual:
-    status: in-progress # first working pass: WebGL Julia-set visualizer, audio-reactive, real audio.wav wired in
+    status: in-progress # WebGL Julia-set visualizer: audio-reactive, plays the master, bell pulses from frames.json
     entry: tools/visuals/src/compositions/slow-drift/ # not visuals/ — see the visuals-compose skill for why
   sync:
-    status: in-progress # audio.wav done; frames.json + manifest.json (video keyframes) not built yet
-    output: sync/ # audio.wav rendered via tools/sounds/render.mjs (synth-only, 48kHz, 364s incl. 4s tail)
+    status: done # audio.wav + audio-master.wav + frames.json + manifest.json all generated
+    output: sync/ # audio.wav via tools/sounds/render.mjs (48kHz, 368s), audio-master.wav via master.mjs, frames.json/manifest.json via frames.mjs
+publish:
+  status: in-progress # draft pack written; waiting on the user's decisions (language, links, thumbnail text)
+  file: slow-drift.youtube.md # titles, description, chapters, hashtags, thumbnail brief — see the youtube-publish skill
+  video: renders/slow-drift.mp4
 doc: slow-drift.md
