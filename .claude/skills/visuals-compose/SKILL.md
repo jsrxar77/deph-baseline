@@ -204,6 +204,16 @@ The default bitrate is far above the recommendation (about 41 Mbps average at cr
 grain is expensive to compress; a 6-minute 1080p60 file was 1.9-2.9 GB). YouTube accepts and re-encodes it,
 but the upload is heavy: `--crf=25` or a later ffmpeg re-encode brings it down.
 
+## HDR-look bloom pipeline (Songcord J)
+
+`tools/visuals/src/compositions/songcord/HdrCanvas.tsx` is a small raw-WebGL2 pipeline reusable by other pieces: the
+scene fragment shader writes LINEAR, unclamped light to a half-float texture (`EXT_color_buffer_float` works in
+Remotion's headless ANGLE), a 5-level bloom pyramid is built from what exceeds a threshold, and a final pass adds bloom,
+ACES tone mapping, vignette and grain and writes normal 8-bit BT.709 output. It is an "HDR look", not an HDR export.
+Rules learned tuning it: scale the world down and give it a black level (deep darks are what make the lights read as
+HDR); accumulate overlapping light sources with `max` when their density depends on speed, never a sum; keep attack
+pulses soft and capped (photosensitivity, and deph's no-strobe rule). A 1080p frame took about 70 ms to render.
+
 ## Before finishing: reconcile the whole yaml
 
 Update `media/<name>/<name>.deph.yaml`'s `domains.visual` — `status` (`in-progress` for a first working

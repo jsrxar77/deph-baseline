@@ -4,6 +4,10 @@ node_modules/
 # Rendered audio — large, and fully regenerable from the .strudel source via
 # node tools/sounds/render.mjs (see docs/sync-pipeline.md). Not worth tracking in git.
 media/*/sync/*.wav
+
+# User-supplied source recordings for audio-first pieces (media/<name>/sync/source.mp3): someone else's music (e.g. a
+# client's), so never tracked in this public repository without an explicit decision.
+media/*/sync/source.*
 tools/visuals/public/*.wav
 
 # Rendered videos — several GB each, fully regenerable with `npx remotion render` (see the
@@ -14,3 +18,4 @@ media/*/renders/*.webm
 
 # Copies of the sync data that Remotion reads from public/ (the originals in media/<name>/sync/ are tracked).
 tools/visuals/public/*-frames.json
+tools/visuals/public/*-analysis.json

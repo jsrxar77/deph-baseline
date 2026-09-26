@@ -1,0 +1,23 @@
+name: songcord
+title: Songcord
+created: 2026-09-26
+key: A:minor # ESTIMATE from sync/analysis.json (Krumhansl-Schmuckler, r=0.85 vs A major 0.71) — not composed; confirm by ear
+tempo:
+  cpm: null # no Strudel source: audio-first piece, so there is no cycle clock
+arc: [] # candidate sections are in sync/analysis.json; filled in once the user confirms them
+total_cycles: null # not applicable without Strudel; the real length comes from the audio (see sync/manifest.json)
+domains:
+  sound:
+    status: not-requested # the audio already exists (user-supplied mp3); it was not made with Strudel
+    file: null
+    source: sync/audio.wav # the supplied recording, converted to wav
+  visual:
+    status: done # final = L "Wake" with the YouTube SDR grade, composition SongcordFinal4K; prototypes A-K kept for comparison
+    entry: tools/visuals/src/compositions/songcord/ # not visuals/ — see the visuals-compose skill for why
+  sync:
+    status: done # source.mp3 -> audio.wav (48 kHz) -> audio-master.wav (-16 LUFS, raw was -8.0 LUFS) + analysis.json
+    output: sync/ # also audio-youtube.wav (-14 LUFS master for the YouTube video); analysis.json (tools/sounds/analyze-audio.mjs) replaces the frames.json Strudel would have produced
+publish:
+  status: not-applicable # client / showcase piece over the client's own music, not a deph channel release: no deph YouTube pack
+  video: renders/songcord-youtube-4k.mp4 # 4K master tuned for YouTube playback, delivered to the client
+doc: songcord.md

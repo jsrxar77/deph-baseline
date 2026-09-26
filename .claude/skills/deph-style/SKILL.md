@@ -174,6 +174,45 @@ Entry format: `date — decision — reason/evidence — where it lives`.
 - 2026-09-24 — README.md written for the public repository (what deph is, the pipeline, how to rebuild a piece, the
   432 Hz / binaural note stated as fact). Left out on purpose until the user decides: any mention of AI assistance, and
   the licence ("not chosen yet") — `README.md`.
+- 2026-09-26 — Songcord: first **audio-first** piece (a film-score recording supplied by the user, no Strudel): analysed with
+  `analyze-audio.mjs` instead of `frames.mjs`; the user confirmed the measured arc as an epic-film narrative (question at
+  1:17-1:28, drama 1:58-2:35, resolution 2:48) and asked to explore visual directions beyond the fractal, so three
+  prototypes (A Dive, B Interference, C Cymatics) were built for comparison before choosing — explored techniques beyond
+  fractals as the user asked — `media/songcord/songcord.md`, `tools/visuals/src/compositions/songcord/`.
+- 2026-09-26 — Songcord prototypes reviewed: B's silence at the held question needed something (user: "hace falta algo"), so
+  sustained sound now also moves the water (breath rings); the user asked for D (3D ribbons, `@remotion/three` installed) and
+  a hybrid E built from B and C on top of A's narrative. D's first version (independent Lissajous ribbons) read as a tangle;
+  coherent twisting currents around shared spines worked — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord: the user asked for E's layers in different blending colours in the film's palette (green, blues,
+  violets) — the first deliberate departure from Deep Decay, for this piece only (`pandoraField`, `uPalette`); asked whether
+  D lacked something (it did: a world, palette, structure, energy-driven motion) and asked where the sound comes from — measured:
+  the mix is centred and wide, register (not pan) is the location cue, instruments cannot be identified — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord: the user chose **E** (Dive world + ripples + cymatic filigree, Pandora palette) as the line to follow, and asked
+  for a more intense "J" on top of it: HDR-like glow, more saturated Avatar colours, and D's ribbon reduced to a single luminous
+  being / halo that wanders the whole frame leaving a trail that fades away. Waiting on the user's OK to the plan before building — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord J "Luminous": user's answers — ONE being of light, trail of about 4 s "then we see", HDR look only for now.
+  Built as linear HDR + bloom + ACES with much darker world and a black level (first pass was blown out); the being's trail
+  combines with max, not sum. Colours pushed to intense Pandora blues/teals/violets; the world brightens where the being
+  passes. Learned: HDR impact comes from deep darks next to very bright lights, not from making everything brighter —
+  `media/songcord/songcord.md`, `HdrCanvas.tsx`.
+- 2026-09-26 — Songcord: the user liked J a lot and asked for K: the being of light as a smooth beam with no DNA-like twisting trail, and the
+  A and C layers (light shafts, cymatic filigree) plus everything else seen "as if through water" so the whole piece reads as one
+  underwater world — built as a shared refraction warp + caustics + red absorption + slight dispersion; J left as is — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord: the user likes K ("me gusta") and asked for a next version where C (the cymatic lines) is not so straight but gives
+  the effect of the wake that water makes when something passes through it. Understanding proposed to the user; waiting for their OK before building — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord L: the user clarified that the water-wake idea is about waves over the whole frame, not the being's wake: keep the being of
+  light and the attack ripples, and turn only the dominant-note lines (C) into a water wake, keeping the harmony thread, with a 12 s wake.
+  Built as pitch-class sources wandering the frame whose ring waves interfere into curved wakes; a first pass was a purple haze and was made crisper —
+  `media/songcord/songcord.md`, `wake.ts`.
+- 2026-09-26 — Songcord: the user approved L as the final look ("esta todo perfecto"; the stutter is only the Studio's real-time preview, a compiled mp4 is smooth) and asked for
+  an mp4 with real HDR to hand to a client. Constraint found: only ~5.8 GB free on disk, so no frame sequences; plan proposed to the user (float readback from the shader -> 10-bit
+  PQ/BT.2020 -> HEVC through a pipe), waiting for their OK — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord delivery: the user's answers — the recommended format (HDR10 HEVC) for the client, AND a version made for YouTube where most viewers are on SDR screens: as
+  bright and punchy as possible on SDR ("HDR simulado"), because that is where it will mostly be seen; both files; 1000-nit cap for the HDR one; output in `media/songcord/renders/`.
+  Understanding sent to the user, waiting for their OK before building or rendering — `media/songcord/songcord.md`.
+- 2026-09-26 — Songcord is a showcase for a client, over the client's own music: the user said to forget deph, YouTube and rights ("solo quiero mostrar que se puede hacer"). The
+  deph YouTube pack, the deph-branded thumbnail and the rights warnings were removed; the deliverable is the 4K master tuned for YouTube playback. Lesson: ask whether new
+  audio-first work is a deph release before applying the deph publishing workflow — `media/songcord/songcord.md`.
 
 ## Entry template
 

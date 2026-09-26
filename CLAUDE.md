@@ -213,6 +213,23 @@ only if the gain would push peaks over the ceiling. Keep `audio.wav` (raw) as th
 is derived and regenerated after every sound change. Both are git-ignored. Playback in the video uses the
 master; the audio-reactive analysis keeps reading the raw file (see `visuals-compose`).
 
+## Analyzing an existing recording (audio-first pieces, no Strudel source)
+
+```
+ffmpeg -i media/<name>/sync/source.mp3 -ar 48000 -c:a pcm_s16le media/<name>/sync/audio.wav
+node tools/sounds/master.mjs media/<name>/sync/audio.wav --out media/<name>/sync/audio-master.wav
+node tools/sounds/analyze-audio.mjs media/<name>/sync/audio.wav --out media/<name>/sync/analysis.json [--fps 30]
+```
+
+For a composition whose music already exists (`domains.sound.status: not-requested`), `analyze-audio.mjs` is the
+counterpart of `frames.mjs`: it *measures* the recording instead of reading events from a pattern. It writes, per
+video frame, dB-linear loudness, six band levels, spectral centroid, flux, stereo width/balance and the stereo position
+of each band group (`pan.low|mid|high`, -1..1), plus onsets in three groups (low/mid/high, each with its stereo `pan`
+and register `freq`), candidate section boundaries (self-similarity novelty), a key estimate and a
+tempo guess. Section boundaries, key and tempo are estimates, and the low-band onsets are noisy on sustained or
+modulated bass (they are not reliable kick detection) — the user's ear confirms. The source recording
+(`sync/source.*`) is git-ignored: it may not be ours to publish.
+
 ## Inspector internals and portability
 
 - `tools/sounds/inspect.mjs`: the CLI (arg parsing, evaluation, output). `tools/sounds/eval-strudel.mjs`:
