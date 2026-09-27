@@ -17,11 +17,19 @@ total_cycles: 180 # 360s = 6:00 exactly, at cpm 30
 domains:
   sound:
     status: done
+    source: strudel # what sync/audio.wav comes from: strudel (render.mjs) or ableton (see domains.daw)
     file: sounds/slow-drift.strudel
     variant: sounds/slow-drift-loop-only.strudel # unarranged, 4-voice comparison version
   visual:
     status: in-progress # WebGL Julia-set visualizer: audio-reactive, plays the master, bell pulses from frames.json
     entry: tools/visuals/src/compositions/slow-drift/ # not visuals/ — see the visuals-compose skill for why
+  daw:
+    status: in-progress # MIDI + stem exported and guide written; waiting on the user's Ableton session
+    midi: daw/slow-drift.mid # per-track files in daw/tracks/, mapping info in daw/tracks.json (tools/sounds/midi.mjs)
+    stems: daw/stems/ # 05-binaural.wav (render.mjs --only '$4'): the binaural layer has no notes
+    guide: slow-drift.ableton.md # step-by-step Ableton guide (Surge XT presets, effects, export settings)
+    project: daw/slow-drift Project/slow-drift.als # created when the user saves the Live Set
+    mastering: null # ableton (Ozone) or pipeline (master.mjs) — left open per piece
   sync:
     status: done # audio.wav + audio-master.wav + frames.json + manifest.json all generated
     output: sync/ # audio.wav via tools/sounds/render.mjs (48kHz, 368s), audio-master.wav via master.mjs, frames.json/manifest.json via frames.mjs

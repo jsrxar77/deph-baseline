@@ -1,0 +1,39 @@
+name: musica-universalis
+title: Musica Universalis
+created: 2026-09-27
+key: D:dorian
+tuning: A4 = 432 Hz # channel signature. Hybrid: the drone in Pythagorean pure fifths (Surge XT .scl/.kbm), every other voice 12-TET at 432
+tempo:
+  cpm: 30 # setcpm(30): 1 cycle = 2 s = one 4/4 bar at 120 BPM (the tempo Ableton is set to)
+arc: # version 2, shortened to 6:00 (user: 8:00 too long, Shepard arrived too late). 8-bar phrases, Dm6-Gsus4-Csus4-Dm6
+  - { name: intro, cycles: 8 } # 0:00 hook: drone, pad, the motif in the filtered arp
+  - { name: development, cycles: 24 } # 0:16 the rolling bass arrives; lead from bar 21; arp and pad breathing (12-bar cycle)
+  - { name: climax, cycles: 40 } # 1:04 everything
+  - { name: flight, cycles: 32 } # 2:24 break: arp crossfades out as the Shepard rises in; bass out; arp returns in the last 8
+  - { name: return, cycles: 48 } # 3:28 the groove back, brightest; the Shepard recedes over its first 16 bars
+  - { name: outro, cycles: 28 } # 5:04 dissolving to the drone
+total_cycles: 180 # 360 s = 6:00 at cpm 30
+domains:
+  sound:
+    status: planned
+    source: strudel # what sync/audio.wav comes from: strudel (render.mjs) or ableton (see domains.daw)
+    file: sounds/musica-universalis.strudel
+  daw:
+    status: parked # 2026-09-27: the user prefers Strudel's own sound for this piece. Kept: Live Set in ableton/, MIDI + tuning files in daw/ (built through the Ableton MCP)
+    project_saved_as: ableton/musica-universalis Project/musica-universalis.als # where the user saved the Live Set; built from the 8:00 v2, before the 6:00 cut and the organic rework (daw/ MIDI is current)
+    tuning: daw/tuning/ # musica-universalis-pythagorean.scl/.kbm (drone, Surge), musica-universalis-432.scl/.kbm (shepard, Surge) and -432.tun (Serum 2 tracks)
+    midi: daw/musica-universalis.mid
+    stems: daw/stems/
+    guide: musica-universalis.ableton.md
+    project: daw/musica-universalis Project/musica-universalis.als
+    mastering: null # ableton (Ozone) or pipeline (master.mjs) — decided per piece
+  visual:
+    status: planned # first idea to try: Kepler orbits / harmonograph (Lissajous) figures drawn from the piece's intervals
+    entry: tools/visuals/src/compositions/musica-universalis/ # not visuals/ — see the visuals-compose skill for why
+  sync:
+    status: not-built
+    output: sync/
+publish:
+  status: planned
+  file: musica-universalis.youtube.md
+doc: musica-universalis.md

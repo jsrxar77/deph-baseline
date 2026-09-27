@@ -19,3 +19,18 @@ media/*/renders/*.webm
 # Copies of the sync data that Remotion reads from public/ (the originals in media/<name>/sync/ are tracked).
 tools/visuals/public/*-frames.json
 tools/visuals/public/*-analysis.json
+
+# DAW bridge (docs/daw-bridge.md): audio rendered for or exported from Ableton is regenerable and large. The .mid files,
+# tracks.json and the Live Set (.als) are tracked; stems, exports, recordings and Ableton's backups are not.
+media/*/daw/**/*.wav
+media/*/daw/**/*.aif
+media/*/daw/**/*.aiff
+media/*/daw/**/Backup/
+# The Live Set folder a user saves by hand (media/<name>/ableton/): the .als is tracked, audio and backups are not.
+media/*/ableton/**/*.wav
+media/*/ableton/**/*.aif
+media/*/ableton/**/*.aiff
+media/*/ableton/**/Backup/
+# Ableton's per-file analysis data (next to any audio it has seen) and macOS folder-icon files.
+*.asd
+Icon?

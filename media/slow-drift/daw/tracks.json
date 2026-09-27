@@ -1,0 +1,269 @@
+{
+  "source": "media/slow-drift/sounds/slow-drift.strudel",
+  "cps": 0.5,
+  "bpm": 120,
+  "timeSignature": "4/4",
+  "cyclesPerBar": 1,
+  "totalCycles": 180,
+  "durationSeconds": 360,
+  "bendRange": 2,
+  "velRange": 40,
+  "tracks": [
+    {
+      "layer": "$0",
+      "name": "drone",
+      "cents": -31.77,
+      "bend": 6891,
+      "peakGain": 0.32,
+      "pitchRange": [
+        36,
+        43
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "sine"
+          ]
+        },
+        "attack": {
+          "min": 6,
+          "max": 6
+        },
+        "release": {
+          "min": 10,
+          "max": 10
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "cutoff": {
+          "min": 500,
+          "max": 900
+        },
+        "room": {
+          "min": 0.9,
+          "max": 0.9
+        },
+        "roomsize": {
+          "min": 0.95,
+          "max": 0.95
+        },
+        "orbit": {
+          "min": 1,
+          "max": 1
+        },
+        "pan": {
+          "min": 0.35,
+          "max": 0.35
+        }
+      },
+      "channel": 0,
+      "suggestedFaderDb": -3.9,
+      "file": "tracks/01-drone.mid",
+      "noteCount": 13
+    },
+    {
+      "layer": "$1",
+      "name": "sub",
+      "cents": -31.77,
+      "bend": 6891,
+      "peakGain": 0.18,
+      "pitchRange": [
+        24,
+        24
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "sine"
+          ]
+        },
+        "attack": {
+          "min": 4,
+          "max": 4
+        },
+        "release": {
+          "min": 8,
+          "max": 8
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "cutoff": {
+          "min": 200,
+          "max": 200
+        }
+      },
+      "channel": 1,
+      "suggestedFaderDb": -8.9,
+      "file": "tracks/02-sub.mid",
+      "noteCount": 9
+    },
+    {
+      "layer": "$2",
+      "name": "pad",
+      "cents": -31.77,
+      "bend": 6891,
+      "peakGain": 0.5,
+      "pitchRange": [
+        60,
+        86
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "triangle"
+          ]
+        },
+        "attack": {
+          "min": 3,
+          "max": 3
+        },
+        "decay": {
+          "min": 1.5,
+          "max": 1.5
+        },
+        "release": {
+          "min": 6,
+          "max": 6
+        },
+        "sustain": {
+          "min": 0.4,
+          "max": 0.4
+        },
+        "cutoff": {
+          "min": 727.9632727895366,
+          "max": 1599.814242137883
+        },
+        "room": {
+          "min": 0.85,
+          "max": 0.85
+        },
+        "roomsize": {
+          "min": 0.9,
+          "max": 0.9
+        },
+        "orbit": {
+          "min": 2,
+          "max": 2
+        },
+        "pan": {
+          "min": 0.20134674667200256,
+          "max": 0.7946251048226469
+        }
+      },
+      "channel": 2,
+      "suggestedFaderDb": 0,
+      "file": "tracks/03-pad.mid",
+      "noteCount": 52
+    },
+    {
+      "layer": "$3",
+      "name": "bells",
+      "cents": -31.77,
+      "bend": 6891,
+      "peakGain": 0.08,
+      "pitchRange": [
+        76,
+        81
+      ],
+      "params": {
+        "fmi": {
+          "min": 0.5,
+          "max": 1
+        },
+        "fmh": {
+          "min": 2,
+          "max": 3
+        },
+        "s": {
+          "values": [
+            "sine"
+          ]
+        },
+        "attack": {
+          "min": 0.05,
+          "max": 0.05
+        },
+        "decay": {
+          "min": 0.6,
+          "max": 0.6
+        },
+        "release": {
+          "min": 6,
+          "max": 6
+        },
+        "sustain": {
+          "min": 0.35,
+          "max": 0.35
+        },
+        "fmattack": {
+          "min": 0.012,
+          "max": 0.012
+        },
+        "fmdecay": {
+          "min": 0.35,
+          "max": 0.35
+        },
+        "fmsustain": {
+          "min": 0.06,
+          "max": 0.06
+        },
+        "fmenv": {
+          "values": [
+            "exp"
+          ]
+        },
+        "cutoff": {
+          "min": 2800,
+          "max": 2800
+        },
+        "room": {
+          "min": 0.95,
+          "max": 0.95
+        },
+        "roomsize": {
+          "min": 9,
+          "max": 9
+        },
+        "orbit": {
+          "min": 3,
+          "max": 3
+        },
+        "delay": {
+          "min": 0.4,
+          "max": 0.4
+        },
+        "delaytime": {
+          "min": 1.13,
+          "max": 1.13
+        },
+        "delayfeedback": {
+          "min": 0.55,
+          "max": 0.55
+        },
+        "pan": {
+          "min": 0.10082342755049467,
+          "max": 0.9704064466059208
+        }
+      },
+      "channel": 3,
+      "suggestedFaderDb": -15.9,
+      "file": "tracks/04-bells.mid",
+      "noteCount": 21
+    }
+  ],
+  "audioOnly": [
+    {
+      "layer": "$4",
+      "events": 10,
+      "sounds": [
+        "sine"
+      ]
+    }
+  ],
+  "warnings": [],
+  "generatedAt": "2026-09-27T18:17:07.561Z"
+}

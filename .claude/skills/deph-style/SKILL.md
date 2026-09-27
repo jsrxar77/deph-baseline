@@ -36,6 +36,10 @@ How to use this file:
   space, more reverb/delay. Fill silence with tail (reverb `size` 9 s, non-metric delay 1.13 s, feedback
   0.55), not with more notes.
 - **Bells are an accent layer, never a fifth voice.** The user asked for them lower twice. Gains 0.055-0.08.
+- **Organic journey, no jolts.** Voices hand over through crossfades, never drop to zero mid-piece, and every layer
+  (Shepard included) plays chord tones at the piece's own pace. Calm density (8ths, not 16ths) for travelling.
+- **With a pulse: one motif, one shared progression.** Every voice derives from one cell and follows the same chord
+  changes on the same 8-bar phrases; independent loops only for beatless textures (Musica Universalis, rejected collage).
 - **Pedal, not melody.** Rejected: a wide ascending arpeggio (0 4 7 9 12 14) and a C-E-G-E triad
   arpeggio (lullaby-like). Chosen: a pedal on G, G A G E, steps of at most a third.
 - **Warm harmonic bell timbre.** Rejected: metallic FM bell (fmh 1.4 / 2.4) — its partials sat only ~20 dB
@@ -49,7 +53,9 @@ How to use this file:
 - **Binaural layer:** sine hard-left and hard-right around C4 (256.87 Hz), beat 10/8/6/5/4 Hz across the
   arc (alpha to theta), dry, ~17 dB under the peak, one long note per section. Headphones only.
 - **Retention:** a short cold-open bell teaser and an early, very quiet pad entry, so the first seconds
-  hold a first-time listener without diluting the climax's arrival.
+  hold a first-time listener without diluting the climax's arrival. Never more than ~15 s without a new event near the
+  start; the core texture (pulse, if any) within the first minute. Rejected twice for a slow runway (Slow Drift 2:08,
+  Musica Universalis 1:52).
 
 ## Visual style — distilled
 
@@ -85,7 +91,11 @@ How to use this file:
 - The user prefers to see results: stills/contact sheets across the whole piece, the Studio at
   `localhost:3100`, and a compiled mp4 in `~/Movies/` (not the Desktop; a file there vanished once).
 - Be honest about trade-offs and side effects (e.g. "the C anchor got weaker", "less metallic, more glass").
-- Spanish in conversation; docs and code comments in English.
+- Spanish in conversation; docs and code comments in English. Guides the user follows by hand (e.g.
+  `<name>.ableton.md`) are in Spanish.
+- **Ableton**: the user is at level zero. Every Ableton guide says exactly which plugin, preset, knob value,
+  effect and menu. For choices with several valid options (e.g. how to carry 432 Hz), the user prefers the
+  simplest one for them.
 
 ## Rejected ideas (and why) — don't re-propose without a new reason
 
@@ -95,6 +105,7 @@ How to use this file:
   the default (unset) `decay`; reverb shared by voices of different `size`.
 
 ## Open questions and untried candidates
+
 
 - Bell phrases measured to have 0 semitone clashes but not yet rendered: `D G A G`, `G E D E`; the
   untried "C and G only" phrase; `0 2 0 1` if C should return as the anchor.
@@ -213,6 +224,65 @@ Entry format: `date — decision — reason/evidence — where it lives`.
 - 2026-09-26 — Songcord is a showcase for a client, over the client's own music: the user said to forget deph, YouTube and rights ("solo quiero mostrar que se puede hacer"). The
   deph YouTube pack, the deph-branded thumbnail and the rights warnings were removed; the deliverable is the 4K master tuned for YouTube playback. Lesson: ask whether new
   audio-first work is a deph release before applying the deph publishing workflow — `media/songcord/songcord.md`.
+- 2026-09-27 — Workflow: Strudel stays where pieces are composed; Ableton Live (with the Mac's VST/AU library) becomes an optional
+  refinement stage (instruments, effects, mix, master), feeding the existing video pipeline instead of replacing it. The user chose: MIDI over
+  the IAC bus for quick sound tests and exported `.mid` for the final version; 432 Hz carried inside the MIDI (a pitch bend, the simplest
+  option: nothing to set in Ableton); mastering left open per piece (Ozone in Ableton or `master.mjs`); a detailed beginner guide per piece
+  naming plugins, presets, settings and effects — `docs/daw-bridge.md`, `ableton-bridge` skill, `media/slow-drift/slow-drift.ableton.md`.
+- 2026-09-27 — New piece Musica Universalis (music of the spheres): the user chose the name, sound + video (try Claude's
+  Kepler-orbits / harmonograph idea first), the "tetractys" arc 1:2:4:3 (~8:00, no separate outro), D dorian over C lydian,
+  and kept 432 Hz + binaural as the channel signature. New character asked for: "muy volador, muy psy, que te lleve a un
+  lugar" (soaring, psychedelic, a journey) — a departure from Slow Drift's still meditation. Instruments: Surge XT and Serum 2
+  (not Kontakt orchestras). First piece composed Ableton-first — `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — Musica Universalis: the user chose (a) psybient WITH a soft pulse — first deph piece with rhythm: no hard kick,
+  beatless intro, rolling bass + 16th arps with ping-pong delay from the development, full pulse in the climax, dissolving in the
+  deceleration, 120 BPM (1 cycle = 1 bar at 30 cpm); a Shepard-Risset rising glissando as the "flying" element. Tuning: hybrid —
+  the monochord drone (2:1, 3:2, 4:3) in exact Pythagorean ratios in Surge XT, everything else equal temperament at 432 Hz —
+  `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — Musica Universalis, first listen: the user found the start monotonous ("un loop que no para"): the intro plus the first
+  two thirds of the development kept almost one note (the monochord) until the pulse at 1:52, far too long for YouTube. Lesson, again
+  (Slow Drift had the same fix): something new must happen within the first ~10-15 s and the pulse/core texture must arrive early;
+  a concept like "one string alone" has to be expressed in seconds, not minutes — `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — Musica Universalis rewrite, approved by the user ("tiene que ser algo más coherente"): the first version was a collage —
+  each voice on its own planetary loop and its own material, fine for beatless Eno but incoherent over a psy pulse. New rule for pieces
+  with a pulse: ONE motif (the Pythagorean cell D-A-G-D: unison, fifth, fourth, octave) that every voice derives from, ONE shared chord
+  progression (D dorian: Dm-G-C-Dm, 8 bars) that bass, arp, pad and lead all follow, 8-bar phrasing, hook in the first seconds, a
+  mid-piece "flight" break (bass out, Shepard + pad) and a return. Concepts (planets, tetractys ratios) become subtle detail, never the
+  structure. Also found: notes longer than a few bars keep sounding after Strudel is stopped (superdough schedules each whole note), so
+  no note longer than 4 bars — `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — Musica Universalis v2: the user likes the general idea ("me gusta la idea general, bien!") — one Pythagorean motif
+  (D-A-G-D) shared by every voice, one progression (Dm6-Gsus4-Csus4-Dm6, fourths and fifths), 8-bar phrases, hook at 0:00, groove at
+  0:16, flight break with the Shepard rise, return — `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — Musica Universalis v2 in Strudel: the user likes it ("me gusta") but found the arp "muy agudo, mucho brillo" and too
+  quiet. Fixed as asked: resonance lpq 7 -> 3, lpenv 2 -> 1.5, filter ranges ~35% lower (return section 2.6-3.2 kHz -> 1.6-2.0 kHz),
+  gains x1.4 (~+3 dB). Lesson: a resonant saw pluck in 16ths reads as harsh and thin at the same time; for deph, darker and
+  louder rather than bright and quiet. Register kept (D4-G6); an octave down is the next step if it's still too high —
+  `media/musica-universalis/sounds/musica-universalis.strudel`.
+- 2026-09-27 — After trying the Ableton build (Surge XT / Serum 2 presets, MCP-built set), the user prefers Strudel's own sound for
+  Musica Universalis: "sigamos con strudel, tiene más el sonido que busco". Ableton and MIDI are parked for now (the set, the MIDI
+  export and the tuning files are kept in media/musica-universalis/ableton/ and daw/). The deph sound, so far, is Strudel's
+  synthesis refined in code; a DAW is an option, not the default path.
+- 2026-09-27 — Musica Universalis: the user asked for the arp and the pads to interlace, "subiendo uno, bajando otro", in a
+  Pythagorean cycle, rising and falling in presence. Built (volume and brightness only, the user's choice; contrary pitch motion
+  left as a possible next step): in development, climax and return the two breathe in opposite phase, +/-5 dB and filter x0.75-1.35,
+  over 12 bars (twelve fifths close the circle; 12:8 against the harmonic phrase = 3:2, a pure fifth). The pad's own 16-bar filter
+  sweep is replaced by the breath there, or it blurred the crossing — `media/musica-universalis/sounds/musica-universalis.strudel`.
+- 2026-09-27 — Musica Universalis cut from 8:00 to 6:00 (user: too long and repetitive, "no creo que la gente escuche más de 6
+  minutos algo tan repetitivo"; the Shepard arrived only at 3:28). Flight kept whole, now at 2:24, the middle. The Shepard made louder
+  and brighter (it was getting lost), and its entry and exit crossfaded "de una manera más orgánica" against the arp: the arp fades and
+  darkens over 12 bars as the Shepard rises, and returns opening while the Shepard recedes over 24. Lessons: for deph with a
+  pulse, 6:00 is the ceiling; the most distinctive moment should sit near the middle; voices should hand over through crossfades,
+  not cuts, and a Shepard scale must never restart mid-flight — `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — Musica Universalis, "todo más orgánico, un viaje, no sobresaltos": (1) the arp vanished (silent 12 bars in the
+  flight; -5 dB breath dips) -> it never disappears now (flight floor about -32 dB, breath +/-3 dB); (2) the Shepard sounded
+  "agarrado de los pelos, en otro tiempo" -> it stepped through every scale degree each half bar regardless of the chord; rebuilt from
+  the progression itself (Dm6-Gsus4-Csus4-Dm6 climbs by fourths, voice-led upward = +1 octave per phrase), so all 420 notes are chord
+  tones and it moves with the harmony, legato, triangle; (3) the arp calmer (16ths -> 8ths) with a register arc toward the climax
+  and back by Pythagorean steps (0 -> +fifth -> +octave -> back); (4) section edges crossfaded (bass 4-bar fades, the arp enters the
+  flight from where the climax leaves it). Principles: every layer must belong to the harmony and the pulse; hand-overs are
+  crossfades; nothing drops to zero mid-piece; density low enough to travel with — `media/musica-universalis/musica-universalis.md`.
+- 2026-09-27 — The user approved the organic rework of Musica Universalis ("me parece un excelente trabajo"); committed as the
+  reference version before exploring a variation.
 
 ## Entry template
 

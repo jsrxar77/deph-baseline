@@ -1,7 +1,7 @@
 {
   "name": "strudel-sounds-tools",
   "version": "1.0.0",
-  "description": "Headless Node tooling for deph's media/<name>/sounds/ Strudel compositions (inspector, and eventually the sync pipeline)",
+  "description": "Headless Node tooling for deph's media/<name>/sounds/ Strudel compositions (inspector, render/sync pipeline, DAW bridge)",
   "scripts": {
     "inspect": "node inspect.mjs",
     "render": "node render.mjs"
@@ -12,6 +12,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@julusian/midi": "^3.8.1",
     "@strudel/core": "^1.2.6",
     "@strudel/mini": "^1.2.6",
     "@strudel/tonal": "^1.2.6",

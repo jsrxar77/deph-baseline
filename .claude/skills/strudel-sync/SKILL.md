@@ -98,6 +98,10 @@ Rendering/conversion scripts: `tools/sounds/` (domain-first, alongside the inspe
 (the WAV writer). Update `docs/sync-pipeline.md`'s "confirmed vs not yet" list as each phase actually gets
 verified, the same way `media/<name>/<name>.md` records what was found while building a piece.
 
+**If the yaml says `domains.sound.source: ableton`**, `sync/audio.wav` is a mix exported from Ableton, not a
+Strudel render: don't overwrite it with `render.mjs` without asking. Render to a different file or confirm first;
+bringing an Ableton mix back is the `ableton-bridge` skill's job (`docs/daw-bridge.md`).
+
 ## Before finishing: reconcile the whole yaml, not just your own status
 
 `domains.sync.status` is `in-progress` once `audio.wav` exists but `frames.json`/`manifest.json` don't

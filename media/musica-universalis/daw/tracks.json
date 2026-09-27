@@ -1,0 +1,423 @@
+{
+  "source": "media/musica-universalis/sounds/musica-universalis.strudel",
+  "cps": 0.5,
+  "bpm": 120,
+  "timeSignature": "4/4",
+  "cyclesPerBar": 1,
+  "totalCycles": 180,
+  "durationSeconds": 360,
+  "bendRange": 2,
+  "velRange": 40,
+  "tracks": [
+    {
+      "layer": "$0",
+      "name": "drone",
+      "cents": -31.77,
+      "bend": null,
+      "synthTuned": true,
+      "peakGain": 0.14,
+      "pitchRange": [
+        38,
+        50
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "triangle"
+          ]
+        },
+        "attack": {
+          "min": 3,
+          "max": 3
+        },
+        "release": {
+          "min": 5,
+          "max": 5
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "cutoff": {
+          "min": 800,
+          "max": 800
+        },
+        "room": {
+          "min": 0.6,
+          "max": 0.6
+        },
+        "roomsize": {
+          "min": 6,
+          "max": 6
+        },
+        "orbit": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "channel": 0,
+      "suggestedFaderDb": -2.2,
+      "file": "tracks/01-drone.mid",
+      "noteCount": 120
+    },
+    {
+      "layer": "$1",
+      "name": "pad",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.12006569129293414,
+      "pitchRange": [
+        48,
+        60
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "sawtooth"
+          ]
+        },
+        "attack": {
+          "min": 1.5,
+          "max": 1.5
+        },
+        "decay": {
+          "min": 1.5,
+          "max": 1.5
+        },
+        "sustain": {
+          "min": 0.7,
+          "max": 0.7
+        },
+        "release": {
+          "min": 4,
+          "max": 4
+        },
+        "cutoff": {
+          "min": 900,
+          "max": 2800
+        },
+        "room": {
+          "min": 0.7,
+          "max": 0.7
+        },
+        "roomsize": {
+          "min": 8,
+          "max": 8
+        },
+        "orbit": {
+          "min": 2,
+          "max": 2
+        },
+        "pan": {
+          "min": 0.35,
+          "max": 0.65
+        }
+      },
+      "channel": 1,
+      "suggestedFaderDb": -3.5,
+      "file": "tracks/02-pad.mid",
+      "noteCount": 630
+    },
+    {
+      "layer": "$2",
+      "name": "arp",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.14125375446227545,
+      "pitchRange": [
+        50,
+        91
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "sawtooth"
+          ]
+        },
+        "attack": {
+          "min": 0.005,
+          "max": 0.005
+        },
+        "decay": {
+          "min": 0.3,
+          "max": 0.3
+        },
+        "sustain": {
+          "min": 0,
+          "max": 0
+        },
+        "release": {
+          "min": 0.2,
+          "max": 0.2
+        },
+        "cutoff": {
+          "min": 400,
+          "max": 2310.528334465553
+        },
+        "resonance": {
+          "min": 3,
+          "max": 3
+        },
+        "lpenv": {
+          "min": 1.5,
+          "max": 1.5
+        },
+        "lpdecay": {
+          "min": 0.15,
+          "max": 0.15
+        },
+        "pan": {
+          "min": 0.3,
+          "max": 0.7
+        },
+        "delay": {
+          "min": 0.3,
+          "max": 0.3
+        },
+        "delaytime": {
+          "min": 0.75,
+          "max": 0.75
+        },
+        "delayfeedback": {
+          "min": 0.4,
+          "max": 0.4
+        },
+        "room": {
+          "min": 0.3,
+          "max": 0.3
+        },
+        "roomsize": {
+          "min": 3,
+          "max": 3
+        },
+        "orbit": {
+          "min": 3,
+          "max": 3
+        }
+      },
+      "channel": 2,
+      "suggestedFaderDb": -2.1,
+      "file": "tracks/03-arp.mid",
+      "noteCount": 1376
+    },
+    {
+      "layer": "$3",
+      "name": "bass",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.18,
+      "pitchRange": [
+        26,
+        36
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "sawtooth"
+          ]
+        },
+        "attack": {
+          "min": 0.003,
+          "max": 0.003
+        },
+        "decay": {
+          "min": 0.13,
+          "max": 0.13
+        },
+        "sustain": {
+          "min": 0,
+          "max": 0
+        },
+        "release": {
+          "min": 0.05,
+          "max": 0.05
+        },
+        "cutoff": {
+          "min": 280,
+          "max": 280
+        },
+        "resonance": {
+          "min": 5,
+          "max": 5
+        },
+        "lpenv": {
+          "min": 2.5,
+          "max": 2.5
+        },
+        "lpdecay": {
+          "min": 0.09,
+          "max": 0.09
+        }
+      },
+      "channel": 3,
+      "suggestedFaderDb": 0,
+      "file": "tracks/04-bass.mid",
+      "noteCount": 1536
+    },
+    {
+      "layer": "$4",
+      "name": "lead",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.07,
+      "pitchRange": [
+        74,
+        86
+      ],
+      "params": {
+        "fmi": {
+          "min": 0.5,
+          "max": 1
+        },
+        "fmh": {
+          "min": 2,
+          "max": 3
+        },
+        "s": {
+          "values": [
+            "sine"
+          ]
+        },
+        "attack": {
+          "min": 0.05,
+          "max": 0.05
+        },
+        "decay": {
+          "min": 0.8,
+          "max": 0.8
+        },
+        "sustain": {
+          "min": 0.4,
+          "max": 0.4
+        },
+        "release": {
+          "min": 5,
+          "max": 5
+        },
+        "fmattack": {
+          "min": 0.012,
+          "max": 0.012
+        },
+        "fmdecay": {
+          "min": 0.4,
+          "max": 0.4
+        },
+        "fmsustain": {
+          "min": 0.08,
+          "max": 0.08
+        },
+        "fmenv": {
+          "values": [
+            "exp"
+          ]
+        },
+        "cutoff": {
+          "min": 3200,
+          "max": 3200
+        },
+        "room": {
+          "min": 0.85,
+          "max": 0.85
+        },
+        "roomsize": {
+          "min": 9,
+          "max": 9
+        },
+        "orbit": {
+          "min": 4,
+          "max": 4
+        },
+        "delay": {
+          "min": 0.35,
+          "max": 0.35
+        },
+        "delaytime": {
+          "min": 1.13,
+          "max": 1.13
+        },
+        "delayfeedback": {
+          "min": 0.5,
+          "max": 0.5
+        },
+        "pan": {
+          "min": 0.3,
+          "max": 0.7
+        }
+      },
+      "channel": 4,
+      "suggestedFaderDb": -8.2,
+      "file": "tracks/05-lead.mid",
+      "noteCount": 73
+    },
+    {
+      "layer": "$5",
+      "name": "shepard",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.12,
+      "pitchRange": [
+        38,
+        96
+      ],
+      "params": {
+        "s": {
+          "values": [
+            "triangle"
+          ]
+        },
+        "attack": {
+          "min": 1,
+          "max": 1
+        },
+        "decay": {
+          "min": 1,
+          "max": 1
+        },
+        "sustain": {
+          "min": 0.8,
+          "max": 0.8
+        },
+        "release": {
+          "min": 2.5,
+          "max": 2.5
+        },
+        "cutoff": {
+          "min": 3200,
+          "max": 3200
+        },
+        "room": {
+          "min": 0.6,
+          "max": 0.6
+        },
+        "roomsize": {
+          "min": 7,
+          "max": 7
+        },
+        "orbit": {
+          "min": 5,
+          "max": 5
+        }
+      },
+      "channel": 5,
+      "suggestedFaderDb": -3.5,
+      "file": "tracks/06-shepard.mid",
+      "noteCount": 420
+    }
+  ],
+  "audioOnly": [
+    {
+      "layer": "$6",
+      "events": 90,
+      "sounds": [
+        "sine"
+      ]
+    }
+  ],
+  "warnings": [],
+  "generatedAt": "2026-09-27T21:33:12.832Z"
+}

@@ -87,6 +87,8 @@ that belong to the sound domain's implementation.
 - Once the sound domain is `done` and real audio is wanted for the visual → invoke `strudel-sync` to
   render the bridge into `sync/` (this can happen before the visual domain is `done` — `visuals-compose`
   needs a real `audio.wav` to wire in, not a finished video, in order to start).
+- The user wants the sound refined in Ableton with real plugins → invoke `ableton-bridge` once the `.strudel`
+  piece exists. It adds `domains.daw` to the yaml and writes the beginner guide `<name>.ableton.md`.
 
 **Every domain skill reconciles the whole yaml before finishing, not just its own `domains.<domain>.status`
 entry.** Writing the actual sound or visual content is what discovers the real numbers this skill left as

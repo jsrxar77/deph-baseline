@@ -5,14 +5,17 @@
 // playback (s("bd") etc.) is Phase 3, not yet supported here.
 //
 // Usage (run from the project root):
-//   node tools/sounds/render.mjs <file.strudel> --cycles N --out <output.wav> [--tail S] [--sample-rate N]
+//   node tools/sounds/render.mjs <file.strudel> --cycles N --out <output.wav> [--tail S] [--sample-rate N] [--only L]
 //
 // --cycles is required: the total number of cycles to render (the whole piece, not a preview
 // window — unlike the inspector, there's no sensible default here). --tail adds silent seconds
 // after the last event so release/reverb tails finish rendering instead of being cut off abruptly
-// (default 3s).
+// (default 3s). --only renders just the listed `$:` layers (comma-separated keys as the inspector shows them,
+// e.g. --only '$4'): a stem of one voice for a DAW, same length and start as the full render so it lines up
+// at bar 1 (see docs/daw-bridge.md).
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { evalStrudel } from './eval-strudel.mjs';
 import { audioBufferToWavBuffer } from './wav.mjs';
@@ -53,13 +56,14 @@ AudioNode.prototype.disconnect = function (...a) {
 };
 
 function parseArgs(argv) {
-  const args = { file: undefined, cycles: undefined, out: undefined, tail: 3, sampleRate: 48000 };
+  const args = { file: undefined, cycles: undefined, out: undefined, tail: 3, sampleRate: 48000, only: undefined };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--cycles') args.cycles = Number(argv[++i]);
     else if (a === '--out') args.out = argv[++i];
     else if (a === '--tail') args.tail = Number(argv[++i]);
     else if (a === '--sample-rate') args.sampleRate = Number(argv[++i]);
+    else if (a === '--only') args.only = argv[++i].split(',');
     else if (!args.file) args.file = a;
   }
   return args;
@@ -69,7 +73,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.file || !args.cycles || !args.out) {
     console.error(
-      'usage: node tools/sounds/render.mjs <file.strudel> --cycles N --out <output.wav> [--tail S] [--sample-rate N]',
+      'usage: node tools/sounds/render.mjs <file.strudel> --cycles N --out <output.wav> [--tail S] [--sample-rate N] [--only L]',
     );
     process.exit(2);
   }
@@ -84,7 +88,7 @@ async function main() {
 
   let pattern, cps;
   try {
-    ({ pattern, cps } = await evalStrudel(code));
+    ({ pattern, cps } = await evalStrudel(code, { only: args.only }));
   } catch (err) {
     console.error(`ERROR evaluating ${args.file}: ${err.message}`);
     process.exit(1);
@@ -189,6 +193,7 @@ async function main() {
     console.error(`WARNING: rendered audio is silent (peak=${peak}) — check the pattern actually has audible events.`);
   }
 
+  mkdirSync(dirname(args.out), { recursive: true });
   writeFileSync(args.out, audioBufferToWavBuffer(buffer));
   console.error(`wrote ${args.out} (${buffer.duration.toFixed(1)}s, peak=${peak.toFixed(4)})`);
 }

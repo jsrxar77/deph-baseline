@@ -1,0 +1,276 @@
+// "Musica Universalis" — the music of the spheres. The Pythagorean idea that the cosmos is one harmonic composition,
+// heard as a psybient journey. Version 2 (rewritten for coherence after the first listen):
+//
+// - ONE motif, the Pythagorean cell D-A-G-D (unison, fifth, fourth, octave — the consonances of the tetractys). The arp
+//   plays it in 16ths, the lead sings it slowly, the bass rolls on its roots, the drone holds its first two notes.
+// - ONE progression that every voice follows, in 8-bar phrases: Dm6 (2 bars) - Gsus4 (2) - Csus4 (2) - Dm6 (2). Harmony
+//   of fourths and fifths, as in the Pythagorean tradition (thirds were the dissonances then); Dm6 keeps the dorian
+//   colour (D F A B: the raised 6th, B).
+// - A soft psy pulse (rolling bass, no kick), a hook in the first seconds, a mid-piece "flight" break with the endless
+//   Shepard rise, and a return.
+// - No note longer than 4 bars: superdough schedules each note whole, so a long note keeps sounding after Strudel is
+//   stopped (the first version's 96-bar drone did, for minutes).
+//
+// Composed for Ableton from the start: every voice but the binaural pair is plain notes, one voice per instrument
+// (see docs/daw-bridge.md and musica-universalis.ableton.md).
+
+setcpm(30) // 1 cycle = 2 s = one 4/4 bar at 120 BPM (the tempo Ableton must be set to).
+
+// Sections, all multiples of the 8-bar phrase so the progression always starts a section on Dm.
+// Shortened from 8:00 (user: too long and repetitive, the Shepard arrived only at 3:28): development, climax, return and
+// outro trimmed, the flight kept whole and now at 2:24, the middle of the piece. dev 24 = 2 breaths, return 48 = 4.
+const S = { intro: 8, dev: 24, climax: 40, flight: 32, ret: 48, outro: 28 }; // 180 bars = 360 s = 6:00
+
+// ---- key and tuning ------------------------------------------------------------------------------------------------
+// Single source of truth for pitch, mirroring the yaml's `key: D:dorian`. Single quotes on purpose: Strudel parses every
+// double-quoted (and backtick) literal as mini-notation, and helper strings are not patterns.
+const ROOT = 'D';
+const KEY_SUFFIX = ':dorian';
+const KEY = ROOT + KEY_SUFFIX; // "D:dorian" — reference only
+const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX; // scaleAt(2) => "D2:dorian"
+
+// A4 = 432 Hz, the channel's signature: every pitched voice goes through tune(), a constant -31.77-cent shift that the
+// DAW export turns into one pitch bend per track.
+const A4 = 432;
+const TUNE = 12 * Math.log2(A4 / 440);
+const midiOf = (v) => (typeof v === 'string' ? noteToMidi(v) : v); // scale() yields note names ("D3"), not numbers
+const tune = (p) => p.withValue((v) => ({ ...v, note: midiOf(v.note) + TUNE }));
+
+// Pythagorean tuning for the drone only (the "hybrid" the user chose): every pitch a chain of pure 3:2 fifths from D.
+// A pure fifth is 1.955 cents wider than an equal-tempered one, so a note k fifths from D sits k * 1.955 cents off its
+// 12-TET key. D dorian is exactly F C G D A E B, symmetric around D in the chain of fifths — the Pythagorean mode. D
+// stays where 12-TET puts it, so the drone's root meets every other voice exactly; its pure fifth A is 2 cents above
+// theirs. In Ableton the same tuning comes from a Surge XT .scl/.kbm pair, not a pitch bend.
+const FIFTH_DEV = 12 * Math.log2(3 / 2) - 7; // +0.01955 semitones
+const ROOT_PC = noteToMidi(ROOT + '4') % 12;
+const FIFTHS_FROM_ROOT = { 0: 0, 7: 1, 2: 2, 9: 3, 4: 4, 11: 5, 6: 6, 5: -1, 10: -2, 3: -3, 8: -4, 1: -5 };
+const pythagorean = (p) =>
+  p.withValue((v) => {
+    const m = midiOf(v.note);
+    return { ...v, note: m + FIFTHS_FROM_ROOT[(((Math.round(m) - ROOT_PC) % 12) + 12) % 12] * FIFTH_DEV };
+  });
+
+// ---- the shared material -------------------------------------------------------------------------------------------
+// The progression as scale-degree roots, one value per bar over 8 bars: D D G G C C D D. C is written as 6 (the 7th
+// degree) for the bass, which climbs D-G-C; the chord voicings below keep their own voice leading.
+const ROOTS = "<0 0 3 3 6 6 0 0>";
+// Pad voicings over D3, moving by step: Dm6 (D F A B) -> Gsus4 (D G C) -> Csus4 (C F G) -> Dm6. Degrees in D dorian.
+// Sus chords, not major triads: a first draft used G major (G B D) and C major (C E G), and the motif's fourth (C over G,
+// F over C) then sat a semitone from the chord's third on 416 arp notes. With sus4 chords the motif's notes are chord
+// tones on every root (measured: see musica-universalis.md).
+const CHORDS = "<[0,2,4,5]!2 [0,3,6]!2 [-1,2,3]!2 [0,2,4,5]!2>";
+// The motif, D-A-G-D' (degrees 0 4 3 7), as an 8-step arp line in eighths: stated, then answered up to the next fifth
+// and back down (0 4 3 7 11 7 4 3), a small rise-and-fall every bar. Eighths, not the first draft's 16ths: the user
+// wanted it calmer, "para que ayude al viaje". Transposed onto each bar's root it stays inside the mode: over G it is
+// G-D-C-G, over C it is C-G-F-C.
+const ARP_LINE = "0 4 3 7 11 7 4 3";
+// The lead sings the motif one note per 2 bars across the 8-bar phrase: D over Dm6, A over Gsus4 (its 9th), G over
+// Csus4, D' over Dm6.
+const LEAD_LINE = "<0 ~ 4 ~ 3 ~ 7 ~>";
+
+// ---- the breath: arp and pad interlaced -------------------------------------------------------------------------------
+// In the groove sections the arp and the pad breathe in opposite phase (the user's idea): as one rises in presence
+// (louder AND brighter) the other falls back, then they cross. Neither disappears: +/-5 dB around its level, and the
+// filter opens/closes by the same motion. One breath lasts 12 bars — twelve, the Pythagorean number (12 pure fifths
+// close the circle of fifths) — against the 8-bar harmonic phrase: 12:8 = 3:2, a pure fifth, so 3 breaths fit exactly
+// 2 phrases and the two cycles realign every 24 bars.
+const BREATH = 12;
+const SWING = 10 ** (3 / 20); // +/-3 dB as a gain factor (was 5: the arp seemed to vanish in its dips)
+// `lead`: true = this voice rises first (the arp), false = it starts back and rises when the other falls (the pad).
+const presence = (g, lead) => sine.slow(BREATH).range(lead ? g / SWING : g * SWING, lead ? g * SWING : g / SWING);
+const brightness = (lead) => sine.slow(BREATH).range(lead ? 0.85 : 1.2, lead ? 1.2 : 0.85); // filter cutoff factor
+
+// ---- voices --------------------------------------------------------------------------------------------------------
+// Each builder takes a gain: a number, or a ramp (saw/isaw) sampled at each note's onset.
+
+// Drone — the monochord: D2 and its pure fifth A2 (plus D3, the octave, when `octave`), retriggered every 4 bars with a
+// cross-fading envelope so it sounds continuous but never holds a note longer than 4 bars.
+const drone = (g, octave = false) =>
+  tune(pythagorean(n(octave ? "[0,4,7]" : "[0,4]").scale(scaleAt(2)).slow(4)))
+    .s("triangle")
+    .attack(3).release(5).sustain(1)
+    .gain(g)
+    .lpf(800)
+    .room(0.6).size(6).orbit(1);
+
+// Pad — the progression (each chord held 2 bars by the `!2` in CHORDS). Slow filter breathing.
+// `breath`: interlace with the arp (see BREATH above); the pad is the one that starts back.
+const pad = (g, open = 2200, breath = false) =>
+  tune(n(CHORDS).scale(scaleAt(3)))
+    .s("sawtooth")
+    .attack(1.5).decay(1.5).sustain(0.7).release(4) // sustain < 1, so decay is set explicitly (no "clap")
+    // When breathing, the pad's own 16-bar filter sweep is replaced by a fixed centre, so its brightness follows only
+    // the breath (measured: with both, the pad opened at bars where it should be falling back).
+    .lpf(breath ? brightness(false).mul((900 + open) / 2) : sine.slow(16).range(900, open))
+    .gain(breath ? presence(g, false) : g)
+    .room(0.7).size(8).orbit(2)
+    .pan(sine.slow(32).range(0.35, 0.65));
+
+// Arp — the motif in eighths on each bar's root, a soft resonant pluck with a filter envelope; alternating pan and a
+// dotted-quarter delay (3/8 of a bar = 0.75 s) make the ping-pong. Options:
+//   g       gain (number or pattern)        lo/hi/len  filter sweep across `len` bars
+//   breath  interlace with the pad (the arp rises first)   cutoff  a filter pattern replacing the sweep
+//   reg     register offset in scale degrees (number or pattern): the arc climbs by Pythagorean steps, 0 -> +4 (a
+//           fifth) -> +7 (an octave, the peak) and back. The motif is root, fifth and fourth, so moved up a fifth it
+//           still lands on chord tones of the sus4/6 chords.
+const arp = ({ g, lo = 700, hi = 700, len = 8, breath = false, cutoff = null, reg = 0 }) =>
+  tune(n(ARP_LINE.add(ROOTS).add(reg)).scale(scaleAt(3)))
+    .s("sawtooth")
+    .attack(0.005).decay(0.3).sustain(0).release(0.2) // rounder than the first 16th-note pluck
+    .lpf(cutoff ?? (breath ? saw.slow(len).range(lo, hi).mul(brightness(true)) : saw.slow(len).range(lo, hi)))
+    .lpq(3).lpenv(1.5).lpdecay(0.15) // user: "muy agudo, mucho brillo" -> resonance 7 -> 3, lower filter ranges
+    .gain(breath ? presence(g, true) : g)
+    .pan("0.3 0.7")
+    .delay(0.3).delaytime(0.75).delayfeedback(0.4)
+    .room(0.3).size(3).orbit(3);
+
+// Rolling bass — the psy offbeat roll (rest on each beat, three 16ths after it), no kick, on the bar's root: D1 G1 C2.
+const bass = (g) =>
+  tune(n("[~ 0 0 0]*4".add(ROOTS)).scale(scaleAt(1)))
+    .s("sawtooth")
+    .attack(0.003).decay(0.13).sustain(0).release(0.05)
+    .lpf(280).lpq(5).lpenv(2.5).lpdecay(0.09)
+    .gain(g);
+
+// Lead — the motif sung slowly as glass bells (integer FM ratios 2 and 3: harmonic, no non-scale partials), with a long
+// non-metric echo so it floats over the pulse. The accent layer: kept below the arp.
+const lead = (g) => {
+  const notes = n(LEAD_LINE).scale(scaleAt(5));
+  const strike = (p) =>
+    tune(p)
+      .s("sine")
+      .attack(0.05).decay(0.8).sustain(0.4).release(5)
+      .fmattack(0.012).fmdecay(0.4).fmsustain(0.08).fmenv('exp')
+      .lpf(3200)
+      .room(0.85).size(9).orbit(4)
+      .delay(0.35).delaytime(1.13).delayfeedback(0.5)
+      .pan(sine.slow(8).range(0.3, 0.7));
+  // The second operator at half level via velocity (superdough multiplies gain by it), not `g * 0.5`: when g is a fade
+  // pattern, `g * 0.5` is NaN, which superdough plays as gain 1 — full volume (found in the MIDI export's levels).
+  return stack(strike(notes.fm(1).fmh(2)).gain(g), strike(notes.fm(0.5).fmh(3)).gain(g).velocity(0.5));
+};
+
+// Shepard — the flight, built from the piece's own harmony. The progression Dm6 -> Gsus4 -> Csus4 -> Dm6 climbs by
+// fourths (D -> G -> C -> D): voice-led UPWARD every time, one phrase ends exactly an octave above where it began, so the
+// chords themselves form an endless rise. Five copies an octave apart; each is heard according to its height in a fixed
+// five-octave window (level = sin^2 of its place in the window), so a voice fades in at the bottom as another fades out
+// at the top. One octave per 8-bar phrase, one chord per 2 bars, always the chord the pad is playing: it moves at the
+// piece's own pace, not its own (the first Shepard stepped through every scale degree each half bar and sounded
+// "agarrado de los pelos", in another time). Legato, triangle, presence from level rather than a bright wave.
+const SHEP_BARS = S.flight + 16; // the flight plus the first 16 bars of the return, one continuous segment
+const SHEP_WINDOW = 35; // 5 octaves x 7 degrees
+// Per 2-bar chord: root in degrees rising through the phrase (0, 3, 6, 7 = D, G, C, D') and the chord's shape above it.
+const SHEP_ROOTS = [0, 3, 6, 7];
+const SHEP_SHAPES = [[0, 2, 4, 5], [0, 3, 4], [0, 3, 4], [0, 2, 4, 5]]; // Dm6, Gsus4, Csus4, Dm6
+const shepVoice = (octave, slot) => {
+  const steps = Array.from({ length: SHEP_BARS / 2 }, (_, i) => {
+    const phrase = Math.floor(i / 4), chord = i % 4, shape = SHEP_SHAPES[chord];
+    if (slot >= shape.length) return null;
+    const d = (((7 * phrase + SHEP_ROOTS[chord] + shape[slot] + 7 * octave) % SHEP_WINDOW) + SHEP_WINDOW) % SHEP_WINDOW;
+    return { d, w: Math.sin((Math.PI * (d + 0.5)) / SHEP_WINDOW) ** 2 };
+  });
+  return n(cat(...steps.map((x) => (x ? pure(x.d) : silence))).slow(2))
+    .velocity(cat(...steps.map((x) => pure(x ? x.w : 0))).slow(2));
+};
+const shepard = (g) =>
+  tune(stack(...[0, 1, 2, 3, 4].flatMap((o) => [0, 1, 2, 3].map((slot) => shepVoice(o, slot)))).scale(scaleAt(2)))
+    .s("triangle")
+    .attack(1).decay(1).sustain(0.8).release(2.5) // sustain < 1, so decay is set; long, overlapping: a wash, not steps
+    .gain(g)
+    .lpf(3200)
+    .room(0.6).size(7).orbit(5);
+
+// Binaural — the channel signature: a sine hard-left and one hard-right around D3 in this tuning (144.16 Hz), `beat`
+// Hz apart, dry, retriggered every 4 bars (no note longer than 4 bars). No notes (Hz), so in Ableton it is a stem.
+const CARRIER = A4 * Math.pow(2, -19 / 12); // D3 with A4 = 432
+const binaural = (beat, g) =>
+  stack(freq(CARRIER - beat / 2).s("sine").pan(0), freq(CARRIER + beat / 2).s("sine").pan(1))
+    .slow(4)
+    .attack(3).release(5).sustain(1)
+    .gain(g);
+
+// ---- arrangement ---------------------------------------------------------------------------------------------------
+// intro 0:00 hook | dev 0:16 groove | climax 1:20 | flight 3:28 break | ret 4:32 return | outro 6:40, ends 8:00
+
+// Drone: from the first second; the octave joins from the climax on; alone at the very end, fading.
+$: arrange(
+  [S.intro, drone(0.12)],
+  [S.dev, drone(0.13)],
+  [S.climax, drone(0.13, true)],
+  [S.flight, drone(0.14, true)],
+  [S.ret, drone(0.13, true)],
+  [S.outro, drone(isaw.slow(S.outro).range(0.02, 0.13))],
+)
+
+// Pad: the harmony, from the start (a soft floor, not silence), most open in the flight and return, fading in the outro.
+$: arrange(
+  [S.intro, pad(saw.slow(S.intro).range(0.03, 0.06), 1400)],
+  [S.dev, pad(0.07, 1800, true)], // breathing against the arp (dev, climax, return)
+  [S.climax, pad(0.08, 2400, true)],
+  [S.flight, pad(0.09, 2800)],
+  [S.ret, pad(0.085, 2800, true)],
+  [S.outro, pad(isaw.slow(S.outro).range(0, 0.07), 1600)],
+)
+
+// Arp: never disappears (user: "se va mucho... que no desaparezca"). Its register draws an arc toward the climax and
+// back: low in the intro, up a fifth halfway through the development, an octave up (the peak) in climax and return,
+// down a fifth in the flight and the outro, home at the end. In the flight it steps back behind the Shepard (about
+// -12 dB, dark) instead of stopping, and comes forward again over the last 8 bars; it starts the flight from the level
+// and brightness where the climax's breath leaves it, so there is no jump.
+$: arrange(
+  [S.intro, arp({ g: saw.slow(S.intro).range(0.028, 0.063), lo: 400, hi: 700, len: S.intro })],
+  [S.dev, arp({ g: 0.07, lo: 700, hi: 1400, len: S.dev, breath: true, reg: "<0!12 4!12>" })],
+  [S.climax, arp({ g: 0.09, lo: 1400, hi: 1800, len: S.climax, breath: true, reg: 7 })],
+  [S.flight, arp({
+    g: arrange([12, isaw.slow(12).range(0.025, 0.12)], [12, pure(0.025)], [8, saw.slow(8).range(0.025, 0.09)]),
+    cutoff: arrange([12, isaw.slow(12).range(600, 2100)], [12, pure(600)], [8, saw.slow(8).range(600, 1600)]),
+    reg: "<7!12 4!20>",
+  })],
+  [S.ret, arp({ g: 0.1, lo: 1600, hi: 2000, len: S.ret, breath: true, reg: 7 })],
+  [S.outro - 8, arp({ g: isaw.slow(S.outro - 8).range(0.014, 0.084), cutoff: 900, reg: "<4!10 0!10>" })],
+  [8, silence],
+)
+
+// Bass: the groove arrives at 0:16; out for the flight (that is what makes it a break); back for the return; leaves
+// first in the outro.
+$: arrange(
+  [S.intro, silence],
+  [S.dev, bass(0.16)],
+  // Fades out over the last 4 bars of the climax and back in over the first 4 of the return, instead of cutting.
+  [S.climax, bass(arrange([S.climax - 4, pure(0.18)], [4, isaw.slow(4).range(0.02, 0.18)]))],
+  [S.flight, silence],
+  [S.ret, bass(arrange([4, saw.slow(4).range(0.02, 0.18)], [S.ret - 4, pure(0.18)]))],
+  [16, bass(isaw.slow(16).range(0.03, 0.16))],
+  [S.outro - 16, silence],
+)
+
+// Lead: the motif sung from the second half of the development; through the flight (the tune carries the break);
+// fading with the outro.
+$: arrange(
+  [S.intro, silence],
+  [S.dev / 2, silence],
+  [S.dev / 2, lead(0.05)],
+  [S.climax, lead(0.065)],
+  [S.flight, lead(0.07)],
+  [S.ret, lead(0.065)],
+  [S.outro / 2, lead(isaw.slow(S.outro / 2).range(0.01, 0.05))],
+  [S.outro / 2, silence],
+)
+
+// Shepard: the flight, as ONE continuous 48-bar segment (a restart would break the endless rise), louder than before
+// (user: "se pierde"). Its level mirrors the arp: rises over 12 bars as the arp fades, holds 12, then recedes over 24
+// (the last 8 of the flight, while the arp comes back, and the first 16 of the return).
+$: arrange(
+  [S.intro + S.dev + S.climax, silence],
+  [S.flight + 16, shepard(arrange([12, saw.slow(12).range(0.02, 0.12)], [12, pure(0.12)], [24, isaw.slow(24).range(0, 0.12)]))],
+  [S.ret - 16 + S.outro, silence],
+)
+
+// Binaural: 10 Hz for the hook and groove, 8 in the climax, 6 in the flight, 8 again in the return, 4 in the outro.
+$: arrange(
+  [S.intro + S.dev, binaural(10, 0.03)],
+  [S.climax, binaural(8, 0.04)],
+  [S.flight, binaural(6, 0.045)],
+  [S.ret, binaural(8, 0.04)],
+  [S.outro, binaural(4, 0.03)],
+)

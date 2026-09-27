@@ -1,0 +1,28 @@
+! musica-universalis-pythagorean.scl
+! 1 semitones: 256/243 = 90.225 cents (12-TET 100)
+! 2 semitones: 9/8 = 203.910 cents (12-TET 200)
+! 3 semitones: 32/27 = 294.135 cents (12-TET 300)
+! 4 semitones: 81/64 = 407.820 cents (12-TET 400)
+! 5 semitones: 4/3 = 498.045 cents (12-TET 500)
+! 6 semitones: 729/512 = 611.730 cents (12-TET 600)
+! 7 semitones: 3/2 = 701.955 cents (12-TET 700)
+! 8 semitones: 128/81 = 792.180 cents (12-TET 800)
+! 9 semitones: 27/16 = 905.865 cents (12-TET 900)
+! 10 semitones: 16/9 = 996.090 cents (12-TET 1000)
+! 11 semitones: 243/128 = 1109.775 cents (12-TET 1100)
+!
+Pythagorean 12-tone scale on D: every degree a chain of pure 3:2 fifths from the root (tools/sounds/scl.mjs)
+ 12
+!
+ 256/243
+ 9/8
+ 32/27
+ 81/64
+ 4/3
+ 729/512
+ 3/2
+ 128/81
+ 27/16
+ 16/9
+ 243/128
+ 2/1

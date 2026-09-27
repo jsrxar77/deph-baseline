@@ -17,7 +17,9 @@ Object.assign(console, { log, warn });
 
 const { evalScope, evaluate, Pattern, silence, stack, isPattern, register } = core;
 
-export async function evalStrudel(code) {
+// `only`: optional list of layer keys ('$0', '$3', ...) to keep; every other `$:` layer is left out, as if
+// muted. Used by render.mjs --only to render one layer as a stem for a DAW (see docs/daw-bridge.md).
+export async function evalStrudel(code, { only } = {}) {
   const pPatterns = {};
   let anonymousIndex = 0;
   let cps = 0.5;
@@ -60,7 +62,7 @@ export async function evalStrudel(code) {
       }
       // Tag each event with its layer so callers can show/group by which `$:` block it came from.
       const tag = (v) => (v !== null && typeof v === 'object' ? { ...v, layer: key } : { value: v, layer: key });
-      if (!solo || isSolo) list.push(value.fmap(tag));
+      if ((!solo || isSolo) && (!only || only.includes(key))) list.push(value.fmap(tag));
     }
     pattern = stack(...list);
   }

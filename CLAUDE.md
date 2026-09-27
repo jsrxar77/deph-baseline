@@ -42,12 +42,20 @@ inside that piece's own folder, rather than grouped by media type across the who
     `audio-master.wav` (loudness master), `frames.json` (every event with its exact frame number) and
     `manifest.json`. See `docs/sync-pipeline.md`. This is where `strudel-sync` writes. The `.wav` files are
     git-ignored; the two small JSON files are tracked.
+  - **`media/<name>/<name>.ableton.md`** — only for a piece refined in Ableton: the step-by-step guide for the
+    user (who is new to Ableton), in Spanish: which plugin and preset per track, what to adjust, which effects,
+    export settings. Written by the `ableton-bridge` skill.
+  - **`media/<name>/daw/`** — the Ableton side of a piece (optional): `<name>.mid` + `tracks/NN-<voice>.mid` (the
+    Strudel piece as MIDI, from `midi.mjs`), `tracks.json` (mapping info), `stems/` (audio-only layers from
+    `render.mjs --only`), `exports/` (mixes exported from Ableton) and the Live Set folder `<name> Project/`.
+    `.mid`, `tracks.json` and `.als` are tracked; every `.wav`/`.aif` and Ableton's `Backup/` are git-ignored.
+    See `docs/daw-bridge.md`.
   - **`media/<name>/renders/`** — the piece's compiled final videos (`.mp4`), rendered with
     `npx remotion render <CompositionId> ../../media/<name>/renders/<name>.mp4` from `tools/visuals/`.
     Git-ignored (several GB each, regenerable). Not `sync/`, which is the audio/video bridge data, and not
     `~/Movies` or the Desktop, which sit outside the project (a file left on the Desktop vanished once).
 - **`/docs`** — cross-cutting documentation only: the composing workflow (`composition-workflow.md`), the
-  audio/video sync pipeline spec (`sync-pipeline.md`), the visuals-bridge overview
+  audio/video sync pipeline spec (`sync-pipeline.md`), the Strudel → Ableton bridge spec (`daw-bridge.md`), the visuals-bridge overview
   (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `DephBanner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
 - **`/tools`** — domain-first, one subfolder per domain, each its own npm project (own `package.json`,
   `package-lock.json`, `node_modules`; there's no project-root `package.json`). `tools/sounds/` holds
@@ -68,6 +76,9 @@ inside that piece's own folder, rather than grouped by media type across the who
     yaml, then hands off to the domain skills below.
   - `strudel-compose` — writing the actual `.strudel` file and its doc, once a composition folder exists.
   - `strudel-sync` — rendering a finished piece to audio + frame-numbered keyframes in `sync/`.
+  - `ableton-bridge` — optional: taking a piece into Ableton Live to refine its sound with the Mac's VST/AU library
+    (MIDI + stems export, live playback over the IAC bus, the beginner guide `<name>.ableton.md`) and bringing the
+    exported mix back into `sync/` (alignment check, mastering, keyframes).
   - `visuals-compose` — building the actual Remotion composition (in `tools/visuals/src/compositions/`,
     wiring in the real `audio.wav`).
   - `youtube-publish` — the last step of the pipeline: builds and maintains each composition's YouTube publish
@@ -212,6 +223,29 @@ the piece's dynamics are untouched (Slow Drift: LRA 15.9 LU before and after); a
 only if the gain would push peaks over the ceiling. Keep `audio.wav` (raw) as the source of truth; the master
 is derived and regenerated after every sound change. Both are git-ignored. Playback in the video uses the
 master; the audio-reactive analysis keeps reading the raw file (see `visuals-compose`).
+
+## Taking a piece into Ableton (DAW bridge, optional)
+
+```
+node tools/sounds/midi.mjs <file.strudel> --cycles N --out-dir media/<name>/daw [--names a,b,c] [--bend-range 2] [--vel-range 40]
+node tools/sounds/render.mjs <file.strudel> --cycles N --only '$4' --out media/<name>/daw/stems/05-<voice>.wav
+node tools/sounds/midi-live.mjs <file.strudel> --cycles N [--from C] [--names a,b,c] [--watch]   # --list shows ports
+node tools/sounds/align-check.mjs media/<name>/sync/audio.wav --frames media/<name>/sync/frames.json
+node tools/sounds/master.mjs media/<name>/sync/audio-master.wav --measure
+node tools/sounds/scl.mjs --root D --a4 432 --out media/<name>/daw/tuning/<name>-pythagorean   # tuning file for Surge XT
+```
+
+Strudel composes; Ableton Live 12 Suite with the Mac's plugins refines. Two paths share one mapping
+(`tools/sounds/midi-map.mjs`): **`midi.mjs`** exports the whole piece as MIDI for the final version, and
+**`midi-live.mjs`** plays it in real time to the IAC bus ("IAC Driver Bus 1", already enabled) for quick sound tests,
+reloading on every save with `--watch`. It exists because the `strudelvs` extension has no Strudel MIDI output. 1 cycle = 1 bar of 4/4
+(BPM = cpm × 4). Off-440 tuning travels as one pitch bend per track, and per-note gain as velocity (dB-linear, exact in Surge XT
+with Vel > Gain at −40 dB). Layers without notes become stems. `align-check.mjs` verifies that an exported mix still lines up
+with `frames.json`. The exported mix comes back as `sync/audio.wav` and the yaml says so (`domains.sound.source:
+ableton`). With Live open, the `ableton` MCP server (`.mcp.json`, `mcp-server-ableton-live` 1.8.1, pinned) lets Claude build
+the set itself: tracks, plugins, notes, native effects, fade automation, recording. Presets and tuning files stay manual
+(Live hides plugin parameters from the API). Full spec: `docs/daw-bridge.md`; workflow: the `ableton-bridge` skill. The user is new to Ableton: every
+guide is step by step.
 
 ## Analyzing an existing recording (audio-first pieces, no Strudel source)
 

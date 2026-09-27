@@ -496,3 +496,15 @@ fade, up to 6 overlapping. Subtle by design, and never a shape of its own. A/B s
 (78.5 s) show a soft haze appearing around its position 0.5-1 s later that is absent in the control frame.
 Switch: `BELL_PULSES_ENABLED` in `FractalVisualizer.tsx`. Playback uses `sync/audio-master.wav` (-16 LUFS);
 the audio-reactive analysis keeps reading the raw `audio.wav`.
+
+## Ableton version (DAW bridge)
+
+The piece is exported to `daw/` for refinement in Ableton Live (see `docs/daw-bridge.md`). `daw/slow-drift.mid` and
+`daw/tracks/` hold four MIDI tracks: drone `$0` ch 1, sub `$1` ch 2, pad `$2` ch 3, bells `$3` ch 4. Each carries a
+−31.77-cent pitch bend (A4 = 432) and per-note velocity for the section fades. The binaural layer `$4` has no notes
+(`freq` in Hz), so it goes as an audio stem, `daw/stems/05-binaural.wav`. The bells' two stacked FM operators
+collapse to one MIDI note per hit (42 events → 21 notes). Verified: every onset and pitch in the `.mid`, read back with
+an independent parser, matches `sync/frames.json` exactly (95 notes, 0 ms). The user's step-by-step guide (Surge XT
+presets, effects recreating the reverb/delay/pan/filter values above, export settings) is `slow-drift.ableton.md`.
+`sync/audio.wav` still comes from Strudel (`domains.sound.source: strudel` in the yaml) until an Ableton mix is
+brought back.

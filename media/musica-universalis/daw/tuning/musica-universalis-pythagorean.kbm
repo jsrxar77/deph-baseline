@@ -1,0 +1,26 @@
+! musica-universalis-pythagorean.kbm — maps MIDI 62 (D4) to degree 0 of musica-universalis-pythagorean.scl at 288.3254 Hz (A4 = 432 in 12-TET)
+! map size
+12
+! first and last MIDI note
+0
+127
+! middle note (degree 0)
+62
+! reference note and its frequency
+62
+288.325409
+! scale degree of the formal octave
+12
+! mapping
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11

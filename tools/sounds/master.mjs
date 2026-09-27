@@ -6,6 +6,8 @@
 //
 // Usage (from the project root):
 //   node tools/sounds/master.mjs <in.wav> --out <out.wav> [--lufs -16] [--ceiling -1]
+//   node tools/sounds/master.mjs <in.wav> --measure      (only report loudness/true peak against the targets; for
+//                                                         a file already mastered elsewhere, e.g. in Ableton)
 //
 // Needs ffmpeg on PATH. Length and sample rate are unchanged, so the master stays sample-aligned with the
 // raw render (the video's audio-reactive analysis keeps reading the raw file; only playback uses the master).
@@ -13,11 +15,12 @@
 import { spawnSync } from 'node:child_process';
 
 function parseArgs(argv) {
-  const a = { file: undefined, out: undefined, lufs: -16, ceiling: -1 };
+  const a = { file: undefined, out: undefined, lufs: -16, ceiling: -1, measure: false };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--out') a.out = argv[++i];
     else if (argv[i] === '--lufs') a.lufs = Number(argv[++i]);
     else if (argv[i] === '--ceiling') a.ceiling = Number(argv[++i]);
+    else if (argv[i] === '--measure') a.measure = true;
     else if (!a.file) a.file = argv[i];
   }
   return a;
@@ -43,12 +46,21 @@ function measure(file) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-if (!args.file || !args.out) {
-  console.error('usage: node tools/sounds/master.mjs <in.wav> --out <out.wav> [--lufs -16] [--ceiling -1]');
+if (!args.file || (!args.out && !args.measure)) {
+  console.error('usage: node tools/sounds/master.mjs <in.wav> (--out <out.wav> | --measure) [--lufs -16] [--ceiling -1]');
   process.exit(2);
 }
 
 const before = measure(args.file);
+if (args.measure) {
+  const m = before;
+  console.log(`${args.file}: ${m.lufs.toFixed(1)} LUFS, LRA ${m.lra.toFixed(1)} LU, true peak ${m.truePeak.toFixed(1)} dBFS`);
+  const off = [];
+  if (Math.abs(m.lufs - args.lufs) > 1) off.push(`loudness is ${(m.lufs - args.lufs).toFixed(1)} LU from the ${args.lufs} LUFS target`);
+  if (m.truePeak > args.ceiling) off.push(`true peak is over the ${args.ceiling} dBTP ceiling`);
+  console.log(off.length ? `NOT OK: ${off.join('; ')}` : 'OK: within 1 LU of the target and under the ceiling');
+  process.exit(off.length ? 1 : 0);
+}
 const gainDb = args.lufs - before.lufs;
 const peakAfter = before.truePeak + gainDb;
 const needsLimiter = peakAfter > args.ceiling;
