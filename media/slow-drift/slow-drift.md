@@ -6,7 +6,7 @@ anywhere. Four independent voices, each built from a loop length that shares no 
 others (plus a fifth, quiet binaural layer — see "A=432 Hz tuning and a binaural layer" below), so the texture keeps recombining instead of repeating; on top of that, a five-section arc (intro
 → development → climax → deceleration → outro) built with `arrange()`. A short, unarranged version of the
 same four voices is kept at `sounds/slow-drift-loop-only.strudel` for comparison. Cross-domain metadata
-(key, tempo, arc, per-domain status) lives in the sibling `slow-drift.deph.yaml`, not duplicated here.
+(key, tempo, arc, per-domain status) lives in the sibling `slow-drift.yaml`, not duplicated here.
 Tuned to **A = 432 Hz** (not the standard 440) — see the same section below.
 
 ## Tempo, duration, key
@@ -305,7 +305,7 @@ more than one pass, the voices phase against each other rather than repeating in
 
 ## Visuals
 
-`SlowDriftFractal` (`tools/visuals/src/compositions/slow-drift/`) — a single Julia-set fractal in WebGL,
+`slow-drift` (`tools/visuals/src/compositions/slow-drift/`) — a single Julia-set fractal in WebGL,
 filling the frame, reacting to this piece's real rendered `audio.wav` (`media/slow-drift/sync/audio.wav`)
 rather than to Strudel's event data. "deph / Deep Decay" palette: obsidian background (`#050508`) through
 night-blue (`#121829`), cosmic violet (`#2d1b4e`), oxidized teal (`#1fa396`) and electric cyan (`#38bdf8`),

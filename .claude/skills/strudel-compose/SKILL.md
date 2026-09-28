@@ -19,7 +19,7 @@ project's file-layout rule (which folder anything new belongs in).
 
 This skill assumes `deph-compose` already scaffolded `media/<name>/` with its yaml, doc, and empty
 `sounds/`/`visuals/`/`sync/` subfolders — arc, duration, and key were already decided there. Read
-`media/<name>/<name>.deph.yaml` for those values rather than asking again. If no composition folder
+`media/<name>/<name>.yaml` for those values rather than asking again. If no composition folder
 exists yet, stop and use `deph-compose` first.
 
 ## Structure
@@ -274,7 +274,7 @@ layout" section for the full project-wide rule.
 ## Before finishing: reconcile the whole yaml, not just your own status
 
 Writing the piece is the step that discovers real numbers `deph-compose` left as `null` — don't stop at
-flipping `domains.sound.status` to `done`. Re-read `media/<name>/<name>.deph.yaml` and check every field
+flipping `domains.sound.status` to `done`. Re-read `media/<name>/<name>.yaml` and check every field
 this work actually affects:
 
 - `tempo.cpm` — set from the piece's real `setcpm()` call.

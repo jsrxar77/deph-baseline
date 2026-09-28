@@ -26,7 +26,7 @@
 //   color += touch.y * presence * SHADE_STRENGTH;     // content here" so the wave stays invisible
 //                                                      // wherever it isn't touching anything real.
 // `presence` is however that piece defines "how solid is my own content here" (for
-// SlowDriftFractal, derived from escape speed — see shaders.ts). Tune LIFT_STRENGTH/SHADE_STRENGTH
+// slow-drift, derived from escape speed — see shaders.ts). Tune LIFT_STRENGTH/SHADE_STRENGTH
 // per composition; the raw slope values are large (an analytic gaussian derivative) by design.
 
 export const DEPH_PHASE_RINGS_GLSL = `

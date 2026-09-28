@@ -36,6 +36,7 @@ How to use this file:
   space, more reverb/delay. Fill silence with tail (reverb `size` 9 s, non-metric delay 1.13 s, feedback
   0.55), not with more notes.
 - **Bells are an accent layer, never a fifth voice.** The user asked for them lower twice. Gains 0.055-0.08.
+- **Vary by weight, not by gaps.** Humanize with ghost notes, legato and ≤10 ms drift; dropped notes read as stops.
 - **Organic journey, no jolts.** Voices hand over through crossfades, never drop to zero mid-piece, and every layer
   (Shepard included) plays chord tones at the piece's own pace. Calm density (8ths, not 16ths) for travelling.
 - **With a pulse: one motif, one shared progression.** Every voice derives from one cell and follows the same chord
@@ -165,17 +166,17 @@ Entry format: `date — decision — reason/evidence — where it lives`.
   user asked for it to be done for every publication, with EN/ES, hashtags and channel positioning; rules re-verified
   on YouTube Help (hashtags: 3 shown, over 60 ignored; chapters; thumbnails; disclosure only for realistic content) —
   honesty rules kept: 432 Hz and binaural as facts, never health effects — `youtube-publish`.
-- 2026-09-24 — Channel banner made from the piece itself (`DephBanner`, fractal at 5:00 + `deph` / `GENERATIVE AMBIENT`
+- 2026-09-24 — Channel banner made from the piece itself (`deph-banner`, fractal at 5:00 + `deph` / `GENERATIVE AMBIENT`
   in Avenir Next, inside YouTube's safe area) so the channel image is the same visual language as the videos —
   brand images live in `docs/youtube-channel/` — `docs/youtube-channel.md`.
 - 2026-09-24 — Profile picture: keep the user's illustrated portrait and its softened face, and replace its original
   blue/purple torus background with the Slow Drift fractal (portrait cut out with a colour-based mask) — first try
   (defocused, tinted original background) was rejected: "the face is fine, but I want a background more in line with
   what we are doing"; the expression can't be changed without an image generator — `docs/youtube-channel.md`,
-  `DephAvatar`, `make-avatar-mask.mjs`.
+  `deph-avatar`, `make-avatar-mask.mjs`.
 - 2026-09-24 — Profile picture: the user tried a plain black background and chose the **fractal** one; the black variant was
   removed — `docs/youtube-channel.md`.
-- 2026-09-24 — Video thumbnail made in Remotion (`DephThumbnailSlowDrift`): fractal frame, dark gradient on the left, heavy
+- 2026-09-24 — Video thumbnail made in Remotion (`slow-drift-thumbnail`): fractal frame, dark gradient on the left, heavy
   **SLOW DRIFT** + **432 Hz · BINAURAL** — no thumbnail-generation skill exists, so thumbnails follow the same
   code-made approach as the banner and avatar; checked at sidebar size — `slow-drift.youtube.md`, `youtube-publish`.
 - 2026-09-24 — Thumbnail template fixed for every piece: the user liked the original typeface (Avenir Next Bold) and asked
@@ -260,7 +261,7 @@ Entry format: `date — decision — reason/evidence — where it lives`.
   `media/musica-universalis/sounds/musica-universalis.strudel`.
 - 2026-09-27 — After trying the Ableton build (Surge XT / Serum 2 presets, MCP-built set), the user prefers Strudel's own sound for
   Musica Universalis: "sigamos con strudel, tiene más el sonido que busco". Ableton and MIDI are parked for now (the set, the MIDI
-  export and the tuning files are kept in media/musica-universalis/ableton/ and daw/). The deph sound, so far, is Strudel's
+  export and the tuning files are kept in media/musica-universalis/daw/). The deph sound, so far, is Strudel's
   synthesis refined in code; a DAW is an option, not the default path.
 - 2026-09-27 — Musica Universalis: the user asked for the arp and the pads to interlace, "subiendo uno, bajando otro", in a
   Pythagorean cycle, rising and falling in presence. Built (volume and brightness only, the user's choice; contrary pitch motion
@@ -283,6 +284,77 @@ Entry format: `date — decision — reason/evidence — where it lives`.
   crossfades; nothing drops to zero mid-piece; density low enough to travel with — `media/musica-universalis/musica-universalis.md`.
 - 2026-09-27 — The user approved the organic rework of Musica Universalis ("me parece un excelente trabajo"); committed as the
   reference version before exploring a variation.
+- 2026-09-27 — Variation "organic arp" of Musica Universalis (the approved version kept intact): the user wanted the arp "menos
+  matemático, menos pegado al beat… con probabilidad… que no sea tan Kraftwerk", same notes. Built with probabilistic steps (anchors
+  on the downbeat and the octave always sound; ~6.3 of 8 notes a bar), 0-24 ms human timing, perlin phrase dynamics and varying
+  decays. Taste: machine-perfect sequencing reads as cold for deph; prefer human, breathing placement — to be confirmed by ear —
+  `media/musica-universalis/sounds/musica-universalis-organic.strudel`.
+- 2026-09-27 — Organic arp, second try: dropping notes by probability read as "muy cortada… con frenadas" — the user wants variation
+  but a journey without stops. Replaced gaps with moving ghost notes (every note plays, random ones at 45%), more legato, timing drift
+  cut to 10 ms. Rule: in deph, organic variation lives in weight, timbre and micro-timing — never in silences that break the flow.
+- 2026-09-27 — Variation "meditative, no pulse" of Musica Universalis (on top of the organic one): held sub instead of the rolling bass,
+  held pad chords, and an arp in free rhythm (uneven 3-2-3-4-2-3-4-3 lengths) with long soft tails and a non-metric echo. Finding: jitter
+  on an even grid does NOT remove the pulse (sd 22-43 ms around 500 ms is still heard as a beat); uneven note lengths do (sd 118 ms).
+  Long tails expose harmonic rubs that fast notes hide: the arp's +fifth register (E over Dm6's F) had to go; octave-only arc —
+  `media/musica-universalis/sounds/musica-universalis-meditative.strudel`.
+- 2026-09-27 — Meditative variation liked ("me gusta… está orgánico como lo que busco"); the arp needed more presence and less
+  uniformity: +4 dB, filter x1.4, wider phrase swell -> the arp now sits level with the pad (medians within ~1 dB) with ~15 dB of
+  internal dynamics. Taste: a soft timbre still needs presence to carry the journey; "organic" must not become "flat".
+- 2026-09-27 — Meditative variation: the arp moved up an octave (D4-G7) as a trial and kept ("está perfecto, kudos!"). This version
+  (musica-universalis-meditative.strudel) is the one taken forward to the render and the video. Taste: a floating, pulse-free
+  arp sits well high above the pad; low it blurred into it.
+- 2026-09-27 — Musica Universalis video: the user chose option A (Pythagorean harmonograph), with the Songcord guidelines (simulated-HDR
+  look graded for SDR screens on YouTube, 4K60) and a palette of blues, turquoise, aquamarine and violets; audio for the video at -14 LUFS
+  ("sigamos lo recomendado para YouTube"), -16 master kept as the channel standard. The user did not remember the creation-torus
+  signature: explain it with a comparison still before deciding.
+- 2026-09-27 — Musica Universalis video, first attempt rejected: a literal parametric harmonograph (Lissajous curves computed and
+  drawn whole as static polylines every frame) read as "círculos perfectos, espirales… muy básico", nothing like Songcord's quality.
+  Diagnosis: Songcord's line work (wake.ts, shader.ts) never draws a whole curve at once — a moving point of light is followed by a
+  short fading trail (a comet), and the "shape" is only ever felt through motion and field interference (ring waves from moving
+  sources, refraction, caustics), never seen as a frozen diagram. Lesson for any future line/curve visual: render motion + trail +
+  field interaction, never the complete analytic curve as a static shape, however period-accurate the math is.
+- 2026-09-27 — Musica Universalis video, comet approach refined: the user found it "muy frenético… parece un espermatozoide"
+  (the bright head + tapering tail read as a sperm cell) and "siempre 3 rayos que dan vuelta" (exact-integer Lissajous ratios
+  close into the same simple shape every cycle). Fixed: removed the head blob entirely, made the ray uniform width/brightness
+  along its whole length with soft tapered ends only; halved the angular speed; added a slow incommensurate secondary term to
+  each axis (dominant frequency still the true interval ratio, so the meaning holds) so the curve precesses and never closes
+  the same way twice. Lesson: a bright core + thin fading tail on a moving point reads as a biological/organic creature shape
+  (sperm, worm) whether intended or not — a "ray of light" needs deliberately uniform width and brightness, not comet-style
+  head emphasis. The user then asked for parallel proposals for a fully different, fractal-based generation — see the next
+  entry once one is chosen.
+- 2026-09-27 — Musica Universalis, fractal proposal A1 (Multibrot mandala) tried and rejected: "es muy básico… es un globo".
+  Root cause, structural not cosmetic: a Julia/Multibrot set viewed whole (no zoom) always reads as a blob with a wavy edge —
+  the recursive, self-similar detail that makes a fractal look like a fractal only appears when the camera hugs the boundary
+  (exactly why Slow Drift needed deep zoom + a boundary-seeking camera). A wide, un-zoomed "contained mandala" framing, chosen
+  specifically to avoid repeating Slow Drift's full-frame zoomed-landscape look, removed the one thing that makes the fractal
+  read as a fractal. Lesson: escape-time fractals need either real zoom into the boundary or a fundamentally different
+  (domain-coloring / phase-based) technique to look organic from a wide view — color/palette tuning alone cannot fix it.
+- 2026-09-27 — Musica Universalis, mandala rejected on composition, not just color: "tampoco tiene sentido tener algo así
+  en el centro que parece un escudo… no es atractivo". A single static shape centered in frame reads as a heraldic badge/logo
+  regardless of what it's made of (fractal or otherwise) — the problem is the CENTERED-AND-STILL framing itself, not the
+  Multibrot math or its palette. Pattern across all three visual attempts so far: comets were rejected for frantic/mechanical
+  motion, static lines/rings for cold geometry, the mandala for being centered and iconic. Common thread the user responds to:
+  movement that is asymmetric, distributed and continuously changing — never one thing frozen in the middle, never a repeating
+  closed shape. Any next proposal must avoid a single centered static focal point as a first principle, not tune around it.
+- 2026-09-27 — Musica Universalis, both prior video attempts explicitly reviewed together and rejected on the same call: "no
+  quiero que todo termine en un paneo de camara basico, quiero cosas que vayan construyendo de manera organica, sumando de
+  acuerdo a pieza y el sonido.. y restando mientras va finalizando… me gusta más el de rayo de luz, pero lo frenetico cuando hay
+  frecuencias agudas no escala… el segundo un escudo es como un diseñador de primer año". Explicit requirements going forward,
+  standing for any future visual: (1) never a basic camera pan; (2) the picture must BUILD as the piece does and DISSOLVE as it
+  ends — content amount as a direct function of the arc, not a fixed composition the whole piece; (3) keep the ray-of-light
+  language, but its franticness on high/acute passages must not scale into disorientation; (4) never a single centered iconic
+  shape (the mandala's "shield" problem). Third attempt built: a scattered swarm of many independent light filaments (never one
+  object, never a shared centre — each filament's own base position is spread across nearly the whole frame), each a
+  closed-form uniform-angular-speed circular orbit (guaranteed constant speed by construction, so "frantic" becomes
+  structurally impossible) with slow independent centre-drift/radius-breathing for organic variation, count building with the
+  arc and thinning in the outro. Two real bugs found and fixed while verifying this numerically (see `visuals-compose` for the
+  technical detail): an orbit whose angular speed was itself modulated by the chord produced growing speed spikes at every
+  chord change (measured 16-25x within a 2 s window) — the modulation was moved to radius amplitude instead, which is safe;
+  and the arp's water-wave wake (built on one fixed carrier filament) still produced clean "radar" concentric circles because
+  that filament barely moved between consecutive arp notes — fixed by having each arp note ride a DIFFERENT filament (picked
+  from the note), so rings originate from genuinely separated points. Not yet shown to/approved by the user — stills rendered
+  and being presented for reaction before any further work (full render, choosing between the 3 coexisting attempts, deleting
+  the others) — `media/musica-universalis/musica-universalis.md` (once written up), `filaments.ts`, `musica-universalis.tsx`.
 
 ## Entry template
 
@@ -291,3 +363,17 @@ Entry format: `date — decision — reason/evidence — where it lives`.
 ```
 Also update the distilled sections above if the decision changes a principle, and move items out of
 "Open questions" when they are resolved.
+- 2026-09-27 — Naming made strict (user: "coherencia"): every name of a composition is exactly its kebab-case name
+  (`musica-universalis`), a suffix only to name a purpose (`.yaml`, `.youtube.md`), never Final/Flow/Proto/4K/deph; only
+  4K; every `media/<name>/visuals` is the symlink. Renamed ids, files, `.deph.yaml` -> `.yaml`, Ableton set into `daw/`,
+  shared code into `tools/visuals/src/shared/`; Songcord's prototypes deleted — `deph-compose` "Naming", `visuals-compose`.
+- 2026-09-27 — Musica Universalis water: the user asked for Songcord's water and Claude ported the wrong layer (`wake.ts`,
+  V-wakes drawn as lines); the user meant the ripples — "como cuando tirás una piedra, ondas redondas que se cruzan con
+  otras en otro lugar". Rebuilt with the shared ripples on a textured world (star dust at four depths) so the water shows
+  by what it bends and the glints it catches; 3D rays with depth of field over it — `musica-universalis.md`.
+- 2026-09-27 — Musica Universalis: the rays as a swarm of 26 thin, short, one-colour streaks still read as "bacterias"; the user
+  compared with Songcord and asked for its beings ("como Songcord… quizá menos que ahora"), head included. Rebuilt with Songcord's
+  beam and head (wide white head, flare along the travel, teal-blue-violet taper, 4 s trail, lights its surroundings), 1 to 6 beings
+  following the arc, on 3D orbits that precess and change sphere at chord changes (the user's idea: "saltar de esfera, otro plano").
+  Lesson: a head is fine when it is Songcord's stretched flare on a wide beam moving smoothly; the rejected "espermatozoide" was a
+  round blob on a thin wiggling tail. Many small lights read as organisms; few large ones read as beings — `musica-universalis.md`.

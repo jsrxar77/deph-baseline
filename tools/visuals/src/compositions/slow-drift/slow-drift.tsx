@@ -1,6 +1,6 @@
 import { CalculateMetadataFunction, Composition, staticFile } from "remotion";
 import { getAudioDurationInSeconds } from "@remotion/media-utils";
-import { FractalVisualizer } from "./compositions/slow-drift/FractalVisualizer";
+import { FractalVisualizer } from "./FractalVisualizer";
 
 type Props = {};
 
@@ -15,15 +15,15 @@ const calculateMetadata: CalculateMetadataFunction<Props> = async () => {
   };
 };
 
-export const SlowDriftFractal = () => {
+export const SlowDriftCompositions = () => {
   return (
     <Composition
-      id="SlowDriftFractal"
+      id="slow-drift"
       component={FractalVisualizer}
       durationInFrames={21840} // placeholder; calculateMetadata overrides this from the real audio
       fps={FPS}
-      width={1920}
-      height={1080}
+      width={3840}
+      height={2160}
       calculateMetadata={calculateMetadata}
     />
   );

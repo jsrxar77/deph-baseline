@@ -1,14 +1,8 @@
-// Musica Universalis — MAIN VERSION: the "meditative" variation, chosen by the user for the render and the video.
-// Built on the organic-arp variation (now sounds/backup/musica-universalis-organic.strudel), itself built on the
-// pulse version (sounds/backup/musica-universalis-pulse.strudel).
-// The user wanted it "más meditativa, tal vez sin pulso". Same harmony, motif, register arc, arp/pad breath, Shepard,
-// lead, tuning and binaural; what made the pulse is gone:
-// - the rolling 16th-note bass -> a held sub on each chord's root (a floor that doesn't beat);
-// - the arp -> half speed (quarters), free timing up to 100 ms, soft triangle with long tails, a non-metric 1.13 s echo
-//   (it floats like bells instead of marking the grid); ghost notes kept;
-// - the pad -> each chord held for its full 2 bars instead of re-struck every bar;
-// - the arp's register arc moves by octaves only (2:1): its "+fifth" step puts an E against the Dm6's F, a semitone rub
-//   that the fast arp hides but these long tails hold (measured: 33 notes).
+// BACKUP — variation "organic arp" of the 6:00 pulse version (now backup/musica-universalis-pulse.strudel). Identical except
+// the arp, which the user wanted "menos matemático, menos pegado al beat… con probabilidad… que no sea tan Kraftwerk":
+// same notes, played like a person. First try dropped notes by probability and felt "muy cortada… con frenadas", so
+// now NO note is dropped: random steps become soft ghost notes instead (the accent moves, the flow never stops), notes
+// are a little more legato, human timing drift up to 10 ms, and phrase-like dynamics.
 //
 // "Musica Universalis" — the music of the spheres. The Pythagorean idea that the cosmos is one harmonic composition,
 // heard as a psybient journey. Version 2 (rewritten for coherence after the first listen):
@@ -71,24 +65,6 @@ const ROOTS = "<0 0 3 3 6 6 0 0>";
 // F over C) then sat a semitone from the chord's third on 416 arp notes. With sus4 chords the motif's notes are chord
 // tones on every root (measured: see musica-universalis.md).
 const CHORDS = "<[0,2,4,5]!2 [0,3,6]!2 [-1,2,3]!2 [0,2,4,5]!2>";
-// Meditative: the same chords, each held for its full 2 bars (one note per chord, not one per bar).
-const CHORDS_HELD = "<[0,2,4,5] [0,3,6] [-1,2,3] [0,2,4,5]>".slow(2);
-// The arp without pulse: the same 8 notes, but with uneven lengths (3-2-3-4-2-3-4-3 sixths of a bar: 500, 333, 500,
-// 667, 333, 500, 667, 500 ms) spread over 2 bars, a long-short phrasing like breathing or speech instead of a grid.
-// Measured first: jittering an even grid (random 0-100 ms, then perlin rubato) left the notes every ~500 ms with an sd
-// of only 22-43 ms — steady quarters at 120 BPM, still heard as a pulse.
-// More presence for the floating arp (user: "un poco más de presencia… más llevadera y no tan uniforme"): louder and a
-// little brighter than the organic version's settings, which the soft triangle had sunk under the pad.
-const ARP_BOOST = 10 ** (4 / 20); // +4 dB
-// The whole arp one octave up (7 scale degrees), tried at the user's request and kept ("está perfecto"). 0 = the
-// previous register (D3-G6 instead of D4-G7).
-const ARP_OCTAVE = 7;
-const ARP_OPEN = 1.4; // filter opened 40% (the triangle is much darker than the saw these ranges were set for)
-const scaleBy = (x, k) => (typeof x === 'number' ? x * k : x.mul(k));
-const ARP_LINE_FREE = "0@3 4@2 3@3 7@4 11@2 7@3 4@4 3@3";
-const ARP_GHOSTS_FREE = "1@3 [1|0.45]@2 [1|0.45]@3 1@4 [1|0.45]@2 [1|0.45]@3 [1|0.45]@4 [1|0.45]@3";
-// The chord roots, one held note per chord, for the sub.
-const ROOTS_HELD = "<0 3 6 0>".slow(2);
 // The motif, D-A-G-D' (degrees 0 4 3 7), as an 8-step arp line in eighths: stated, then answered up to the next fifth
 // and back down (0 4 3 7 11 7 4 3), a small rise-and-fall every bar. Eighths, not the first draft's 16ths: the user
 // wanted it calmer, "para que ayude al viaje". Transposed onto each bar's root it stays inside the mode: over G it is
@@ -130,7 +106,7 @@ const drone = (g, octave = false) =>
 // Pad — the progression (each chord held 2 bars by the `!2` in CHORDS). Slow filter breathing.
 // `breath`: interlace with the arp (see BREATH above); the pad is the one that starts back.
 const pad = (g, open = 2200, breath = false) =>
-  tune(n(CHORDS_HELD).scale(scaleAt(3)))
+  tune(n(CHORDS).scale(scaleAt(3)))
     .s("sawtooth")
     .attack(1.5).decay(1.5).sustain(0.7).release(4) // sustain < 1, so decay is set explicitly (no "clap")
     // When breathing, the pad's own 16-bar filter sweep is replaced by a fixed centre, so its brightness follows only
@@ -148,28 +124,24 @@ const pad = (g, open = 2200, breath = false) =>
 //           fifth) -> +7 (an octave, the peak) and back. The motif is root, fifth and fourth, so moved up a fifth it
 //           still lands on chord tones of the sus4/6 chords.
 const arp = ({ g, lo = 700, hi = 700, len = 8, breath = false, cutoff = null, reg = 0 }) =>
-  // The free-rhythm line (ARP_LINE_FREE) over 2 bars, plus 0-40 ms of per-note human timing. Roots still follow the
-  // bar, so every note stays on the chord.
-  tune(n(ARP_LINE_FREE.slow(2).add(ROOTS).add(reg).add(ARP_OCTAVE))
-    .late(rand.segment(12).range(0, 0.02))
-    .scale(scaleAt(3)))
+  tune(n(ARP_LINE.add(ROOTS).add(reg)).late(rand.segment(8).range(0, 0.005)).scale(scaleAt(3)))
     // ^ human timing: each eighth lands 0-10 ms late (0.005 of a 2-second bar); 24 ms felt like stumbling
-    .s("triangle") // softer than the saw pluck
-    .attack(0.03).decay(rand.range(1, 1.6)).sustain(0.12).release(3) // long, bell-like tails; decay set since sustain < 1
-    .velocity(perlin.slow(4).range(0.45, 1).mul(ARP_GHOSTS_FREE.slow(2))) // slower phrase swell x ghost notes (gain keeps the breath)
-    .lpf(scaleBy(cutoff ?? (breath ? saw.slow(len).range(lo, hi).mul(brightness(true)) : saw.slow(len).range(lo, hi)), ARP_OPEN))
-    .lpq(1) // no resonant 'pluck' and no filter envelope: nothing percussive
-    .gain(scaleBy(breath ? presence(g, true) : g, ARP_BOOST))
+    .s("sawtooth")
+    .attack(0.005).decay(rand.range(0.35, 0.55)).sustain(0).release(0.35) // more legato: notes touch each other
+    .velocity(perlin.slow(2).range(0.6, 1).mul(ARP_GHOSTS)) // phrase-like swell x moving ghost notes (gain keeps the breath)
+    .lpf(cutoff ?? (breath ? saw.slow(len).range(lo, hi).mul(brightness(true)) : saw.slow(len).range(lo, hi)))
+    .lpq(3).lpenv(1.5).lpdecay(0.15) // user: "muy agudo, mucho brillo" -> resonance 7 -> 3, lower filter ranges
+    .gain(breath ? presence(g, true) : g)
     .pan("0.3 0.7")
-    .delay(0.35).delaytime(1.13).delayfeedback(0.5) // non-metric echo (as in Slow Drift's bells): it doesn't imply a beat
+    .delay(0.3).delaytime(0.75).delayfeedback(0.4)
     .room(0.3).size(3).orbit(3);
 
-// Sub — in place of the rolling bass: one held sine per chord on its root (D1, G1, C2), a floor that doesn't beat.
+// Rolling bass — the psy offbeat roll (rest on each beat, three 16ths after it), no kick, on the bar's root: D1 G1 C2.
 const bass = (g) =>
-  tune(n(ROOTS_HELD).scale(scaleAt(1)))
-    .s("sine")
-    .attack(2).release(4).sustain(1)
-    .lpf(220)
+  tune(n("[~ 0 0 0]*4".add(ROOTS)).scale(scaleAt(1)))
+    .s("sawtooth")
+    .attack(0.003).decay(0.13).sustain(0).release(0.05)
+    .lpf(280).lpq(5).lpenv(2.5).lpdecay(0.09)
     .gain(g);
 
 // Lead — the motif sung slowly as glass bells (integer FM ratios 2 and 3: harmonic, no non-scale partials), with a long
@@ -259,15 +231,15 @@ $: arrange(
 // and brightness where the climax's breath leaves it, so there is no jump.
 $: arrange(
   [S.intro, arp({ g: saw.slow(S.intro).range(0.028, 0.063), lo: 400, hi: 700, len: S.intro })],
-  [S.dev, arp({ g: 0.07, lo: 700, hi: 1400, len: S.dev, breath: true, reg: "<0!12 7!12>" })],
+  [S.dev, arp({ g: 0.07, lo: 700, hi: 1400, len: S.dev, breath: true, reg: "<0!12 4!12>" })],
   [S.climax, arp({ g: 0.09, lo: 1400, hi: 1800, len: S.climax, breath: true, reg: 7 })],
   [S.flight, arp({
     g: arrange([12, isaw.slow(12).range(0.025, 0.12)], [12, pure(0.025)], [8, saw.slow(8).range(0.025, 0.09)]),
     cutoff: arrange([12, isaw.slow(12).range(600, 2100)], [12, pure(600)], [8, saw.slow(8).range(600, 1600)]),
-    reg: "<7!12 0!20>",
+    reg: "<7!12 4!20>",
   })],
   [S.ret, arp({ g: 0.1, lo: 1600, hi: 2000, len: S.ret, breath: true, reg: 7 })],
-  [S.outro - 8, arp({ g: isaw.slow(S.outro - 8).range(0.014, 0.084), cutoff: 900, reg: 0 })],
+  [S.outro - 8, arp({ g: isaw.slow(S.outro - 8).range(0.014, 0.084), cutoff: 900, reg: "<4!10 0!10>" })],
   [8, silence],
 )
 

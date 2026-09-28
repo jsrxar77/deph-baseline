@@ -15,23 +15,25 @@ arc: # version 2, shortened to 6:00 (user: 8:00 too long, Shepard arrived too la
 total_cycles: 180 # 360 s = 6:00 at cpm 30
 domains:
   sound:
-    status: planned
+    status: done # the meditative version, approved by the user ("está perfecto")
     source: strudel # what sync/audio.wav comes from: strudel (render.mjs) or ableton (see domains.daw)
-    file: sounds/musica-universalis.strudel
+    file: sounds/musica-universalis.strudel # the meditative version (no pulse), chosen for the render and the video
+    backup: # superseded versions, kept for reference
+      - sounds/backup/musica-universalis-pulse.strudel # 6:00 psybient with a pulse (rolling bass); the daw/ MIDI and Live Set come from this line
+      - sounds/backup/musica-universalis-organic.strudel # the pulse version with an organic arp (ghost notes, legato, human timing)
   daw:
-    status: parked # 2026-09-27: the user prefers Strudel's own sound for this piece. Kept: Live Set in ableton/, MIDI + tuning files in daw/ (built through the Ableton MCP)
-    project_saved_as: ableton/musica-universalis Project/musica-universalis.als # where the user saved the Live Set; built from the 8:00 v2, before the 6:00 cut and the organic rework (daw/ MIDI is current)
+    status: parked # 2026-09-27: the user prefers Strudel's own sound for this piece. Kept in daw/: the Live Set, MIDI and tuning files (built through the Ableton MCP)
     tuning: daw/tuning/ # musica-universalis-pythagorean.scl/.kbm (drone, Surge), musica-universalis-432.scl/.kbm (shepard, Surge) and -432.tun (Serum 2 tracks)
     midi: daw/musica-universalis.mid
     stems: daw/stems/
     guide: musica-universalis.ableton.md
-    project: daw/musica-universalis Project/musica-universalis.als
+    project: daw/musica-universalis Project/musica-universalis.als # built from the 8:00 v2, before the 6:00 cut and the organic rework (daw/ MIDI is current)
     mastering: null # ableton (Ozone) or pipeline (master.mjs) — decided per piece
   visual:
-    status: planned # first idea to try: Kepler orbits / harmonograph (Lissajous) figures drawn from the piece's intervals
-    entry: tools/visuals/src/compositions/musica-universalis/ # not visuals/ — see the visuals-compose skill for why
+    status: in-progress # rays of light on 3D orbits + the arp as water with lit nodes; harmonograph, comets and mandala were tried and deleted (see musica-universalis.md)
+    entry: tools/visuals/src/compositions/musica-universalis/musica-universalis.tsx # composition id `musica-universalis` (4K); media/musica-universalis/visuals is the symlink
   sync:
-    status: not-built
+    status: done # audio.wav (7 layers rendered in parallel with --only, summed), audio-master.wav (-16 LUFS), audio-youtube.wav (-14 LUFS, for the video), frames.json + manifest.json, analysis.json
     output: sync/
 publish:
   status: planned

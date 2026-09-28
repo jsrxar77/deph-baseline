@@ -22,7 +22,7 @@ domains:
     variant: sounds/slow-drift-loop-only.strudel # unarranged, 4-voice comparison version
   visual:
     status: in-progress # WebGL Julia-set visualizer: audio-reactive, plays the master, bell pulses from frames.json
-    entry: tools/visuals/src/compositions/slow-drift/ # not visuals/ — see the visuals-compose skill for why
+    entry: tools/visuals/src/compositions/slow-drift/slow-drift.tsx # composition id `slow-drift` (4K); media/slow-drift/visuals is the symlink
   daw:
     status: in-progress # MIDI + stem exported and guide written; waiting on the user's Ableton session
     midi: daw/slow-drift.mid # per-track files in daw/tracks/, mapping info in daw/tracks.json (tools/sounds/midi.mjs)

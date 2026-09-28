@@ -47,10 +47,14 @@ number, 0 (light) to 1 (the question).
 
 ## Look-development prototypes (2026-09-26)
 
+History: the prototype compositions below (A-L) were compared in the Studio and then **deleted on 2026-09-27**, once L was
+chosen; only the composition `songcord` remains. Its code: `songcord.tsx` (uniforms), `shader.ts` (the scene), the
+snippets it reuses from A (`world.ts`) and B (`tools/visuals/src/shared/ripples.ts`), `wake.ts`, `being.ts`, `analysis.ts`, `common.ts`, and the
+shared HDR pipeline `tools/visuals/src/shared/HdrCanvas.tsx`.
+
 Five full-length Studio compositions (`SongcordProtoA-Dive`, `-B-Interference`, `-C-Cymatics`, `-D-Ribbons`, `-E-PandoraDeep`), 1920x1080 at 60 fps,
 all reading `sync/analysis.json` (a copy is in `tools/visuals/public/songcord-analysis.json`) as pure functions of
-the frame, playing `audio-master.wav`. Code: `tools/visuals/src/compositions/songcord/` (`Prototypes.tsx`, one
-`shader*.ts` each, `analysis.ts`, `common.ts`, `ShaderCanvas.tsx`).
+the frame, playing `audio-master.wav`.
 
 - **A Dive** — camera height follows the arc: light shafts and caustics at the surface, marine snow, bioluminescent
   motes that take over in the deep; choir/air band brightens the motes.
@@ -153,7 +157,7 @@ twisting DNA-like tail, only one smooth beam that tapers and fades (with a flare
 by water wakes over the whole frame. The user's clarification: keep the being of light, keep the attack ripples (B), and only
 turn the dominant-note lines (C) into a water wake, with the harmony thread kept; wake length 12 s.
 
-- **How** (`wake.ts`, `shaderL.ts`): each of the 12 pitch classes owns an invisible source that wanders slowly across the whole
+- **How** (`wake.ts`, `shader.ts`): each of the 12 pitch classes owns an invisible source that wanders slowly across the whole
   frame; while that note sounds (measured chroma, weight at the moment of emission) it drops ring waves that expand and fade over
   `WAKE_SECONDS = 12`. The interference of rings from a moving source is a wake (curved V-shaped arms), drawn as luminous crest
   lines (zero crossings of the summed wave, normalised by the local wave envelope so lines exist only where the water is
@@ -170,8 +174,8 @@ mp4 plays smoothly) and, after weighing an HDR10 delivery, chose to deliver **on
 simulated-HDR look, since most viewers watch on SDR screens. (A real HDR10 deliverable was planned but dropped at the user's request;
 the plan is in the conversation history, not built. `HdrCanvas` still renders the HDR look in a standard video.)
 
-- **Composition:** `SongcordFinal4K` (3840x2160, 60 fps; `SongcordFinal` is the 1080p twin for quick stills). It is L with an SDR grade for
-  bright screens (`YT_GRADE`, `YT_GAIN` in `Prototypes.tsx`): world gain 0.42 instead of 0.24, exposure 1.05, saturation 1.28, bloom 0.55 with
+- **Composition:** `songcord` (3840x2160, 60 fps, the only one). It is L with an SDR grade for
+  bright screens (`GRADE`, `GAIN` in `songcord.tsx`): world gain 0.42 instead of 0.24, exposure 1.05, saturation 1.28, bloom 0.55 with
   threshold 1.2, gamma 2.25 instead of 2.0 (lifted shadows). Measured average luma (limited range, 16-235) at 0:10/0:45/1:22/2:10/2:55:
   L 66/77/101/94/79, final 91/108/132/124/105, i.e. about a third brighter; highlights still reach white (Y max 211-235). A first try with
   bloom 0.8 washed the held-question frame out to a big white area and was reduced.

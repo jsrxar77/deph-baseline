@@ -47,7 +47,7 @@ what to publish and when; Claude never uploads anything.
    AMBIENT`; a dark gradient on the left over a frame of the piece's own fractal; the **bottom-right corner left
    empty** (YouTube draws the video-length badge there). What changes per piece: `lines`, `facts`, `series`
    (increment it), and `momentSeconds` (pick a frame with a bold shape and no active bell pulse). Render with
-   `npx remotion still DephThumbnailSlowDrift --props='{"lines":["New","Piece"],"facts":"...","series":"02","momentSeconds":120}'
+   `npx remotion still slow-drift-thumbnail --props='{"lines":["New","Piece"],"facts":"...","series":"02","momentSeconds":120}'
    --output=../../media/<name>/renders/thumbnails/<name>-thumbnail.jpg`. The composition is registered per piece in
    `tools/visuals/src/Root.tsx` and imports that piece's visualizer (today Slow Drift's); when a second piece exists,
    register its own id with its own visualizer rather than reusing this one. Always check the result at about
@@ -79,7 +79,7 @@ what to publish and when; Claude never uploads anything.
 
 ## Facts to take from the project (never invent)
 
-Key and tuning (`<name>.deph.yaml`, `<name>.md`), arc and section lengths, voices, the binaural beat
+Key and tuning (`<name>.yaml`, `<name>.md`), arc and section lengths, voices, the binaural beat
 schedule, loudness of the master, video length and resolution, visuals description. If a fact is not in the
 project, leave a `TODO(user)` rather than guessing (channel URL, social links, publish date).
 

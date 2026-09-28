@@ -64,7 +64,7 @@ cycles --(cps, from the piece's setcpm())--> seconds --(fps, 60 for this project
 Write this once, in the script that produces `frames.json`. Never duplicate it (e.g. re-hardcoding the
 piece's tempo inside `tools/visuals/`) — that's how audio and video silently drift apart after a tempo
 edit. The `.strudel` file's `setcpm()` remains the single source of truth for the number; once computed,
-mirror it into `media/<name>/<name>.deph.yaml`'s `tempo.cpm` field so other tools can read tempo without
+mirror it into `media/<name>/<name>.yaml`'s `tempo.cpm` field so other tools can read tempo without
 parsing Strudel — that mirroring doesn't count as a second implementation, since nothing recomputes it
 independently there.
 
@@ -106,7 +106,7 @@ bringing an Ableton mix back is the `ableton-bridge` skill's job (`docs/daw-brid
 
 `domains.sync.status` is `in-progress` once `audio.wav` exists but `frames.json`/`manifest.json` don't
 yet, and `done` only once all three do (Slow Drift: done) — don't jump straight to
-`done` just because the audio render succeeded. Also re-read `media/<name>/<name>.deph.yaml` and check
+`done` just because the audio render succeeded. Also re-read `media/<name>/<name>.yaml` and check
 whether the render surfaced anything that should update other fields too — e.g. if `tempo.cpm` was still
 `null` there (sound domain finished without reconciling it, or the piece's tempo changed since), fill it
 in from the same `setcpm()` reading used for the time conversion, rather than leaving the yaml stale next

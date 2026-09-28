@@ -95,7 +95,7 @@ media/slow-drift/sync/
                     total frames, audio/frames filenames, generation timestamp.
 ```
 
-The composition's `media/<name>/<name>.deph.yaml` gets its `domains.sync.status` set to `in-progress` once
+The composition's `media/<name>/<name>.yaml` gets its `domains.sync.status` set to `in-progress` once
 `audio.wav` exists but `frames.json`/`manifest.json` don't yet (the current state for "Slow Drift"), and
 `done` once all three do — see the `strudel-sync` skill.
 
@@ -112,7 +112,7 @@ cycles  --(cps, read from the piece's setcpm())-->  seconds  --(fps, from the us
 This conversion is written once, inside whatever script generates `frames.json`, and nowhere else. If
 it's duplicated (e.g. the piece's tempo hardcoded again inside `tools/visuals/`), a tempo change in the
 piece silently desyncs the video from the audio. The resulting cpm gets mirrored into the composition's
-`<name>.deph.yaml` (`tempo.cpm`) for other tools to read without parsing Strudel — a mirror, not a second
+`<name>.yaml` (`tempo.cpm`) for other tools to read without parsing Strudel — a mirror, not a second
 computation.
 
 ## Where this lives

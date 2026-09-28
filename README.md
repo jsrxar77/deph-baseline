@@ -33,7 +33,7 @@ media/<piece>/renders/<piece>.mp4        the final video (git-ignored: several G
 ```
 
 Everything belonging to one piece lives in its own folder, `media/<piece>/`: the manifest
-(`<piece>.deph.yaml`), its notes (`<piece>.md`), the sound, the visual (a link to the real code), the sync data, the
+(`<piece>.yaml`), its notes (`<piece>.md`), the sound, the visual (a link to the real code), the sync data, the
 renders and the YouTube publish pack. [`CLAUDE.md`](CLAUDE.md) documents the layout and every tool in detail.
 
 ## Try it
@@ -60,7 +60,7 @@ cp media/slow-drift/sync/frames.json        tools/visuals/public/slow-drift-fram
 # 4. preview in Remotion Studio, or render the final video
 cd tools/visuals
 npx remotion studio
-npx remotion render SlowDriftFractal ../../media/slow-drift/renders/slow-drift.mp4 --crf=25
+npx remotion render slow-drift ../../media/slow-drift/renders/slow-drift.mp4 --crf=25
 ```
 
 The rendered audio and video are not in the repository (large and fully regenerable); the steps above rebuild them

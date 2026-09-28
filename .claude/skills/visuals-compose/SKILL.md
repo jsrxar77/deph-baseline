@@ -5,7 +5,7 @@ description: Use when building the actual Remotion video composition for a piece
 
 # Building a composition's video side
 
-Everything here was found by actually building the first one (`SlowDriftFractal`, a WebGL Julia-set
+Everything here was found by actually building the first one (`slow-drift`, a WebGL Julia-set
 visualizer for "Slow Drift"), hitting real errors rather than assuming the originally-planned
 architecture would work. Two things in `CLAUDE.md`'s file-layout section turned out to be wrong in
 practice; this skill documents the corrected reality. Update `CLAUDE.md` if this skill and it ever
@@ -34,8 +34,8 @@ The bundler never sees the link (it only reads `tools/`), git stores it as a tin
 composition's folder shows its sound, visual, sync and renders side by side. Never put code in the link's
 `media/` side or make the link point into `media/`.
 
-Register the composition in `tools/visuals/src/Composition.tsx` (import from
-`./compositions/<name>/...`) and make sure `tools/visuals/src/Root.tsx` renders it.
+The composition's entry file is `tools/visuals/src/compositions/<name>/<name>.tsx`; it exports the `<Composition>` and
+`tools/visuals/src/Root.tsx` renders it. Name it as the "Naming" section below says.
 
 ## Wiring in the real audio (also a correction)
 
@@ -110,7 +110,7 @@ A first version drew straight sweeping bands directly onto the final color (`col
 sweepHighlight * ...`) — it read as literal "Hollywood searchlight" beams cutting across the
 content, not something behind it. The corrected approach: render `dephCreationTorus(uv, uTime)`
 first as a background color, then `mix(background, content, opacity)`, where `opacity` is however
-that piece defines "how solid is my own content here." For `SlowDriftFractal`, fast-escaping
+that piece defines "how solid is my own content here." For `slow-drift`, fast-escaping
 exterior pixels (far "open sky" around the fractal) fade toward transparent so the rings show
 through there, while the fractal's own boundary and interior stay fully opaque and occlude them —
 see `colorAt`'s returned `.a` in `shaders.ts`. A composition with no natural "open" regions (e.g.
@@ -206,7 +206,7 @@ but the upload is heavy: `--crf=25` or a later ffmpeg re-encode brings it down.
 
 ## HDR-look bloom pipeline (Songcord J)
 
-`tools/visuals/src/compositions/songcord/HdrCanvas.tsx` is a small raw-WebGL2 pipeline reusable by other pieces: the
+`tools/visuals/src/shared/HdrCanvas.tsx` is a small raw-WebGL2 pipeline reusable by other pieces: the
 scene fragment shader writes LINEAR, unclamped light to a half-float texture (`EXT_color_buffer_float` works in
 Remotion's headless ANGLE), a 5-level bloom pyramid is built from what exceeds a threshold, and a final pass adds bloom,
 ACES tone mapping, vignette and grain and writes normal 8-bit BT.709 output. It is an "HDR look", not an HDR export.
@@ -214,9 +214,58 @@ Rules learned tuning it: scale the world down and give it a black level (deep da
 HDR); accumulate overlapping light sources with `max` when their density depends on speed, never a sum; keep attack
 pulses soft and capped (photosensitivity, and deph's no-strobe rule). A 1080p frame took about 70 ms to render.
 
+## Naming, and the consistency check to run every time
+
+Names follow the `deph-compose` skill's "Naming" rule: the Remotion composition id is exactly the composition's name
+(`musica-universalis`), only 4K, no 1080p twin, no Final/Flow/Proto/4K in any name; the entry file is
+`compositions/<name>/<name>.tsx`; code used by more than one piece lives in `tools/visuals/src/shared/` (today
+`HdrCanvas.tsx`). Alternatives compared side by side are deleted (id and code) as soon as one is chosen.
+
+Every piece's `media/<name>/visuals` must be the symlink to its code — Songcord was once left as an empty directory
+after its code was built, and the user caught it. Before calling any visual work done, run from the project root and
+fix anything that isn't `symlink OK`, then check the Studio list shows only piece names and `deph-*` brand items:
+
+```
+for d in media/*/; do n=$(basename "$d"); printf "%s: " "$n"; if [ -L "$d/visuals" ] && [ -d "$d/visuals/" ]; then echo "symlink OK"; else echo "FIX: not a working symlink"; fi; done
+(cd tools/visuals && npx remotion compositions)
+```
+
 ## Before finishing: reconcile the whole yaml
 
-Update `media/<name>/<name>.deph.yaml`'s `domains.visual` — `status` (`in-progress` for a first working
+Update `media/<name>/<name>.yaml`'s `domains.visual` — `status` (`in-progress` for a first working
 pass, `done` once it's considered finished) and `entry` (point it at the real
 `tools/visuals/src/compositions/<name>/` location, not the folder the original scaffold implied). See
 `deph-compose`'s "Hand off" section for why every domain skill does this, not just this one.
+
+
+## Lissajous/harmonograph motion: constant speed and a GLSL smoothstep gotcha (Musica Universalis)
+
+Two concrete, reusable technical findings from building a moving-light-with-trail visual (the comet technique,
+see the deph-style log for the creative back-and-forth that led here):
+
+- **`smoothstep(edge0, edge1, x)` is UNDEFINED per the GLSL ES spec when `edge0 >= edge1`.** Writing a "fade out"
+  as `smoothstep(1.0, 0.82, u)` (descending edges, meant as "1 near u=0.82, ramping to 0 by u=1") compiled and ran,
+  but wasn't clamped the way a naive read of the formula suggests — it produced an unclamped hot spot instead of a
+  soft taper, seen as "un punto redondo... círculo con una estela" instead of a uniform ray. Always keep edges
+  ascending and invert the RESULT instead: `1.0 - smoothstep(0.82, 1.0, u)`.
+- **A sine-based path (Lissajous, harmonograph, any `sin(a*t)`) moves at wildly uneven speed** — nearly stalled at
+  its amplitude peaks, fastest through its zero-crossings. Sampling its trail at fixed TIME steps puts samples far
+  apart exactly where it's moving fast (reads as a sudden frantic jump) and bunched where it's slow (reads as
+  calm) — inconsistently, within the same trail, at different moments of the piece: "de repente tienen movimientos
+  suaves y de repente comienza uno frenético" (the user's words). Fix: walk backward in TIME with an adaptively
+  rescaled step (a few refinement iterations per point, checking the actual screen distance moved and rescaling
+  the step to hit a target distance) so consecutive trail points are spaced by roughly equal SCREEN DISTANCE, not
+  equal time — cheap (a couple of position evaluations per trail point, done once per frame on the CPU) and fixes
+  the unevenness by construction, everywhere, rather than by tuning rates per-piece.
+
+## `<Audio>`'s `from` prop delays playback, it does not trim the source
+
+Found while checking Musica Universalis's audio/video alignment: `tools/visuals/src/shared/HdrCanvas.tsx` (used by
+both Songcord and Musica Universalis) had `<Audio src={...} from={237} />`. In `@remotion/media`, `<Audio>`'s `from`
+comes from `InteractiveBaseProps` (`Pick<SequenceProps, 'from' | ...>`) — it behaves like wrapping the audio in
+`<Sequence from={237}>`: the track starts playing 237 frames (≈3.95 s) into the COMPOSITION timeline, not 237 frames
+into the audio file. The prop for trimming the source itself is `trimBefore`/`trimAfter`. With `from={237}` left in,
+both pieces played about 4 s of video before any sound — the opposite of "the video starts with the music, not
+before". Removed (verified with `ffprobe -show_entries stream=start_time` on both compositions: video and audio
+streams both start at 0.000000 now). Check this whenever `<Audio>` is added to a shared canvas component — a stray
+`from` is easy to leave in from a one-off scrubbing test.

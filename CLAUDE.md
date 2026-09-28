@@ -12,14 +12,20 @@ drive that extension, so it edits the file and reads the result with the headles
 Organization is composition-first: everything belonging to one piece lives together, split by domain
 inside that piece's own folder, rather than grouped by media type across the whole project.
 
+**Naming (standing rule):** everything of a composition carries exactly its kebab-case name (`musica-universalis`):
+folder, files, Remotion composition id, public copies. A suffix only when it tells two things apart and names the
+purpose (`.yaml`, `.youtube.md`, `.ableton.md`, `-master.wav`); never a brand, technique, stage or resolution word
+(no deph/Fractal/Flow/Final/Proto/4K). Only 4K is built. Every `media/<name>/visuals` is the symlink to its code. Full
+rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-compose`, "Naming, and the consistency check".
+
 - **`/media`** — one subfolder per composition: `media/<name>/`. Nothing else goes directly under
   `/media` — no shared/ungrouped content, no tooling.
-  - **`media/<name>/<name>.deph.yaml`** — the composition's manifest: `key`, `tempo`, `arc` (section
+  - **`media/<name>/<name>.yaml`** — the composition's manifest: `key`, `tempo`, `arc` (section
     names + cycle counts), `total_cycles`, and a `domains` map (`sound`/`visual`/`sync`, each with a
     `status` — `planned`/`in-progress`/`done`/`not-built` — and the path to that domain's content). This
     is the *only* place cross-domain info lives; a fact that belongs to one domain (e.g. voice design
     notes) stays in that domain's own files, not duplicated into the yaml. See
-    `media/slow-drift/slow-drift.deph.yaml` for the format.
+    `media/slow-drift/slow-drift.yaml` for the format.
   - **`media/<name>/<name>.md`** — the composition's doc: arc/duration table, voices, key, design
     decisions and issues found while building it. One file, not a `pieces/` subfolder — a composition
     folder already scopes everything to a single piece.
@@ -27,8 +33,9 @@ inside that piece's own folder, rather than grouped by media type across the who
     chapters, hashtags, tags, thumbnail brief, upload checklist), tracked in git. Built and kept current by
     the `youtube-publish` skill; its status is tracked in the yaml under `publish`. The channel-wide copy
     (positioning, channel description, standard footer, open decisions) is in `docs/youtube-channel.md`.
-  - **`media/<name>/sounds/`** — the Strudel side: `<name>.strudel` plus any variant files (e.g. an
-    unarranged comparison version). This is where `strudel-compose` writes.
+  - **`media/<name>/sounds/`** — the Strudel side: `<name>.strudel` (always the current main version) plus any variant
+    files (e.g. an unarranged comparison version). Superseded versions the user wants kept go to `sounds/backup/`. This
+    is where `strudel-compose` writes.
   - **`media/<name>/visuals/`** — a **symlink** to the real Remotion code,
     `../../tools/visuals/src/compositions/<name>` (relative), so opening the composition's folder shows its
     whole visual side. The code itself cannot live here: Remotion's bundler resolves `node_modules` from a
@@ -56,7 +63,7 @@ inside that piece's own folder, rather than grouped by media type across the who
     `~/Movies` or the Desktop, which sit outside the project (a file left on the Desktop vanished once).
 - **`/docs`** — cross-cutting documentation only: the composing workflow (`composition-workflow.md`), the
   audio/video sync pipeline spec (`sync-pipeline.md`), the Strudel → Ableton bridge spec (`daw-bridge.md`), the visuals-bridge overview
-  (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `DephBanner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
+  (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `deph-banner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
 - **`/tools`** — domain-first, one subfolder per domain, each its own npm project (own `package.json`,
   `package-lock.json`, `node_modules`; there's no project-root `package.json`). `tools/sounds/` holds
   every Strudel/audio tool (the inspector today; the render/sync pipeline once it's built) — it reads and
@@ -106,7 +113,7 @@ Invoke the `deph-compose` skill (`.claude/skills/deph-compose/SKILL.md`) for the
    necessarily all five, not necessarily in that order) and duration, overall or per section.
 3. **Confirm a key/scale** (e.g. "C major", "C dorian") — this seeds the yaml and drives every `scale()`
    call in the sound domain.
-4. **Scaffold** `media/<name>/<name>.deph.yaml`, `media/<name>/<name>.md`, and the subfolders for the
+4. **Scaffold** `media/<name>/<name>.yaml`, `media/<name>/<name>.md`, and the subfolders for the
    domains actually needed (always `sounds/`, `visuals/`, `sync/` together, even if some start empty —
    see `deph-compose` for why).
 5. **Delegate**: sound content to `strudel-compose`, video content to `visuals-compose` (once it exists),

@@ -12,8 +12,8 @@ domains:
     file: null
     source: sync/audio.wav # the supplied recording, converted to wav
   visual:
-    status: done # final = L "Wake" with the YouTube SDR grade, composition SongcordFinal4K; prototypes A-K kept for comparison
-    entry: tools/visuals/src/compositions/songcord/ # not visuals/ — see the visuals-compose skill for why
+    status: done # L "Wake" with the YouTube SDR grade, composition `songcord` (4K); the prototypes A-K were deleted after the choice
+    entry: tools/visuals/src/compositions/songcord/songcord.tsx # composition id `songcord` (4K); media/songcord/visuals is the symlink
   sync:
     status: done # source.mp3 -> audio.wav (48 kHz) -> audio-master.wav (-16 LUFS, raw was -8.0 LUFS) + analysis.json
     output: sync/ # also audio-youtube.wav (-14 LUFS master for the YouTube video); analysis.json (tools/sounds/analyze-audio.mjs) replaces the frames.json Strudel would have produced

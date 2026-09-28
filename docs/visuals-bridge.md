@@ -34,7 +34,7 @@ in `tools/visuals/` to read directly, without needing to know anything about Str
 
 ## Correction: the first visual didn't need `frames.json` at all
 
-"Slow Drift" 's first composition (`SlowDriftFractal`, a WebGL Julia-set visualizer) turned out not to
+"Slow Drift" 's first composition (`slow-drift`, a WebGL Julia-set visualizer) turned out not to
 need the precomputed event data described above. It reacts to the rendered `audio.wav` directly, at
 render time, via `@remotion/media-utils`' `useWindowedAudioData`/`visualizeAudio` (real FFT analysis of
 the actual waveform) — the "instead of needing real-time audio-reactive analysis" framing above was the

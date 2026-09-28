@@ -1,7 +1,13 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { AbsoluteFill, staticFile } from "remotion";
 import { Audio } from "@remotion/media";
-import type { UniformValue } from "./ShaderCanvas";
+
+/** A shader uniform: a float, a vec2/vec3, or a float/vec4 array. */
+export type UniformValue =
+  | number
+  | [number, number]
+  | [number, number, number]
+  | { kind: "1fv" | "4fv"; value: Float32Array };
 
 // A small HDR pipeline in raw WebGL2, deterministic and a pure function of the frame:
 //   1. the scene fragment shader renders LINEAR, unclamped light into a half-float texture (values above 1 are real

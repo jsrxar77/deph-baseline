@@ -26,11 +26,6 @@ media/*/daw/**/*.wav
 media/*/daw/**/*.aif
 media/*/daw/**/*.aiff
 media/*/daw/**/Backup/
-# The Live Set folder a user saves by hand (media/<name>/ableton/): the .als is tracked, audio and backups are not.
-media/*/ableton/**/*.wav
-media/*/ableton/**/*.aif
-media/*/ableton/**/*.aiff
-media/*/ableton/**/Backup/
 # Ableton's per-file analysis data (next to any audio it has seen) and macOS folder-icon files.
 *.asd
 Icon?

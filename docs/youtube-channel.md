@@ -95,7 +95,7 @@ Help on 2026-09-24 unless marked otherwise.
 - **Links** (up to 14 on the Home tab): the series playlist, the first video, and any social profile;
   `TODO(user)`. **Contact email** for business inquiries: `TODO(user)`.
 - **Profile picture (made):** `docs/youtube-channel/avatar.jpg`, 800x800. Built from the user's own illustrated
-  portrait (`channels4_profile.jpg`, left untouched) as the Remotion composition `DephAvatar`
+  portrait (`channels4_profile.jpg`, left untouched) as the Remotion composition `deph-avatar`
   (`tools/visuals/src/brand/ChannelAvatar.tsx`). The face is kept (only a light soft focus; the expression is not
   changed — no image generator here) and the **original blue/purple torus background is replaced by the Slow Drift
   fractal** in the Deep Decay palette (slightly defocused, darkened, with a soft dark halo behind the head), so the
@@ -105,7 +105,7 @@ Help on 2026-09-24 unless marked otherwise.
   grey or near black; the face area is forced as figure because a bluish rim light on the left ear matches the
   background colour). Source copy for Remotion: `tools/visuals/public/deph-avatar-source.jpg`. Checked inside
   YouTube's circular crop. Re-render: `node scripts/make-avatar-mask.mjs` (only if the portrait changes) then
-  `npx remotion still DephAvatar --output=../../docs/youtube-channel/avatar.jpg`, from `tools/visuals/`.
+  `npx remotion still deph-avatar --output=../../docs/youtube-channel/avatar.jpg`, from `tools/visuals/`.
   **Chosen by the user on 2026-09-24: the fractal-background version** (`avatar.jpg`). A plain black background was
   tried as an alternative and not chosen; its file and composition were removed.
 - **Profile picture (earlier proposal):** the creation-torus mark — four concentric rings (3/6/9/12) in the Deep Decay palette on
@@ -115,9 +115,9 @@ Help on 2026-09-24 unless marked otherwise.
   Profile picture size and video watermark size were not confirmed in the help pages: check the hint Studio
   shows when uploading (800x800 and 150x150 are remembered, unverified).
 - **Banner file (made):** `docs/youtube-channel/banner.jpg`, 2560x1440, about 0.9 MB. It is the Remotion composition
-  `DephBanner` (`tools/visuals/src/brand/ChannelBanner.tsx`): a frame of the Slow Drift fractal at 5:00 (chosen
+  `deph-banner` (`tools/visuals/src/brand/ChannelBanner.tsx`): a frame of the Slow Drift fractal at 5:00 (chosen
   because no bell pulse is active there), darkened softly in the middle, with `deph` and `GENERATIVE AMBIENT`
-  in Avenir Next inside the safe area. Re-render: `npx remotion still DephBanner --output=../../docs/youtube-channel/banner.jpg`
+  in Avenir Next inside the safe area. Re-render: `npx remotion still deph-banner --output=../../docs/youtube-channel/banner.jpg`
   from `tools/visuals/`. Upload it in Studio > Customization > Branding.
 - **Layout:** channel trailer (shown once to non-subscribers): Slow Drift until a 30-60 s trailer exists;
   featured video for returning subscribers: the latest upload; sections (up to 12; the default has Shorts,

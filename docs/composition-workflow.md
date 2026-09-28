@@ -101,7 +101,7 @@ composition's doc.
   under `/sounds`, then under `media/sounds/pieces/`; it now sits directly inside the composition's own
   folder now that `/media` is organized composition-first rather than by media type.
 - Cross-domain facts (key, tempo, arc, which domains exist and their status) live in
-  `media/<name>/<name>.deph.yaml` instead of being duplicated into this doc — see `CLAUDE.md`'s "File
+  `media/<name>/<name>.yaml` instead of being duplicated into this doc — see `CLAUDE.md`'s "File
   layout" section.
 
 ## 5. Validate with the inspector, not by ear

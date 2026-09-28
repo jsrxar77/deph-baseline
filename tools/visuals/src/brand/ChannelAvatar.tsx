@@ -7,7 +7,7 @@ import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer"
 // by the Slow Drift fractal in deph's Deep Decay palette, so the channel image speaks the same visual language
 // as the videos. The portrait is cut out with public/deph-avatar-mask.png, generated from the portrait itself by
 // scripts/make-avatar-mask.mjs (colour-based cutout of the head, hair, ears, neck and collar).
-// Rendered with:  npx remotion still DephAvatar --output=../../docs/youtube-channel/avatar.jpg
+// Rendered with:  npx remotion still deph-avatar --output=../../docs/youtube-channel/avatar.jpg
 const FPS = 60;
 const FRACTAL_MOMENT_SECONDS = 300; // same moment as the banner: no bell pulse active
 const SRC = "deph-avatar-source.jpg";

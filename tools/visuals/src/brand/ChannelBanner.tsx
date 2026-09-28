@@ -6,7 +6,7 @@ import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer"
 // Slow Drift fractal as full-bleed background, softly darkened in the middle so the text reads, with the
 // channel name and tagline inside YouTube's safe area (about 1544x423 at this size, centered — the part
 // visible on every device). Rendered with:
-//   npx remotion still DephBanner --output=../../docs/youtube-channel/banner.jpg
+//   npx remotion still deph-banner --output=../../docs/youtube-channel/banner.jpg
 // Pick a moment with no bell pulse active (see bellPulses.ts): 300 s is 12.5 s after the last bell.
 const FPS = 60;
 const MOMENT_SECONDS = 300;

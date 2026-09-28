@@ -1,0 +1,57 @@
+{
+  "source": "media/musica-universalis/sounds/musica-universalis.strudel",
+  "cps": 0.5,
+  "cpm": 30,
+  "totalCycles": 180,
+  "fps": 60,
+  "sampleRate": 48000,
+  "durationSeconds": 368,
+  "totalFrames": 22080,
+  "frames": "frames.json",
+  "audio": "audio.wav",
+  "layers": {
+    "$0": {
+      "events": 120,
+      "sounds": [
+        "triangle"
+      ]
+    },
+    "$1": {
+      "events": 315,
+      "sounds": [
+        "sawtooth"
+      ]
+    },
+    "$2": {
+      "events": 688,
+      "sounds": [
+        "triangle"
+      ]
+    },
+    "$6": {
+      "events": 90,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "$3": {
+      "events": 64,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "$4": {
+      "events": 146,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "$5": {
+      "events": 420,
+      "sounds": [
+        "triangle"
+      ]
+    }
+  },
+  "generatedAt": "2026-09-27T22:08:28.610Z"
+}

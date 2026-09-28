@@ -1,21 +1,29 @@
 import { GLSL_COMMON } from "./common";
-import { SCENE_A_GLSL } from "./shaderA";
-import { RIPPLES_GLSL } from "./shaderB";
-import { PLATE_GLSL } from "./shaderC";
+import { WORLD_GLSL } from "./world";
+import { RIPPLES_GLSL } from "../../shared/ripples";
 import { NT } from "./being";
+import { NK, NH } from "./wake";
 
-// Prototype K — J seen through water. Two changes from J, both from the user's review:
+// Songcord's scene (the look chosen as prototype L): the world (world.ts) and the attack ripples (shared/ripples.ts), water
+// wakes over the whole frame (wake.ts), and one being of light (being.ts), all seen through water. It came from K, which
+// made two changes to J after the user's review:
 //  1. The being of light is a single smooth BEAM: no twisting strands, just a tapering streak with a soft halo, and an
 //     elongated flare along its direction of travel, still fading over the trail length.
 //  2. Everything (the light shafts and motes of A, the cymatic filigree of C, the ripples, and the beam itself) is seen
 //     through moving water: one shared refraction warp displaces every layer, caustics dance over the image, colour
 //     is absorbed toward blue-green and disperses slightly at the edges (see HdrCanvas `ca`).
-export const FRAGMENT_K = GLSL_COMMON + SCENE_A_GLSL + RIPPLES_GLSL + PLATE_GLSL + `
+export const FRAGMENT = GLSL_COMMON + WORLD_GLSL + RIPPLES_GLSL + `
 #define NT ${NT}
+#define NK ${NK}
+#define NH ${NH}
+uniform vec4 uWake[NK * NH]; // x, y (source position at emission), age (s), amplitude (that note's weight then, faded)
+uniform float uWakeKw[NK];   // wave number per pitch class (the tonic is the longest wave)
+uniform float uDomHue;       // dominant pitch class / 12
 uniform vec4 uTrail[NT];   // xy = core; zw unused (0) in K; index 0 is the head
 uniform vec2 uHead;
 uniform float uHeadPower;
 uniform float uPulse;
+uniform float uGain;       // world brightness (0.24 = the dark cinematic grade; higher for the SDR/YouTube grade)
 
 // Refraction: a slow large swell plus medium ripples, gently driven by the sound (never a shake).
 vec2 waterWarp(vec2 p){
@@ -36,6 +44,32 @@ float caustic(vec2 p){
   float r1 = 1.0 - abs(2.0 * vnoise(q + w * 1.6 + vec2(t * 0.30, -t * 0.22)) - 1.0);
   float r2 = 1.0 - abs(2.0 * vnoise(q * 1.3 - w * 1.6 + vec2(-t * 0.26, t * 0.31) + 11.0) - 1.0);
   return clamp(pow(r1 * r2, 5.0) * 2.2, 0.0, 1.0);
+}
+
+vec3 hueColor(float h){
+  vec3 c = mix(PAN_BLUE, PAN_TEAL, smoothstep(0.0, 0.35, h));
+  c = mix(c, PAN_VIOLET, smoothstep(0.30, 0.65, h));
+  return mix(c, PAN_MAGENTA, smoothstep(0.65, 1.0, h));
+}
+
+// Ring waves dropped by the moving sources, summed: the interference of rings from a moving source is a wake.
+// Returns (signed wave height, envelope): where the envelope is ~0 there is no wake, so lines are only drawn where
+// there is water disturbed by something.
+vec2 wakeField(vec2 p){
+  float h = 0.0, env = 0.0;
+  for (int k = 0; k < NK; k++){
+    float kw = uWakeKw[k];
+    for (int m = 0; m < NH; m++){
+      vec4 s = uWake[k * NH + m];
+      if (s.w <= 0.001) continue;
+      float r = length(p - s.xy);
+      float d = r - s.z * 0.15;                       // the ring expands at a fixed speed
+      float pk = s.w * exp(-d * d / 0.030) / (1.0 + 1.6 * r);
+      h += pk * cos(kw * d);
+      env += pk;
+    }
+  }
+  return vec2(h, env);
 }
 
 float segDist(vec2 p, vec2 a, vec2 b){
@@ -96,14 +130,15 @@ void main(){
 
   // the world (A) and the cymatic filigree (C), both through the water
   vec3 col = sceneA(pr);
-  float wC = smoothstep(0.30, 0.90, uArc) * (0.55 + 0.45 * uLevel);
-  vec2 uv = pr / vec2(aspect, 1.0) + 0.5;
-  float v = plate(uv, uTime);
-  float line = exp(-abs(v) / (0.016 + 0.030 * (1.0 - uLevel)));
-  float belly = 1.0 - exp(-v * v * 1.6);
+  float wC = smoothstep(0.30, 0.90, uArc) * (0.55 + 0.45 * uLevel) + 0.25;
+  vec2 wf = wakeField(pr);
+  float wenv = smoothstep(0.02, 0.16, wf.y);
+  float line = exp(-abs(wf.x) / (0.045 * wf.y + 1e-4)) * wenv;             // curved crest lines of the wake
+  float sheen = smoothstep(0.0, 1.0, 0.5 + 2.5 * wf.x / (wf.y + 0.05)) * wenv;  // soft water surface tilt between the lines
   vec3 lineCol = mix(mix(PAN_VIOLET, PAN_MAGENTA, 0.4), pandoraField(pr * 1.1, 5.0), 0.35);
-  col += lineCol * line * wC * (1.1 + 1.6 * near);
-  col += pandoraField(pr * 0.7, 6.0) * belly * wC * 0.10;
+  lineCol = mix(lineCol, hueColor(uDomHue) * 1.3, 0.4);                    // the dominant note tints the wake
+  col += lineCol * line * wC * (1.8 + 1.6 * near);
+  col += pandoraField(pr * 0.7, 6.0) * sheen * wenv * wC * 0.015;
 
   // glints on the ripples
   vec3 n = normalize(vec3(-slope * 3.0, 1.0));
@@ -122,7 +157,7 @@ void main(){
   float lum = dot(col, vec3(0.30, 0.59, 0.11));
   col = mix(vec3(lum), col, 1.45);
   col *= vec3(0.86, 1.0, 1.08);
-  col = max(col * 0.24 - 0.022, 0.0);
+  col = max(col * uGain - 0.022, 0.0);
   col *= 1.0 + 1.3 * near * uHeadPower;
   col += mix(PAN_TEAL, PAN_VIOLET, 0.4) * near * 0.03 * uHeadPower;
 

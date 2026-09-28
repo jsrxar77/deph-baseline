@@ -1,6 +1,6 @@
 ---
 name: deph-compose
-description: Use when starting any new deph composition (a piece that may have a sound side, a visual side, or both), or substantially reworking one's overall structure — covers deciding which domains it needs, asking arc/duration/key up front, and scaffolding the media/<name>/ folder with its .deph.yaml manifest and doc before handing off to strudel-compose, visuals-compose, or strudel-sync for the actual domain work.
+description: Use when starting any new deph composition (a piece that may have a sound side, a visual side, or both), or substantially reworking one's overall structure — covers deciding which domains it needs, asking arc/duration/key up front, and scaffolding the media/<name>/ folder with its .yaml manifest and doc before handing off to strudel-compose, visuals-compose, or strudel-sync for the actual domain work.
 ---
 
 # Starting a deph composition
@@ -25,13 +25,33 @@ Ask the user:
 5. **A name** for the composition (kebab-case, becomes the folder name and filename stem — e.g.
    `slow-drift`).
 
+## Naming (standing rule, for every file, folder and id of a composition)
+
+The composition's name — kebab-case, lower case, hyphens (`slow-drift`, `songcord`, `musica-universalis`) — is the only
+stem anything of that composition carries. The user insisted on this after finding incoherent names ("SlowDriftFractal",
+"SongcordFinal4K", "MusicaUniversalisFlow4K", a `.deph.yaml` next to files without "deph"):
+
+- **A suffix only when it is needed to tell two things apart**, and then it names the purpose: `<name>.yaml` (the one
+  manifest), `<name>.md` (the doc), `<name>.youtube.md` and `<name>.ableton.md` (two more docs, so they need a purpose),
+  `<name>.strudel`, `<name>.mid`, `renders/<name>.mp4`, public copies `<name>-audio.wav`, `<name>-master.wav`,
+  `<name>-youtube.wav`, `<name>-frames.json`, `<name>-analysis.json`, a thumbnail `<name>-thumbnail`.
+- **Never a word of more**: no brand ("deph"), no technique ("Fractal", "Flow"), no stage ("Final", "v2", "Proto"), no
+  resolution ("4K") in a name. The current version simply carries the name; replaced versions the user wants kept go to a
+  `backup/` folder (as in `sounds/backup/`), everything else is deleted.
+- **Remotion**: the composition id is exactly `<name>` (e.g. `musica-universalis`), built only in 4K (3840x2160); no
+  1080p twin. Its code is `tools/visuals/src/compositions/<name>/<name>.tsx` plus that folder's helper files. Code shared by
+  several pieces lives in `tools/visuals/src/shared/`, never inside one piece's folder. Brand items that belong to the
+  channel, not to a piece, take the channel name: `deph-banner`, `deph-avatar`.
+- **While comparing alternatives**, each one may carry a descriptive id so they can be seen side by side in the Studio;
+  once the user chooses, the chosen one is renamed to `<name>` and the others are deleted (id and code) the same day.
+
 ## Scaffold
 
 Create, in this order:
 
 ```
 media/<name>/
-  <name>.deph.yaml
+  <name>.yaml
   <name>.md            (a short stub — the domain skill that does the real work fills this in)
   <name>.youtube.md    (publish pack stub — filled by the youtube-publish skill once a video exists)
   sounds/
@@ -48,7 +68,7 @@ top-level structure itself (it only writes files, not folders). `visuals/` is cr
 (`ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals`). Compiled videos go in
 `renders/`.
 
-The yaml — see `media/slow-drift/slow-drift.deph.yaml` for a filled-in example:
+The yaml — see `media/slow-drift/slow-drift.yaml` for a filled-in example:
 
 ```yaml
 name: <name>

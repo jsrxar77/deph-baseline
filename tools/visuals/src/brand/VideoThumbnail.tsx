@@ -10,7 +10,7 @@ import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer"
 //   bottom-right left EMPTY on purpose: YouTube draws the video-length badge there
 // Background: a frame of the piece's own fractal, with a dark gradient on the left so text reads at small sizes
 // (thumbnails are often shown ~170 px wide). Render one with:
-//   npx remotion still DephThumbnailSlowDrift --output=../../media/<name>/renders/thumbnails/<name>-thumbnail.jpg
+//   npx remotion still slow-drift-thumbnail --output=../../media/<name>/renders/thumbnails/<name>-thumbnail.jpg
 const FPS = 60;
 const CYAN = "#7fd4f5";
 const WHITE = "#f2fbff";

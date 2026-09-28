@@ -176,7 +176,7 @@ void main() {
 
   // Growth: a one-way function of position in the piece (not a repeating cycle) — compact during
   // the intro, expanding through development into the climax, easing back slightly for the outro.
-  // Arc breakpoints mirror media/slow-drift/slow-drift.deph.yaml (12/24/72/48/24 cycles at 30cpm);
+  // Arc breakpoints mirror media/slow-drift/slow-drift.yaml (12/24/72/48/24 cycles at 30cpm);
   // kept as plain seconds here since this shader doesn't parse Strudel or read the yaml, same as
   // the rest of this composition — update by hand if the piece's arc changes.
   // No bass-driven zoom/pan here anymore — it read as a shaky, uncomfortable "tremble" tied to the

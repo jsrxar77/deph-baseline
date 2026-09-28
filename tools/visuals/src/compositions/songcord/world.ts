@@ -1,9 +1,7 @@
-import { GLSL_COMMON } from "./common";
-
-// Prototype A — "Dive": a slow descent from the lit surface into the dark and back. Camera height IS the
+// The world ("Dive", first built as prototype A): a slow descent from the lit surface into the dark and back. Camera height IS the
 // narrative curve (uArc), so the deepest point is the held question at 1:17-1:28 and the return to light is the
 // resolution at 2:48. Light shafts and marine snow are world-space, so they move because the camera does.
-export const SCENE_A_GLSL = `
+export const WORLD_GLSL = `
 uniform float uCamY;
 
 float snowLayer(vec2 p, float scale, float parallax, float seed, float lit){
@@ -79,15 +77,5 @@ vec3 sceneA(vec2 p){
   col += g * vis * (0.55 + 0.9 * uAir + 0.5 * uLevel) * (1.0 + 1.0 * uVivid);
 
   return col;
-}
-`;
-
-export const FRAGMENT_A = GLSL_COMMON + SCENE_A_GLSL + `
-void main(){
-  vec2 p = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.y; // centred, y up, height = 1
-  vec3 col = sceneA(p);
-  col = 1.0 - exp(-col * 1.35);
-  col *= 1.0 - 0.55 * dot(p * vec2(0.8, 1.1), p * vec2(0.8, 1.1));
-  gl_FragColor = vec4(col, 1.0);
 }
 `;

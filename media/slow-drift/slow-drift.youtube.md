@@ -103,9 +103,9 @@ Canal: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 **Finished thumbnail (made): `slow-drift-thumbnail.jpg`** — 1280x720, 155 KB, the deph thumbnail template (see
 `youtube-publish`): brand chip `deph · 01` with the ring mark, **SLOW DRIFT** in Avenir Next Bold, a cyan rule,
 **432 Hz · BINAURAL**, and `HEADPHONES · GENERATIVE AMBIENT` on the 4:10 fractal frame, bottom-right corner empty for
-YouTube's duration badge. Checked at 168 px wide: title and facts legible. Composition `DephThumbnailSlowDrift`
+YouTube's duration badge. Checked at 168 px wide: title and facts legible. Composition `slow-drift-thumbnail`
 (`tools/visuals/src/brand/VideoThumbnail.tsx`); re-render:
-`npx remotion still DephThumbnailSlowDrift --output=../../media/slow-drift/renders/thumbnails/slow-drift-thumbnail.jpg`.
+`npx remotion still slow-drift-thumbnail --output=../../media/slow-drift/renders/thumbnails/slow-drift-thumbnail.jpg`.
 
 The three candidate files above carry no text on purpose (raw frames); the finished thumbnail is the one to upload.
 
