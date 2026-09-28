@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
-import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer";
 
 // deph's YouTube thumbnail template (1280x720) — every deph video's cover uses this layout so the series is
 // recognizable at a glance:
@@ -44,10 +43,14 @@ const Headphones: React.FC<{ size: number }> = ({ size }) => (
 
 const UI = '"Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif';
 
-export const VideoThumbnail: React.FC<ThumbnailProps> = ({ lines, facts, series, momentSeconds, font, weight, tracking, titleSize }) => (
+// One template, every piece's own visual as the background: each piece registers its own thumbnail composition
+// via makeThumbnail(<its visual component>) rather than this file importing any one piece directly — the layout
+// changes once, for all; only the background differs.
+export const makeThumbnail = (Background: React.ComponentType): React.FC<ThumbnailProps> =>
+  ({ lines, facts, series, momentSeconds, font, weight, tracking, titleSize }) => (
   <AbsoluteFill style={{ backgroundColor: "#050508" }}>
     <Sequence from={-momentSeconds * FPS}>
-      <FractalVisualizer />
+      <Background />
     </Sequence>
     <AbsoluteFill
       style={{

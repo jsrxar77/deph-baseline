@@ -143,7 +143,9 @@ shorteners; anything selling health products. Future: Spotify / Apple Music / Ba
 
 - **Playlist link and other links** (the `TODO(user)` items above); channel name and handle as shown on YouTube.
 - **Channel description** (About): in progress, waiting on the user's answers — see the conversation of 2026-09-23.
-- **Transparency line:** mention in descriptions that the pieces are made with code and tools (Strudel,
-  Remotion, and an AI assistant), or not. Not required for this kind of content; a transparency choice.
+- **Transparency line: resolved 2026-09-28 — yes, disclose.** Every "ABOUT THE MAKING" / "SOBRE LA CREACIÓN"
+  section names the AI assistant (Claude) alongside Strudel and Remotion, e.g. "built in collaboration with an
+  AI assistant (Claude)" / "construido en colaboración con un asistente de IA (Claude)". Not required by YouTube
+  for this kind of content (see `youtube-publish`'s AI-disclosure rule), but the user chose to state it anyway.
 - **Piece length strategy:** keep short pieces (Slow Drift is 6:08), or also deliver longer arrangements.
 - **Publishing cadence** and whether to premiere videos.

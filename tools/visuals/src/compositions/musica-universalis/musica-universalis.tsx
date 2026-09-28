@@ -54,7 +54,7 @@ function buildUniforms(tl: Timeline, t: number, aspect: number) {
   };
 }
 
-const MusicaUniversalis: React.FC = () => {
+export const MusicaUniversalis: React.FC = () => {
   const tl = useTimeline();
   const t = useCurrentFrame() / FPS;
   const { width, height } = useVideoConfig();

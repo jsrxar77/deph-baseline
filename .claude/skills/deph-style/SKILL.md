@@ -377,3 +377,9 @@ Also update the distilled sections above if the decision changes a principle, an
   following the arc, on 3D orbits that precess and change sphere at chord changes (the user's idea: "saltar de esfera, otro plano").
   Lesson: a head is fine when it is Songcord's stretched flare on a wide beam moving smoothly; the rejected "espermatozoide" was a
   round blob on a thin wiggling tail. Many small lights read as organisms; few large ones read as beings — `musica-universalis.md`.
+- 2026-09-28 — Musica Universalis video approved as final ("quedo perfecto"): beings of light (1 to 6, following the
+  arc) on 3D orbits that precess and change sphere at chord changes, over star dust at four depths, seen through
+  Songcord's water-ripple technique (arp notes and lead bells as stones, real crossings and glints, no drawn lines).
+  4K render verified: 22,080 frames, yuv420p/BT.709/limited range, audio and video both starting at 0.000000 (a stray
+  `from={237}` delay found and fixed in the shared HdrCanvas), 432 Hz and the binaural beat schedule (10/8/6/4 Hz)
+  confirmed by direct measurement — `media/musica-universalis/renders/musica-universalis.mp4`, `musica-universalis.md`.

@@ -269,3 +269,28 @@ both pieces played about 4 s of video before any sound — the opposite of "the 
 before". Removed (verified with `ffprobe -show_entries stream=start_time` on both compositions: video and audio
 streams both start at 0.000000 now). Check this whenever `<Audio>` is added to a shared canvas component — a stray
 `from` is easy to leave in from a one-off scrubbing test.
+
+## Reporting render progress (standing rule): the Node API, never the CLI, for a render worth watching
+
+`npx remotion render` only draws a live progress bar for an interactive terminal. Piped through Bash, backgrounded, or
+both (any render long enough to matter), that bar never reaches a readable log — confirmed directly: the captured
+output file stayed at 0 bytes through a 40+ minute run. The result was no honest way to answer "how far along is it,"
+which is not acceptable for professional work — the user was right to insist on this.
+
+The real fix is `tools/visuals/render.mjs`, which renders through the Node.js API (`bundle()` -> `selectComposition()`
+-> `renderMedia()`) instead of the CLI. `renderMedia()`'s `onProgress` reports exact `renderedFrames`, `encodedFrames`
+and `progress` (0..1) on every tick; the script writes one JSON line per tick to `<output>.progress.jsonl`, readable at
+any moment with `tail -1 <output>.progress.jsonl`, from this or a later session, whether the render is in the
+foreground or the background.
+
+```
+node render.mjs <compositionId> <outputPath> [--frames=start-end] [--concurrency=N]
+```
+
+Always use this for any render worth tracking (i.e. every real one) — never `npx remotion render` piped/backgrounded
+for a render whose progress might need checking. The script mirrors every setting from `remotion.config.ts`: that
+file's own top comment is the reason ("When using the Node.JS APIs, the config file doesn't apply. Instead, pass
+options directly to the APIs") — Rspack, the Tailwind `bundlerOverride`, `chromiumOptions: { gl: "angle" }` (WebGL
+needs it, see above), `pixelFormat: "yuv420p"` and `colorSpace: "bt709"` (YouTube's limited-range BT.709, see
+"Encoding for YouTube" above). If `remotion.config.ts` ever gains a new setting, mirror it here too, in the
+`renderMedia()`/`bundle()` call, or this script silently drifts from what the CLI would have produced.
