@@ -392,3 +392,19 @@ Also update the distilled sections above if the decision changes a principle, an
   strike like a real beacon. Done: +6.8 dB level (`BEACON_GAIN`), FM index 0.35 -> 0.12 and fmh 2 -> 4, hpf 750 -> 1400,
   lpf 3200 -> 7000, longer ring (release 1.6 s), delay 0.5 s with feedback 0.62 (about 8 audible repeats) —
   `morpho-genesis.strudel`. Listening check still the user's ear.
+- 2026-10-05 — Morpho-Field (new piece, sound first): the user chose the name, a lydian mode in A (A4 = 432), a 6:09 length
+  so the whole piece can be heard, and the image as its arc: Vibration, Frequency, Sacred Geometry. Bells should sound like real
+  bells, not like crystal: the user chose FM synthesis (rendered), not samples (not yet supported by the render pipeline) —
+  `media/morpho-field/morpho-field.md`.
+- 2026-10-05 — Morpho-Field rewritten after the user called the two-note version empty and repetitive: "quiero una pieza a la
+  altura... compleja, profunda, con efecto wow... inventa una historia". Now five parts with a story (void, bloom, field, geometry,
+  dissolution), 12 layers, a seed motif with call and answer, and a seventh harmonic as the peak moment. The user will judge it by ear;
+  sound status set back to in-progress until then — `media/morpho-field/morpho-field.md`.
+- 2026-10-05 — Morpho-Field composed from scratch after the user rejected two drafts ("son 2 notas que no dan interés";
+  "no puedes dejar una nota sola durante 48 segundos") and asked for research and professional work: complex, deep, a "wow"
+  moment, a story. Researched first (Eno's incommensurable loops, Pärt's tintinnabuli, Reich's chord cycle, Floating Points'
+  seven-note motif in *Promises*, Hopkins' beatless builds) and reused what the user approved in Musica Universalis (one
+  motif, a shared progression, arp/pad breath, free rhythm). The wow is a Fibonacci canon (21:13:8 cycles per statement)
+  that converges at 4:16 after an inhale. Meditative, 6:09. Measured: 470 -> 44 semitone clashes after separating registers.
+  Lesson: the retention rule was written but not applied; `strudel-compose` now has a mandatory listener checklist —
+  `media/morpho-field/morpho-field.md`.

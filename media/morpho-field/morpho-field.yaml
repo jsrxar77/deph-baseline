@@ -1,0 +1,23 @@
+name: morpho-field
+title: Morpho-Field
+created: 2026-10-05
+key: A:lydian # A4 = 432 Hz
+tempo:
+  cpm: 30 # setcpm(30) in sounds/morpho-field.strudel — 1 cycle = 2 s
+arc:
+  - { name: vibration, cycles: 32 } # 0:00 - 1:04 — motif from the first second, tintinnabuli voice, pad, sub, the answer
+  - { name: frequency, cycles: 56 } # 1:04 - 2:56 — harmonic-series arp, resonating motif, canon voices 21 and 13 enter
+  - { name: geometry, cycles: 64 } # 2:56 - 5:04 — canon voice 8, mirrored bells on Fibonacci gaps, inhale, convergence at 4:16
+  - { name: rest, cycles: 32.5 } # 5:04 - 6:09 — voices drift apart, the motif alone, the plate rests on A
+total_cycles: 184.5 # 369 s = 6:09 at cpm 30
+domains:
+  sound:
+    status: in-progress # rewritten from scratch (motif, tintinnabuli, voiced chord cycle, Fibonacci canon); waiting for the user to listen
+    file: sounds/morpho-field.strudel
+  visual:
+    status: not-requested # next iteration, after the sound is approved
+    entry: tools/visuals/src/compositions/morpho-field/
+  sync:
+    status: not-built
+    output: sync/
+doc: morpho-field.md

@@ -290,6 +290,43 @@ next to a finished piece that clearly has a tempo) — the yaml is the single cr
 specifically because every skill that touches a composition keeps *all* of it current, not just its own
 corner. See `deph-compose`'s "Hand off" section for the same rule stated once, canonically.
 
+## Before handing a piece to the user: the listener checklist (mandatory)
+
+Morpho-Field's first two drafts were rejected as "two notes for two minutes" and "one note alone for 48 s", although
+`deph-style` already said why (its "Retention" rule, learned on Slow Drift and Musica Universalis). The rule exists; this is
+the check that makes sure it is applied. Run all of it, with numbers, before telling the user a piece is ready:
+
+1. **Hook at 0:00.** The motif (or the piece's most recognisable element) sounds in the first seconds, with the harmony.
+   Never a lone tone or silence as the opening idea — a concept like "one tone alone" is expressed in seconds, not minutes.
+2. **Nothing static for more than ~15 s near the start, ~30 s anywhere.** Measure it: list the onsets of the melodic
+   layers (`--json`, ignoring events with gain ≈ 0) and report every gap longer than 10 s.
+3. **Core texture before 1:00:** pad, bass and the main melodic voice all on.
+4. **Material, not just sound.** A motif every voice derives from, a chord progression with voice leading
+   (`chord().voicing()` with an `anchor` does it automatically), and a development of the motif (answer, inversion,
+   register, canon). Sustained tones alone are not a composition.
+5. **A climax that is an event**, prepared by subtraction (an "inhale": a voice out, the filter closing) and arriving on a
+   chord-cycle boundary.
+6. **Semitone clashes counted** between simultaneous voices (0.5–1.5 semitones apart): report the number. Melodic voices
+   that share a register with a sustained pad usually cause most of them; separate the registers.
+7. Every layer sums to the piece's total cycles; no note longer than 4 cycles (superdough keeps a long note sounding after
+   Strudel is stopped).
+
+## Sources behind the compositional techniques (verify before relying on them again)
+
+Consulted for Morpho-Field (2026-10-05). Each one is cited where its technique is used.
+
+- Reverb Machine, *Music for Airports* (Eno): incommensurable loop lengths and phasing, the source of the Fibonacci canon.
+  https://reverbmachine.com/blog/deconstructing-brian-eno-music-for-airports/
+- Wikipedia, *Promises* (Floating Points, Pharoah Sanders, LSO): one seven-note motif that never leaves the piece while its
+  textures change; a repeated four-chord progression that evolves through revoicing. https://en.wikipedia.org/wiki/Promises_(Floating_Points,_Pharoah_Sanders_and_the_London_Symphony_Orchestra_album)
+- Wikipedia, *Tintinnabuli* (Pärt): the M-voice (stepwise) and the T-voice (only the tonic triad's tones). https://en.wikipedia.org/wiki/Tintinnabuli
+- Steve Reich, *Music for 18 Musicians*: a cycle of chords as the form, each held for two breaths, phrases sized to the breath.
+  https://stevereich.com/composition/music-for-18-musicians/
+- Wikipedia, *Music for Psychedelic Therapy* (Jon Hopkins): a beatless single piece that builds slowly toward a resolution.
+  https://en.wikipedia.org/wiki/Music_for_Psychedelic_Therapy
+- Strudel docs, chord voicings (`chord().dict().anchor().mode().voicing()`, automatic voice leading): https://strudel.cc/understand/voicings/
+- Strudel docs, signals (`sine`, `saw`, `perlin`, `rand` as continuous control): https://strudel.cc/learn/signals/
+
 ## Validate before saying it works
 
 ```
