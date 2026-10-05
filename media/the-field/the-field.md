@@ -34,28 +34,44 @@ manifests the whole.** (The user's narrative; it follows the reference image: vi
 
 ## Visual (composition `the-field`, 4K 60 fps — code in `visuals/`, the symlink to tools/visuals/src/compositions/the-field)
 
-- **The field:** sand on an endless vibrating plate, seen by a slow camera under a low grazing light. The sand gathers on
-  the nodal lines of a circular-plate mode (m petals, k rings: `cos(m θ)·cos(π k r)` plus a quieter overtone mode); every
-  chord is a mode, so the sand migrates to a new figure every 8 s (3.5 s transition). The modes grow more complex with the
-  arc and return to the simplest at the end. Each grain is either there or not (its own random threshold against the
-  local density), so the edges are granular, not airbrushed.
-- **Notes move the sand:** the lead's notes are wide slow waves, the arp's small quick ones, the gong a shock; deph's
-  creation torus lifts the sand where its waves cross, never drawn as a shape.
-- **Geometry:** three figures of light from Morpho-Genesis's sacred geometry, made parametric in
-  `tools/visuals/src/shared/sacredGeometry.ts`, rise from the sand on planes at three heights, one per canon voice: Flower
-  of Life (cantus 21, teal), Metatron's Cube (middle 13, amethyst), Seed of Life (high 8, gold). Each grows one element per
-  note of its voice and turns 60° per statement (they are six-fold symmetric), so all three line up exactly at 4:16.
-  Bells: mirrored glints left/right on the highest plane.
-- **The whole (4:16):** the camera has risen during the inhale to look straight down; the figures line up and turn white
-  gold, the sand redraws Metatron's Cube right under the light one (scaled for the plane's height so the lines coincide),
-  the gong's shock crosses the field. Then the figures turn apart again and fade, and the camera lowers over the field.
-- **Look:** HdrCanvas (bloom, ACES, grain), depth of field per plane (sharp filament in focus, aura out of it), distance
-  fog to the horizon. Low chromatic aberration (0.0004): stronger values split single-pixel grains into coloured dots.
-- **Measured:** one 4K frame renders in about 0.15 s; 120 frames in 18 s plus encoding; output H.264 3840x2160 60 fps,
-  yuv420p, BT.709, limited range. Contact sheet checked at 0:06, 0:40, 1:20, 2:00, 2:30, 3:10, 3:50, 4:08, 4:17, 4:30, 5:10, 5:50.
-- **Fixed while building it:** the square-plate formula repeated over the field read as a wireframe grid (replaced by
-  circular modes); three figures sharing a centre summed to a white blow-out (light halved, out-of-focus aura halved);
-  the sand's Metatron and the light's were drawn at different scales and doubled every line (matched).
+Art direction agreed with the user (2026-10-05), after a first version made of stacked neon layers was rejected:
+
+- **One material:** about 524,000 motes of quartz dust (`grains.ts`), the same ones and the same number from the first frame
+  to the last — the geometry is built from the sand that leaves the table, nothing appears from nowhere.
+- **One palette, "Nácar":** sea glass, periwinkle, lavender, rose quartz, dawn peach, champagne over the night's indigo
+  (#0B0E1A, #1A1F3A). One colour field for everything: a gradient by distance from the centre, the same on the table and in
+  the air; scattered dust follows a slowly flowing version of it (rejected: random hue per grain, "una caja de M&M").
+- **One light:** low moonlight that rises and warms into dawn at the whole, then returns. **deph's HDR look** (bloom on
+  light above 1, then HdrCanvas's grade: ACES, saturation, gamma 2.25, vignette, grain) in SDR, as in Songcord/Musica Universalis.
+- **One continuous shot**, moves only in 3D (crane, orbit, descent; never a sideways pan), on a spline that flows through its
+  keys without stopping; it orbits the flower itself while it floats.
+
+The story on screen:
+
+| Time | What the dust does |
+| :--- | :--- |
+| 0:00 | Macro: scattered motes in a flowing nacre stain, depth of field; every note lifts the dust softly, evenly. |
+| 0:24 – 1:04 | The dust finds the nodal lines: the first Chladni figures. |
+| 1:04 – 2:56 | A new figure at each melodic note (at least 3.5 s apart, 3 s glide), the camera rising away. |
+| 2:56 – 4:00 | Mitosis: the centre circle rises from the table first, then its six, then the twelve; each grain slides under its place, rises straight up, and its circle buds off its parent. The canon turns the three groups. |
+| 4:16 | The three groups line up: the Flower of Life, complete, floating over the emptied table. |
+| 5:00 – 5:30 | The fall (approved as is): grains drop straight down, then slide into the figure on the table. |
+| 5:50 – 6:09 | The dust scatters to where it began; the camera descends to the grains. |
+
+**The figures are real Chladni figures**, chosen by the music: on a square plate a mode (n, m) resonates at a frequency
+proportional to n² + m²; each melodic note sets the figure for the two modes nearest its frequency, weighted by how near
+each is (a driven plate between two resonances), with the degenerate halves mixed by c away from ±1 (c = ±1 gives
+straight-line grids, rejected by the user as "tic-tac-toe"). The arc pushes the plate into higher overtones as it builds.
+A figure never repeats any of the last ten, and the two families of figures alternate: 89 changes, 38 distinct figures.
+
+Rejected and fixed along the way (so they are not tried again): neon line figures over the sand; separate colours per layer;
+the square-plate formula as straight grids; grains as shaded spheres (now soft motes); random hue per grain; motes drawn
+full-pixel when smaller than a pixel (a white haze); a 20 s fall per grain (a curtain in front of the camera); the flower's
+cast shadow (did not read); a 2x2 slab whose corners showed black when the camera turned; two figures visible at once
+during a change (now every grain moves almost together).
+
+Measured: 120 frames of 4K in about 12 s plus 17 s of encoding (about an hour for the piece); H.264 3840x2160, 60 fps,
+yuv420p, BT.709.
 
 ## Material (every voice derives from it)
 

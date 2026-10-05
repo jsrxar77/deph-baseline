@@ -15,9 +15,13 @@ domains:
     status: done # approved by the user ("una obra de arte"); source: strudel (render.mjs)
     file: sounds/the-field.strudel
   visual:
-    status: in-progress # Chladni sand field + sacred-geometry figures; composition id the-field (4K 60 fps)
+    status: done # approved by the user ("es perfecto... otra obra de arte"); quartz dust on a Chladni plate, mitosis Flower of Life; final 4K render in renders/the-field.mp4
     entry: tools/visuals/src/compositions/the-field/the-field.tsx # media/the-field/visuals is the symlink
   sync:
     status: done # audio.wav (raw), audio-master.wav (-16 LUFS), audio-youtube.wav (-14 LUFS, limiter -1 dBTP), frames.json + manifest.json (60 fps); 432 Hz and binaural measured in the render
     output: sync/
+publish:
+  status: ready # pack written (titles, descriptions EN/ES, chapters, tags, cover candidates); waiting on the user's open decisions and the upload
+  file: the-field.youtube.md
+  thumbnail: renders/thumbnails/the-field-thumbnail.jpg # chosen by the user: the flower coming apart at 5:13 (momentSeconds 313, bgShift 0.12)
 doc: the-field.md

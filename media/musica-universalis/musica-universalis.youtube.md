@@ -51,7 +51,7 @@ ABOUT THE MAKING
 Written as code with Strudel, rendered to audio, and paired with a 3D visual made with Remotion, built in collaboration with an AI assistant (Claude). The harmony follows the Pythagorean tradition (musica universalis, "the music of the spheres"): consonance built from fourths and fifths rather than thirds.
 
 This is music, not medical advice or treatment. Binaural layers work only with headphones.
-deph — generative ambient music and fractal visuals.
+deph — generative ambient music and fractal visuals. New pieces in the series: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 Channel: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 #ambientmusic #meditationmusic #432hz #binauralbeats #generativemusic
@@ -84,7 +84,7 @@ SOBRE LA CREACIÓN
 Escrita como código con Strudel, renderizada a audio y acompañada de un visual en 3D hecho con Remotion, construido en colaboración con un asistente de IA (Claude). La armonía sigue la tradición pitagórica (musica universalis, "la música de las esferas"): consonancia construida con cuartas y quintas en vez de terceras.
 
 Esto es música, no consejo ni tratamiento médico. Las capas binaurales solo funcionan con auriculares.
-deph — música ambient generativa y visuales fractales.
+deph — música ambient generativa y visuales fractales. Más piezas de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 Canal: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 #ambientmusic #meditationmusic #432hz #binauralbeats #generativemusic
@@ -127,13 +127,13 @@ ES: `Con auriculares se nota la capa binaural. ¿Notaste el tono Shepard en la s
 
 ## Playlist / series
 
-None for this upload, at the user's request — no playlist, no social links in the description.
+Part of the series playlist "deph — generative ambient" (https://www.youtube.com/playlist?list=PLX0Afm4O4W30), video 02 — the user changed the earlier "no playlist" decision on 2026-10-05. Still no social links in the description.
 
 ## Cards and end screen
 
 - **Info cards:** none for now, same reasoning as Slow Drift (a card interrupting a meditation piece distracts;
   revisit once more pieces exist).
-- **End screen:** last 20 seconds (5:48-6:08): subscribe button only (no playlist to point to).
+- **End screen:** last 20 seconds (5:48-6:08): subscribe button and the series playlist.
 
 ## Upload checklist
 
@@ -155,7 +155,7 @@ None for this upload, at the user's request — no playlist, no social links in 
 
 ## Resolved (2026-09-28, with the user)
 
-- **No playlist, no social links** in this description or end screen.
+- **Playlist:** linked in both descriptions since 2026-10-05 (the user reversed the earlier "no playlist" choice); still no social links.
 - **AI collaboration disclosed**: "ABOUT THE MAKING" / "SOBRE LA CREACIÓN" names Claude alongside Strudel and
   Remotion. Also updated as the channel-wide default in `docs/youtube-channel.md`.
 - **Thumbnail moment: 4:20** (was recommended at 2:00; the user chose the busier, brighter candidate instead).

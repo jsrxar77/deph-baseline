@@ -30,6 +30,8 @@ vec2 flowerCentre(int i) {
 }
 // Group of sphere i, following the canon: 0 cantus (ring at R*sqrt3), 1 middle (ring at 2R), 2 high (Seed of Life).
 int groupOf(int i) { return i < 7 ? 2 : (i < 13 ? 0 : 1); }
+// The circle each one buds off from: the first six from the centre, the outer twelve from the first-ring circle beside them.
+int parentOf(int i) { if (i < 7) return 0; if (i < 13) return 1 + (i - 7); return 1 + (i - 13); }
 
 mat2 rot2(float a) { float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
 float hash11(float p) { p = fract(p * 0.1031); p *= p + 33.33; p *= p + p; return fract(p); }
@@ -152,7 +154,7 @@ void main() {
 
   // Vibration: grains on vibrating ground jump with the notes; grains on a nodal line stay still (as on a real plate).
   float energy = clamp(abs(field(home, uModeB, uCW.zw)) * 0.5, 0.0, 1.0);
-  float vib = mix(1.0, energy, order);
+  float vib = 0.7 + 0.3 * s1; // every grain, evenly: jumps limited to antinode grains looked isolated
   float y = (uJump * (0.25 + 0.75 * s3) * 0.022 + uShimmer * s1 * 0.004) * vib + hop;
   y += torusCrest(plate, uTime) * 0.006;
   y += width * 0.25 * max(0.0, 1.0 - abs(jitter) / (2.0 * width)) * order;  // the ridge's own height
@@ -169,32 +171,39 @@ void main() {
   vec3 onPlate = vec3(plate.x, y, plate.y);
   float edgeFade = 1.0 - smoothstep(0.8, 0.99, max(abs(plate.x), abs(plate.y)));
 
-  // ---- leaving the plate: rings, then the spheres ----
+  // ---- leaving the plate: the Flower of Life is born like cells dividing ----
+  // Assembly mirrors the disassembly the user approved (fall straight down, then slide into the figure), reversed and in
+  // the order of mitosis: the centre circle first, then its six, then the twelve. Each grain first slides on the table to
+  // just under its place in its parent's ring, rises straight up, and then its circle separates from the parent and moves
+  // to its own place — a new cell budding off. The canon's three speeds turn the groups until they line up at 4:16.
   int sphere = int(floor(hash11(s0 * 913.7 + s2 * 71.3) * 19.0));
   int grp = groupOf(sphere);
   float rotA = grp == 0 ? uRot.x : (grp == 1 ? uRot.y : uRot.z);
   vec2 centre = rot2(rotA) * flowerCentre(sphere);
-  float ringH = uFlowerH * (0.55 + 0.25 * float(grp));                          // three heights, one per voice
+  int par = parentOf(sphere);
+  int pgrp = groupOf(par);
+  float rotP = pgrp == 0 ? uRot.x : (pgrp == 1 ? uRot.y : uRot.z);
+  vec2 parentC = rot2(rotP) * flowerCentre(par);
   float ang = fract(s1 * 7.31 + s3 * 3.17) * 2.0 * PI; // its own seed: sharing s1 with the offset split each ring in two
-  vec3 onRing = vec3(centre.x + (R + jitter * 0.45) * cos(ang), ringH, centre.y + (R + jitter * 0.45) * sin(ang));
-  // The sphere as rings of grains (an armillary sphere): every equator, plus two meridians on the 7 central spheres.
-  vec3 sc = vec3(centre.x, uFlowerH, centre.y);
-  vec3 onSphere = sc + R * vec3(cos(ang), 0.0, sin(ang));
-  // Only the equators — together they are the Flower of Life — with a lighter dispersion than on the plate, so the form
-  // reads clean (meridians and full plate-strength dispersion made it a tangle).
-  onSphere += normalize(onSphere - sc + 1e-5) * jitter * 0.45 + vec3(0.0, (s0 - 0.5) * width * 0.4, 0.0);
-  // Each grain leaves at its own moment (uLift sweeps past its seed): the plate empties as the geometry fills.
-  float lift = smoothstep(0.0, 1.0, clamp((uLift * 1.08 - s0) / 0.08, 0.0, 1.0)) * (1.0 - stray);
-  vec3 air = mix(onRing, onSphere, smoothstep(0.0, 1.0, clamp(uWhole * 1.3 - s3 * 0.3, 0.0, 1.0)));
-  // The path up is an arc, not a straight line: the grain rises first, then travels.
-  vec3 pos = mix(onPlate, air, lift);
-  pos.y += sin(PI * lift) * 0.08;
-  // Falling back: each grain falls (accelerating) to where it is on the plate now.
+  vec2 ringOff = (R + jitter * 0.45) * vec2(cos(ang), sin(ang));
+  float hgt = uFlowerH + (s0 - 0.5) * width * 0.4;
+  float birth = float(sphere) / 19.0 * 0.78;
+  float q = clamp((uLift * 1.04 - birth - s2 * 0.06) / 0.16, 0.0, 1.0) * (1.0 - stray);
+  float slide = smoothstep(0.0, 0.35, q);   // across the table to just under its place
+  float rise = smoothstep(0.3, 0.75, q);    // straight up: the fall, reversed
+  float split = smoothstep(0.7, 1.0, q);    // mitosis: the new circle leaves its parent for its own place
+  vec2 under = parentC + ringOff;
+  vec2 xz = mix(mix(plate, under, slide), centre + ringOff, split);
+  vec3 air = vec3(xz.x, mix(y, hgt, rise), xz.y);
+  float lift = rise;
+  float lifted = step(0.0001, q);
+  vec3 pos = mix(onPlate, air, lifted);
+  // Falling back (approved as is): each grain falls straight down, accelerating, then slides into the figure.
   float fall = clamp((uFall * 1.1 - s2) / 0.1, 0.0, 1.0);
   vec3 landed = vec3(pos.x, onPlate.y, pos.z);
   vec3 down = mix(pos, landed, fall * fall);
   down = mix(down, onPlate, smoothstep(0.75, 1.0, fall) * smoothstep(0.0, 1.0, clamp((uFall - 0.6) / 0.4, 0.0, 1.0)));
-  pos = mix(pos, down, step(0.001, lift) * step(0.0001, fall));
+  pos = mix(pos, down, lifted * step(0.0001, fall));
   pos.xz = mix(pos.xz, home, uScatter);
   pos.y *= 1.0 - uScatter;
 
@@ -248,8 +257,8 @@ void main() {
 }
 `;
 
-// The plate: a square slab of dark stone in the night's indigo, lit by the same single light; it receives the real
-// shadow of the Flower of Life's rings above it (cast along the light), not a drawing.
+// The plate: dark stone in the night's indigo, lit by the same single light. (A cast shadow of the flower was tried and
+// removed: it did not read.)
 export const PLATE_VERT = /* glsl */ `
 varying vec3 vWorld;
 varying vec3 vNormal;
@@ -265,10 +274,6 @@ export const PLATE_FRAG = /* glsl */ `
 ${COMMON}
 uniform vec3 uLightColor;
 uniform vec3 uLightWorld;  // direction toward the light, world space
-uniform vec3 uRot;
-uniform float uFlowerH;
-uniform float uShadow;     // how much of the geometry is in the air (0..1)
-uniform float uWholeP;     // rings -> spheres
 varying vec3 vWorld;
 varying vec3 vNormal;
 float h21(vec2 p) { vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
@@ -279,24 +284,10 @@ void main() {
   vec3 night = pow(vec3(0.043, 0.055, 0.102), vec3(2.2));   // #0B0E1A
   vec3 deep = pow(vec3(0.102, 0.122, 0.227), vec3(2.2));    // #1A1F3A
   float stone = 0.55 * vnoise(xz * 40.0) + 0.3 * vnoise(xz * 160.0) + 0.15 * vnoise(xz * 600.0);
-  float top = step(0.5, vNormal.y);
   vec3 col = mix(night, deep, 0.35 + 0.4 * stone);
   float lambert = max(dot(vNormal, uLightWorld), 0.0);
   col *= 0.6 + 1.6 * lambert;
   col += uLightColor * 0.012 * stone * lambert;
-  // Shadow of the rings: from this point, follow the light up to each ring's height and see whether it crosses a ring.
-  if (uShadow > 0.0 && top > 0.5) {
-    float sh = 0.0;
-    for (int i = 0; i < 19; i++) {
-      int grp = groupOf(i);
-      float rotA = grp == 0 ? uRot.x : (grp == 1 ? uRot.y : uRot.z);
-      float hgt = mix(uFlowerH * (0.55 + 0.25 * float(grp)), uFlowerH, uWholeP);
-      vec2 q = xz + uLightWorld.xz / max(uLightWorld.y, 0.15) * hgt;
-      float d = abs(length(q - rot2(rotA) * flowerCentre(i)) - R);
-      sh = max(sh, exp(-d * d / 0.00004));
-    }
-    col *= 1.0 - 0.55 * sh * uShadow;
-  }
   gl_FragColor = vec4(col, 1.0);
 }
 `;

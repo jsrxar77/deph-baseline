@@ -420,3 +420,20 @@ Also update the distilled sections above if the decision changes a principle, an
   shape, and stacked them on separate planes that appeared from nowhere. Lesson: one piece = one art direction — one material,
   one palette, one light, one continuous transformation; a voice of the music changes the material, it does not get its own
   overlay. Agree on style frames before building — `media/the-field/the-field.md`.
+- 2026-10-05 — The Field visual, second direction, built with the user's corrections step by step: one material (quartz
+  dust, the same grains throughout — "todo tiene que ser uno con la misma cantidad de arena, no que aparezca de la nada"),
+  one palette (nacre over indigo; gold-and-black and neon both rejected; "colores colores", but "no una caja de M&M": a
+  gradient), deph's HDR look in SDR, 3D camera moves only ("no de un lado a otro"), everything organic ("nada brusco").
+  Figures must be real and change at every note ("no inventadas", "imágenes diferentes"): Chladni modes chosen by frequency,
+  as two-mode responses so they curve (straight grids rejected as "tableros de ta-te-ti"). Finer dust, not spheres; lines with
+  dispersion, not perfect. The fall back to the table was approved ("salió perfecto"); the assembly was rebuilt as its mirror,
+  as mitosis. The flower's cast shadow was rejected — `media/the-field/the-field.md`.
+- 2026-10-05 — The Field approved as final ("es perfecto, kudos... es otra obra de arte"). Final 4K60 render with live progress
+  (render.mjs), YouTube pack ready (series 03). Cover: the series template with the complete Flower of Life; a new optional
+  `bgShift` in VideoThumbnail.tsx moves (and enlarges) the background so a centred subject clears the title —
+  `media/the-field/the-field.youtube.md`.
+- 2026-10-05 — The Field cover: the user chose the flower coming apart (5:13, "el momento donde se está desarmando la flor de la
+  vida... en ese caos") over the complete flower Claude recommended — the cover shows transformation, not the finished form —
+  `media/the-field/the-field.youtube.md`.
+- 2026-10-05 — The Field: the user chose to mention the collaboration with AI in the description ("si se menciona colaboración
+  con IA"), as Musica Universalis did — `media/the-field/the-field.youtube.md`.

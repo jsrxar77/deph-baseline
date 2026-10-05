@@ -137,8 +137,7 @@ const Scene: React.FC<{ tl: Timeline; t: number; width: number; height: number }
         vertexShader: PLATE_VERT,
         fragmentShader: PLATE_FRAG,
         uniforms: {
-          uLightColor: { value: new THREE.Color() }, uLightWorld: { value: new THREE.Vector3() }, uRot: { value: new THREE.Vector3() },
-          uFlowerH: { value: 0.32 }, uShadow: { value: 0 }, uWholeP: { value: 0 },
+          uLightColor: { value: new THREE.Color() }, uLightWorld: { value: new THREE.Vector3() },
         },
       }),
     [],
@@ -214,12 +213,9 @@ const Scene: React.FC<{ tl: Timeline; t: number; width: number; height: number }
     u.uLift.value = lift;
     const rot = new THREE.Vector3(groupAngle(PERIODS[0], t), groupAngle(PERIODS[1], t), groupAngle(PERIODS[2], t));
     u.uRot.value.copy(rot);
-    p.uRot.value.copy(rot);
     const whole = curve([[T.whole - 0.5, 0], [T.whole + 2.5, 1]], t);
     u.uWhole.value = whole;
-    p.uWholeP.value = whole;
     u.uFall.value = fall;
-    p.uShadow.value = lift * (1 - fall);
     u.uFade.value = curve([[0, 0], [2, 1], [T.end - 3, 1], [T.end + 5, 0]], t);
     const bells = recentEvents(tl, "bells", t, 3).slice(0, N_BELLS);
     u.uBells.value.forEach((v: THREE.Vector4, i: number) => {
