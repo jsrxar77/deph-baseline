@@ -1,7 +1,7 @@
 # The Field — YouTube publish pack
 
 Status: **ready** (waiting on the user's open decisions and the upload) · last updated 2026-10-05
-Source video: `media/the-field/renders/the-field.mp4` — 6:15 (375 s: 6:09 of music and its last 6 s of reverb tail),
+Source video: `media/the-field/renders/the-field.mp4` — 6:15 (375.06 s: 6:09 of music and its last 6 s of reverb tail), 6.1 GB,
 3840x2160 at 60 fps, H.264 / AAC, audio mastered to -14 LUFS (true peak -1 dBTP) · series number **03** ·
 Channel material: `docs/youtube-channel.md` · Rules: `youtube-publish` skill. Chapter times are computed from the
 composition yaml (arc 32/56/64/32.5 cycles at 30 cpm = 2 s per cycle, the convergence at cycle 128); re-check them
@@ -152,7 +152,9 @@ Series number 03 on the cover. Playlist "deph — generative ambient" (decided 2
 
 ## Upload checklist
 
-- [ ] Wait for the render to finish and check it: `ffprobe` (3840x2160, 60 fps, yuv420p, BT.709), and watch it once.
+- [x] Render verified 2026-10-05: H.264 High 3840x2160 60 fps, yuv420p, BT.709 limited range; AAC-LC 48 kHz stereo at
+      -14.0 LUFS (peak -0.9 dBFS, LRA 8.6 LU); video and audio both start at 0.000000; frames at 0:30 and 4:22 checked.
+- [ ] Watch it once end to end.
 - [ ] Upload `media/the-field/renders/the-field.mp4` as **Private** first; let processing reach 4K; check the audio in
       the player with headphones (binaural layer).
 - [ ] Title (EN #1), description (EN); check that the five chapters appear as segments on the timeline.
