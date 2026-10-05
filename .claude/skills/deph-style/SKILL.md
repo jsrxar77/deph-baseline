@@ -383,3 +383,12 @@ Also update the distilled sections above if the decision changes a principle, an
   4K render verified: 22,080 frames, yuv420p/BT.709/limited range, audio and video both starting at 0.000000 (a stray
   `from={237}` delay found and fixed in the shared HdrCanvas), 432 Hz and the binaural beat schedule (10/8/6/4 Hz)
   confirmed by direct measurement — `media/musica-universalis/renders/musica-universalis.mp4`, `musica-universalis.md`.
+- 2026-10-05 — Morpho-Genesis (review): the user keeps the full 24:09 piece on purpose — for meditation, a long piece that
+  holds the listener to the end; not cut to 6–8 min. Video standard is 4K at 60 fps always ("el estándar del canal no
+  importa, lo que hacemos siempre"). Approved the deph signature (creation torus) as a layer on this piece's content. The
+  user asked Claude to decide the YouTube disclosure (Strudel and Remotion named) and the audio levels — `morpho-genesis.youtube.md`
+  (when written), `morpho-genesis.md`.
+- 2026-10-05 — Morpho-Genesis beacon: the user asked for a louder beacon, a crystalline timbre, and a delay that repeats the
+  strike like a real beacon. Done: +6.8 dB level (`BEACON_GAIN`), FM index 0.35 -> 0.12 and fmh 2 -> 4, hpf 750 -> 1400,
+  lpf 3200 -> 7000, longer ring (release 1.6 s), delay 0.5 s with feedback 0.62 (about 8 audible repeats) —
+  `morpho-genesis.strudel`. Listening check still the user's ear.
