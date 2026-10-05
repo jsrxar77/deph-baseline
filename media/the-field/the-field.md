@@ -1,18 +1,27 @@
-# Morpho-Field
+# The Field
 
-`sounds/morpho-field.strudel` — 6:09, A lydian, tuned to A4 = 432 Hz, 30 cpm (184.5 cycles of 2 s). Meditative, no pulse.
-Binaural layer (headphones). Sound only for now; the visual is the next iteration.
+`sounds/the-field.strudel` — 6:09, A lydian, tuned to A4 = 432 Hz, 30 cpm (184.5 cycles of 2 s). Meditative, no pulse.
+Binaural layer (headphones). Video: `tools/visuals/src/compositions/the-field/` (composition `the-field`, 4K 60 fps).
+Named Morpho-Field until 2026-10-05.
 
 ## The story
 
-A plate covered in sand is set vibrating, like a Chladni plate. At first it only hums: a seven-note motif over a slow cycle
-of chords. Then it starts to sing its own overtones, an arpeggio built from the real harmonic series of each chord's root.
-Three voices take up the motif at three speeds in Fibonacci proportion (21, 13 and 8 cycles per statement). They enter one
-after another, cross and drift like grains of sand that have not found their place yet. At 4:16 all three reach the
-motif's first note at the same instant: the pattern locks. The motif sounds in three octaves at once, the harmony opens and
-a deep gong rings. Then the voices drift apart again, and the plate comes to rest on the A it started from.
+**The field vibrates, its vibrations become frequencies, the frequencies organise into geometry, and the geometry
+manifests the whole.** (The user's narrative; it follows the reference image: vibration → frequency → geometry.)
 
-It follows the idea in the reference image: vibration → frequency → geometry.
+- **The field vibrates.** From the first second, a seven-note motif over a slow cycle of chords. On screen: an endless
+  field of sand on a vibrating plate; the sand gathers on the nodal lines of the plate's vibration (a Chladni pattern),
+  and every chord is a new pattern.
+- **Vibration becomes frequency.** The field sings its own overtones, an arpeggio built from the real harmonic series of
+  each chord's root. The patterns in the sand grow finer as higher modes are excited.
+- **Frequencies organise into geometry.** Three voices take up the motif at three speeds in Fibonacci proportion (21, 13
+  and 8 cycles per statement); they enter one after another and drift like grains of sand that have not found their
+  place yet. Three figures of light rise from the sand, one per voice (Flower of Life, Metatron's Cube, Seed of Life),
+  each spinning at its voice's speed.
+- **The geometry manifests the whole (4:16).** All three voices reach the motif's first note at the same instant: the
+  motif in three octaves, the harmony open, a deep gong. On screen the three figures line up exactly, the camera looks
+  straight down, and the sand itself redraws Metatron's Cube.
+- **Return.** The voices drift apart and go back into the field, which comes to rest on the A it began on.
 
 ## Arc
 
@@ -20,8 +29,33 @@ It follows the idea in the reference image: vibration → frequency → geometry
 | :--- | :---: | :---: | :--- |
 | Vibration | 0–32 | 0:00 – 1:04 | Motif and pad from the first second; sub at 0:08; tintinnabuli voice at 0:16; motif an octave up at 0:32; its answer (inverted) at 0:48. |
 | Frequency | 32–88 | 1:04 – 2:56 | Harmonic-series arpeggio, breathing against the pad. The motif "resonates" (each note answered by its octave). Canon voice 21 enters at 2:10, voice 13 at 2:32. |
-| Geometry | 88–152 | 2:56 – 5:04 | Canon voice 8 at 2:56; mirrored bells on Fibonacci gaps from 3:12. Inhale at 4:00 (arp out, pad filter closes, sub leaves). **Convergence at 4:16.** |
-| Rest | 152–184.5 | 5:04 – 6:09 | The voices drift apart and leave; the motif once more, alone (5:36); the plate rests on A. |
+| Geometry | 88–152 | 2:56 – 5:04 | Canon voice 8 at 2:56; mirrored bells on Fibonacci gaps from 3:12. Inhale at 4:00 (arp out, pad filter closes, sub leaves). **The whole at 4:16.** |
+| Return | 152–184.5 | 5:04 – 6:09 | The voices drift apart and leave; the motif once more, alone (5:36); the field rests on A. |
+
+## Visual (composition `the-field`, 4K 60 fps — code in `visuals/`, the symlink to tools/visuals/src/compositions/the-field)
+
+- **The field:** sand on an endless vibrating plate, seen by a slow camera under a low grazing light. The sand gathers on
+  the nodal lines of a circular-plate mode (m petals, k rings: `cos(m θ)·cos(π k r)` plus a quieter overtone mode); every
+  chord is a mode, so the sand migrates to a new figure every 8 s (3.5 s transition). The modes grow more complex with the
+  arc and return to the simplest at the end. Each grain is either there or not (its own random threshold against the
+  local density), so the edges are granular, not airbrushed.
+- **Notes move the sand:** the lead's notes are wide slow waves, the arp's small quick ones, the gong a shock; deph's
+  creation torus lifts the sand where its waves cross, never drawn as a shape.
+- **Geometry:** three figures of light from Morpho-Genesis's sacred geometry, made parametric in
+  `tools/visuals/src/shared/sacredGeometry.ts`, rise from the sand on planes at three heights, one per canon voice: Flower
+  of Life (cantus 21, teal), Metatron's Cube (middle 13, amethyst), Seed of Life (high 8, gold). Each grows one element per
+  note of its voice and turns 60° per statement (they are six-fold symmetric), so all three line up exactly at 4:16.
+  Bells: mirrored glints left/right on the highest plane.
+- **The whole (4:16):** the camera has risen during the inhale to look straight down; the figures line up and turn white
+  gold, the sand redraws Metatron's Cube right under the light one (scaled for the plane's height so the lines coincide),
+  the gong's shock crosses the field. Then the figures turn apart again and fade, and the camera lowers over the field.
+- **Look:** HdrCanvas (bloom, ACES, grain), depth of field per plane (sharp filament in focus, aura out of it), distance
+  fog to the horizon. Low chromatic aberration (0.0004): stronger values split single-pixel grains into coloured dots.
+- **Measured:** one 4K frame renders in about 0.15 s; 120 frames in 18 s plus encoding; output H.264 3840x2160 60 fps,
+  yuv420p, BT.709, limited range. Contact sheet checked at 0:06, 0:40, 1:20, 2:00, 2:30, 3:10, 3:50, 4:08, 4:17, 4:30, 5:10, 5:50.
+- **Fixed while building it:** the square-plate formula repeated over the field read as a wireframe grid (replaced by
+  circular modes); three figures sharing a centre summed to a white blow-out (light halved, out-of-focus aura halved);
+  the sand's Metatron and the light's were drawn at different scales and doubled every line (matched).
 
 ## Material (every voice derives from it)
 

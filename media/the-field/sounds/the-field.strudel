@@ -1,13 +1,14 @@
-// "morpho-field" — vibration becomes frequency, frequency becomes geometry.
+// "the-field" — the field vibrates, its vibrations become frequencies, the frequencies organise into geometry, and the
+// geometry manifests the whole.
 // 184.5 cycles at 30 cpm = 6:09. A lydian, tuned to A4 = 432 Hz. Meditative: no pulse. Binaural layer (headphones).
 //
 // THE STORY
-// A sand-covered plate is set vibrating (a Chladni plate). At first it only hums: a seven-note motif and the chords that
-// carry it. Then it begins to sing its own overtones: an arpeggio made of the real harmonic series of each chord's root.
-// Three voices start singing the motif at three speeds in Fibonacci proportion (21, 13 and 8 cycles per statement),
-// entering one after another, crossing and drifting like grains of sand that have not found their place yet. At 4:16 all
-// three arrive at the same instant: the pattern locks. The motif sounds in three octaves at once, the harmony opens, a
-// triad of bells rings. Then the voices drift apart again, and the plate goes quiet on the A it started from.
+// The field vibrates: a seven-note motif and the chords that carry it, from the first second. The vibration becomes
+// frequency: the field sings its own overtones, an arpeggio made of the real harmonic series of each chord's root. The
+// frequencies organise into geometry: three voices take up the motif at three speeds in Fibonacci proportion (21, 13 and
+// 8 cycles per statement), entering one after another, crossing and drifting like grains of sand that have not found their
+// place yet. At 4:16 all three arrive at the same instant and the geometry manifests the whole: the motif in three octaves
+// at once, the harmony open, a deep gong. Then the voices drift apart and return to the field, resting on the A it began on.
 //
 // MATERIAL (every voice derives from it)
 // - The motif: E D# C# D# E A G# (degrees 4 3 2 3 4 7 6), seven notes, stepwise, leaning on the lydian D#. Its answer is
@@ -25,9 +26,9 @@
 //   II   Frequency     1:04 - 2:56   cycles  32 -  88   harmonic-series arpeggio, breathing against the pad; motif in
 //                                                       new registers; canon voices enter at 2:10 (21) and 2:32 (13)
 //   III  Geometry      2:56 - 5:04   cycles  88 - 152   third canon voice (8) at 2:56, bells on Fibonacci gaps; inhale
-//                                                       at 4:00 (arp out, filter closes, sub out); CONVERGENCE at 4:16
-//   IV   Rest          5:04 - 6:09   cycles 152 - 184.5 voices drift apart and leave; the overtones return faintly; the
-//                                                       motif alone one last time; the plate rests on A
+//                                                       at 4:00 (arp out, filter closes, sub out); THE WHOLE at 4:16
+//   IV   Return        5:04 - 6:09   cycles 152 - 184.5 voices drift apart and leave; the overtones return faintly; the
+//                                                       motif alone one last time; the field rests on A
 
 setcpm(30) // 1 cycle = 2 s
 

@@ -292,7 +292,7 @@ corner. See `deph-compose`'s "Hand off" section for the same rule stated once, c
 
 ## Before handing a piece to the user: the listener checklist (mandatory)
 
-Morpho-Field's first two drafts were rejected as "two notes for two minutes" and "one note alone for 48 s", although
+The Field's first two drafts (then named Morpho-Field) were rejected as "two notes for two minutes" and "one note alone for 48 s", although
 `deph-style` already said why (its "Retention" rule, learned on Slow Drift and Musica Universalis). The rule exists; this is
 the check that makes sure it is applied. Run all of it, with numbers, before telling the user a piece is ready:
 
@@ -313,7 +313,7 @@ the check that makes sure it is applied. Run all of it, with numbers, before tel
 
 ## Sources behind the compositional techniques (verify before relying on them again)
 
-Consulted for Morpho-Field (2026-10-05). Each one is cited where its technique is used.
+Consulted for The Field (then Morpho-Field, 2026-10-05). Each one is cited where its technique is used.
 
 - Reverb Machine, *Music for Airports* (Eno): incommensurable loop lengths and phasing, the source of the Fibonacci canon.
   https://reverbmachine.com/blog/deconstructing-brian-eno-music-for-airports/

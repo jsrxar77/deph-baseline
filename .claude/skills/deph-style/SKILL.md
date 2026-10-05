@@ -395,11 +395,11 @@ Also update the distilled sections above if the decision changes a principle, an
 - 2026-10-05 — Morpho-Field (new piece, sound first): the user chose the name, a lydian mode in A (A4 = 432), a 6:09 length
   so the whole piece can be heard, and the image as its arc: Vibration, Frequency, Sacred Geometry. Bells should sound like real
   bells, not like crystal: the user chose FM synthesis (rendered), not samples (not yet supported by the render pipeline) —
-  `media/morpho-field/morpho-field.md`.
+  `media/the-field/the-field.md`.
 - 2026-10-05 — Morpho-Field rewritten after the user called the two-note version empty and repetitive: "quiero una pieza a la
   altura... compleja, profunda, con efecto wow... inventa una historia". Now five parts with a story (void, bloom, field, geometry,
   dissolution), 12 layers, a seed motif with call and answer, and a seventh harmonic as the peak moment. The user will judge it by ear;
-  sound status set back to in-progress until then — `media/morpho-field/morpho-field.md`.
+  sound status set back to in-progress until then — `media/the-field/the-field.md`.
 - 2026-10-05 — Morpho-Field composed from scratch after the user rejected two drafts ("son 2 notas que no dan interés";
   "no puedes dejar una nota sola durante 48 segundos") and asked for research and professional work: complex, deep, a "wow"
   moment, a story. Researched first (Eno's incommensurable loops, Pärt's tintinnabuli, Reich's chord cycle, Floating Points'
@@ -407,4 +407,16 @@ Also update the distilled sections above if the decision changes a principle, an
   motif, a shared progression, arp/pad breath, free rhythm). The wow is a Fibonacci canon (21:13:8 cycles per statement)
   that converges at 4:16 after an inhale. Meditative, 6:09. Measured: 470 -> 44 semitone clashes after separating registers.
   Lesson: the retention rule was written but not applied; `strudel-compose` now has a mandatory listener checklist —
-  `media/morpho-field/morpho-field.md`.
+  `media/the-field/the-field.md`.
+- 2026-10-05 — Morpho-Field renamed **The Field** (`the-field`) by the user, with its narrative in their words: "el campo
+  vibra, genera frecuencias que se organizan en geometría para poder manifestar el todo" (the field vibrates, its vibrations
+  become frequencies, the frequencies organise into geometry, and the geometry manifests the whole). The 4:16 convergence is
+  "the whole"; the last part is "return". The user approved the sound ("una obra de arte"). Visual approved as a plan: a Chladni
+  sand field (each chord a mode), three figures of light from Morpho-Genesis's sacred geometry rising from it at the canon's
+  speeds, lining up at 4:16 while the sand draws Metatron's Cube — `media/the-field/the-field.md`.
+- 2026-10-05 — The Field, first visual REJECTED ("no tiene una dirección de arte definida, son capas superpuestas que no dan
+  una idea de continuidad... cada capa tiene colores diferentes, formas diferentes... muy pobre"). It mixed two visual
+  languages (granular ivory sand + neon line figures), gave each canon voice its own colour (teal, amethyst, gold) and its own
+  shape, and stacked them on separate planes that appeared from nowhere. Lesson: one piece = one art direction — one material,
+  one palette, one light, one continuous transformation; a voice of the music changes the material, it does not get its own
+  overlay. Agree on style frames before building — `media/the-field/the-field.md`.

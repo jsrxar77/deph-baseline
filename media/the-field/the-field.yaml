@@ -1,0 +1,23 @@
+name: the-field
+title: The Field
+created: 2026-10-05
+key: A:lydian # A4 = 432 Hz
+tempo:
+  cpm: 30 # setcpm(30) in sounds/the-field.strudel — 1 cycle = 2 s
+arc:
+  - { name: vibration, cycles: 32 } # 0:00 - 1:04 — motif from the first second, tintinnabuli voice, pad, sub, the answer
+  - { name: frequency, cycles: 56 } # 1:04 - 2:56 — harmonic-series arp, resonating motif, canon voices 21 and 13 enter
+  - { name: geometry, cycles: 64 } # 2:56 - 5:04 — canon voice 8, mirrored bells on Fibonacci gaps, inhale, convergence at 4:16
+  - { name: return, cycles: 32.5 } # 5:04 - 6:09 — voices drift apart, the motif alone, the field rests on A (the whole manifests at 4:16, cycle 128)
+total_cycles: 184.5 # 369 s = 6:09 at cpm 30
+domains:
+  sound:
+    status: done # approved by the user ("una obra de arte"); source: strudel (render.mjs)
+    file: sounds/the-field.strudel
+  visual:
+    status: in-progress # Chladni sand field + sacred-geometry figures; composition id the-field (4K 60 fps)
+    entry: tools/visuals/src/compositions/the-field/the-field.tsx # media/the-field/visuals is the symlink
+  sync:
+    status: done # audio.wav (raw), audio-master.wav (-16 LUFS), audio-youtube.wav (-14 LUFS, limiter -1 dBTP), frames.json + manifest.json (60 fps); 432 Hz and binaural measured in the render
+    output: sync/
+doc: the-field.md
