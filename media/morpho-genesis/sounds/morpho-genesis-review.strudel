@@ -1,0 +1,317 @@
+// "morpho-genesis" — Generative ambient piece exploring Vibration, Frequency, and Sacred Geometry
+// Key: F#:lydian (Cosmic / Interstellar Lydian mode in A4 = 432 Hz)
+// Duration: 24:09 exact (1449 seconds = 724.5 cycles at 30 cpm).
+//
+// Dynamic Architecture (Wide Dynamic Range & Negative Space):
+// - Layered breathing: layers yield to each other in counter-phase instead of piling up simultaneously.
+// - Intro (0:00 - 3:00): Intimate, sparse valley (gains 0.006 - 0.045). Sub bass silent, pad softly filtered.
+// - Development (3:00 - 8:20): Gradual tidal swell. Sub bass enters late (cycle 130); pad breathes in 24-cycle waves.
+// - Climax (8:20 - 17:30): Luminous peak (max gains 0.06 - 0.09). When the 120-cycle Shepard rises, the pad
+//   recedes to half-gain and closes its filter, giving the celestial ascent a clear, open sky.
+// - Deceleration (17:30 - 21:50): Organic untangling. Layers exit one by one, opening wide pauses.
+// - Outro (21:50 - 24:09): Return to quiet primordial sine vibration and Delta pulse.
+
+setcpm(30) // 1 cycle = 2 seconds. 724.5 cycles = 1449s = 24:09 exact.
+
+// ---- Tuning & Source of Truth (F# Lydian @ 432 Hz) -------------------------------------------------
+const ROOT = 'F#';
+const KEY_SUFFIX = ':lydian';
+const KEY = ROOT + KEY_SUFFIX; // "F#:lydian"
+const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX;
+
+// A4 = 432 Hz calibration (deph standard)
+const A4 = 432;
+const TUNE = 12 * Math.log2(A4 / 440); // -0.317666 semitones
+const tune = (p) => p.add(note(TUNE));
+
+// Arc section lengths in cycles (total = 724.5 cycles = 1449s = 24:09 exact)
+const S = {
+  intro: 23,        // 0:00 - 3:00 (180s) — Intimate valley
+  dev: 41,         // 3:00 - 8:20 (320s) — Tidal growth
+  climax: 70,      // 8:20 - 17:30 (550s) — Peak with Shepard sky
+  decel: 33,       // 17:30 - 21:50 (260s) — Gradual unlayering
+  outro: 17.5,      // 21:50 - 24:09 (139s) — Final stillness
+};
+
+// ---- Harmonic Foundations --------------------------------------------------------------------------
+// 8-bar celestial harmonic phrase (16 cycles) in F# Lydian:
+// F#maj9#11 (4 cycles) -> G#6/9 (4 cycles) -> D#m9 (4 cycles) -> C#sus4 (4 cycles)
+const CHORDS_HELD = "<[0,2,4,6] [1,3,5,7] [5,7,9,11] [4,7,8,11]>".slow(16);
+// The climax ends on a settled F# major triad (F#, A#, C#) in its last 16 cycles.
+const CHORDS_CLIMAX = arrange([54, CHORDS_HELD], [16, "[0,2,4]".slow(1)]);
+
+// ---- Voices & Sound Design (Strict Spectral Separation) --------------------------------------------
+
+// 1. Primordial Drone: Warm ground holding fundamental F# and octave/fifth resonances (LPF 500 - 750 Hz)
+const drone = (g, cutoff) =>
+  tune(n("<[0, 4] [0, 4] [0, 5] [0, 4]>").scale(scaleAt(2)))
+    .s("triangle")
+    .slow(16)
+    .attack(4.5).decay(3.5).sustain(0.80).release(6.5)
+    .lpf(cutoff || 600)
+    .gain(g)
+    .room(0.60).size(7.5).orbit(1);
+
+// 2. Sub Bass: Deep clean root support strictly below 150 Hz (F# -> G# -> D# -> C#)
+const subBass = (g) =>
+  tune(n("<0 1 5 4>").scale(scaleAt(1)))
+    .s("sine")
+    .slow(16)
+    .attack(3.0).decay(2.0).sustain(0.85).release(5.0)
+    .lpf(140)
+    .gain(g);
+
+// 3. Ethereal Sacred Pad: Warm mid-range cushion (420 - 850 Hz), breathing in slow waves
+// The filter breathes once per 30 s (sine.slow(15)), the same rhythm as the deph creation torus.
+const pad = (g, cutoff, chords) =>
+  tune(n(chords || CHORDS_HELD).scale(scaleAt(3)))
+    .s("sawtooth")
+    .attack(4.0).decay(3.0).sustain(0.70).release(6.0)
+    .lpf((typeof cutoff === 'number' ? pure(cutoff) : cutoff || pure(680)).add(sine.slow(15).range(-40, 40)))
+    .gain(g)
+    .pan(saw.slow(24).range(0.38, 0.62))
+    .room(0.70).size(8.5).orbit(2);
+
+// 4. Singing Bowls (Crystal & Tibetan Bowls):
+// Soft mallet strike (attack: 0.18s), warm pure FM overtones (fmh: 2 & 3),
+// very spacious rhythm with 6-8 seconds between strikes, gently attenuated for background depth.
+const bowlStrike = (p) =>
+  p.s("triangle")
+   .attack(0.18).decay(2.5).sustain(0.20).release(5.5)
+   .lpf(2000).hpf(400)
+   .delay(0.25).delaytime(4.0).delayfeedback(0.30)
+   .room(0.60).size(8.5).orbit(3);
+
+const singingBowls = ({ g, density, reg }) => {
+  const notes = n("~ ~ ~ ~ 5 ~ ~ ~ 4 ~ ~ ~ 0 ~ ~ ~")
+    .scale(scaleAt(4 + (reg || 0)))
+    .slow(16)
+    .degradeBy(1 - (density || 0.85));
+  return stack(
+    bowlStrike(tune(notes).fm(0.40).fmh(2)).gain(g),
+    bowlStrike(tune(notes).fm(0.20).fmh(3)).gain(g).velocity(0.50)
+  ).pan(sine.slow(21).range(0.3, 0.7));
+};
+
+// Warm initial singing bowl strike at 0:08 (F#4 fundamental)
+const introBowlStrike = (g) =>
+  tune(n("~ 0 ~ ~").scale(scaleAt(4)))
+    .s("triangle")
+    .slow(8)
+    .attack(0.20).decay(3.0).sustain(0.25).release(6.5)
+    .fm(0.35).fmh(2)
+    .gain(g)
+    .delay(0.25).delaytime(4.0).delayfeedback(0.30)
+    .room(0.65).size(8.5).orbit(3);
+
+// 5. Shepard-Risset Endless Ascent (Sacred Ascension)
+// 5 octaves of triangle voices climbing continuously through 120 cycles (4 minutes) in the heart of the Climax.
+const SHEP_CYCLES = 32; // 32 cycles (about 1 minute)
+const SHEP_WINDOW = 35;  // 5 octaves x 7 diatonic degrees
+const SHEP_ROOTS = [0, 1, 5, 4]; // Roots of F#, G#, D#, C#
+const SHEP_SHAPES = [[0, 2, 4, 6], [0, 2, 4, 6], [0, 2, 4, 6], [0, 3, 4, 6]];
+
+const shepVoice = (octave, slot) => {
+  const steps = Array.from({ length: Math.floor(SHEP_CYCLES / 4) }, (_, i) => {
+    const phrase = Math.floor(i / 4);
+    const chord = i % 4;
+    const shape = SHEP_SHAPES[chord];
+    if (slot >= shape.length) return null;
+    const d = (((7 * phrase + SHEP_ROOTS[chord] + shape[slot] + 7 * octave) % SHEP_WINDOW) + SHEP_WINDOW) % SHEP_WINDOW;
+    const w = Math.sin((Math.PI * (d + 0.5)) / SHEP_WINDOW) ** 2;
+    return { d, w };
+  });
+  return n(cat(...steps.map((x) => (x ? pure(x.d) : silence))).slow(4))
+    .velocity(cat(...steps.map((x) => pure(x ? x.w : 0))).slow(4));
+};
+
+const shepard = (g) =>
+  tune(stack(...[0, 1, 2, 3, 4].flatMap((o) => [0, 1, 2, 3].map((slot) => shepVoice(o, slot)))).scale(scaleAt(2)))
+    .s("triangle")
+    .attack(1.2).decay(1.2).sustain(0.75).release(3.5)
+    .lpf(2400).hpf(300)
+    .gain(g)
+    .room(0.55).size(7.5).orbit(4);
+
+// 6. Binaural Beat: Pure headphone tuning layer around F#3 (181.65 Hz at A4=432)
+const CARRIER = A4 * Math.pow(2, -15 / 12); // F#3 with A4 = 432
+const binaural = (beat, g) =>
+  stack(
+    freq(CARRIER - beat / 2).s("sine").pan(0),
+    freq(CARRIER + beat / 2).s("sine").pan(1)
+  )
+    .slow(8)
+    .attack(4).decay(2).sustain(1).release(6)
+    .gain(g);
+
+// 7. Cosmic Beacon Bell (Organically Spaced Pi-Pi Decompression Valve):
+// Clean crystal droplet (attack: 0.025s, decay: 0.6s, release: 0.8s)
+// bouncing at the piece's natural cycle tempo (every 2.0s = 1 cycle at 30 cpm):
+// L (t=0s) -> R (t=2s) -> L (t=4s) -> R (t=6s), then total silence.
+const piDrop = (p, panVal, atten) =>
+  p.s("sine")
+   .attack(0.05).decay(1.20).sustain(0).release(1.70)
+   .lpf(2500).lpenv(1.5).lpdecay(1.2).hpf(1400)
+   .pan(panVal)
+   .velocity(atten)
+   .vib(5).vibmod(0.015)
+   .room(0.28).size(4.0).orbit(6);
+
+// Beacon level: +6.8 dB over the earlier levels. Each note bounces four times, 3 s apart (L, R, L, R), fading from
+// 1.00 to 0.16 velocity, no delay.
+const BEACON_GAIN = 1.8;
+
+const beacon = (pat, g) => {
+  const base = tune(pat).fm(0.12).fmh(2).gain(g.mul(BEACON_GAIN));
+  return stack(
+    piDrop(base, 0.18, 1.00),                      // Left, t = 0 s, loudest
+    piDrop(base.late(1.5), 0.82, 0.58)             // Right, t = 3 s, softer
+  );
+};
+
+// ====================================================================================================
+// TIMELINES (arrange() per voice across the 724.5-cycle arc = 24:09 exact)
+// ====================================================================================================
+
+// --- Layer 0: Primordial Drone (Tidal Breathing) ---
+$: arrange(
+  // Intro: Quiet intimate valley (0.035 -> 0.065), softly filtered
+  [S.intro, drone(saw.slow(S.intro).range(0.035, 0.065), 520)],
+  // Development: Slow 32-cycle tidal wave (0.050 -> 0.080)
+  [10, drone(sine.slow(32).range(0.050, 0.080), 620)],
+  // Development breath (cycles 40-56): drone and pad rest, only bowls and the beacon remain
+  [4, silence],
+  [S.dev - 14, drone(sine.slow(32).range(0.050, 0.080), 620)],
+  // Climax: Cedes room (drops to 0.055) so the pad and Shepard have clear low-end headroom
+  [S.climax, drone(arrange(
+    [20, pure(0.065)],
+    [30, pure(0.045)], // Dips during peak Shepard flight
+    [20, pure(0.060)]
+  ), 680)],
+  // Deceleration: Gently subsiding
+  [S.decel, drone(isaw.slow(S.decel).range(0.035, 0.055), 540)],
+  // Outro: Dissolving to the edge of silence
+  [S.outro - 4, drone(isaw.slow(S.outro - 4).range(0.015, 0.035), 460)],
+  [4, silence],
+)
+
+// --- Layer 1: Sub Bass (Enters late, exits early, avoids crowding) ---
+$: arrange(
+  // Intro: Completely silent (keeping the floor light and spacious)
+  [S.intro, silence],
+  // Development: Enters only in the second half (cycle 130), gentle swell (0.020 -> 0.065)
+  [20, silence],
+  [S.dev - 20, subBass(saw.slow(S.dev - 20).range(0.020, 0.065))],
+  // Climax: Firm clean anchor (0.075), but ducks (0.035) during the Shepard flight
+  [20, subBass(0.075)],
+  [30, subBass(0.035)], // Ducks cleanly for the Shepard ascent
+  [20, subBass(0.070)],
+  // Deceleration: Exits during the first 50 cycles, leaving 80 cycles of open space
+  [13, subBass(isaw.slow(13).range(0.015, 0.065))],
+  [S.decel - 13, silence],
+  // Outro: Silent
+  [S.outro, silence],
+)
+
+// --- Layer 2: Ethereal Sacred Pad (Breathing Counter-Phase) ---
+$: arrange(
+  // Intro: Whispered warmth (0.025 -> 0.045, filter 420 -> 560 Hz), arropando sin saturar
+  [S.intro, pad(saw.slow(S.intro).range(0.025, 0.045), saw.slow(S.intro).range(420, 560))],
+  // Development: 24-cycle breathing swell (0.050 -> 0.085, filter 580 -> 780 Hz)
+  [10, pad(sine.slow(24).range(0.050, 0.085), saw.slow(10).range(580, 780))],
+  [4, silence],
+  [S.dev - 14, pad(sine.slow(24).range(0.050, 0.085), saw.slow(S.dev - 14).range(580, 780))],
+  // Climax: Expands, then RECEDES during Shepard flight to leave open sky
+  [S.climax, pad(arrange(
+    [20, pure(0.090)],                         // Initial climax bloom
+    [30, pure(0.045)],                        // Ducks to half-gain & closes filter for Shepard
+    [20, pure(0.080)]                          // Reblooms on return
+  ), arrange(
+    [20, pure(850)],
+    [30, pure(550)],                         // Closes filter during Shepard to avoid frequency clash
+    [20, pure(800)]
+  ), CHORDS_CLIMAX)],
+  // Deceleration: Settling into warm darkness (0.065 -> 0.020, filter 650 -> 450 Hz)
+  [S.decel, pad(isaw.slow(S.decel).range(0.020, 0.065), isaw.slow(S.decel).range(450, 650))],
+  // Outro: Fades into deep quiet, exiting for the final 35 cycles
+  [9, pad(isaw.slow(9).range(0.005, 0.020), 420)],
+  [S.outro - 9, silence],
+)
+
+// --- Layer 3: Singing Bowls (Spacious Background Accents) ---
+$: arrange(
+  // Intro: Single warm bowl at 0:08 (cycle 4)
+  [1, silence],
+  [3, introBowlStrike(0.035)],
+  [S.intro - 4, silence],
+  // Development: Spacious accents (0.018 -> 0.038)
+  [S.dev, singingBowls({
+    g: saw.slow(S.dev).range(0.018, 0.038),
+    density: 0.85,
+    reg: 0
+  })],
+  // Climax: Resonant accents (0.045)
+  [S.climax, singingBowls({
+    g: arrange(
+      [20, pure(0.045)],
+      [30, isaw.slow(30).range(0.030, 0.048)],
+      [20, pure(0.042)]
+    ),
+    density: 0.90,
+    reg: 0
+  })],
+  // Deceleration: Thinning, very distant echoes (0.028 -> 0.008)
+  [S.decel, singingBowls({
+    g: isaw.slow(S.decel).range(0.008, 0.028),
+    density: 0.65,
+    reg: 0
+  })],
+  // Outro: Silent
+  [S.outro, silence],
+)
+
+// --- Layer 4: Shepard-Risset Sacred Flight (Clear Uncrowded Sky) ---
+// Continuous 120-cycle ascension in the Climax, sounding in a clear, uncluttered frequency space
+$: arrange(
+  [S.intro + S.dev + 18, silence],
+  [SHEP_CYCLES, shepard(arrange(
+    [6, saw.slow(6).range(0.015, 0.060)],
+    [20, pure(0.060)],
+    [6, isaw.slow(6).range(0.010, 0.060)]
+  ))],
+  [S.climax - (18 + SHEP_CYCLES) + S.decel + S.outro, silence],
+)
+
+// --- Layer 5: Binaural Tuning ---
+// Subdued, comfortable headphone layer (0.022 - 0.026)
+$: arrange(
+  [S.intro, binaural(6, 0.022)],
+  [S.dev, binaural(5, 0.024)],
+  [S.climax, binaural(6, 0.026)],
+  [S.decel, binaural(5, 0.024)],
+  [S.outro, binaural(4, 0.020)],
+)
+
+// --- Layer 6: Cosmic Beacon Bell (Organically Spaced Pi-Pi Decompression Valve) ---
+// Discrete 2.0s bounces in the stereo field: L (t=0s) -> R (t=2s) -> L (t=4s) -> R (t=6s)
+// Delicate, non-invasive background dynamic progression:
+$: arrange(
+  // Intro: Gotas suaves pero claramente audibles (0.016 -> 0.026)
+  [S.intro, beacon(n("0 ~ ~ ~ 1 ~ ~ ~").scale(scaleAt(5)).slow(24), saw.slow(S.intro).range(0.016, 0.026))],
+  // Development: Crecimiento armónico puro (0.026 -> 0.038)
+  [S.dev, beacon(n("0 ~ ~ ~ 6 ~ ~ ~ 2 ~ ~ ~ 4 ~ ~ ~").scale(scaleAt(5)).slow(16), saw.slow(S.dev).range(0.026, 0.038))],
+  // Climax: Expresión luminosa plena consonante (0.038 -> 0.052)
+  [S.climax, beacon(arrange(
+    [20, n("0 ~ ~ ~ 1 ~ ~ ~ 5 ~ ~ ~ 4 ~ ~ ~").scale(scaleAt(5)).slow(16)],
+    [30, n("1 ~ ~ ~ 5 ~ ~ ~ 4 ~ ~ ~ 0 ~ ~ ~").scale(scaleAt(5)).slow(16)],
+    [20, n("5 ~ ~ ~ 4 ~ ~ ~ 0 ~ ~ ~ 1 ~ ~ ~").scale(scaleAt(5)).slow(16)]
+  ), arrange(
+    [20, saw.slow(20).range(0.026, 0.046)],
+    [30, pure(0.052)],
+    [20, isaw.slow(20).range(0.032, 0.052)]
+  ))],
+  // Deceleration: Desensamblaje melódico y descenso gradual (0.042 -> 0.018)
+  [S.decel, beacon(n("4 ~ ~ ~ 5 ~ ~ ~ 2 ~ ~ ~ 0 ~ ~ ~").scale(scaleAt(5)).slow(20), isaw.slow(S.decel).range(0.018, 0.042))],
+  // Outro: Dos susurros finales lejanos (0.014 -> 0.004)
+  [S.outro, beacon(n("0 ~ ~ ~ ~ ~ ~ ~").scale(scaleAt(5)).slow(32), isaw.slow(S.outro).range(0.004, 0.014))],
+)
