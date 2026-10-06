@@ -146,3 +146,19 @@ Si este tipo de contenido te transmite paz, te invito a suscribirte al canal de 
 > ▶️ https://youtu.be/8QGj_FvP5Xo
 > 
 > Subscribe if you enjoy the journey! ✨ #ambientmusic #432hz #meditation
+
+---
+
+## 5. WhatsApp (Grupos / Amigos)
+
+> Buenas, buenas. Les quería compartir un proyecto en el que vengo trabajando: armé un canal (**@deph.ambient**) de música ambiental y visuales relajantes, y acabo de subir una nueva pieza: **The Field**.
+> 
+> Es ideal para ponerse auriculares en esos momentos en los que necesitan bajar un cambio del día, concentrarse o simplemente cerrar los ojos y desconectar un rato del ruido de fondo.
+> 
+> Se los dejo por acá para que lo escuchen:  
+> 👉 https://youtu.be/8QGj_FvP5Xo
+> 
+> El canal es nuevo, así que si les gusta y se pueden **suscribir**, a ustedes les toma un segundo y a mí me da una mano enorme con el algoritmo para que empiece a caminar y pueda seguir produciendo.
+> 
+> ¡Un abrazo grande!
+
