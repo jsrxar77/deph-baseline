@@ -1,6 +1,6 @@
 # The Field — YouTube publish pack
 
-Status: **ready** (waiting on the user's open decisions and the upload) · last updated 2026-10-05
+Status: **published** (2026-10-06) · URL: https://youtu.be/8QGj_FvP5Xo · last updated 2026-10-06
 Source video: `media/the-field/renders/the-field.mp4` — 6:15 (375.06 s: 6:09 of music and its last 6 s of reverb tail), 6.1 GB,
 3840x2160 at 60 fps, H.264 / AAC, audio mastered to -14 LUFS (true peak -1 dBTP) · series number **03** ·
 Channel material: `docs/youtube-channel.md` · Rules: `youtube-publish` skill. Chapter times are computed from the
@@ -154,22 +154,22 @@ Series number 03 on the cover. Playlist "deph — generative ambient" (decided 2
 
 - [x] Render verified 2026-10-05: H.264 High 3840x2160 60 fps, yuv420p, BT.709 limited range; AAC-LC 48 kHz stereo at
       -14.0 LUFS (peak -0.9 dBFS, LRA 8.6 LU); video and audio both start at 0.000000; frames at 0:30 and 4:22 checked.
-- [ ] Watch it once end to end.
-- [ ] Upload `media/the-field/renders/the-field.mp4` as **Private** first; let processing reach 4K; check the audio in
+- [x] Watch it once end to end.
+- [x] Upload `media/the-field/renders/the-field.mp4` as **Private** first; let processing reach 4K; check the audio in
       the player with headphones (binaural layer).
-- [ ] Title (EN #1), description (EN); check that the five chapters appear as segments on the timeline.
-- [ ] Add the ES title + description as a **translation** (Studio > Subtitles / Translate metadata).
-- [ ] Thumbnail: `the-field-thumbnail.jpg` (the 5:13 disassembly, chosen by the user), 1280x720, 154 KB.
-- [ ] Category **Music**; audience **not made for kids**; comments on; standard license.
-- [ ] "Altered or synthetic content": **No** (abstract particle simulation and synthesized music, nothing realistic).
-- [ ] Tags from the list above; end screen in the last 20 s; pin the comment after publishing.
-- [ ] Add the video to the playlist "deph — generative ambient" (create it first if needed: `docs/youtube-channel.md`).
-- [ ] Schedule or publish; then add the URL and date here and in the yaml (`publish`).
+- [x] Title (EN #1), description (EN); check that the five chapters appear as segments on the timeline.
+- [x] Add the ES title + description as a **translation** (Studio > Subtitles / Translate metadata).
+- [x] Thumbnail: `the-field-thumbnail.jpg` (the 5:13 disassembly, chosen by the user), 1280x720, 154 KB.
+- [x] Category **Music**; audience **not made for kids**; comments on; standard license.
+- [x] "Altered or synthetic content": **No** (abstract particle simulation and synthesized music, nothing realistic).
+- [x] Tags from the list above; end screen in the last 20 s; pin the comment after publishing.
+- [x] Add the video to the playlist "deph — generative ambient" (create it first if needed: `docs/youtube-channel.md`).
+- [x] Published on YouTube: https://youtu.be/8QGj_FvP5Xo (2026-10-06). Social media launch kit in `the-field.social.md`.
 
-## Open decisions (TODO for the user)
+## Decisions completed
 
 1. ~~Which cover~~ — decided 2026-10-05: the 5:13 disassembly (`the-field-thumbnail.jpg`).
-2. **Which title:** EN #1 (search phrase first) or EN #2 (the narrative, "from sound to sacred geometry").
+2. ~~Which title~~ — EN #1 / ES #1 applied.
 3. ~~AI mention~~ — decided 2026-10-05: yes, "built in collaboration with an AI assistant (Claude)" in both languages, as in Musica Universalis.
 4. ~~Playlist~~ — created by the user on 2026-10-05: https://www.youtube.com/playlist?list=PLX0Afm4O4W30 (linked in both descriptions).
-5. **Publish date.**
+5. ~~Publish date~~ — 2026-10-06. Published at https://youtu.be/8QGj_FvP5Xo.

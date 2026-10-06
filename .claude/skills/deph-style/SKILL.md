@@ -437,3 +437,6 @@ Also update the distilled sections above if the decision changes a principle, an
   `media/the-field/the-field.youtube.md`.
 - 2026-10-05 — The Field: the user chose to mention the collaboration with AI in the description ("si se menciona colaboración
   con IA"), as Musica Universalis did — `media/the-field/the-field.youtube.md`.
+- 2026-10-06 — The Field published on YouTube (https://youtu.be/8QGj_FvP5Xo) as series 03. Social media launch pack created at
+  `media/the-field/the-field.social.md` (Facebook, Instagram, X) with warm, nature-centric invitations to relax and subscribe —
+  `media/the-field/the-field.social.md`, `the-field.yaml`.

@@ -21,7 +21,10 @@ domains:
     status: done # audio.wav (raw), audio-master.wav (-16 LUFS), audio-youtube.wav (-14 LUFS, limiter -1 dBTP), frames.json + manifest.json (60 fps); 432 Hz and binaural measured in the render
     output: sync/
 publish:
-  status: ready # pack written (titles, descriptions EN/ES, chapters, tags, cover candidates); waiting on the user's open decisions and the upload
+  status: published
+  url: "https://youtu.be/8QGj_FvP5Xo"
+  published: 2026-10-06
   file: the-field.youtube.md
+  social: the-field.social.md
   thumbnail: renders/thumbnails/the-field-thumbnail.jpg # chosen by the user: the flower coming apart at 5:13 (momentSeconds 313, bgShift 0.12)
 doc: the-field.md

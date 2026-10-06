@@ -3,6 +3,7 @@
 `sounds/the-field.strudel` — 6:09, A lydian, tuned to A4 = 432 Hz, 30 cpm (184.5 cycles of 2 s). Meditative, no pulse.
 Binaural layer (headphones). Video: `tools/visuals/src/compositions/the-field/` (composition `the-field`, 4K 60 fps).
 Named Morpho-Field until 2026-10-05.
+▶ **Watch on YouTube:** [The Field (4K · 432 Hz · Binaural)](https://youtu.be/8QGj_FvP5Xo)
 
 ## The story
 
