@@ -14,7 +14,7 @@
 // e.g. --only '$4'): a stem of one voice for a DAW, same length and start as the full render so it lines up
 // at bar 1 (see docs/daw-bridge.md).
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, appendFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { evalStrudel } from './eval-strudel.mjs';
@@ -54,6 +54,9 @@ AudioNode.prototype.disconnect = function (...a) {
   if (renderInProgress) return undefined;
   return realDisconnect.apply(this, a);
 };
+
+// Seconds of audio between progress checkpoints (see the progress note in main()).
+const PROGRESS_EVERY = 30;
 
 function parseArgs(argv) {
   const args = { file: undefined, cycles: undefined, out: undefined, tail: 3, sampleRate: 48000, only: undefined };
@@ -150,10 +153,27 @@ async function main() {
     await new Promise((r) => setTimeout(r, 25));
   }
 
+  // Progress: the offline context is suspended every PROGRESS_EVERY seconds of audio and resumed right away, so each
+  // checkpoint is a real measured position in the piece. One JSON line per checkpoint goes to <out>.progress.jsonl
+  // (same convention as tools/visuals/render.mjs): read it at any time with `tail -1`.
   console.error('rendering...');
+  const progressPath = `${args.out}.progress.jsonl`;
+  const renderStart = Date.now();
+  mkdirSync(dirname(args.out), { recursive: true });
+  writeFileSync(progressPath, '');
+  const logProgress = (entry) =>
+    appendFileSync(progressPath, JSON.stringify({ t: new Date().toISOString(), ...entry }) + '\n');
+  for (let at = PROGRESS_EVERY; at < durationSec; at += PROGRESS_EVERY) {
+    ctx.suspend(at).then(async () => {
+      logProgress({ stage: 'rendering', progress: +(at / durationSec).toFixed(4), renderedSeconds: at, elapsedMs: Date.now() - renderStart });
+      await ctx.resume();
+    });
+  }
   renderInProgress = true;
   const buffer = await ctx.startRendering();
   renderInProgress = false;
+  logProgress({ stage: 'done', progress: 1, renderedSeconds: durationSec, elapsedMs: Date.now() - renderStart });
+  console.error(`rendered in ${((Date.now() - renderStart) / 1000).toFixed(0)} s`);
 
   const ch0 = buffer.getChannelData(0);
   let peak = 0;

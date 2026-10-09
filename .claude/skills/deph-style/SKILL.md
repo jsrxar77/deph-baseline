@@ -383,3 +383,60 @@ Also update the distilled sections above if the decision changes a principle, an
   4K render verified: 22,080 frames, yuv420p/BT.709/limited range, audio and video both starting at 0.000000 (a stray
   `from={237}` delay found and fixed in the shared HdrCanvas), 432 Hz and the binaural beat schedule (10/8/6/4 Hz)
   confirmed by direct measurement — `media/musica-universalis/renders/musica-universalis.mp4`, `musica-universalis.md`.
+- 2026-10-05 — Morpho-Genesis (review): the user keeps the full 24:09 piece on purpose — for meditation, a long piece that
+  holds the listener to the end; not cut to 6–8 min. Video standard is 4K at 60 fps always ("el estándar del canal no
+  importa, lo que hacemos siempre"). Approved the deph signature (creation torus) as a layer on this piece's content. The
+  user asked Claude to decide the YouTube disclosure (Strudel and Remotion named) and the audio levels — `morpho-genesis.youtube.md`
+  (when written), `morpho-genesis.md`.
+- 2026-10-05 — Morpho-Genesis beacon: the user asked for a louder beacon, a crystalline timbre, and a delay that repeats the
+  strike like a real beacon. Done: +6.8 dB level (`BEACON_GAIN`), FM index 0.35 -> 0.12 and fmh 2 -> 4, hpf 750 -> 1400,
+  lpf 3200 -> 7000, longer ring (release 1.6 s), delay 0.5 s with feedback 0.62 (about 8 audible repeats) —
+  `morpho-genesis.strudel`. Listening check still the user's ear.
+- 2026-10-05 — Morpho-Field (new piece, sound first): the user chose the name, a lydian mode in A (A4 = 432), a 6:09 length
+  so the whole piece can be heard, and the image as its arc: Vibration, Frequency, Sacred Geometry. Bells should sound like real
+  bells, not like crystal: the user chose FM synthesis (rendered), not samples (not yet supported by the render pipeline) —
+  `media/the-field/the-field.md`.
+- 2026-10-05 — Morpho-Field rewritten after the user called the two-note version empty and repetitive: "quiero una pieza a la
+  altura... compleja, profunda, con efecto wow... inventa una historia". Now five parts with a story (void, bloom, field, geometry,
+  dissolution), 12 layers, a seed motif with call and answer, and a seventh harmonic as the peak moment. The user will judge it by ear;
+  sound status set back to in-progress until then — `media/the-field/the-field.md`.
+- 2026-10-05 — Morpho-Field composed from scratch after the user rejected two drafts ("son 2 notas que no dan interés";
+  "no puedes dejar una nota sola durante 48 segundos") and asked for research and professional work: complex, deep, a "wow"
+  moment, a story. Researched first (Eno's incommensurable loops, Pärt's tintinnabuli, Reich's chord cycle, Floating Points'
+  seven-note motif in *Promises*, Hopkins' beatless builds) and reused what the user approved in Musica Universalis (one
+  motif, a shared progression, arp/pad breath, free rhythm). The wow is a Fibonacci canon (21:13:8 cycles per statement)
+  that converges at 4:16 after an inhale. Meditative, 6:09. Measured: 470 -> 44 semitone clashes after separating registers.
+  Lesson: the retention rule was written but not applied; `strudel-compose` now has a mandatory listener checklist —
+  `media/the-field/the-field.md`.
+- 2026-10-05 — Morpho-Field renamed **The Field** (`the-field`) by the user, with its narrative in their words: "el campo
+  vibra, genera frecuencias que se organizan en geometría para poder manifestar el todo" (the field vibrates, its vibrations
+  become frequencies, the frequencies organise into geometry, and the geometry manifests the whole). The 4:16 convergence is
+  "the whole"; the last part is "return". The user approved the sound ("una obra de arte"). Visual approved as a plan: a Chladni
+  sand field (each chord a mode), three figures of light from Morpho-Genesis's sacred geometry rising from it at the canon's
+  speeds, lining up at 4:16 while the sand draws Metatron's Cube — `media/the-field/the-field.md`.
+- 2026-10-05 — The Field, first visual REJECTED ("no tiene una dirección de arte definida, son capas superpuestas que no dan
+  una idea de continuidad... cada capa tiene colores diferentes, formas diferentes... muy pobre"). It mixed two visual
+  languages (granular ivory sand + neon line figures), gave each canon voice its own colour (teal, amethyst, gold) and its own
+  shape, and stacked them on separate planes that appeared from nowhere. Lesson: one piece = one art direction — one material,
+  one palette, one light, one continuous transformation; a voice of the music changes the material, it does not get its own
+  overlay. Agree on style frames before building — `media/the-field/the-field.md`.
+- 2026-10-05 — The Field visual, second direction, built with the user's corrections step by step: one material (quartz
+  dust, the same grains throughout — "todo tiene que ser uno con la misma cantidad de arena, no que aparezca de la nada"),
+  one palette (nacre over indigo; gold-and-black and neon both rejected; "colores colores", but "no una caja de M&M": a
+  gradient), deph's HDR look in SDR, 3D camera moves only ("no de un lado a otro"), everything organic ("nada brusco").
+  Figures must be real and change at every note ("no inventadas", "imágenes diferentes"): Chladni modes chosen by frequency,
+  as two-mode responses so they curve (straight grids rejected as "tableros de ta-te-ti"). Finer dust, not spheres; lines with
+  dispersion, not perfect. The fall back to the table was approved ("salió perfecto"); the assembly was rebuilt as its mirror,
+  as mitosis. The flower's cast shadow was rejected — `media/the-field/the-field.md`.
+- 2026-10-05 — The Field approved as final ("es perfecto, kudos... es otra obra de arte"). Final 4K60 render with live progress
+  (render.mjs), YouTube pack ready (series 03). Cover: the series template with the complete Flower of Life; a new optional
+  `bgShift` in VideoThumbnail.tsx moves (and enlarges) the background so a centred subject clears the title —
+  `media/the-field/the-field.youtube.md`.
+- 2026-10-05 — The Field cover: the user chose the flower coming apart (5:13, "el momento donde se está desarmando la flor de la
+  vida... en ese caos") over the complete flower Claude recommended — the cover shows transformation, not the finished form —
+  `media/the-field/the-field.youtube.md`.
+- 2026-10-05 — The Field: the user chose to mention the collaboration with AI in the description ("si se menciona colaboración
+  con IA"), as Musica Universalis did — `media/the-field/the-field.youtube.md`.
+- 2026-10-06 — The Field published on YouTube (https://youtu.be/8QGj_FvP5Xo) as series 03. Social media launch pack created at
+  `media/the-field/the-field.social.md` (Facebook, Instagram, X) with warm, nature-centric invitations to relax and subscribe —
+  `media/the-field/the-field.social.md`, `the-field.yaml`.

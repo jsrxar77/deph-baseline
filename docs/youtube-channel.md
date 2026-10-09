@@ -47,12 +47,12 @@ Primary phrases: "ambient meditation music", "432 Hz music", "binaural beats", "
 
 **EN**
 > This is music, not medical advice or treatment. Binaural layers work only with headphones.
-> deph — generative ambient music and fractal visuals. New pieces in the series: TODO(user: playlist link)
+> deph — generative ambient music and fractal visuals. New pieces in the series: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 > Channel: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 **ES**
 > Esto es música, no consejo ni tratamiento médico. Las capas binaurales solo funcionan con auriculares.
-> deph — música ambient generativa y visuales fractales. Más piezas de la serie: TODO(user: enlace a la lista)
+> deph — música ambient generativa y visuales fractales. Más piezas de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 > Canal: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 ## Recurring hashtags and title pattern
@@ -125,6 +125,29 @@ Help on 2026-09-24 unless marked otherwise.
 - **Upload defaults** (Settings > Upload defaults): category Music, not made for kids, standard license, comments
   on, and the standard description footer pasted as the default description (remembered feature, not verified
   here). Phone-verify the account so custom thumbnails and longer uploads are enabled (remembered, not verified).
+
+## Series playlist (created by the user, 2026-10-05: https://www.youtube.com/playlist?list=PLX0Afm4O4W30)
+
+The user asked for it on 2026-10-05. Claude never touches the channel: the user creates it in YouTube Studio with the text
+below (Studio > Content > Playlists > New playlist, or "Save" > "New playlist" from a video).
+
+- **Title (EN):** `deph — generative ambient` · **title translation (ES):** `deph — ambient generativo`
+- **Visibility:** Public. **Ordering:** Manual, oldest first, so the series reads 01, 02, 03 as numbered on the covers.
+- **Order:**
+  1. Slow Drift (01)
+  2. Musica Universalis (02)
+  3. The Field (03)
+- **Description (EN):**
+  > A series of generative ambient pieces for meditation and quiet focus, each one composed as code and paired with a
+  > visual made from the music itself. Tuned to A = 432 Hz, with a binaural layer — best with headphones. Numbered in the
+  > order they were made: start anywhere, or from 01. This is music, not medical advice or treatment.
+- **Description (ES, as a translation):**
+  > Una serie de piezas de ambient generativo para meditar y concentrarte en calma, cada una compuesta como código y
+  > acompañada de una imagen hecha a partir de la propia música. Afinadas a A = 432 Hz, con una capa binaural — mejor con
+  > auriculares. Numeradas en el orden en que se hicieron: empezá por cualquiera, o por la 01. Esto es música, no consejo
+  > ni tratamiento médico.
+- **Its link** is in the standard footer above and in every pack. Add every new upload to it (it is in the upload checklist), add it as a section on the channel's Home
+  tab, and point the end screens at it once there are enough pieces.
 
 ## Links to show on the channel (recommendation, 2026-09-24)
 

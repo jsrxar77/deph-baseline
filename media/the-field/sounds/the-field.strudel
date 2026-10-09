@@ -1,0 +1,346 @@
+// "the-field" — the field vibrates, its vibrations become frequencies, the frequencies organise into geometry, and the
+// geometry manifests the whole.
+// 184.5 cycles at 30 cpm = 6:09. A lydian, tuned to A4 = 432 Hz. Meditative: no pulse. Binaural layer (headphones).
+//
+// THE STORY
+// The field vibrates: a seven-note motif and the chords that carry it, from the first second. The vibration becomes
+// frequency: the field sings its own overtones, an arpeggio made of the real harmonic series of each chord's root. The
+// frequencies organise into geometry: three voices take up the motif at three speeds in Fibonacci proportion (21, 13 and
+// 8 cycles per statement), entering one after another, crossing and drifting like grains of sand that have not found their
+// place yet. At 4:16 all three arrive at the same instant and the geometry manifests the whole: the motif in three octaves
+// at once, the harmony open, a deep gong. Then the voices drift apart and return to the field, resting on the A it began on.
+//
+// MATERIAL (every voice derives from it)
+// - The motif: E D# C# D# E A G# (degrees 4 3 2 3 4 7 6), seven notes, stepwise, leaning on the lydian D#. Its answer is
+//   the inversion around E: E F# G# F# E B C#.
+// - The tintinnabuli voice (Arvo Pärt): for each motif note, the first tone of the A major triad (A C# E) above it. The
+//   two lines sound as one.
+// - The harmonic cycle (Steve Reich's idea of a chord cycle as the form): 8 chords, 4 cycles (8 s) each, 64 s per turn,
+//   moving by revoicing: Amaj9 - B/A - C#m7 - F#m11 - E6/9 - G#m7 - B/A - Amaj9 (brighter voicing).
+// - The proportional canon: the motif at 21, 13 and 8 cycles per statement (Fibonacci). Starting at 65, 76 and 88, each
+//   voice completes a whole number of statements (3, 4, 5) and all three reach the motif's first note at cycle 128.
+//
+// CHAPTERS
+//   I    Vibration     0:00 - 1:04   cycles   0 -  32   motif + pad at 0:00, sub 0:08, tintinnabuli 0:16, octave 0:32,
+//                                                       answer 0:48
+//   II   Frequency     1:04 - 2:56   cycles  32 -  88   harmonic-series arpeggio, breathing against the pad; motif in
+//                                                       new registers; canon voices enter at 2:10 (21) and 2:32 (13)
+//   III  Geometry      2:56 - 5:04   cycles  88 - 152   third canon voice (8) at 2:56, bells on Fibonacci gaps; inhale
+//                                                       at 4:00 (arp out, filter closes, sub out); THE WHOLE at 4:16
+//   IV   Return        5:04 - 6:09   cycles 152 - 184.5 voices drift apart and leave; the overtones return faintly; the
+//                                                       motif alone one last time; the field rests on A
+
+setcpm(30) // 1 cycle = 2 s
+
+// ---- key and tuning ------------------------------------------------------------------------------------------------
+const ROOT = 'A';
+const KEY_SUFFIX = ':lydian';
+const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX; // scaleAt(4) => "A4:lydian"
+const A4 = 432;
+const TUNE = 12 * Math.log2(A4 / 440);
+const midiOf = (v) => (typeof v === 'string' ? noteToMidi(v) : v); // scale() yields note names
+const tune = (p) => p.withValue((v) => ({ ...v, note: midiOf(v.note) + TUNE }));
+const hz = (midi) => A4 * Math.pow(2, (midi - 69) / 12); // for the Hz-specified voices (same A4, tuned once)
+
+// ---- the motif and its tintinnabuli voice ------------------------------------------------------------------------
+const M = "4 3 2 3 4 7 6 ~";   // E D# C# D# E A G#
+const T = "7 4 4 4 7 9 7 ~";   // first A-major-triad tone above each motif note
+const MI = "4 5 6 5 4 1 2 ~";  // the answer: the motif inverted around E
+const TI = "7 7 7 7 7 2 4 ~";
+
+// ---- the harmonic cycle (one chord per 4 cycles, 32 cycles per turn) ------------------------------------------------
+// Chord symbols, voiced by Strudel's voicing engine: `anchor` keeps every voicing's top note at or below B4 and it picks
+// the inversion closest to the previous chord, so the pad moves by the smallest steps (automatic voice leading). Every
+// note it produces is in A lydian (checked with the inspector). B over the A pedal is the lydian II/I colour.
+const CHORDS = "<A^9 B C#m7 F#m11 E69 G#m7 B A^9>".slow(4);
+const voiced = (anchor) => chord(CHORDS).dict('ireal').anchor(anchor).mode('below').voicing();
+// Bass roots in degrees from A1: A A C# F# E G# A A
+const ROOTS = "<0 0 2 5 4 6 0 0>".slow(4);
+// The arp's overtone root per chord (MIDI): A2 B2 C#3 F#2 E2 G#2 B2 A2. B/A takes B's overtones (A's fifth, E, would rub
+// against the chord's D#).
+const ARP_ROOTS = [45, 47, 49, 42, 40, 44, 47, 45];
+const arpRootHz = cat(...ARP_ROOTS.map((m) => pure(hz(m)))).slow(4);
+// The harmonic series of that root (x2, x3, x4, x6, x8: roots and pure fifths) in free rhythm: uneven lengths (3-2-3-4-2-
+// 3-4-3) over the chord's 4 cycles, a breathing phrase rather than a grid.
+const HARMONICS = "2@3 3@2 4@3 6@4 8@2 6@3 4@4 3@3";
+const GHOSTS = "1@3 [1|0.5]@2 [1|0.5]@3 1@4 [1|0.5]@2 [1|0.5]@3 [1|0.5]@4 [1|0.5]@3";
+
+// ---- the breath: arp and pad in opposite phase (from Musica Universalis) ---------------------------------------------
+const BREATH = 12;
+const SWING = 10 ** (3 / 20);
+const presence = (g, lead) => sine.slow(BREATH).range(lead ? g / SWING : g * SWING, lead ? g * SWING : g / SWING);
+const brightness = (lead) => sine.slow(BREATH).range(lead ? 0.85 : 1.2, lead ? 1.2 : 0.85);
+
+// ---- voices --------------------------------------------------------------------------------------------------------
+
+// Pad: the harmonic cycle on two sawtooth layers 7 cents apart, panned apart: the slow beating between them is the
+// plate's vibration. Each chord is one 4-cycle note with long overlapping tails.
+const pad = (notes, g, cutoff) =>
+  stack(
+    tune(notes).add(note(0.07)).pan(0.3),
+    tune(notes).add(note(-0.07)).pan(0.7)
+  )
+    .s("sawtooth")
+    .attack(2.5).decay(2).sustain(0.7).release(4)
+    .lpf(cutoff)
+    .gain(g)
+    .room(0.7).size(8).orbit(1);
+
+// Sub: the chord roots, a floor that does not beat.
+const sub = (roots, g) =>
+  tune(n(roots).scale(scaleAt(1)))
+    .s("sine")
+    .attack(2).decay(1).sustain(0.9).release(4)
+    .lpf(220)
+    .gain(g);
+
+// Glass: the motif's own timbre — two harmonic FM operators (ratios 2 and 3, no non-scale partials), long non-metric echo.
+const glass = (p, g) =>
+  stack(
+    tune(p).fm(1).fmh(2).gain(g),
+    tune(p).fm(0.5).fmh(3).gain(g).velocity(0.5)
+  )
+    .s("sine")
+    .attack(0.04).decay(1.2).sustain(0.25).release(4)
+    .fmattack(0.012).fmdecay(0.4).fmsustain(0.08).fmenv('exp')
+    .lpf(3600)
+    .pan(sine.slow(10).range(0.35, 0.65))
+    .delay(0.3).delaytime(1.13).delayfeedback(0.45)
+    .room(0.85).size(9).orbit(2);
+
+// Tintinnabuli: a soft sine under the motif, same reverb.
+const tint = (p, g) =>
+  tune(p)
+    .s("sine")
+    .attack(0.1).decay(2).sustain(0.3).release(4)
+    .gain(g)
+    .pan(sine.slow(10).range(0.65, 0.35))
+    .room(0.85).size(9).orbit(2);
+
+// One motif statement over 8 cycles: `line`/`tline` are the motif strings, `oct` the octave, `withT` adds the
+// tintinnabuli voice.
+const statement = (line, tline, oct, g, withT) =>
+  withT
+    ? stack(glass(n(line).scale(scaleAt(oct)).slow(8), g), tint(n(tline).scale(scaleAt(oct)).slow(8), g * 0.55))
+    : glass(n(line).scale(scaleAt(oct)).slow(8), g);
+
+// In Frequency the motif is heard "resonating": each note answered half a second later by its octave (its second
+// harmonic), softer. echoWith makes the answer a real event (unlike the delay), so it shows up in frames.json for the
+// video. Only the octave: echoWith applies its function cumulatively, and a chained fifth takes the motif's D# to A, the
+// mode's one tritone.
+const resonating = (line, oct, g) =>
+  glass(
+    n(line).slow(8)
+      .echoWith(2, 1 / 4, (p) => p.add(n(7)).velocity(0.55))
+      .scale(scaleAt(oct)),
+    g,
+  );
+
+// Arp: the harmonic series of each chord's root, in free rhythm, 0-20 ms human timing, ghost notes, ping-pong pan.
+// Now and then (15% of notes, chosen by Strudel's deterministic randomness) a note leaps to the next octave of the
+// series — the plate jumping to a higher mode.
+const arp = (g, cutoff) =>
+  freq(HARMONICS.slow(4).mul(arpRootHz))
+    .sometimesBy(0.15, (p) => p.withValue((v) => ({ ...v, freq: v.freq * 2 })))
+    .late(rand.segment(16).range(0, 0.01))
+    .s("triangle")
+    .attack(0.03).decay(rand.range(1, 1.6)).sustain(0.12).release(3)
+    .velocity(perlin.slow(6).range(0.5, 1).mul(GHOSTS.slow(4)))
+    .lpf(cutoff)
+    .gain(g)
+    .pan("0.3 0.7")
+    .delay(0.35).delaytime(1.13).delayfeedback(0.45)
+    .room(0.3).size(3).orbit(3);
+
+// The canon: the motif stretched over `dur` cycles per statement, repeated.
+const canonLine = (dur, oct) => n(M).scale(scaleAt(oct)).slow(dur);
+
+// Canon voice 21 — the cantus, low and warm (sine + a little triangle), with a slow vibrato.
+const cantus = (p, g) =>
+  stack(tune(p).s("sine").gain(g), tune(p).s("triangle").gain(g).velocity(0.35))
+    .attack(0.4).decay(3).sustain(0.5).release(5)
+    .vib(4).vibmod(0.04)
+    .lpf(1400)
+    .pan(0.45)
+    .room(0.7).size(7).orbit(4);
+
+// Canon voice 13 — the middle voice, soft triangle.
+const middle = (p, g) =>
+  tune(p)
+    .s("triangle")
+    .attack(0.08).decay(2.5).sustain(0.3).release(4)
+    .lpf(2000)
+    .gain(g)
+    .pan(0.6)
+    .room(0.6).size(6).orbit(5);
+
+// Canon voice 8 — the fastest, high glass (shares the glass voice's reverb; the lead is silent while it sings).
+const high = (p, g) => glass(p, g);
+
+// Bells: struck, two inharmonic FM operators at a low index (ratios 1.4 and 2.4, the user's choice of a real bell
+// colour), explicit decay, fmattack never 0. Pitches: the cycle of fifths through A lydian; onsets on Fibonacci gaps.
+// Mirrored with jux(rev): the left ear hears the line forward, the right ear hears it backward — a bilateral symmetry,
+// the geometry made audible.
+const bellNotes = n("7 4 1 5 2 6 3 7 4 1 5 2 6 3 7 4").scale(scaleAt(6)).struct("t t t f t f f t f f f f t f f f").slow(16);
+const mirroredBell = (p, g) => bell(p, g).jux(rev);
+const bell = (p, g) =>
+  stack(
+    tune(p).fm(1.2).fmh(1.4).gain(g),
+    tune(p).fm(0.6).fmh(2.4).gain(g).velocity(0.5)
+  )
+    .s("sine")
+    .fmattack(0.012).fmdecay(0.35).fmsustain(0.06).fmenv('exp')
+    .attack(0.012).decay(2.2).sustain(0).release(2.5)
+    .pan(perlin.slow(5).range(0.25, 0.75))
+    .room(0.5).size(6).orbit(6);
+
+// Binaural: a sine hard-left and one hard-right around A3 (216 Hz), `beat` Hz apart, dry, retriggered every 4 cycles.
+const CARRIER = A4 / 2;
+const binaural = (beat, g) =>
+  stack(freq(CARRIER - beat / 2).s("sine").pan(0), freq(CARRIER + beat / 2).s("sine").pan(1))
+    .slow(4)
+    .attack(3).decay(1).sustain(1).release(5)
+    .gain(g);
+
+// ---- arrangement ---------------------------------------------------------------------------------------------------
+// The harmony voices (pad, sub, arp) run continuously for 160 cycles (5 turns of the chord cycle) so the progression never
+// restarts mid-turn; only their level and filter are arranged. The last 24.5 cycles rest on A.
+const REST = 24.5; // 160 -> 184.5
+
+// Pad
+$: arrange(
+  // From cycle 64 (a new turn of the chord cycle) the pad moves down, at or below C#4, so the canon voices sing above
+  // it in three clear octaves instead of rubbing against its sustained E and D# (measured: 144 semitone clashes before).
+  [160, pad(arrange([64, voiced("B4")], [96, voiced("C#4")]),
+    arrange(
+      [32, saw.slow(32).range(0.035, 0.07)],     // I: rising from the first second
+      [56, presence(0.075, false)],               // II: breathing against the arp
+      [32, pure(0.08)],                           // III
+      [8, isaw.slow(8).range(0.045, 0.08)],       // inhale (4:00)
+      [16, pure(0.1)],                            // CONVERGENCE (4:16)
+      [8, isaw.slow(8).range(0.08, 0.1)],
+      [8, isaw.slow(8).range(0.065, 0.08)],
+    ),
+    arrange(
+      [32, sine.slow(16).range(700, 1300)],
+      [56, brightness(false).mul(1500)],
+      [32, pure(1800)],
+      [8, isaw.slow(8).range(500, 1800)],         // the filter closes before the convergence
+      [16, pure(3200)],                           // and opens wide on it
+      [8, isaw.slow(8).range(2000, 3200)],
+      [8, isaw.slow(8).range(1600, 2000)],
+    ))],
+  [REST, pad(chord("A^9").dict('ireal').anchor("C#4").mode('below').voicing().slow(4), isaw.slow(REST).range(0, 0.065), isaw.slow(REST).range(500, 1600))],
+)
+
+// Sub
+$: arrange(
+  [160, sub(ROOTS,
+    arrange(
+      [4, pure(0)],
+      [28, saw.slow(28).range(0.06, 0.14)],       // enters at 0:08
+      [56, pure(0.15)],
+      [32, pure(0.16)],
+      [4, pure(0.16)],
+      [4, isaw.slow(4).range(0, 0.16)],           // leaves just before the convergence...
+      [16, pure(0.2)],                            // ...and lands on it
+      [8, pure(0.16)],
+      [8, pure(0.15)],
+    ))],
+  [REST, sub("0".slow(4), isaw.slow(REST).range(0, 0.15))],
+)
+
+// Arp: the overtone series, in Frequency; steps back in Geometry; out for the inhale and the convergence; a faint memory
+// at the start of the rest.
+$: arrange(
+  [160, arp(
+    arrange(
+      [32, pure(0)],
+      [8, saw.slow(8).range(0, 0.06)],
+      [48, presence(0.07, true)],
+      [24, pure(0.05)],
+      [8, isaw.slow(8).range(0, 0.05)],
+      [32, pure(0)],
+      [8, saw.slow(8).range(0, 0.025)],
+    ),
+    arrange(
+      [32, pure(1200)],
+      [56, brightness(true).mul(1800)],
+      [32, pure(1500)],
+      [32, pure(1200)],
+      [8, pure(1100)],
+    ))],
+  [REST, silence],
+)
+
+// Glass lead: the motif from the first second, then new registers and the answer; silent while the canon sings; once
+// more, alone, at the end.
+$: arrange(
+  [8, statement(M, T, 4, 0.045, false)],        // 0:00 the hook (E5-A5, above the pad)
+  [8, statement(M, T, 4, 0.05, true)],          // 0:16 with the tintinnabuli voice
+  [8, statement(M, T, 5, 0.035, false)],        // 0:32 an octave up
+  [8, statement(MI, TI, 4, 0.05, true)],        // 0:48 the answer
+  [8, silence],
+  [8, resonating(M, 4, 0.04)],                   // 1:20 the motif resonating in its overtones
+  [8, silence],
+  [8, resonating(MI, 4, 0.04)],                  // 1:52 the answer, resonating
+  [8, silence],
+  [8, statement(M, T, 4, 0.04, true)],          // 2:24
+  [8, silence],
+  [64, silence],                                // Geometry: the canon carries the motif
+  [16, silence],
+  [8, statement(M, T, 4, 0.04, true)],          // 5:36 the last statement
+  [8.5, glass(n("0").scale(scaleAt(4)).slow(4), 0.03)], // the A
+)
+
+// Canon voice 21 (cantus): 3 statements from 2:10, the convergence, then drifting away.
+$: arrange(
+  [65, silence],
+  [63, cantus(canonLine(21, 3), 0.05)],
+  [16, cantus(canonLine(8, 3), 0.055)],         // CONVERGENCE: all three voices at 8 cycles, in three octaves
+  [24, cantus(canonLine(21, 3), isaw.slow(24).range(0, 0.05))],
+  [16.5, silence],
+)
+
+// Canon voice 13 (middle): 4 statements from 2:32.
+$: arrange(
+  [76, silence],
+  [52, middle(canonLine(13, 4), 0.04)],
+  [16, middle(canonLine(8, 4), 0.045)],
+  [16, middle(canonLine(13, 4), isaw.slow(16).range(0, 0.04))],
+  [24.5, silence],
+)
+
+// Canon voice 8 (high): 5 statements from 2:56.
+$: arrange(
+  [88, silence],
+  [40, high(canonLine(8, 5), 0.035)],
+  [16, high(canonLine(8, 5), 0.04)],
+  [8, high(canonLine(8, 5), isaw.slow(8).range(0, 0.035))],
+  [32.5, silence],
+)
+
+// Bells on Fibonacci gaps: from 3:12, out for the inhale, back on the convergence, fading.
+$: arrange(
+  [96, silence],
+  [24, mirroredBell(bellNotes, 0.03)],
+  [8, silence],
+  [16, mirroredBell(bellNotes, 0.035)],
+  [16, mirroredBell(bellNotes, isaw.slow(16).range(0, 0.03))],
+  [24.5, silence],
+)
+
+// The convergence: a deep gong — A1 and E2 (root and fifth; no third to rub), struck once at 4:16.
+$: arrange(
+  [128, silence],
+  [4, bell(n("[0,4]").scale(scaleAt(1)).struct("t ~ ~ ~").slow(4), 0.06)],
+  [52.5, silence],
+)
+
+// Binaural: 7 Hz in Vibration, 6 in Frequency, 5 in Geometry, 4 in the rest.
+$: arrange(
+  [32, binaural(7, 0.03)],
+  [56, binaural(6, 0.035)],
+  [64, binaural(5, 0.04)],
+  [32.5, binaural(4, 0.03)],
+)

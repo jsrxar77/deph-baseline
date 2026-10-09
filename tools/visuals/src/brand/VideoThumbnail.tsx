@@ -23,6 +23,8 @@ export type ThumbnailProps = {
   weight: number;
   tracking: string; // letter-spacing of the title
   titleSize: number;
+  bgShift?: number; // optional: move the background right by this fraction of the width, enlarged so it still covers the frame (keeps a centred subject clear of
+  // the title); 0 by default, so earlier covers are unchanged
 };
 
 const RingMark: React.FC<{ size: number }> = ({ size }) => (
@@ -47,11 +49,13 @@ const UI = '"Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif';
 // via makeThumbnail(<its visual component>) rather than this file importing any one piece directly — the layout
 // changes once, for all; only the background differs.
 export const makeThumbnail = (Background: React.ComponentType): React.FC<ThumbnailProps> =>
-  ({ lines, facts, series, momentSeconds, font, weight, tracking, titleSize }) => (
+  ({ lines, facts, series, momentSeconds, font, weight, tracking, titleSize, bgShift = 0 }) => (
   <AbsoluteFill style={{ backgroundColor: "#050508" }}>
-    <Sequence from={-momentSeconds * FPS}>
-      <Background />
-    </Sequence>
+    <AbsoluteFill style={{ transform: `translateX(${bgShift * 100}%) scale(${1 + 2 * bgShift})` }}>
+      <Sequence from={-momentSeconds * FPS}>
+        <Background />
+      </Sequence>
+    </AbsoluteFill>
     <AbsoluteFill
       style={{
         background:

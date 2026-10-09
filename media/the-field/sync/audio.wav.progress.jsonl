@@ -1,0 +1,13 @@
+{"t":"2026-10-05T05:50:23.051Z","stage":"rendering","progress":0.08,"renderedSeconds":30,"elapsedMs":58325}
+{"t":"2026-10-05T05:51:20.955Z","stage":"rendering","progress":0.16,"renderedSeconds":60,"elapsedMs":116229}
+{"t":"2026-10-05T05:52:20.797Z","stage":"rendering","progress":0.24,"renderedSeconds":90,"elapsedMs":176071}
+{"t":"2026-10-05T05:53:20.869Z","stage":"rendering","progress":0.32,"renderedSeconds":120,"elapsedMs":236143}
+{"t":"2026-10-05T05:54:17.077Z","stage":"rendering","progress":0.4,"renderedSeconds":150,"elapsedMs":292351}
+{"t":"2026-10-05T05:55:17.373Z","stage":"rendering","progress":0.48,"renderedSeconds":180,"elapsedMs":352647}
+{"t":"2026-10-05T05:56:20.374Z","stage":"rendering","progress":0.56,"renderedSeconds":210,"elapsedMs":415648}
+{"t":"2026-10-05T05:57:23.744Z","stage":"rendering","progress":0.64,"renderedSeconds":240,"elapsedMs":479018}
+{"t":"2026-10-05T05:58:26.931Z","stage":"rendering","progress":0.72,"renderedSeconds":270,"elapsedMs":542205}
+{"t":"2026-10-05T05:59:29.703Z","stage":"rendering","progress":0.8,"renderedSeconds":300,"elapsedMs":604977}
+{"t":"2026-10-05T06:00:34.247Z","stage":"rendering","progress":0.88,"renderedSeconds":330,"elapsedMs":669521}
+{"t":"2026-10-05T06:01:40.489Z","stage":"rendering","progress":0.96,"renderedSeconds":360,"elapsedMs":735763}
+{"t":"2026-10-05T06:02:13.516Z","stage":"done","progress":1,"renderedSeconds":375,"elapsedMs":768790}

@@ -1,0 +1,25 @@
+name: morpho-genesis
+title: Morpho-Genesis
+created: 2026-10-04
+key: F#:lydian
+tempo:
+  cpm: 30 # setcpm(30) in sounds/morpho-genesis.strudel — 1 cycle = 2s.
+arc:
+  - { name: intro, cycles: 90 } # 0:00 - 3:00 (180s) — Pure primordial vibration, sub drone in F#, 6 Hz Theta
+  - { name: development, cycles: 160 } # 3:00 - 8:20 (320s) — Frequency differentiation, F# Lydian chords, FM bells
+  - { name: climax, cycles: 275 } # 8:20 - 17:30 (550s) — Sacred Geometry, Fibonacci loops, 120-cycle Shepard rise
+  - { name: deceleration, cycles: 130 } # 17:30 - 21:50 (260s) — Geometric untangling & celestial dissolution
+  - { name: outro, cycles: 69.5 } # 21:50 - 24:09 (139s) — Dissolution to pure primordial sine vibration, 4 Hz Delta
+total_cycles: 724.5 # 1449s = 24:09 exact, at cpm 30 (724.5 * 2s = 1449s)
+domains:
+  sound:
+    status: done
+    source: strudel
+    file: sounds/morpho-genesis.strudel
+  visual:
+    status: planned
+    entry: tools/visuals/src/compositions/morpho-genesis/
+  sync:
+    status: not-built
+    output: sync/
+doc: morpho-genesis.md

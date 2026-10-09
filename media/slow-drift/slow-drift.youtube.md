@@ -46,7 +46,7 @@ ABOUT THE MAKING
 Written as code with Strudel, rendered to audio, and paired with a fractal visual made with Remotion. The slow, looping harmony is inspired by Brian Eno's tape-loop pieces.
 
 This is music, not medical advice or treatment. Binaural layers work only with headphones.
-deph — generative ambient music and fractal visuals. New pieces in the series: TODO(user: playlist link)
+deph — generative ambient music and fractal visuals. New pieces in the series: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 Channel: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 #ambientmusic #meditationmusic #432hz #binauralbeats #generativemusic #fractal
@@ -76,7 +76,7 @@ SOBRE LA CREACIÓN
 Escrita como código con Strudel, renderizada a audio y acompañada de un visual fractal hecho con Remotion. La armonía lenta y en bucle se inspira en las piezas de bucles de cinta de Brian Eno.
 
 Esto es música, no consejo ni tratamiento médico. Las capas binaurales solo funcionan con auriculares.
-deph — música ambient generativa y visuales fractales. Más piezas de la serie: TODO(user: enlace a la lista)
+deph — música ambient generativa y visuales fractales. Más piezas de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 Canal: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 #ambientmusic #meditationmusic #432hz #binauralbeats #generativemusic #fractal
