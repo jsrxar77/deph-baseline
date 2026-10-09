@@ -10,20 +10,31 @@ import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer"
 // Rendered with:  npx remotion still deph-avatar --output=../../docs/youtube-channel/avatar.jpg
 const FPS = 60;
 const FRACTAL_MOMENT_SECONDS = 300; // same moment as the banner: no bell pulse active
-const SRC = "deph-avatar-source.jpg";
+const DEFAULT_SRC = "deph-avatar-source.jpg";
+const DEFAULT_MASK = "deph-avatar-mask.png";
+
+// Props (all optional; defaults reproduce the original avatar): another portrait and its cutout mask from
+// public/, and whether to apply the face soft focus (off for crisp comic-style portraits).
+//   npx remotion still deph-avatar --props='{"src":"x.jpg","mask":"x-mask.png","softFocus":false}' --output=...
+export type ChannelAvatarProps = { src?: string; mask?: string; softFocus?: boolean };
 
 const FACE_MASK = "radial-gradient(ellipse 30% 42% at 50% 53%, #000 45%, transparent 100%)"; // soft-focus zone
-const PORTRAIT_CUTOUT = `url(${staticFile("deph-avatar-mask.png")})`;
 
 const fill: React.CSSProperties = { width: "100%", height: "100%", objectFit: "cover" };
-const cutout: React.CSSProperties = {
-  WebkitMaskImage: PORTRAIT_CUTOUT,
-  maskImage: PORTRAIT_CUTOUT,
-  WebkitMaskSize: "100% 100%",
-  maskSize: "100% 100%",
-};
 
-export const ChannelAvatar: React.FC = () => (
+export const ChannelAvatar: React.FC<ChannelAvatarProps> = ({
+  src: SRC = DEFAULT_SRC,
+  mask = DEFAULT_MASK,
+  softFocus = true,
+}) => {
+  const PORTRAIT_CUTOUT = `url(${staticFile(mask)})`;
+  const cutout: React.CSSProperties = {
+    WebkitMaskImage: PORTRAIT_CUTOUT,
+    maskImage: PORTRAIT_CUTOUT,
+    WebkitMaskSize: "100% 100%",
+    maskSize: "100% 100%",
+  };
+  return (
   <AbsoluteFill style={{ backgroundColor: "#050508" }}>
     {/* 1. background: the fractal, slightly defocused and darkened so the figure stays the subject */}
     <AbsoluteFill style={{ filter: "blur(2.5px) brightness(0.8) saturate(1.05)" }}>
@@ -42,11 +53,11 @@ export const ChannelAvatar: React.FC = () => (
     </AbsoluteFill>
 
     {/* 3. face: soft focus (a blurred copy over the sharp one), slightly warmer and lifted */}
-    <AbsoluteFill style={cutout}>
+    {softFocus && <AbsoluteFill style={cutout}>
       <AbsoluteFill style={{ WebkitMaskImage: FACE_MASK, maskImage: FACE_MASK, opacity: 0.55 }}>
         <Img src={staticFile(SRC)} style={{ ...fill, filter: "blur(3px) contrast(0.9) brightness(1.06) saturate(0.92)" }} />
       </AbsoluteFill>
-    </AbsoluteFill>
+    </AbsoluteFill>}
 
     {/* 4. gentle vignette toward the circle's edge */}
     <AbsoluteFill
@@ -54,3 +65,4 @@ export const ChannelAvatar: React.FC = () => (
     />
   </AbsoluteFill>
 );
+};

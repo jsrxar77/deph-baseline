@@ -4,7 +4,7 @@ import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer"
 
 // deph's YouTube channel banner (2560x1440, YouTube's recommended size). A single still: a frame of the
 // Slow Drift fractal as full-bleed background, softly darkened in the middle so the text reads, with the
-// channel name and tagline inside YouTube's safe area (about 1544x423 at this size, centered — the part
+// channel name ("deph") and "ambient" (deph ambient = deep phase ambient) inside YouTube's safe area (about 1544x423 at this size, centered — the part
 // visible on every device). Rendered with:
 //   npx remotion still deph-banner --output=../../docs/youtube-channel/banner.jpg
 // Pick a moment with no bell pulse active (see bellPulses.ts): 300 s is 12.5 s after the last bell.
@@ -51,7 +51,7 @@ export const ChannelBanner: React.FC = () => (
           textShadow: "0 0 30px rgba(5,5,8,0.7)",
         }}
       >
-        generative ambient
+        ambient
       </div>
     </AbsoluteFill>
   </AbsoluteFill>
