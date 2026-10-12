@@ -294,3 +294,12 @@ options directly to the APIs") — Rspack, the Tailwind `bundlerOverride`, `chro
 needs it, see above), `pixelFormat: "yuv420p"` and `colorSpace: "bt709"` (YouTube's limited-range BT.709, see
 "Encoding for YouTube" above). If `remotion.config.ts` ever gains a new setting, mirror it here too, in the
 `renderMedia()`/`bundle()` call, or this script silently drifts from what the CLI would have produced.
+
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: "creation torus señal", "Remotion ANGLE WebGL", "codec color YouTube", "Audio from", "progreso de render", y "GLSL" antes de escribir un shader nuevo.
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** `record_work` de la composición (qué se construyó, cómo se verificó el render real con ffprobe y stills).
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.

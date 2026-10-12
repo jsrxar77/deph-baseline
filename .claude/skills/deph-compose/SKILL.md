@@ -122,3 +122,12 @@ fixes the decisions, the domain skills fix the resulting facts.
 ## File layout
 
 See `CLAUDE.md`'s "File layout" section for the full project-wide rule this skill implements.
+
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: "layout naming symlink" (solo si el pedido cambia estructura o dónde vive algo), y las decisiones de composiciones previas si el arco o la key se parecen.
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** `record_work` corto por composición nueva: dominios elegidos, key, arco y duración, y por qué.
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.

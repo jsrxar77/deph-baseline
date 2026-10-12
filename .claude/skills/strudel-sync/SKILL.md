@@ -112,3 +112,12 @@ whether the render surfaced anything that should update other fields too — e.g
 in from the same `setcpm()` reading used for the time conversion, rather than leaving the yaml stale next
 to a finished render. See `deph-compose`'s "Hand off" section for this rule stated once, canonically —
 every domain skill keeps the *whole* yaml current, not just its own corner.
+
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: "frames.mjs conversión de tiempo", "master LUFS YouTube", "render headless Strudel".
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** `record_work` con las mediciones (LUFS, true peak, alineamiento de onsets) y cualquier rareza del render.
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.

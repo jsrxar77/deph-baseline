@@ -118,6 +118,15 @@ How to use this file:
 - Slow Drift's YouTube pack is drafted (`slow-drift.youtube.md`) but waits on the user: primary language, channel/links,
   thumbnail choice and text, AI-tools transparency line, publish date.
 
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: "rechazado no repetir [tipo de idea]", "decisión creativa [pieza o dominio]", "registros voces choques semitono". Cruza el "Rejected ideas" de este skill con lo que haya en el vault.
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** **tras cada decisión creativa guiada por el usuario**, además del append al log de abajo (que sigue siendo la fuente de verdad), `record_work` con la decisión, la alternativa descartada y el por qué. Es automático, no hace falta que el usuario lo pida.
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.
+
 ## Decision log (append newest at the bottom)
 
 Entry format: `date — decision — reason/evidence — where it lives`.

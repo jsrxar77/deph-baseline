@@ -345,3 +345,12 @@ composition's actual video code living in `tools/visuals/src/compositions/<name>
 see the `visuals-compose` skill for why). Once a piece is finished, its audio + video keyframes get
 rendered to `media/<name>/sync/` — see the `strudel-sync` skill and `docs/sync-pipeline.md` for that
 pipeline; this skill only covers composing the piece itself.
+
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: "listener checklist", "mini-notación comillas simples", "orbit reverb", "FM parciales escala", "tuning 432".
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** `record_work` del resumen de la pieza (voces, arco, problemas hallados y cómo se midieron con el inspector).
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.

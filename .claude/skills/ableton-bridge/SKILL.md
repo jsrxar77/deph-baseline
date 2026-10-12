@@ -87,3 +87,12 @@ In short:
   +15 ms, not 0. Tolerance is 35 ms.
 - `frames.mjs --audio` reads the duration from a plain 44-byte WAV header. Always convert Ableton's export with
   the ffmpeg line; don't copy it as-is.
+
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: "MIDI export pitch bend drones", "tuning Surge XT", "Ableton MCP límites".
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** `record_work` de lo hecho (qué pista/plugin, qué mix volvió, cómo se verificó el alineamiento con `align-check.mjs`).
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.

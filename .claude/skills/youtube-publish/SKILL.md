@@ -128,3 +128,12 @@ Source video: media/<name>/renders/<name>.mp4 (<duration>, <resolution>, <LUFS>)
 
 Set `domains.publish.status: published`, add the URL and date to the pack and yaml, and add a `deph-style`
 log entry with anything learned (what performed, what to change next time).
+
+## Memoria compartida (vault `hologrowth-brain`, MCP `om`)
+
+**Antes de empezar:** `recall` (sin filtro) y luego `search` con: reglas del canal (432 Hz y binaural como hechos, divulgación de IA, nunca subir, sin links a playlists), "YouTube reglas verificadas", "chapters tags descripción límites".
+`recall` primero: `search` puede devolver vacío aunque la memoria exista. Si algo esperado no aparece, correr `health` antes de concluir que no hay registro.
+Decir en el plan qué volvió: las decisiones registradas en las que se apoya el trabajo, lo que va *en contra*, o "no hay nada registrado sobre esto". Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar o preguntar al usuario.
+
+**Al terminar:** `record_work` del estado del pack y las decisiones abiertas. Al re-verificar una regla de YouTube, `remember` con la fecha. Después de publicar, registrar los resultados (CTR, retención, búsquedas) si dicen algo para la próxima pieza.
+`remember` solo si la lección le serviría a alguien en **otro** proyecto: `scope: "project"` con `projects: ["deph-baseline"]`, o `scope: "platform"` para una rareza de Remotion/Strudel/GLSL/Ableton, con `confidence` honesta (`verified` + `verification` solo si se probó). Nunca secretos ni datos personales. El repo sigue siendo la fuente de verdad de lo suyo; el vault no copia el skill.
