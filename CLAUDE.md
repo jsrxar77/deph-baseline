@@ -285,3 +285,33 @@ modulated bass (they are not reliable kick detection) — the user's ear confirm
 - `eval-strudel.mjs` re-implements the small part of the browser REPL that `$:` labels, `setcpm`/`setcps`,
   `all` and `_$:` muting need — shared by every script that evaluates a `.strudel` file, so a Strudel
   update that adds REPL-level behavior only needs fixing in this one place.
+
+## Memoria compartida de Hologrowth (vault `hologrowth-brain`, MCP `om`)
+
+Las decisiones, aprendizajes y contexto que cruzan proyectos viven fuera de este repo, en el vault `~/Projects/hologrowth-brain`, accesible por el servidor MCP `om`. Este repo sigue siendo la fuente de verdad de lo suyo (`media/<name>/`, `docs/`, los skills); el vault guarda el **por qué** y lo que sirve para otros proyectos.
+
+- **`search`**: el registro escrito (por qué se eligió algo, qué se descartó, contra qué restricción). **Empezar acá.**
+- **`expand`**: links y backlinks de una nota conocida; más barato que volver a buscar.
+- **`recall`**: lecciones durables con alcance a este proyecto. Al principio vuelve vacío: eso **no** significa que no haya registro.
+- **`health`**: cuando algo que debería estar no aparece (todas las fallas se ven igual desde afuera: sin resultados).
+
+Consultar el vault antes de cambiar:
+
+- el pipeline de render o de audio: `render.mjs` (sonido y Remotion), `master.mjs`, `frames.mjs`, y los ajustes de codec o color de `remotion.config.ts`
+- dónde vive el código de una composición: carpetas entre `media/` y `tools/`, el symlink `visuals`, los archivos de `tools/visuals/public/`
+- shaders, WebGL o la firma visual (creation torus): `HdrCanvas`, trazos tipo cometa, cualquier GLSL nuevo
+- afinación y tuning: A=432 Hz, la capa binaural, el export MIDI con pitch bend, los archivos de escala de Surge XT
+- las reglas de publicación en YouTube: cómo se afirma 432 Hz y binaural, la divulgación de colaboración con IA, chapters, tags, límites de la descripción
+
+Si el vault y este repo no coinciden, el vault tiene el *por qué*: reconciliar antes de cambiar comportamiento, y preguntar al usuario si la duda sigue.
+
+**Decir qué volvió**, en lo que se escriba antes de implementar (plan o propuesta): nombrar las decisiones registradas en las que se apoya el trabajo, lo que encontraste en *contra* del enfoque, y un "no hay nada registrado sobre esto" explícito cuando el vault está vacío.
+
+### Registrar lo que se aprende
+
+La prueba es si le serviría a alguien trabajando en **otro** proyecto.
+
+- **`remember`**: lección durable (una restricción descubierta, una trampa que costó tiempo, una regla que generaliza). Poner `confidence` (`verified` / `inferred` / `unverified`) con honestidad y `verification` si es `verified`. Para algo de este repo: `scope: "project"` con `projects: ["deph-baseline"]`. Para una rareza de una herramienta o plataforma (Remotion, Strudel, GLSL): `scope: "platform"` antes que `"general"`.
+- **`record_work`**: lo que pasó acá: cambios, decisiones y alternativas descartadas, qué se aprendió, qué queda abierto, cómo se verificó.
+
+Nunca registrar secretos, contenido de `.env` ni datos personales en el vault.
