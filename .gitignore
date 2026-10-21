@@ -26,6 +26,11 @@ media/*/daw/**/*.wav
 media/*/daw/**/*.aif
 media/*/daw/**/*.aiff
 media/*/daw/**/Backup/
+media/*/ableton/**/*.wav
+media/*/ableton/**/*.aif
+media/*/ableton/**/*.aiff
+media/*/ableton/**/Backup/
 # Ableton's per-file analysis data (next to any audio it has seen) and macOS folder-icon files.
 *.asd
 Icon?
+

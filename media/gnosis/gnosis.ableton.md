@@ -76,21 +76,62 @@ Si abres tu plantilla estándar de 8 canales (`Strudel Temaplte.als`) o creas la
 * **Preset sugerido**: En Serum 2 → `Factory/Soundscape/` → **`SC - Astral Projection.SerumPreset`** (o `SC - Memories of Etheric Lights.SerumPreset`).
 * **Fader sugerido**: `-11.0 dB`.
 
-### Pista 7: Voz de la Revelación / Solo Lead (`tracks/07-binaural.mid`)
-* **Rol**: Canto lírico en los momentos de mayor elevación y clímax (Fases III y IV).
+### Pista 7: Capa Binaural Theta 6 Hz (`tracks/07-binaural.mid` o audio)
+* **Rol**: Inducción a ondas cerebrales Theta (6 Hz) para meditación profunda lúcida, calibrada a A4 = 432 Hz ($D_4 = 288.33\text{ Hz}$, $285.33\text{ Hz L} / 291.33\text{ Hz R}$).
+* **Instrumento / Dispositivo**: **Utility** (Audio) o generador estéreo dual de senoides sin procesar.
+* **Regla de oro**: Mantener **100% SECA** (sin Reverb ni Delay), para preservar la fase y la separación estéreo estricta requerida por el cerebro.
+* **Fader sugerido**: `-16.0 dB`.
+
+### Pista 8: Voz de la Revelación / Solo Lead (`tracks/08-solo-lead.mid`)
+* **Rol**: Canto lírico monofónico que emerge con gracia en los momentos de elevación.
 * **Instrumento**: **Serum 2**.
 * **Preset sugerido**: En Serum 2 → `Factory/Lead/` → **`LD - Analog Glow.SerumPreset`**.
-* **Ajuste clave**: Modo Legato / Mono activado con Portamento suave (entre 60 y 120 ms).
-* **Fader sugerido**: `-6.0 dB`.
+* **Ajuste clave**: Modo Mono / Legato con Portamento suave (80–120 ms), ataque suave de 1.5s y release de 5.5s con amplio delay.
+* **Fader sugerido**: `-12.0 dB`.
 
 ---
 
-## 🎧 Capa Binaural Theta (6 Hz @ 432 Hz)
+## 🌊 Configuración Vital de los Sintetizadores para Evitar Cortes (Respiración Continua)
 
-Para la capa de ondas Theta (6 Hz) de inducción meditativa:
-1. Crea una pista de audio en Ableton.
-2. Puedes importar el stem generado de Strudel (`media/gnosis/sync/binaural-stem.wav`) o generarlo en Ableton con dos osciladores puros (uno a 285.33 Hz en el canal L y otro a 291.33 Hz en el canal R).
-3. **Regla de oro**: Mantén esta capa completamente **SECA** (sin Reverb ni Delay), ya que los efectos espaciales mezclan los canales izquierdo y derecho y destruyen el efecto psicoacústico binaural.
+Para que el **Primordial Drone (Pista 1)** y el **Pleroma Pad (Pista 4)** "vayan y vengan" en mareas sin cortarse jamás:
+1. **Surge XT (Pista 1 y Pista 2)**:
+   * **Play Mode** (arriba a la izquierda): Configúralo en **`Poly`** (8 o 16 voces). Esto permite que cada marea de notas solape acústicamente con la siguiente sin cortar la cola de la anterior.
+   * **Amp EG**:
+     * **Attack**: $\approx 3.0\text{ s}$
+     * **Sustain**: $100\%$ (o $0.0\text{ dB}$)
+     * **Release**: $\approx 8.0\text{ s}$ a $12.0\text{ s}$
+2. **Serum 2 (Pista 4 - Pleroma Pad)**:
+   * **ENV 1 (Amp)**:
+     * **Attack**: $\approx 3.5\text{ s}$
+     * **Sustain**: $100\%$
+     * **Release**: $\approx 8.0\text{ s}$
+   * **Polyphony**: Asegúrate de que esté en $\ge 4$ voces para crossfade natural.
+
+---
+
+## 🎛️ Cadena de Masterización en el Bus Master de Ableton Live
+
+Para masterizar la pieza completa y alcanzar el estándar meditativo de **-16 LUFS integrados** y **-1.0 dBTP de techo**:
+
+Carga en la pista **Master** de Ableton los siguientes 3 efectos en orden:
+
+### 1. EQ Eight (Limpieza Quirúrgica y Aire)
+* **Banda 1 (Corte Grave)**: Tipo *High Pass 4x* (48 dB/oct) fijado en **`25 Hz`** (elimina sub-rumble inaudible sin tocar la nota fundamental D1 en 36.7 Hz).
+* **Banda 3 (Resonancia)**: Tipo *Bell* en **`320 Hz`**, Ganancia en **`-1.2 dB`**, Q en **`0.8`** (limpia la acumulación de frecuencias medias bajas para máxima claridad).
+* **Banda 7 (Aire Cósmico)**: Tipo *High Shelf* en **`11.5 kHz`**, Ganancia en **`+0.8 dB`** (aporta luminosidad sedosa y apertura al campo estéreo).
+
+### 2. Glue Compressor (Pegamento Dinámico Transparente)
+* **Attack**: `30 ms` (ataque ultra lento para preservar todos los transientes suaves y microdetalles).
+* **Release**: `Auto` (respiración adaptativa continua).
+* **Ratio**: `2:1` (compresión suave e imperceptible).
+* **Threshold**: Ajustar hasta obtener entre **`0.5 dB` y `1.0 dB` de reducción de ganancia máxima** en el clímax de la Fase IV.
+* **Makeup**: `+0.5 dB`.
+
+### 3. Limiter (Techo True Peak y Normalización LUFS)
+* **Ceiling (Techo)**: Fijar en **`-1.0 dB`** (garantiza cero distorsión inter-sample en plataformas de streaming y YouTube).
+* **Lookahead**: `5.0 ms`.
+* **Release**: `Auto`.
+* **Gain**: Subir suavemente la ganancia hasta que la sonoridad integrada de la sesión alcance entre **`-16.0 LUFS` y `-15.5 LUFS`**.
 
 ---
 
