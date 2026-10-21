@@ -1,13 +1,13 @@
 # Gnosis en Ableton Live: Guía Paso a Paso (Nivel Cero)
 
-Esta guía lleva la pieza **Gnosis** (21:20 exactos, 640 compases a 120 BPM) desde Strudel hacia **Ableton Live 12 Suite** para producirla con tus sintetizadores e instrumentos reales instalados en tu Mac (Surge XT, Serum 2, etc.), respetando la calibración a **432 Hz**.
+Esta guía lleva la pieza **Gnosis** (24:00 exactos, 720 compases a 120 BPM) desde Strudel hacia **Ableton Live 12 Suite** para producirla con tus sintetizadores e instrumentos reales instalados en tu Mac (Surge XT, Serum 2, etc.), respetando la calibración a **432 Hz**.
 
 ---
 
 ## 🧭 Resumen de la Estructura en Ableton
 
 * **Tempo**: `120.00 BPM` (en compás `4/4`). 1 compás en Ableton = 1 ciclo de Strudel = 2 segundos.
-* **Duración total**: `640 compases` = 21 minutos y 20 segundos exactos.
+* **Duración total**: `720 compases` = 24 minutos y 00 segundos exactos.
 * **Archivos listos en `media/gnosis/daw/`**:
   * `gnosis.mid` (el archivo MIDI maestro con todos los canales)
   * `tracks/01-earth-pulse.mid` (Canal 1 - Pulso Terrestre / Kick C1)

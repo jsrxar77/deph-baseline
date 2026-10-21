@@ -5,12 +5,12 @@ key: D:dorian # Tuned to A4 = 432 Hz
 tempo:
   cpm: 30 # 1 cycle = 2s (120 BPM in 4/4)
 arc:
-  - { name: pleroma, cycles: 96 }          # 0:00 - 3:12 (The Unmanifest Light & Theta seed)
-  - { name: descent, cycles: 128 }         # 3:12 - 7:28 (Emanation of Sophia & Bell Arp)
-  - { name: density, cycles: 160 }         # 7:28 - 12:48 (The Crucible & Apparent Prison / Sub enters)
-  - { name: grounding, cycles: 160 }       # 12:48 - 18:08 (The Earthing Rod / Climax & Full Integration)
-  - { name: transfiguration, cycles: 96 }  # 18:08 - 21:20 (The Awakened Physical Vessel)
-total_cycles: 640 # 1280s = 21:20 exact (>20 min meditative transport)
+  - { name: pleroma, cycles: 108 }         # 0:00 - 3:36 (The Unmanifest Light & Theta seed)
+  - { name: descent, cycles: 144 }         # 3:36 - 8:24 (Emanation of Sophia & Bell Arp)
+  - { name: density, cycles: 180 }         # 8:24 - 14:24 (The Crucible & Apparent Prison / Sub enters)
+  - { name: grounding, cycles: 180 }       # 14:24 - 20:24 (The Earthing Rod / Climax & Full Integration)
+  - { name: transfiguration, cycles: 108 } # 20:24 - 24:00 (The Awakened Physical Vessel)
+total_cycles: 720 # 1440s = 24:00 exact (Deep meditative transport)
 domains:
   sound:
     status: in-progress

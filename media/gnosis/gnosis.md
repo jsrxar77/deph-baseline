@@ -1,7 +1,7 @@
 # Gnosis
 
 Generative ambient composition for deep meditation and trans-dimensional transport.
-Duration: **21:20 exact** (1280 seconds = 640 cycles at 30 cpm / 120 BPM in 4/4).
+Duration: **24:00 exact** (1440 seconds = 720 cycles at 30 cpm / 120 BPM in 4/4).
 Key: **D dorian**, calibrated to **A4 = 432 Hz**.
 Visual Framework: **HyperFrames** (HTML5 + CSS + GSAP).
 
@@ -16,19 +16,19 @@ Inspirada conceptualmente en la divulgación de **Agencia Cósmica** sobre la na
 La narrativa de **Gnosis** rechaza el dualismo derrotista del escape espiritual:
 1. **El Dilema Gnóstico**: Si la consciencia pura (Sophía, la sabiduría arquetípica del Pleroma) descendiera a la tercera dimensión sin un vehículo de disipación y anclaje, la altísima frecuencia de su energía provocaría una sobrecarga incontrolable o una dispersión inmediata.
 2. **El Cuerpo como Transductor**: El cuerpo material no es una celda (*soma-sema*), sino una sofisticada **jabalina o varilla de puesta a tierra (*grounding rod*)**. Permite que la corriente divina circule de manera segura, experimentando la textura, el tacto, la emoción y la geometría física.
-3. **El Viaje Meditativo (>20 minutos)**: Un transporte progresivo y no estático. No es un bucle pasivo: es una experiencia evolutiva e intensa que transita desde la luminosidad informe del Pleroma, a través del peso aparente de la carne en el crisol material, hasta el clímax extático donde cielo y tierra se acoplan en perfecta resonancia armónica.
+3. **El Viaje Meditativo (24:00 exactos)**: Un transporte progresivo y no estático. No es un bucle pasivo: es una experiencia evolutiva e intensa que transita desde la luminosidad informe del Pleroma, a través del peso aparente de la carne en el crisol material, hasta el clímax extático donde cielo y tierra se acoplan en perfecta resonancia armónica.
 
 ---
 
-## Arc & Duration Table (640 Cycles @ 30 cpm)
+## Arc & Duration Table (720 Cycles @ 30 cpm)
 
 | Sección | Ciclos | Tiempo | Minutos | Dinámica y Eventos |
 | :--- | :--- | :--- | :--- | :--- |
-| **I. Pleroma** | 96 | 0:00 – 3:12 | 3:12 | La luz increada. Gancho sutil en 0:00 con el pad celestial y el motivo primordial de Sophía. Capa binaural Theta (6 Hz) a 432 Hz. Espacio inmenso y calmo. |
-| **II. Descent** | 128 | 3:12 – 7:28 | 4:16 | El descenso y condensación de la chispa. El arpegio cristalino de campanas entra y teje patrones en canon. Filtros abriéndose suavemente. |
-| **III. Density** | 160 | 7:28 – 12:48 | 5:20 | El crisol material. El sub-bajo entra con peso gravitatorio (36–55 Hz). Se experimenta la tensión de la materia y el aparente confinamiento en la carne. |
-| **IV. Grounding** | 160 | 12:48 – 18:08 | 5:20 | **Clímax**: La varilla de tierra se activa. Todas las 8 capas interactúan; el flujo de alta frecuencia se estabiliza a través del cuerpo. Sonoridad expansiva, rica y transportadora. |
-| **V. Transfiguration**| 96 | 18:08 – 21:20 | 3:12 | El retorno iluminado. El alma descubre que el cuerpo es sagrado. Las capas se desvanecen gradualmente hacia el tono fundamental en paz absoluta. |
+| **I. Pleroma** | 108 | 0:00 – 3:36 | 3:36 | La luz increada. Gancho sutil en 0:00 con el pad celestial y el motivo primordial de Sophía. Capa binaural Theta (6 Hz) a 432 Hz. Espacio inmenso y calmo. |
+| **II. Descent** | 144 | 3:36 – 8:24 | 4:48 | El descenso y condensación de la chispa. El arpegio cristalino de campanas entra y teje patrones en canon. Filtros abriéndose suavemente. |
+| **III. Density** | 180 | 8:24 – 14:24 | 6:00 | El crisol material. El sub-bajo entra con peso gravitatorio (36–55 Hz). Se experimenta la tensión de la materia y el aparente confinamiento en la carne. |
+| **IV. Grounding** | 180 | 14:24 – 20:24 | 6:00 | **Clímax**: La varilla de tierra se activa. Todas las 8 capas interactúan; el flujo de alta frecuencia se estabiliza a través del cuerpo. Sonoridad expansiva, rica y transportadora. |
+| **V. Transfiguration**| 108 | 20:24 – 24:00 | 3:36 | El retorno iluminado. El alma descubre que el cuerpo es sagrado. Las capas se desvanecen gradualmente hacia el tono fundamental en paz absoluta. |
 
 ---
 

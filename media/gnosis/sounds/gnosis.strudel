@@ -1,17 +1,17 @@
-// "gnosis" — Generative ambient piece for deep meditation and trans-dimensional transport (>20 min)
+// "gnosis" — Generative ambient piece for deep meditation and trans-dimensional transport (24:00 exact)
 // Concept: Cuerpo Material — ¿Prisión para el Alma o Varillas de Conexión a Tierra para Sophía?
 // Reference: Agencia Cósmica
 // Key: D:dorian calibrated to A4 = 432 Hz
-// Duration: 21:20 exact (1280 seconds = 640 cycles at 30 cpm / 120 BPM in 4/4)
+// Duration: 24:00 exact (1440 seconds = 720 cycles at 30 cpm / 120 BPM in 4/4)
 //
 // 5-Phase Subtle Dynamic Arc (Homogeneous, gentle, continuous flow):
-// I.   Pleroma (0:00 - 3:12 | 96 cycles): The Unmanifest Light, seed motif, Theta binaural (6 Hz)
-// II.  Descent (3:12 - 7:28 | 128 cycles): Emanation of Sophia, cascading bell arpeggios, gentle breathing pads
-// III. Density (7:28 - 12:48 | 160 cycles): The Material Crucible, deep pedal notes cross, intertwining lines
-// IV.  Grounding (12:48 - 18:08 | 160 cycles): CLIMAX — The Earthing Rod connects, full 8-track harmonious integration
-// V.   Transfiguration (18:08 - 21:20 | 96 cycles): Golden harmonics, peaceful resting on fundamental D
+// I.   Pleroma (0:00 - 3:36 | 108 cycles): The Unmanifest Light, seed motif, Theta binaural (6 Hz)
+// II.  Descent (3:36 - 8:24 | 144 cycles): Emanation of Sophia, cascading bell arpeggios, gentle breathing pads
+// III. Density (8:24 - 14:24 | 180 cycles): The Material Crucible, deep pedal notes cross, intertwining lines
+// IV.  Grounding (14:24 - 20:24 | 180 cycles): CLIMAX — The Earthing Rod connects, full 8-track harmonious integration
+// V.   Transfiguration (20:24 - 24:00 | 108 cycles): Golden harmonics, peaceful resting on fundamental D
 
-setcpm(30) // 1 cycle = 2 seconds. 640 cycles = 1280s = 21:20 exact.
+setcpm(30) // 1 cycle = 2 seconds. 720 cycles = 1440s = 24:00 exact.
 
 // ---- Tuning & Scale Foundation (D Dorian @ 432 Hz) ----------------------------------------------
 const ROOT = 'D'
@@ -21,101 +21,98 @@ const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX
 
 // A4 = 432 Hz calibration (deph standing standard: -31.77 cents offset)
 const A4 = 432
-const TUNE = 12 * Math
-  .log2(A4 / 440); // -0.317666 semitones
+const TUNE = 12 * Math.log2(A4 / 440); // -0.317666 semitones
 const tune = (p) => p.add(note(TUNE))
 
 // ---- Ch 1: Primordial Drone / Continuous Harmonic Pedal (Surge XT: Basses / Eighties Drone) ----
 // El cimiento eterno: NUNCA se va, NUNCA se interrumpe ni re-dispara.
 // Nota pedal pura sostenida al 100% (sustain 1.0) que mantiene el piso de gravedad cálido e inmutable.
 $: arrange(
-  // I. Pleroma (96 c): Fundamental D2 pura, continua e ininterrumpida
-  [96, tune(n("0").scale(scaleAt(2)).slow(96).gain(0.072).attack(8.0).sustain(1.0).release(16.0).cutoff(220).room(0.95).size(9).legato(1.2).orbit(1).midichan(1))],
-  // II. Descent (128 c): Quinta abierta D2-A2 continua que sostiene el descenso sin saltos
-  [128, tune(n("[0, 4]").scale(scaleAt(2)).slow(128).gain(0.074).attack(6.0).sustain(1.0).release(16.0).cutoff(230).room(0.95).size(9).delay(0.2).delaytime(1.33).delayfeedback(0.4).legato(1.2).orbit(1).midichan(1))],
-  // III. Density (160 c): Sostén pleno del crisol material con armónicos cálidos homogéneos
-  [160, tune(n("[0, 4]").scale(scaleAt(2)).slow(160).gain(0.075).attack(6.0).sustain(1.0).release(16.0).cutoff(240).room(0.95).size(9).delay(0.22).delaytime(1.33).delayfeedback(0.42).legato(1.2).orbit(1).midichan(1))],
-  // IV. Grounding (160 c): Clímax de sustentación continua sin aumentos bruscos de volumen
-  [160, tune(n("[0, 4]").scale(scaleAt(2)).slow(160).gain(0.076).attack(6.0).sustain(1.0).release(16.0).cutoff(245).room(0.95).size(9).delay(0.25).delaytime(1.33).delayfeedback(0.45).legato(1.2).orbit(1).midichan(1))],
-  // V. Transfiguration (96 c): Retorno a la raíz pura D2 que reposa serena hacia el silencio final
-  [96, tune(n("0").scale(scaleAt(2)).slow(96).gain(0.068).attack(8.0).sustain(1.0).release(24.0).cutoff(200).room(0.95).size(9).legato(1.2).orbit(1).midichan(1))]
+  // I. Pleroma (108 c): Fundamental D2 pura, continua e ininterrumpida
+  [108, tune(n("0").scale(scaleAt(2)).slow(108).gain(0.072).attack(8.0).sustain(1.0).release(16.0).cutoff(220).room(0.95).size(9).legato(1.2).orbit(1).midichan(1))],
+  // II. Descent (144 c): Quinta abierta D2-A2 continua que sostiene el descenso sin saltos
+  [144, tune(n("[0, 4]").scale(scaleAt(2)).slow(144).gain(0.074).attack(6.0).sustain(1.0).release(16.0).cutoff(230).room(0.95).size(9).delay(0.2).delaytime(1.33).delayfeedback(0.4).legato(1.2).orbit(1).midichan(1))],
+  // III. Density (180 c): Sostén pleno del crisol material con armónicos cálidos homogéneos
+  [180, tune(n("[0, 4]").scale(scaleAt(2)).slow(180).gain(0.075).attack(6.0).sustain(1.0).release(16.0).cutoff(240).room(0.95).size(9).delay(0.22).delaytime(1.33).delayfeedback(0.42).legato(1.2).orbit(1).midichan(1))],
+  // IV. Grounding (180 c): Clímax de sustentación continua sin aumentos bruscos de volumen
+  [180, tune(n("[0, 4]").scale(scaleAt(2)).slow(180).gain(0.076).attack(6.0).sustain(1.0).release(16.0).cutoff(245).room(0.95).size(9).delay(0.25).delaytime(1.33).delayfeedback(0.45).legato(1.2).orbit(1).midichan(1))],
+  // V. Transfiguration (108 c): Retorno a la raíz pura D2 que reposa serena hacia el silencio final
+  [108, tune(n("0").scale(scaleAt(2)).slow(108).gain(0.068).attack(8.0).sustain(1.0).release(24.0).cutoff(200).room(0.95).size(9).legato(1.2).orbit(1).midichan(1))]
 )
 
 // ---- Ch 2: Varilla de Anclaje / Grounding Sub-Bass (Surge XT: Basses / Sub 1) -------------------
 // Sub-bajo puro en D1 (36.7 Hz @ 432 Hz). Nota pedal ininterrumpida que ancla el cuerpo a tierra
 $: arrange(
-  // I. Pleroma (96 c): Subgrave fundamental continuo en D1
-  [96, tune(n("0").scale(scaleAt(1)).slow(96).gain(0.068).attack(8.0).sustain(1.0).release(16.0).cutoff(105).legato(1.2).orbit(2).midichan(2))],
-  // II. Descent (128 c): Anclaje subgrave continuo
-  [128, tune(n("0").scale(scaleAt(1)).slow(128).gain(0.070).attack(6.0).sustain(1.0).release(16.0).cutoff(110).legato(1.2).orbit(2).midichan(2))],
-  // III. Density (160 c): Densidad física en D1 sosteniendo el crisol
-  [160, tune(n("0").scale(scaleAt(1)).slow(160).gain(0.072).attack(6.0).sustain(1.0).release(16.0).cutoff(115).legato(1.2).orbit(2).midichan(2))],
-  // IV. Grounding (160 c): Conexión a tierra plena sin fisuras
-  [160, tune(n("0").scale(scaleAt(1)).slow(160).gain(0.072).attack(6.0).sustain(1.0).release(16.0).cutoff(115).legato(1.2).orbit(2).midichan(2))],
-  // V. Transfiguration (96 c): Calma final en reposo fundamental
-  [96, tune(n("0").scale(scaleAt(1)).slow(96).gain(0.064).attack(8.0).sustain(1.0).release(20.0).cutoff(100).legato(1.2).orbit(2).midichan(2))]
+  // I. Pleroma (108 c): Subgrave fundamental continuo en D1
+  [108, tune(n("0").scale(scaleAt(1)).slow(108).gain(0.068).attack(8.0).sustain(1.0).release(16.0).cutoff(105).legato(1.2).orbit(2).midichan(2))],
+  // II. Descent (144 c): Anclaje subgrave continuo
+  [144, tune(n("0").scale(scaleAt(1)).slow(144).gain(0.070).attack(6.0).sustain(1.0).release(16.0).cutoff(110).legato(1.2).orbit(2).midichan(2))],
+  // III. Density (180 c): Densidad física en D1 sosteniendo el crisol
+  [180, tune(n("0").scale(scaleAt(1)).slow(180).gain(0.072).attack(6.0).sustain(1.0).release(16.0).cutoff(115).legato(1.2).orbit(2).midichan(2))],
+  // IV. Grounding (180 c): Conexión a tierra plena sin fisuras
+  [180, tune(n("0").scale(scaleAt(1)).slow(180).gain(0.072).attack(6.0).sustain(1.0).release(16.0).cutoff(115).legato(1.2).orbit(2).midichan(2))],
+  // V. Transfiguration (108 c): Calma final en reposo fundamental
+  [108, tune(n("0").scale(scaleAt(1)).slow(108).gain(0.064).attack(8.0).sustain(1.0).release(20.0).cutoff(100).legato(1.2).orbit(2).midichan(2))]
 )
 
 // ---- Ch 3: Motivo de Sophía / Arp Bells (Serum 2: Bell / BL - Zenatrope 02) ---------------------
 // Campanas cristalinas suaves sumergidas en el espacio (gain 0.038 - 0.042 para no sobrecargar el oído ni sobresaltar)
-const sophiaSeed = "0 2 4 6 7 6 4 2"
-const sophiaWide = "0 4 7 9 11 9 7 4"
 $: arrange(
-  // I. Pleroma (96 c): Gancho etéreo sutil en 0:00, flotando como gotas distantes
-  [96, tune(n("<[0 2 4 6 7 6 4 2] ~ [2 4 6 7 9 7 6 4] ~>").scale(scaleAt(4)).slow(24).fmi(0.25).fmh(2).attack(0.12).decay(1.5).sustain(0.2).release(8.0).gain(0.038).pan(sine.slow(14).range(0.3, 0.7)).room(0.92).size(8).delay(0.35).delaytime(1.23).delayfeedback(0.52).orbit(3).midichan(3))],
-  // II. Descent (128 c): Frases espaciadas que bajan en cascada suave
-  [128, tune(n("<[0 2 4 7] [9 7 4 2] ~ [4 7 9 11] [9 7 4 0] ~>").scale(scaleAt(4)).slow(22).fmi(0.30).fmh(2).attack(0.10).decay(1.4).sustain(0.22).release(7.5).gain(0.040).pan(cosine.slow(12).range(0.25, 0.75)).room(0.92).size(8).delay(0.38).delaytime(1.23).delayfeedback(0.54).orbit(3).midichan(3))],
-  // III. Density (160 c): Diálogo apacible en el fondo de la mezcla
-  [160, tune(n("<[0 2 4 6 7 4] ~ [3 4 7 9 7 4] ~ [0 4 6 7 9 7]>").scale(scaleAt(4)).slow(24).fmi(0.32).fmh(3).attack(0.10).decay(1.4).sustain(0.22).release(7.0).gain(0.042).pan(sine.slow(10).range(0.2, 0.8)).room(0.92).size(8).delay(0.38).delaytime(1.17).delayfeedback(0.54).orbit(3).midichan(3))],
-  // IV. Grounding (160 c): Luces lejanas armónicas que integran sin competir
-  [160, tune(n("<[0 4 7 9 11 9 7 4] ~ [2 4 6 7 9 7 4 0] ~>").scale(scaleAt(4)).slow(20).fmi(0.35).fmh(2).attack(0.08).decay(1.3).sustain(0.25).release(7.5).gain(0.044).pan(sine.slow(8).range(0.15, 0.85)).room(0.92).size(8).delay(0.4).delaytime(1.17).delayfeedback(0.55).orbit(3).midichan(3))],
-  // V. Transfiguration (96 c): Campanas solitarias desvaneciéndose en el éter
-  [96, tune(n("<[0 2 4 6 7 6 4 2] ~ ~ ~>").scale(scaleAt(4)).slow(28).fmi(0.22).fmh(2).attack(0.15).decay(1.6).sustain(0.2).release(9.0).gain(0.035).pan(0.5).room(0.94).size(8).orbit(3).midichan(3))]
+  // I. Pleroma (108 c): Gancho etéreo sutil en 0:00, flotando como gotas distantes
+  [108, tune(n("<[0 2 4 6 7 6 4 2] ~ [2 4 6 7 9 7 6 4] ~>").scale(scaleAt(4)).slow(24).fmi(0.25).fmh(2).attack(0.12).decay(1.5).sustain(0.2).release(8.0).gain(0.038).pan(sine.slow(14).range(0.3, 0.7)).room(0.92).size(8).delay(0.35).delaytime(1.23).delayfeedback(0.52).orbit(3).midichan(3))],
+  // II. Descent (144 c): Frases espaciadas que bajan en cascada suave
+  [144, tune(n("<[0 2 4 7] [9 7 4 2] ~ [4 7 9 11] [9 7 4 0] ~>").scale(scaleAt(4)).slow(22).fmi(0.30).fmh(2).attack(0.10).decay(1.4).sustain(0.22).release(7.5).gain(0.040).pan(cosine.slow(12).range(0.25, 0.75)).room(0.92).size(8).delay(0.38).delaytime(1.23).delayfeedback(0.54).orbit(3).midichan(3))],
+  // III. Density (180 c): Diálogo apacible en el fondo de la mezcla
+  [180, tune(n("<[0 2 4 6 7 4] ~ [3 4 7 9 7 4] ~ [0 4 6 7 9 7]>").scale(scaleAt(4)).slow(24).fmi(0.32).fmh(3).attack(0.10).decay(1.4).sustain(0.22).release(7.0).gain(0.042).pan(sine.slow(10).range(0.2, 0.8)).room(0.92).size(8).delay(0.38).delaytime(1.17).delayfeedback(0.54).orbit(3).midichan(3))],
+  // IV. Grounding (180 c): Luces lejanas armónicas que integran sin competir
+  [180, tune(n("<[0 4 7 9 11 9 7 4] ~ [2 4 6 7 9 7 4 0] ~>").scale(scaleAt(4)).slow(20).fmi(0.35).fmh(2).attack(0.08).decay(1.3).sustain(0.25).release(7.5).gain(0.044).pan(sine.slow(8).range(0.15, 0.85)).room(0.92).size(8).delay(0.4).delaytime(1.17).delayfeedback(0.55).orbit(3).midichan(3))],
+  // V. Transfiguration (108 c): Campanas solitarias desvaneciéndose en el éter
+  [108, tune(n("<[0 2 4 6 7 6 4 2] ~ ~ ~>").scale(scaleAt(4)).slow(28).fmi(0.22).fmh(2).attack(0.15).decay(1.6).sustain(0.2).release(9.0).gain(0.035).pan(0.5).room(0.94).size(8).orbit(3).midichan(3))]
 )
 
 // ---- Ch 4: Pleroma Pad (Serum 2: Pad / PD - Analog Soft Cotton) ----------------------------------
 // Pura luz increada: Manto continuo en D2. Oscuro, suave, volador, sin acordes disonantes ni cortes
 $: arrange(
-  // I. Pleroma (96 c): Manto continuo en D2, cálido y sedoso
-  [96, tune(n("0").scale(scaleAt(2)).slow(96).gain(0.038).attack(8.0).sustain(1.0).release(16.0).cutoff(260).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
-  // II. Descent (128 c): Manto continuo en D2
-  [128, tune(n("0").scale(scaleAt(2)).slow(128).gain(0.040).attack(6.0).sustain(1.0).release(16.0).cutoff(280).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
-  // III. Density (160 c): Octava pura D2-D3 continua sin densidad modal distractora
-  [160, tune(n("[0, 7]").scale(scaleAt(2)).slow(160).gain(0.038).attack(6.0).sustain(1.0).release(16.0).cutoff(290).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
-  // IV. Grounding (160 c): Manto de octava plena envolviendo el clímax
-  [160, tune(n("[0, 7]").scale(scaleAt(2)).slow(160).gain(0.040).attack(6.0).sustain(1.0).release(16.0).cutoff(300).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
-  // V. Transfiguration (96 c): Disolución continua en D2 hacia la serenidad
-  [96, tune(n("0").scale(scaleAt(2)).slow(96).gain(0.034).attack(8.0).sustain(1.0).release(24.0).cutoff(230).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))]
+  // I. Pleroma (108 c): Manto continuo en D2, cálido y sedoso
+  [108, tune(n("0").scale(scaleAt(2)).slow(108).gain(0.038).attack(8.0).sustain(1.0).release(16.0).cutoff(260).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
+  // II. Descent (144 c): Manto continuo en D2
+  [144, tune(n("0").scale(scaleAt(2)).slow(144).gain(0.040).attack(6.0).sustain(1.0).release(16.0).cutoff(280).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
+  // III. Density (180 c): Octava pura D2-D3 continua sin densidad modal distractora
+  [180, tune(n("[0, 7]").scale(scaleAt(2)).slow(180).gain(0.038).attack(6.0).sustain(1.0).release(16.0).cutoff(290).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
+  // IV. Grounding (180 c): Manto de octava plena envolviendo el clímax
+  [180, tune(n("[0, 7]").scale(scaleAt(2)).slow(180).gain(0.040).attack(6.0).sustain(1.0).release(16.0).cutoff(300).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))],
+  // V. Transfiguration (108 c): Disolución continua en D2 hacia la serenidad
+  [108, tune(n("0").scale(scaleAt(2)).slow(108).gain(0.034).attack(8.0).sustain(1.0).release(24.0).cutoff(230).room(0.95).size(9).legato(1.2).orbit(4).midichan(4))]
 )
 
 // ---- Ch 5: Tintinnabuli / Secondary Voice (Surge XT: Pads / Harmonic Sweep) ---------------------
 // Gotas sutiles de luz: notas individuales solitarias muy espaciadas, sin acordes ni movimiento denso
 $: arrange(
-  // I. Pleroma (96 c): Una sola nota flotante que susurra a mitad de ciclo
-  [96, tune(n("<~ 0 ~ ~>").scale(scaleAt(4)).slow(24).gain(0.028).attack(6.0).decay(3.0).sustain(0.6).release(10.0).cutoff(500).room(0.92).size(8).orbit(5).midichan(5))],
-  // II. Descent (128 c): Notas simples distanciadas (D4 y A4) en contrapunto minimalista
-  [128, tune(n("<~ 0 ~ 4 ~ ~>").scale(scaleAt(4)).slow(24).gain(0.030).attack(5.0).decay(3.0).sustain(0.65).release(9.0).cutoff(550).room(0.92).size(8).orbit(5).midichan(5))],
-  // III. Density (160 c): Respiración delicada en notas simples flotando en el fondo
-  [160, tune(n("<~ 0 ~ 2 ~ 4>").scale(scaleAt(4)).slow(24).gain(0.032).attack(4.5).decay(2.5).sustain(0.7).release(8.0).cutoff(580).room(0.92).size(8).orbit(5).midichan(5))],
-  // IV. Grounding (160 c): Destellos suaves de quinta espaciados sin sobrecargar
-  [160, tune(n("<[0, 4] ~ ~ 4 ~ 0>").scale(scaleAt(4)).slow(24).gain(0.034).attack(4.0).decay(2.5).sustain(0.7).release(8.5).cutoff(600).room(0.92).size(8).orbit(5).midichan(5))],
-  // V. Transfiguration (96 c): Nota solitaria disolviéndose
-  [96, tune(n("<~ 0 ~ ~>").scale(scaleAt(4)).slow(24).gain(0.026).attack(6.0).decay(3.0).sustain(0.5).release(12.0).cutoff(450).room(0.95).size(9).orbit(5).midichan(5))]
+  // I. Pleroma (108 c): Una sola nota flotante que susurra a mitad de ciclo
+  [108, tune(n("<~ 0 ~ ~>").scale(scaleAt(4)).slow(24).gain(0.028).attack(6.0).decay(3.0).sustain(0.6).release(10.0).cutoff(500).room(0.92).size(8).orbit(5).midichan(5))],
+  // II. Descent (144 c): Notas simples distanciadas (D4 y A4) en contrapunto minimalista
+  [144, tune(n("<~ 0 ~ 4 ~ ~>").scale(scaleAt(4)).slow(24).gain(0.030).attack(5.0).decay(3.0).sustain(0.65).release(9.0).cutoff(550).room(0.92).size(8).orbit(5).midichan(5))],
+  // III. Density (180 c): Respiración delicada en notas simples flotando en el fondo
+  [180, tune(n("<~ 0 ~ 2 ~ 4>").scale(scaleAt(4)).slow(24).gain(0.032).attack(4.5).decay(2.5).sustain(0.7).release(8.0).cutoff(580).room(0.92).size(8).orbit(5).midichan(5))],
+  // IV. Grounding (180 c): Destellos suaves de quinta espaciados sin sobrecargar
+  [180, tune(n("<[0, 4] ~ ~ 4 ~ 0>").scale(scaleAt(4)).slow(24).gain(0.034).attack(4.0).decay(2.5).sustain(0.7).release(8.5).cutoff(600).room(0.92).size(8).orbit(5).midichan(5))],
+  // V. Transfiguration (108 c): Nota solitaria disolviéndose
+  [108, tune(n("<~ 0 ~ ~>").scale(scaleAt(4)).slow(24).gain(0.026).attack(6.0).decay(3.0).sustain(0.5).release(12.0).cutoff(450).room(0.95).size(9).orbit(5).midichan(5))]
 )
 
 // ---- Ch 6: Texturas Cósmicas / Astral Wind (Serum 2: Soundscape / SC - Astral Projection) --------
 // Respiración cósmica continua en el techo estéreo (gain 0.024)
 $: arrange(
-  // I. Pleroma (96 c): Siseo etéreo continuo respirando en el espacio
-  [96, tune(n("<0 7 0 7>").scale(scaleAt(6)).slow(32).gain(0.024).cutoff(1100).fmi(0.2).fmh(1.5).attack(6.0).sustain(1.0).release(12.0).room(0.95).size(9).pan(sine.slow(20).range(0.2, 0.8)).legato(1.2).orbit(6).midichan(6))],
-  // II. Descent (128 c): Movimiento ondulatorio continuo que acompaña el descenso
-  [128, tune(n("<0 4 7 11>").scale(scaleAt(6)).slow(32).gain(0.026).cutoff(1150).fmi(0.25).fmh(1.5).attack(5.0).sustain(1.0).release(12.0).room(0.95).size(9).pan(cosine.slow(16).range(0.2, 0.8)).legato(1.2).orbit(6).midichan(6))],
-  // III. Density (160 c): Textura granular continua flotando sobre el tapiz
-  [160, tune(n("<0 2 4 7>").scale(scaleAt(6)).slow(32).gain(0.026).cutoff(1200).fmi(0.25).fmh(2.0).attack(5.0).sustain(1.0).release(12.0).room(0.95).size(9).pan(sine.slow(14).range(0.15, 0.85)).legato(1.2).orbit(6).midichan(6))],
-  // IV. Grounding (160 c): Partículas etéreas entrelazadas continuas
-  [160, tune(n("<0 4 7 4>").scale(scaleAt(6)).slow(32).gain(0.028).cutoff(1250).fmi(0.28).fmh(2.0).attack(4.5).sustain(1.0).release(12.0).room(0.95).size(9).pan(cosine.slow(12).range(0.1, 0.9)).legato(1.2).orbit(6).midichan(6))],
-  // V. Transfiguration (96 c): Susurro continuo que se expande hacia el horizonte
-  [96, tune(n("<0 7 0 7>").scale(scaleAt(6)).slow(32).gain(0.020).cutoff(1000).fmi(0.18).fmh(1.5).attack(6.0).sustain(1.0).release(14.0).room(0.95).size(9).pan(0.5).legato(1.2).orbit(6).midichan(6))]
+  // I. Pleroma (108 c): Siseo etéreo continuo respirando en el espacio
+  [108, tune(n("<0 7 0 7>").scale(scaleAt(6)).slow(32).gain(0.024).cutoff(1100).fmi(0.2).fmh(1.5).attack(6.0).sustain(1.0).release(12.0).room(0.95).size(9).pan(sine.slow(20).range(0.2, 0.8)).legato(1.2).orbit(6).midichan(6))],
+  // II. Descent (144 c): Movimiento ondulatorio continuo que acompaña el descenso
+  [144, tune(n("<0 4 7 11>").scale(scaleAt(6)).slow(32).gain(0.026).cutoff(1150).fmi(0.25).fmh(1.5).attack(5.0).sustain(1.0).release(12.0).room(0.95).size(9).pan(cosine.slow(16).range(0.2, 0.8)).legato(1.2).orbit(6).midichan(6))],
+  // III. Density (180 c): Textura granular continua flotando sobre el tapiz
+  [180, tune(n("<0 2 4 7>").scale(scaleAt(6)).slow(32).gain(0.026).cutoff(1200).fmi(0.25).fmh(2.0).attack(5.0).sustain(1.0).release(12.0).room(0.95).size(9).pan(sine.slow(14).range(0.15, 0.85)).legato(1.2).orbit(6).midichan(6))],
+  // IV. Grounding (180 c): Partículas etéreas entrelazadas continuas
+  [180, tune(n("<0 4 7 4>").scale(scaleAt(6)).slow(32).gain(0.028).cutoff(1250).fmi(0.28).fmh(2.0).attack(4.5).sustain(1.0).release(12.0).room(0.95).size(9).pan(cosine.slow(12).range(0.1, 0.9)).legato(1.2).orbit(6).midichan(6))],
+  // V. Transfiguration (108 c): Susurro continuo que se expande hacia el horizonte
+  [108, tune(n("<0 7 0 7>").scale(scaleAt(6)).slow(32).gain(0.020).cutoff(1000).fmi(0.18).fmh(1.5).attack(6.0).sustain(1.0).release(14.0).room(0.95).size(9).pan(0.5).legato(1.2).orbit(6).midichan(6))]
 )
 
 // ---- Ch 7: Capa Binaural Theta 6 Hz @ 432 Hz Calibration (Headphones Only) ---------------------
@@ -124,41 +121,39 @@ $: arrange(
 const D4_HZ = 288.326; // Frecuencia exacta de D4 afinado a A4 = 432 Hz
 const THETA_BEAT = 6.0; // 6 Hz = Onda Theta profunda para meditación consciente y trance lúcido
 $: arrange(
-  [96, stack(
+  [108, stack(
     s("sine").freq(D4_HZ - THETA_BEAT / 2).pan(0).gain(0.035).attack(6.0).sustain(1.0).release(10.0),
     s("sine").freq(D4_HZ + THETA_BEAT / 2).pan(1).gain(0.035).attack(6.0).sustain(1.0).release(10.0)
-  ).slow(96).legato(1.2).orbit(7).midichan(7)],
-  [128, stack(
+  ).slow(108).legato(1.2).orbit(7).midichan(7)],
+  [144, stack(
     s("sine").freq(D4_HZ - THETA_BEAT / 2).pan(0).gain(0.035).attack(5.0).sustain(1.0).release(10.0),
     s("sine").freq(D4_HZ + THETA_BEAT / 2).pan(1).gain(0.035).attack(5.0).sustain(1.0).release(10.0)
-  ).slow(128).legato(1.2).orbit(7).midichan(7)],
-  [160, stack(
+  ).slow(144).legato(1.2).orbit(7).midichan(7)],
+  [180, stack(
     s("sine").freq(D4_HZ - THETA_BEAT / 2).pan(0).gain(0.036).attack(5.0).sustain(1.0).release(10.0),
     s("sine").freq(D4_HZ + THETA_BEAT / 2).pan(1).gain(0.036).attack(5.0).sustain(1.0).release(10.0)
-  ).slow(160).legato(1.2).orbit(7).midichan(7)],
-  [160, stack(
+  ).slow(180).legato(1.2).orbit(7).midichan(7)],
+  [180, stack(
     s("sine").freq(D4_HZ - THETA_BEAT / 2).pan(0).gain(0.036).attack(5.0).sustain(1.0).release(10.0),
     s("sine").freq(D4_HZ + THETA_BEAT / 2).pan(1).gain(0.036).attack(5.0).sustain(1.0).release(10.0)
-  ).slow(160).legato(1.2).orbit(7).midichan(7)],
-  [96, stack(
+  ).slow(180).legato(1.2).orbit(7).midichan(7)],
+  [108, stack(
     s("sine").freq(D4_HZ - THETA_BEAT / 2).pan(0).gain(0.032).attack(6.0).sustain(1.0).release(12.0),
     s("sine").freq(D4_HZ + THETA_BEAT / 2).pan(1).gain(0.032).attack(6.0).sustain(1.0).release(12.0)
-  ).slow(96).legato(1.2).orbit(7).midichan(7)]
+  ).slow(108).legato(1.2).orbit(7).midichan(7)]
 )
 
 // ---- Ch 8: Solo Lead / Voz de la Revelación (Serum 2: Lead / LD - Analog Glow) -------------------
 // Melodía lírica apacible y cálida (gain 0.035, cutoff 850 Hz): un susurro melódico que no sobresalta
 $: arrange(
-  // I. Pleroma (96 c): Silencio en la primera mitad, susurro sutil al final
-  [96, tune(n("<~ ~ ~ 0>").scale(scaleAt(5)).slow(24).gain(0.032).attack(4.0).sustain(0.5).release(8.0).cutoff(800).room(0.92).size(8).delay(0.35).delaytime(1.33).delayfeedback(0.5).orbit(8).midichan(8))],
-  // II. Descent (128 c): Primera respuesta melódica en notas simples espaciadas
-  [128, tune(n("<~ [7] ~ ~ [4] ~>").scale(scaleAt(5)).slow(24).gain(0.034).attack(3.0).sustain(0.55).release(7.0).cutoff(850).room(0.90).size(8).delay(0.35).delaytime(1.33).delayfeedback(0.52).orbit(8).midichan(8))],
-  // III. Density (160 c): Frases líricas monofónicas serenas navegando sobre el fondo
-  [160, tune(n("<~ [0] ~ [4] ~ [9] ~ [4]>").scale(scaleAt(5)).slow(28).gain(0.035).attack(2.5).sustain(0.6).release(7.0).cutoff(880).room(0.90).size(8).delay(0.38).delaytime(1.23).delayfeedback(0.54).orbit(8).midichan(8))],
-  // IV. Grounding (160 c): Canto meditativo integrador monofónico, con amplio delay
-  [160, tune(n("<[0] ~ [7] ~ [11] ~ [7] ~>").scale(scaleAt(5)).slow(24).gain(0.036).attack(2.5).sustain(0.6).release(7.5).cutoff(900).room(0.92).size(8).delay(0.4).delaytime(1.23).delayfeedback(0.55).orbit(8).midichan(8))],
-  // V. Transfiguration (96 c): La voz reposa en una nota pedal extendida que se funde en el Pleroma
-  [96, tune(n("<0 ~>").scale(scaleAt(5)).slow(32).gain(0.030).attack(4.0).sustain(0.5).release(12.0).cutoff(750).room(0.95).size(8).orbit(8).midichan(8))]
+  // I. Pleroma (108 c): Silencio en la primera mitad, susurro sutil al final
+  [108, tune(n("<~ ~ ~ 0>").scale(scaleAt(5)).slow(24).gain(0.032).attack(4.0).sustain(0.5).release(8.0).cutoff(800).room(0.92).size(8).delay(0.35).delaytime(1.33).delayfeedback(0.5).orbit(8).midichan(8))],
+  // II. Descent (144 c): Primera respuesta melódica en notas simples espaciadas
+  [144, tune(n("<~ [7] ~ ~ [4] ~>").scale(scaleAt(5)).slow(24).gain(0.034).attack(3.0).sustain(0.55).release(7.0).cutoff(850).room(0.90).size(8).delay(0.35).delaytime(1.33).delayfeedback(0.52).orbit(8).midichan(8))],
+  // III. Density (180 c): Frases líricas monofónicas serenas navegando sobre el fondo
+  [180, tune(n("<~ [0] ~ [4] ~ [9] ~ [4]>").scale(scaleAt(5)).slow(28).gain(0.035).attack(2.5).sustain(0.6).release(7.0).cutoff(880).room(0.90).size(8).delay(0.38).delaytime(1.23).delayfeedback(0.54).orbit(8).midichan(8))],
+  // IV. Grounding (180 c): Canto meditativo integrador monofónico, con amplio delay
+  [180, tune(n("<[0] ~ [7] ~ [11] ~ [7] ~>").scale(scaleAt(5)).slow(24).gain(0.036).attack(2.5).sustain(0.6).release(7.5).cutoff(900).room(0.92).size(8).delay(0.4).delaytime(1.23).delayfeedback(0.55).orbit(8).midichan(8))],
+  // V. Transfiguration (108 c): La voz reposa en una nota pedal extendida que se funde en el Pleroma
+  [108, tune(n("<0 ~>").scale(scaleAt(5)).slow(32).gain(0.030).attack(4.0).sustain(0.5).release(12.0).cutoff(750).room(0.95).size(8).orbit(8).midichan(8))]
 )
-
-

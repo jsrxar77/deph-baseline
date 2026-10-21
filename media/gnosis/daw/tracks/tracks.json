@@ -4,8 +4,8 @@
   "bpm": 120,
   "timeSignature": "4/4",
   "cyclesPerBar": 1,
-  "totalCycles": 640,
-  "durationSeconds": 1280,
+  "totalCycles": 720,
+  "durationSeconds": 1440,
   "bendRange": 2,
   "velRange": 40,
   "tracks": [
@@ -158,7 +158,7 @@
           "max": 9
         },
         "pan": {
-          "min": 0.21468304511145364,
+          "min": 0.21468304511145356,
           "max": 0.85
         },
         "room": {
@@ -193,7 +193,7 @@
       "channel": 2,
       "suggestedFaderDb": -4.7,
       "file": "tracks/03-sophia-motif.mid",
-      "noteCount": 96
+      "noteCount": 114
     },
     {
       "layer": "$3",
@@ -301,7 +301,7 @@
       "channel": 4,
       "suggestedFaderDb": -7,
       "file": "tracks/05-tintinnabuli.mid",
-      "noteCount": 13
+      "noteCount": 14
     },
     {
       "layer": "$5",
@@ -348,7 +348,7 @@
           "max": 9
         },
         "pan": {
-          "min": 0.2263589811361892,
+          "min": 0.2146830451114538,
           "max": 0.9
         },
         "clip": {
@@ -367,7 +367,7 @@
       "channel": 5,
       "suggestedFaderDb": -8.7,
       "file": "tracks/06-cosmic-textures.mid",
-      "noteCount": 20
+      "noteCount": 25
     },
     {
       "layer": "$7",
@@ -442,5 +442,5 @@
     }
   ],
   "warnings": [],
-  "generatedAt": "2026-10-21T01:57:15.862Z"
+  "generatedAt": "2026-10-21T02:30:50.628Z"
 }
