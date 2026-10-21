@@ -98,6 +98,7 @@ Workspace skills are located in `.agents/skills/` (and declared in `.agents/skil
 11. **`strudel-ableton-deployer`**: Automated provisioning of YAML compositions into Ableton Live via `ableton-mcp`. Sigue estrictamente el flujo canónico paso a paso documentado en `docs/ableton-provisioning-workflow.md` (Paso 1: conexión -> Paso 2: template -> Paso 3: pista por pista nombre canónico `Ch {N} - {Rol} ({VST} - {Preset})` + VST + verificación estricta de devices -> Paso 4: tempo -> Paso 5: play Strudel en vivo). Prohibido abrir programas sin orden del usuario.
 12. **`strudel-yaml-composer`**: Decoupled workflow separating musical logic (`.strudel`) from sound design (`.yaml`).
 13. **`strudel-vs-plus`**: Maintenance and architecture standards for the Strudel VS + dual Web Audio & MIDI extension.
+14. **`ableton-device-controller`**: Deep inspection, automated instrument rack wrapping (`wrapInRack`), real-time macro modulation, and master chain provisioning (`master-setup`) via dual `ableton-mcp` (TCP 9877) and `Producer Pal` (HTTP 3350). CLI bridge at `tools/sounds/ableton-controller.mjs`.
 
 ---
 

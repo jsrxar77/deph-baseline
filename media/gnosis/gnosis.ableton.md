@@ -109,33 +109,40 @@ Para que el **Primordial Drone (Pista 1)** y el **Pleroma Pad (Pista 4)** "vayan
 
 ---
 
-## 🎛️ Cadena de Masterización en el Bus Master de Ableton Live
+---
 
-Para masterizar la pieza completa y alcanzar el estándar meditativo de **-16 LUFS integrados** y **-1.0 dBTP de techo**:
+## 🎛️ Cadena de Masterización en el Bus Master de Ableton Live (Provisionada)
 
-Carga en la pista **Master** de Ableton los siguientes 3 efectos en orden:
+La cadena de masterización fue **provisionada y calibrada automáticamente** en el canal **Master** mediante `ableton-controller.mjs master-setup`:
 
-### 1. EQ Eight (Limpieza Quirúrgica y Aire)
-* **Banda 1 (Corte Grave)**: Tipo *High Pass 4x* (48 dB/oct) fijado en **`25 Hz`** (elimina sub-rumble inaudible sin tocar la nota fundamental D1 en 36.7 Hz).
-* **Banda 3 (Resonancia)**: Tipo *Bell* en **`320 Hz`**, Ganancia en **`-1.2 dB`**, Q en **`0.8`** (limpia la acumulación de frecuencias medias bajas para máxima claridad).
-* **Banda 7 (Aire Cósmico)**: Tipo *High Shelf* en **`11.5 kHz`**, Ganancia en **`+0.8 dB`** (aporta luminosidad sedosa y apertura al campo estéreo).
-
-### 2. Glue Compressor (Pegamento Dinámico Transparente)
-* **Attack**: `30 ms` (ataque ultra lento para preservar todos los transientes suaves y microdetalles).
-* **Release**: `Auto` (respiración adaptativa continua).
-* **Ratio**: `2:1` (compresión suave e imperceptible).
-* **Threshold**: Ajustar hasta obtener entre **`0.5 dB` y `1.0 dB` de reducción de ganancia máxima** en el clímax de la Fase IV.
-* **Makeup**: `+0.5 dB`.
-
-### 3. Limiter (Techo True Peak y Normalización LUFS)
-* **Ceiling (Techo)**: Fijar en **`-1.0 dB`** (garantiza cero distorsión inter-sample en plataformas de streaming y YouTube).
-* **Lookahead**: `5.0 ms`.
-* **Release**: `Auto`.
-* **Gain**: Subir suavemente la ganancia hasta que la sonoridad integrada de la sesión alcance entre **`-16.0 LUFS` y `-15.5 LUFS`**.
+1. **EQ Eight (`mt/d0`)**:
+   * Banda 1: *High Pass 48 dB/oct* en **25 Hz** (limpieza inaudible sin tocar D1 en 36.7 Hz).
+   * Banda 2: *Bell* en **320 Hz** a **-1.2 dB** (Q: 0.8, suprime fango acústico en medios-graves).
+   * Banda 4: *High Shelf* en **11.5 kHz** a **+0.8 dB** (aire cósmico sedoso).
+2. **Glue Compressor (`mt/d1`)**:
+   * Attack: `30 ms` (preserva transientes suaves).
+   * Release: `Auto` (pegamento continuo).
+   * Ratio: `2:1` (transparente).
+   * Makeup: `+0.5 dB`.
+3. **Limiter (`mt/d2`)**:
+   * Ceiling: **`-1.0 dBTP`** (estándar de streaming con cero distorsión inter-sample).
+   * Mode: **`True Peak`**.
+   * Lookahead: `6 ms`.
+   * Release: `Auto`.
 
 ---
 
-## 🚀 Provisión Rápida con `strudel-ableton-deployer`
+## 🚀 Control y Automatización en Tiempo Real (`ableton-controller.mjs`)
 
-Si tienes abierto Ableton Live 12 con el servidor `ableton-mcp` activo:
-* Puedes pedirme directamente: *"Carga y despliega la sesión de Gnosis en Ableton"* y el agente creará las pistas, asignará los nombres y cargará los clips MIDI en la Arrangement View de forma 100% automatizada.
+Todas las pistas están envueltas en **Instrument Racks** con sus 16 Macros listos. Con el servidor activo:
+
+```bash
+# Ver estado global de pistas, racks y master
+node tools/sounds/ableton-controller.mjs tracks
+
+# Modificar cualquier Macro en vivo (ej. Cutoff de Serum 2 en Pista 4)
+node tools/sounds/ableton-controller.mjs set 3 0 "Filter 1 Freq" 75.0
+
+# Ejecutar comandos de Producer Pal sobre HTTP 3350
+node tools/sounds/ableton-controller.mjs ppal ppal-read-live-set '{}'
+```

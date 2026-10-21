@@ -1,0 +1,446 @@
+{
+  "source": "media/gnosis/sounds/gnosis.strudel",
+  "cps": 0.5,
+  "bpm": 120,
+  "timeSignature": "4/4",
+  "cyclesPerBar": 1,
+  "totalCycles": 640,
+  "durationSeconds": 1280,
+  "bendRange": 2,
+  "velRange": 40,
+  "tracks": [
+    {
+      "layer": "$0",
+      "name": "primordial-drone",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.076,
+      "pitchRange": [
+        38,
+        45
+      ],
+      "params": {
+        "attack": {
+          "min": 6,
+          "max": 8
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "release": {
+          "min": 16,
+          "max": 24
+        },
+        "cutoff": {
+          "min": 200,
+          "max": 245
+        },
+        "room": {
+          "min": 0.95,
+          "max": 0.95
+        },
+        "roomsize": {
+          "min": 9,
+          "max": 9
+        },
+        "clip": {
+          "min": 1.2,
+          "max": 1.2
+        },
+        "orbit": {
+          "min": 1,
+          "max": 1
+        },
+        "midichan": {
+          "min": 1,
+          "max": 1
+        },
+        "delay": {
+          "min": 0.2,
+          "max": 0.25
+        },
+        "delaytime": {
+          "min": 1.33,
+          "max": 1.33
+        },
+        "delayfeedback": {
+          "min": 0.4,
+          "max": 0.45
+        }
+      },
+      "channel": 0,
+      "suggestedFaderDb": 0,
+      "file": "tracks/01-primordial-drone.mid",
+      "noteCount": 8
+    },
+    {
+      "layer": "$1",
+      "name": "grounding-sub",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.072,
+      "pitchRange": [
+        26,
+        26
+      ],
+      "params": {
+        "attack": {
+          "min": 6,
+          "max": 8
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "release": {
+          "min": 16,
+          "max": 20
+        },
+        "cutoff": {
+          "min": 100,
+          "max": 115
+        },
+        "clip": {
+          "min": 1.2,
+          "max": 1.2
+        },
+        "orbit": {
+          "min": 2,
+          "max": 2
+        },
+        "midichan": {
+          "min": 2,
+          "max": 2
+        }
+      },
+      "channel": 1,
+      "suggestedFaderDb": -0.5,
+      "file": "tracks/02-grounding-sub.mid",
+      "noteCount": 5
+    },
+    {
+      "layer": "$2",
+      "name": "sophia-motif",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.044,
+      "pitchRange": [
+        62,
+        81
+      ],
+      "params": {
+        "fmi": {
+          "min": 0.22,
+          "max": 0.35
+        },
+        "fmh": {
+          "min": 2,
+          "max": 3
+        },
+        "attack": {
+          "min": 0.08,
+          "max": 0.15
+        },
+        "decay": {
+          "min": 1.3,
+          "max": 1.6
+        },
+        "sustain": {
+          "min": 0.2,
+          "max": 0.25
+        },
+        "release": {
+          "min": 7,
+          "max": 9
+        },
+        "pan": {
+          "min": 0.21468304511145364,
+          "max": 0.85
+        },
+        "room": {
+          "min": 0.92,
+          "max": 0.94
+        },
+        "roomsize": {
+          "min": 8,
+          "max": 8
+        },
+        "delay": {
+          "min": 0.35,
+          "max": 0.4
+        },
+        "delaytime": {
+          "min": 1.17,
+          "max": 1.23
+        },
+        "delayfeedback": {
+          "min": 0.52,
+          "max": 0.55
+        },
+        "orbit": {
+          "min": 3,
+          "max": 3
+        },
+        "midichan": {
+          "min": 3,
+          "max": 3
+        }
+      },
+      "channel": 2,
+      "suggestedFaderDb": -4.7,
+      "file": "tracks/03-sophia-motif.mid",
+      "noteCount": 96
+    },
+    {
+      "layer": "$3",
+      "name": "pleroma-pad",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.04,
+      "pitchRange": [
+        38,
+        50
+      ],
+      "params": {
+        "attack": {
+          "min": 6,
+          "max": 8
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "release": {
+          "min": 16,
+          "max": 24
+        },
+        "cutoff": {
+          "min": 230,
+          "max": 300
+        },
+        "room": {
+          "min": 0.95,
+          "max": 0.95
+        },
+        "roomsize": {
+          "min": 9,
+          "max": 9
+        },
+        "clip": {
+          "min": 1.2,
+          "max": 1.2
+        },
+        "orbit": {
+          "min": 4,
+          "max": 4
+        },
+        "midichan": {
+          "min": 4,
+          "max": 4
+        }
+      },
+      "channel": 3,
+      "suggestedFaderDb": -5.6,
+      "file": "tracks/04-pleroma-pad.mid",
+      "noteCount": 7
+    },
+    {
+      "layer": "$4",
+      "name": "tintinnabuli",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.034,
+      "pitchRange": [
+        62,
+        69
+      ],
+      "params": {
+        "attack": {
+          "min": 4,
+          "max": 6
+        },
+        "decay": {
+          "min": 2.5,
+          "max": 3
+        },
+        "sustain": {
+          "min": 0.5,
+          "max": 0.7
+        },
+        "release": {
+          "min": 8,
+          "max": 12
+        },
+        "cutoff": {
+          "min": 450,
+          "max": 600
+        },
+        "room": {
+          "min": 0.92,
+          "max": 0.95
+        },
+        "roomsize": {
+          "min": 8,
+          "max": 9
+        },
+        "orbit": {
+          "min": 5,
+          "max": 5
+        },
+        "midichan": {
+          "min": 5,
+          "max": 5
+        }
+      },
+      "channel": 4,
+      "suggestedFaderDb": -7,
+      "file": "tracks/05-tintinnabuli.mid",
+      "noteCount": 13
+    },
+    {
+      "layer": "$5",
+      "name": "cosmic-textures",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.028,
+      "pitchRange": [
+        86,
+        105
+      ],
+      "params": {
+        "cutoff": {
+          "min": 1000,
+          "max": 1250
+        },
+        "fmi": {
+          "min": 0.18,
+          "max": 0.28
+        },
+        "fmh": {
+          "min": 1.5,
+          "max": 2
+        },
+        "attack": {
+          "min": 4.5,
+          "max": 6
+        },
+        "sustain": {
+          "min": 1,
+          "max": 1
+        },
+        "release": {
+          "min": 12,
+          "max": 14
+        },
+        "room": {
+          "min": 0.95,
+          "max": 0.95
+        },
+        "roomsize": {
+          "min": 9,
+          "max": 9
+        },
+        "pan": {
+          "min": 0.2263589811361892,
+          "max": 0.9
+        },
+        "clip": {
+          "min": 1.2,
+          "max": 1.2
+        },
+        "orbit": {
+          "min": 6,
+          "max": 6
+        },
+        "midichan": {
+          "min": 6,
+          "max": 6
+        }
+      },
+      "channel": 5,
+      "suggestedFaderDb": -8.7,
+      "file": "tracks/06-cosmic-textures.mid",
+      "noteCount": 20
+    },
+    {
+      "layer": "$7",
+      "name": "binaural",
+      "cents": -31.77,
+      "bend": 6891,
+      "synthTuned": false,
+      "peakGain": 0.036,
+      "pitchRange": [
+        74,
+        93
+      ],
+      "params": {
+        "attack": {
+          "min": 2.5,
+          "max": 4
+        },
+        "sustain": {
+          "min": 0.5,
+          "max": 0.6
+        },
+        "release": {
+          "min": 7,
+          "max": 12
+        },
+        "cutoff": {
+          "min": 750,
+          "max": 900
+        },
+        "room": {
+          "min": 0.9,
+          "max": 0.95
+        },
+        "roomsize": {
+          "min": 8,
+          "max": 8
+        },
+        "delay": {
+          "min": 0.35,
+          "max": 0.4
+        },
+        "delaytime": {
+          "min": 1.23,
+          "max": 1.33
+        },
+        "delayfeedback": {
+          "min": 0.5,
+          "max": 0.55
+        },
+        "orbit": {
+          "min": 8,
+          "max": 8
+        },
+        "midichan": {
+          "min": 8,
+          "max": 8
+        }
+      },
+      "channel": 6,
+      "suggestedFaderDb": -6.5,
+      "file": "tracks/07-binaural.mid",
+      "noteCount": 12
+    }
+  ],
+  "audioOnly": [
+    {
+      "layer": "$6",
+      "events": 10,
+      "sounds": [
+        "sine"
+      ]
+    }
+  ],
+  "warnings": [],
+  "generatedAt": "2026-10-21T01:57:15.862Z"
+}

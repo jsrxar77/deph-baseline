@@ -76,6 +76,13 @@ domains:
         preset_uri: "query:Plugins#VST3:Xfer%20Records:Serum%202"
         preset_category: "Factory/Lead"
         preset_name: "LD - Analog Glow"
+    master_chain:
+      - device: "EQ Eight"
+        settings: "High Pass 48dB @ 25 Hz, Bell dip @ 320 Hz (-1.2 dB), High Shelf @ 11.5 kHz (+0.8 dB)"
+      - device: "Glue Compressor"
+        settings: "Ratio 2:1, Attack 30ms, Release Auto, Output +0.5 dB"
+      - device: "Limiter"
+        settings: "Ceiling -1.0 dBTP, Mode True Peak, Lookahead 6ms, Release Auto"
 publish:
   status: planned
   file: gnosis.youtube.md
