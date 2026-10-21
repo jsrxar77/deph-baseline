@@ -10,11 +10,10 @@ media/*/sync/*.wav
 media/*/sync/source.*
 tools/visuals/public/*.wav
 
-# Rendered videos — several GB each, fully regenerable with `npx remotion render` (see the
-# visuals-compose skill). Kept next to their composition in media/<name>/renders/, never in git.
-media/*/renders/*.mp4
-media/*/renders/*.mov
-media/*/renders/*.webm
+.remotion/
+
+# Rendered videos and stills
+media/*/renders/
 
 # Copies of the sync data that Remotion reads from public/ (the originals in media/<name>/sync/ are tracked).
 tools/visuals/public/*-frames.json

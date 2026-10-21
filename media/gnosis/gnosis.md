@@ -20,15 +20,17 @@ La narrativa de **Gnosis** rechaza el dualismo derrotista del escape espiritual:
 
 ---
 
-## Arc & Duration Table (720 Cycles @ 30 cpm)
+## Arc & Duration Table (720 Cycles @ 30 cpm = 24:00 Exact)
 
-| Sección | Ciclos | Tiempo | Minutos | Dinámica y Eventos |
-| :--- | :--- | :--- | :--- | :--- |
-| **I. Pleroma** | 108 | 0:00 – 3:36 | 3:36 | La luz increada. Gancho sutil en 0:00 con el pad celestial y el motivo primordial de Sophía. Capa binaural Theta (6 Hz) a 432 Hz. Espacio inmenso y calmo. |
-| **II. Descent** | 144 | 3:36 – 8:24 | 4:48 | El descenso y condensación de la chispa. El arpegio cristalino de campanas entra y teje patrones en canon. Filtros abriéndose suavemente. |
-| **III. Density** | 180 | 8:24 – 14:24 | 6:00 | El crisol material. El sub-bajo entra con peso gravitatorio (36–55 Hz). Se experimenta la tensión de la materia y el aparente confinamiento en la carne. |
-| **IV. Grounding** | 180 | 14:24 – 20:24 | 6:00 | **Clímax**: La varilla de tierra se activa. Todas las 8 capas interactúan; el flujo de alta frecuencia se estabiliza a través del cuerpo. Sonoridad expansiva, rica y transportadora. |
-| **V. Transfiguration**| 108 | 20:24 – 24:00 | 3:36 | El retorno iluminado. El alma descubre que el cuerpo es sagrado. Las capas se desvanecen gradualmente hacia el tono fundamental en paz absoluta. |
+La obra se desarrolla en **15 etapas progresivas continuas**, erradicando bucles repetitivos y estructurada como un contrapunto polifónico a tres voces (Sophia Bells, Tintinnabuli y Warm Voice):
+
+| Sección | Ciclos | Minutos | Sub-Etapas y Dinámica Contrapuntística |
+| :--- | :--- | :--- | :--- |
+| **I. Pleroma** | 120 (60+30+30) | 0:00 – 4:00 | **El Silencio Increado**: Minimalismo absoluto. Solo drone D2 y sub D1 (0:00-2:00). A los 2:15 despierta la primera campana semilla D3; a los 3:30 el pad respira. Ch 8 y Ch 5 en silencio total. |
+| **II. Descent** | 150 (50+50+50) | 4:00 – 9:00 | **El Primer Diálogo**: Sophia (Ch 3) lanza la pregunta melódica (D3-F3-A3). A los 5:40 despierta la **Voz Cálida (Ch 8)** en registro de violonchelo (D2-A2) con ataque de 10s, respondiendo en contrapunto contrario. Tintinnabuli (Ch 5) suspende su primera gota. |
+| **III. Density** | 180 (60+60+60) | 9:00 – 15:00 | **El Tejido Polifónico (Crisol)**: Canon modal en imitación a la quinta. La melodía se expande a frases de 4 y 6 notas con la 6ª dórica (B3 natural). Modulaciones de pad sin saltos (Gsus2/D $\rightarrow$ Bm7/D $\rightarrow$ Dm9). Cero repetición de frases. |
+| **IV. Grounding** | 150 (50+50+50) | 15:00 – 20:00 | **La Resonancia Plena (Clímax)**: Integración total cielo-tierra. Líneas cantábiles nobles en décimas y sextas. Polifonía serena, sin notas estridentes. |
+| **V. Transfiguration**| 120 (40+40+40) | 20:00 – 24:00 | **La Deconstrucción Asimétrica**: Despedida progresiva: primero calla Ch 8 en el min 21:20 (c 640), luego Tintinnabuli y Sophia con su campana final a las 22:00. Solo el drone D2 y el beat Theta se disuelven hacia el segundo 1440 (24:00 exacto). |
 
 ---
 
@@ -44,8 +46,8 @@ Diseñado de origen para la plantilla estándar de 8 canales de Ableton Live (`S
 | **4** | `Ch 4 - Pleroma Pad` | Pad Pleroma | **Serum 2** | `Factory/Pad/PD - Analog Soft Cotton` — Pad analógico sedoso y envolvente |
 | **5** | `Ch 5 - Tintinnabuli` | Tintinnabuli / Contra-canto Armónico | **Surge XT** | `Pads/Harmonic Sweep.fxp` — Líneas secundarias suspendidas cruzando el pad |
 | **6** | `Ch 6 - Astral Textures`| Texturas Cósmicas / Viento Astral | **Serum 2** | `Factory/Soundscape/SC - Astral Projection` — Respiración cósmica espacial |
-| **7** | `Ch 7 - Theta Binaural` | Capa Theta Binaural 6 Hz (432 Hz) | **Utility** / Strudel | Portadora D4 (288.33 Hz), beat de 6 Hz (285.33 / 291.33 Hz) para audífonos |
-| **8** | `Ch 8 - Solo Lead` | Revelación / Solo Lead | **Serum 2** | `Factory/Lead/LD - Analog Glow` — Canto melódico fluido cruzando los motivos |
+| **7** | `Ch 7 - Theta Binaural` | Capa Theta Binaural 6 Hz (432 Hz) | **Audio Stem** | Portadora D4 (288.33 Hz), beat de 6 Hz (285.33 / 291.33 Hz) para audífonos |
+| **8** | `Ch 8 - Solo Lead` | Voz Cálida / Contrapunto Modal | **Serum 2** | `Factory/Lead/LD - Analog Glow` (Low Pass < 500 Hz, registro chelo D2-A2) |
 
 ---
 

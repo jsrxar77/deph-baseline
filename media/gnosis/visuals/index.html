@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Gnosis — HyperFrames Visual Composition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gnosis — Generative Fractal Engine (HyperFrames)</title>
   <style>
     * {
       box-sizing: border-box;
@@ -14,200 +15,616 @@
       height: 100%;
       overflow: hidden;
       background-color: #050508;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #e2e8f0;
+      user-select: none;
     }
-    #root {
-      position: relative;
-      width: 3840px;
-      height: 2160px;
-      background: radial-gradient(circle at 50% 50%, #0d1322 0%, #050508 75%, #020204 100%);
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* Background Ambience & Sacred Grid */
-    .cosmic-grid {
-      position: absolute;
+
+    /* Outer Stage / Auto-scaler */
+    #viewport-container {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
-      background-size: 80px 80px, 160px 160px;
-      opacity: 0.7;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #020204;
     }
 
-    /* Central Axis — The Grounding Rod (La Varilla de Tierra de Sophía) */
-    .grounding-axis {
-      position: absolute;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(180deg, 
-        rgba(56, 189, 248, 0.9) 0%, 
-        rgba(125, 211, 252, 0.8) 35%, 
-        rgba(251, 191, 36, 0.85) 65%, 
-        rgba(245, 158, 11, 0.95) 100%);
-      box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), 0 0 80px rgba(245, 158, 11, 0.4);
-    }
-
-    /* Sacred Rings of Sophia */
-    .sophia-rings {
-      position: absolute;
-      width: 1200px;
-      height: 1200px;
-      pointer-events: none;
-    }
-    .ring {
+    #stage {
       position: absolute;
       top: 50%;
       left: 50%;
-      border-radius: 50%;
+      width: 3840px;
+      height: 2160px;
+      margin-left: -1920px;
+      margin-top: -1080px;
+      transform-origin: center center;
+      background: radial-gradient(circle at 50% 50%, #0c1220 0%, #050508 70%, #010204 100%);
+      overflow: hidden;
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Canvas Layers */
+    canvas.fractal-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3840px;
+      height: 2160px;
+      pointer-events: none;
+    }
+
+    /* Grounding Rod Axis (Center) */
+    .grounding-rod {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, 
+        rgba(56, 189, 248, 0.95) 0%, 
+        rgba(125, 211, 252, 0.8) 30%, 
+        rgba(251, 191, 36, 0.85) 70%, 
+        rgba(245, 158, 11, 0.95) 100%);
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.7), 0 0 80px rgba(245, 158, 11, 0.5);
+      z-index: 5;
+      opacity: 0.85;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Core Spark */
+    .spark-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      border: 1.5px solid rgba(56, 189, 248, 0.25);
-      box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
-    }
-    .ring-1 { width: 300px; height: 300px; border-color: rgba(251, 191, 36, 0.5); }
-    .ring-2 { width: 600px; height: 600px; border-color: rgba(56, 189, 248, 0.35); }
-    .ring-3 { width: 900px; height: 900px; border-color: rgba(245, 158, 11, 0.25); }
-    .ring-4 { width: 1200px; height: 1200px; border-color: rgba(56, 189, 248, 0.15); }
-
-    /* Central Core / Sophia's Spark */
-    .central-core {
-      position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: radial-gradient(circle, #ffffff 0%, #38bdf8 40%, #0369a1 80%, transparent 100%);
-      box-shadow: 0 0 60px #38bdf8, 0 0 120px rgba(56, 189, 248, 0.8);
+      background: #ffffff;
+      box-shadow: 0 0 40px #38bdf8, 0 0 90px rgba(56, 189, 248, 0.9), 0 0 160px #fbbf24;
+      z-index: 6;
     }
 
-    /* Typography / Minimal Brand & Gnosis Indicator */
-    .hud-header {
+    /* Minimal HUD */
+    .hud-title-block {
       position: absolute;
-      top: 120px;
-      left: 140px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      top: 100px;
+      left: 120px;
+      z-index: 10;
+      pointer-events: none;
     }
     .hud-title {
-      font-size: 42px;
+      font-size: 38px;
       font-weight: 300;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.28em;
       color: #f8fafc;
       text-transform: uppercase;
     }
-    .hud-subtitle {
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      color: #38bdf8;
-      text-transform: uppercase;
-    }
-    .hud-facts {
-      position: absolute;
-      bottom: 120px;
-      left: 140px;
+    .hud-desc {
       font-size: 16px;
-      letter-spacing: 0.15em;
-      color: rgba(248, 250, 252, 0.6);
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: #38bdf8;
+      margin-top: 8px;
       text-transform: uppercase;
     }
-    .phase-badge {
+
+    .hud-phase-badge {
       position: absolute;
-      top: 120px;
-      right: 140px;
-      font-size: 20px;
-      letter-spacing: 0.2em;
+      top: 100px;
+      right: 120px;
+      padding: 10px 28px;
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      background: rgba(12, 18, 32, 0.7);
+      backdrop-filter: blur(12px);
+      font-size: 18px;
+      letter-spacing: 0.22em;
       color: #fbbf24;
       text-transform: uppercase;
-      padding: 8px 24px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
-      border-radius: 9999px;
-      background: rgba(13, 19, 34, 0.6);
-      backdrop-filter: blur(10px);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .hud-specs {
+      position: absolute;
+      bottom: 100px;
+      left: 120px;
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      color: rgba(226, 232, 240, 0.5);
+      text-transform: uppercase;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Interactive Engine Switcher Overlay (UI) */
+    #ui-controls {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 10px 18px;
+      border-radius: 14px;
+      backdrop-filter: blur(16px);
+      z-index: 100;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .ctrl-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .ctrl-btn.active {
+      background: rgba(56, 189, 248, 0.25);
+      color: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    #scrub-container {
+      position: absolute;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      max-width: 90vw;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(10, 15, 26, 0.85);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 8px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      z-index: 100;
+    }
+    #scrub-bar {
+      flex: 1;
+      accent-color: #38bdf8;
+      cursor: pointer;
+    }
+    #scrub-time {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #fbbf24;
+      font-variant-numeric: tabular-nums;
+      min-width: 90px;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="./gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" data-composition-id="gnosis">
-    <div class="cosmic-grid"></div>
-    
-    <!-- Central Grounding Axis -->
-    <div class="grounding-axis" id="groundingAxis"></div>
 
-    <!-- Sophia Sacred Geometry Rings -->
-    <div class="sophia-rings" id="sophiaRings">
-      <div class="ring ring-4" id="ring4"></div>
-      <div class="ring ring-3" id="ring3"></div>
-      <div class="ring ring-2" id="ring2"></div>
-      <div class="ring ring-1" id="ring1"></div>
-      <div class="central-core" id="core"></div>
-    </div>
+  <div id="viewport-container">
+    <div id="stage" data-composition-id="gnosis">
+      <!-- Grounding Axis & Core -->
+      <div class="grounding-rod" id="groundingRod"></div>
+      <div class="spark-core" id="sparkCore"></div>
 
-    <!-- HUD & Editorial Typography -->
-    <div class="hud-header">
-      <div class="hud-title">GNOSIS</div>
-      <div class="hud-subtitle">Sophia · Grounding Rod Architecture</div>
-    </div>
-    
-    <div class="phase-badge" id="phaseBadge">I. Pleroma</div>
+      <!-- Canvas for real mathematical fractal rendering -->
+      <canvas id="fractalCanvas" class="fractal-layer" width="3840" height="2160"></canvas>
 
-    <div class="hud-facts">
-      432 Hz Calibration · Theta 6 Hz Binaural · 640 Cycles
+      <!-- HUD Overlay -->
+      <div class="hud-title-block">
+        <div class="hud-title">GNOSIS</div>
+        <div class="hud-desc" id="engineDesc">Engine: L-System Dendritic Branching</div>
+      </div>
+
+      <div class="hud-phase-badge" id="phaseBadge">I. Pleroma (0:00)</div>
+
+      <div class="hud-specs">
+        HyperFrames 4K Canvas · 720 Cycles · A4 = 432 Hz · Theta 6 Hz
+      </div>
     </div>
   </div>
 
-  <script>
-    // HyperFrames GSAP Master Timeline
-    // Duration: 1280 seconds (21:20 exact) at 60 fps = 76,800 frames
-    const compositionId = 'gnosis';
-    const totalDuration = 1280; // seconds
+  <!-- Interactive Demo Controls (for user inspection in browser) -->
+  <div id="scrub-container">
+    <span style="font-size: 12px; color: #94a3b8; letter-spacing: 0.05em;">LÍNEA DE TIEMPO:</span>
+    <input type="range" id="scrub-bar" min="0" max="1440" step="1" value="0">
+    <span id="scrub-time">00:00 / 24:00</span>
+  </div>
 
+  <div id="ui-controls">
+    <button class="ctrl-btn active" data-engine="lsystem">1. L-System Arbóreo</button>
+    <button class="ctrl-btn" data-engine="apollonian">2. Tamiz de Apolonio</button>
+    <button class="ctrl-btn" data-engine="sierpinski">3. Celosía Sierpinski</button>
+    <button class="ctrl-btn" data-engine="hybrid">4. Composición Híbrida</button>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. AUTO-SCALE 4K CANVAS TO FIT CURRENT WINDOW
+    // =========================================================================
+    const stage = document.getElementById('stage');
+    function resizeStage() {
+      const scaleX = window.innerWidth / 3840;
+      const scaleY = window.innerHeight / 2160;
+      const scale = Math.min(scaleX, scaleY);
+      stage.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', resizeStage);
+    resizeStage();
+
+    // =========================================================================
+    // 2. CANVAS SETUP
+    // =========================================================================
+    const canvas = document.getElementById('fractalCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = 3840;
+    const H = 2160;
+    const CX = W / 2;
+    const CY = H / 2;
+
+    // Palette: Deep Decay calibrated for Gnosis
+    const PALETTE = {
+      obsidian: '#050508',
+      cyan: 'rgba(56, 189, 248, ',
+      gold: 'rgba(251, 191, 36, ',
+      amber: 'rgba(245, 158, 11, ',
+      sapphire: 'rgba(3, 105, 161, ',
+      emerald: 'rgba(31, 163, 150, ',
+      white: 'rgba(255, 255, 255, '
+    };
+
+    // =========================================================================
+    // 3. FRACTAL ENGINE 1: DENDRITIC L-SYSTEM (Sophia's Roots & Branches)
+    // =========================================================================
+    function drawDendriticLSystem(progress, phaseEnergy, breathPhase) {
+      // Clear
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+
+      const maxDepth = 9;
+      const effectiveDepth = Math.min(maxDepth, Math.floor(4 + progress * 5));
+      const spreadAngle = 0.36 + Math.sin(breathPhase) * 0.05 + phaseEnergy * 0.08;
+      const trunkLen = 220 + progress * 80;
+
+      // Recursive branch drawer
+      function branch(x, y, len, angle, depth, isRoot) {
+        if (depth <= 0 || len < 6) return;
+
+        const x2 = x + Math.sin(angle) * len;
+        const y2 = y + (isRoot ? Math.cos(angle) : -Math.cos(angle)) * len;
+
+        const depthRatio = depth / maxDepth;
+        const alpha = Math.max(0.08, depthRatio * 0.85);
+
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x2, y2);
+
+        // Color gradation: Celestial branches (cyan/gold) vs Material roots (amber/teal)
+        if (isRoot) {
+          ctx.strokeStyle = PALETTE.gold + alpha + ')';
+          ctx.lineWidth = Math.max(1.2, depth * 2.2);
+        } else {
+          ctx.strokeStyle = (depth % 2 === 0 ? PALETTE.cyan : PALETTE.gold) + alpha + ')';
+          ctx.lineWidth = Math.max(1.0, depth * 2.0);
+        }
+        ctx.stroke();
+
+        // Tip node glow on terminal branches
+        if (depth === 1 && Math.random() < 0.4) {
+          ctx.fillStyle = PALETTE.white + (alpha * 0.8) + ')';
+          ctx.beginPath();
+          ctx.arc(x2, y2, 2.5 + Math.sin(breathPhase * 2) * 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        const nextLen = len * (0.72 + (depth % 3) * 0.03);
+        const asymmetry = 0.04 * Math.sin(depth + breathPhase);
+
+        // Branch bifurcation
+        branch(x2, y2, nextLen, angle - spreadAngle + asymmetry, depth - 1, isRoot);
+        branch(x2, y2, nextLen, angle + spreadAngle + asymmetry, depth - 1, isRoot);
+
+        // Occasional harmonic third sub-branch
+        if (depth > 4) {
+          branch(x2, y2, nextLen * 0.65, angle + asymmetry * 2, depth - 2, isRoot);
+        }
+      }
+
+      // Draw Upper Branches (Ascent / Sophia's Pleroma reach)
+      branch(CX, CY - 20, trunkLen, 0, effectiveDepth, false);
+
+      // Draw Lower Roots (Descent / Grounding into the material earth)
+      branch(CX, CY + 20, trunkLen * 0.85, 0, effectiveDepth, true);
+
+      ctx.restore();
+    }
+
+    // =========================================================================
+    // 4. FRACTAL ENGINE 2: APOLLONIAN GASKET (Descartes Circle Theorem)
+    // =========================================================================
+    // Recursively computes mutually tangent kissing circles
+    function drawApollonianGasket(progress, phaseEnergy, breathPhase) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+
+      const rot = breathPhase * 0.15;
+      const baseR = 540 + Math.sin(breathPhase) * 40 + progress * 180;
+
+      // Outer boundary ring
+      ctx.strokeStyle = PALETTE.cyan + '0.45)';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(CX, CY, baseR, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Inner symmetrically packed circles
+      const maxGenerations = Math.min(5, 2 + Math.floor(progress * 3.5));
+
+      function recurseCircles(cx, cy, r, depth) {
+        if (depth <= 0 || r < 8) return;
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+
+        const alpha = Math.min(0.85, 0.2 + (depth / maxGenerations) * 0.6);
+        ctx.strokeStyle = (depth % 2 === 0 ? PALETTE.gold : PALETTE.cyan) + alpha + ')';
+        ctx.lineWidth = Math.max(1, depth * 1.4);
+        ctx.stroke();
+
+        // 3 interior symmetric Soddy circles
+        const subR = r / (1 + 2 / Math.sqrt(3)); // Exact geometric Soddy ratio
+        const dist = r - subR;
+
+        for (let i = 0; i < 3; i++) {
+          const theta = rot + (i * Math.PI * 2) / 3;
+          const nx = cx + Math.cos(theta) * dist;
+          const ny = cy + Math.sin(theta) * dist;
+          recurseCircles(nx, ny, subR, depth - 1);
+        }
+
+        // Central nest circle
+        const centerR = r - 2 * subR;
+        if (centerR > 6) {
+          recurseCircles(cx, cy, centerR, depth - 1);
+        }
+      }
+
+      recurseCircles(CX, CY, baseR, maxGenerations);
+
+      // Radial interference harmonic chords
+      const chords = 12;
+      ctx.strokeStyle = PALETTE.sapphire + '0.25)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < chords; i++) {
+        const ang = rot + (i * Math.PI * 2) / chords;
+        ctx.beginPath();
+        ctx.moveTo(CX + Math.cos(ang) * 40, CY + Math.sin(ang) * 40);
+        ctx.lineTo(CX + Math.cos(ang) * baseR, CY + Math.sin(ang) * baseR);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    // =========================================================================
+    // 5. FRACTAL ENGINE 3: SIERPINSKI SACRED LATTICE (Merkaba / Polyhedral)
+    // =========================================================================
+    function drawSierpinskiLattice(progress, phaseEnergy, breathPhase) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+
+      const rot = breathPhase * 0.08;
+      const size = 800 + Math.sin(breathPhase) * 50 + progress * 200;
+      const depth = Math.min(6, 2 + Math.floor(progress * 4));
+
+      // Recursive triangle subdivision
+      function drawSierpinski(ax, ay, bx, by, cx, cy, d) {
+        if (d <= 0) {
+          ctx.beginPath();
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
+          ctx.lineTo(cx, cy);
+          ctx.closePath();
+          ctx.strokeStyle = PALETTE.cyan + '0.5)';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+          return;
+        }
+
+        // Midpoints
+        const abx = (ax + bx) / 2;
+        const aby = (ay + by) / 2;
+        const bcx = (bx + cx) / 2;
+        const bcy = (by + cy) / 2;
+        const cax = (cx + ax) / 2;
+        const cay = (cy + ay) / 2;
+
+        // Subdivide 3 outer triangles
+        drawSierpinski(ax, ay, abx, aby, cax, cay, d - 1);
+        drawSierpinski(abx, aby, bx, by, bcx, bcy, d - 1);
+        drawSierpinski(cax, cay, bcx, bcy, cx, cy, d - 1);
+
+        // Center inverted triangle accented in gold
+        if (d === depth) {
+          ctx.beginPath();
+          ctx.moveTo(abx, aby);
+          ctx.lineTo(bcx, bcy);
+          ctx.lineTo(cax, cay);
+          ctx.closePath();
+          ctx.strokeStyle = PALETTE.gold + '0.7)';
+          ctx.lineWidth = 2.0;
+          ctx.stroke();
+        }
+      }
+
+      // Star of David / Merkaba dual interlocking configuration
+      for (let s = 0; s < 2; s++) {
+        const angleOffset = rot + (s * Math.PI) / 3;
+        const ax = CX + Math.cos(angleOffset) * size;
+        const ay = CY + Math.sin(angleOffset) * size;
+        const bx = CX + Math.cos(angleOffset + (2 * Math.PI) / 3) * size;
+        const by = CY + Math.sin(angleOffset + (2 * Math.PI) / 3) * size;
+        const cx = CX + Math.cos(angleOffset + (4 * Math.PI) / 3) * size;
+        const cy = CY + Math.sin(angleOffset + (4 * Math.PI) / 3) * size;
+
+        drawSierpinski(ax, ay, bx, by, cx, cy, depth);
+      }
+
+      ctx.restore();
+    }
+
+    // =========================================================================
+    // 6. MASTER RENDER DISPATCHER
+    // =========================================================================
+    let currentEngine = 'lsystem'; // 'lsystem' | 'apollonian' | 'sierpinski' | 'hybrid'
+    let currentSeconds = 0;
+    const TOTAL_SECONDS = 1440; // 24:00 exact
+
+    function getPhaseInfo(sec) {
+      if (sec < 240) return { name: 'I. Pleroma', desc: 'The Unmanifest Silence & Seed Motif', energy: 0.15 };
+      if (sec < 540) return { name: 'II. Descent', desc: 'Emanation of Sophia & First Dialogue', energy: 0.45 };
+      if (sec < 900) return { name: 'III. Density', desc: 'The Polyphonic Weave & Modal Counterpoint', energy: 0.75 };
+      if (sec < 1200) return { name: 'IV. Grounding (Climax)', desc: 'The Earthing Rod & Full Integration', energy: 1.0 };
+      return { name: 'V. Transfiguration', desc: 'The Awakened Vessel & Return to Silence', energy: 0.35 };
+    }
+
+    function renderFrame(timeInSeconds) {
+      ctx.clearRect(0, 0, W, H);
+
+      const progress = timeInSeconds / TOTAL_SECONDS;
+      const phase = getPhaseInfo(timeInSeconds);
+      const breath = timeInSeconds * 0.8; // Smooth meditative cycle
+
+      // Update HUD
+      document.getElementById('phaseBadge').textContent = `${phase.name} (${formatTime(timeInSeconds)})`;
+
+      const rod = document.getElementById('groundingRod');
+      const core = document.getElementById('sparkCore');
+
+      // Update rod & core reactivity
+      rod.style.opacity = (0.4 + phase.energy * 0.6).toString();
+      core.style.transform = `translate(-50%, -50%) scale(${1 + phase.energy * 0.6 + Math.sin(breath * 2) * 0.15})`;
+
+      // Render based on active engine
+      if (currentEngine === 'lsystem') {
+        drawDendriticLSystem(progress, phase.energy, breath);
+        document.getElementById('engineDesc').textContent = 'Engine: L-System Dendritic Branching (Tree & Roots)';
+      } else if (currentEngine === 'apollonian') {
+        drawApollonianGasket(progress, phase.energy, breath);
+        document.getElementById('engineDesc').textContent = 'Engine: Apollonian Gasket (Descartes Kissing Circles)';
+      } else if (currentEngine === 'sierpinski') {
+        drawSierpinskiLattice(progress, phase.energy, breath);
+        document.getElementById('engineDesc').textContent = 'Engine: Sierpinski Sacred Lattice (Merkaba Folding)';
+      } else if (currentEngine === 'hybrid') {
+        // Organic synthesis: Subtle Apollonian geometry background + L-System foreground
+        drawApollonianGasket(progress * 0.7, phase.energy * 0.6, breath * 0.5);
+        drawDendriticLSystem(progress, phase.energy, breath);
+        document.getElementById('engineDesc').textContent = 'Engine: Hybrid Sacred Composition (Gasket + Tree)';
+      }
+    }
+
+    function formatTime(s) {
+      const mins = Math.floor(s / 60).toString().padStart(2, '0');
+      const secs = Math.floor(s % 60).toString().padStart(2, '0');
+      return `${mins}:${secs}`;
+    }
+
+    // =========================================================================
+    // 7. GSAP MASTER TIMELINE & HYPERFRAMES COMPLIANCE
+    // =========================================================================
     window.__timelines = window.__timelines || {};
     const tl = gsap.timeline({ paused: true });
-    window.__timelines[compositionId] = tl;
+    window.__timelines['gnosis'] = tl;
 
-    // Phase Markers (Arc sync):
-    // 0:00 - 3:12 (0 - 192s): Pleroma
-    // 3:12 - 7:28 (192 - 448s): Descent
-    // 7:28 - 12:48 (448 - 768s): Density
-    // 12:48 - 18:08 (768 - 1088s): Grounding
-    // 18:08 - 21:20 (1088 - 1280s): Transfiguration
+    const animObj = { time: 0 };
+    tl.to(animObj, {
+      time: TOTAL_SECONDS,
+      duration: TOTAL_SECONDS,
+      ease: 'none',
+      onUpdate: () => {
+        currentSeconds = animObj.time;
+        scrubBar.value = currentSeconds;
+        scrubTime.textContent = `${formatTime(currentSeconds)} / 24:00`;
+        renderFrame(currentSeconds);
+      }
+    });
 
-    // Continuous Sacred Breathing (Cycles across the 21:20 duration)
-    tl.to('#ring1', { scale: 1.4, duration: 8, ease: 'sine.inOut', repeat: Math.floor(totalDuration / 8), yoyo: true }, 0);
-    tl.to('#ring2', { scale: 1.25, duration: 16, ease: 'sine.inOut', repeat: Math.floor(totalDuration / 16), yoyo: true }, 0);
-    tl.to('#ring3', { scale: 1.15, duration: 24, ease: 'sine.inOut', repeat: Math.floor(totalDuration / 24), yoyo: true }, 0);
-    tl.to('#ring4', { scale: 1.08, duration: 32, ease: 'sine.inOut', repeat: Math.floor(totalDuration / 32), yoyo: true }, 0);
-    tl.to('#core', { scale: 1.6, boxShadow: '0 0 100px #38bdf8, 0 0 200px rgba(56, 189, 248, 0.9)', duration: 4, ease: 'sine.inOut', repeat: Math.floor(totalDuration / 4), yoyo: true }, 0);
+    // Parse URL params for headless snapshotting / mode selection
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('engine')) {
+      currentEngine = urlParams.get('engine');
+      document.querySelectorAll('.ctrl-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-engine') === currentEngine);
+      });
+    }
+    if (urlParams.has('t')) {
+      currentSeconds = parseFloat(urlParams.get('t'));
+      animObj.time = currentSeconds;
+    }
+    if (urlParams.get('clean') === '1' || urlParams.get('clean') === 'true') {
+      const sc = document.getElementById('scrub-container');
+      const uc = document.getElementById('ui-controls');
+      if (sc) sc.style.display = 'none';
+      if (uc) uc.style.display = 'none';
+    }
 
-    // Phase Transitions:
-    tl.set('#phaseBadge', { textContent: 'I. Pleroma' }, 0);
-    tl.set('#phaseBadge', { textContent: 'II. Descent' }, 192);
-    tl.set('#phaseBadge', { textContent: 'III. Density' }, 448);
-    tl.set('#phaseBadge', { textContent: 'IV. Grounding (Climax)' }, 768);
-    tl.set('#phaseBadge', { textContent: 'V. Transfiguration' }, 1088);
+    // Run initial frame
+    renderFrame(currentSeconds);
 
-    // Macro Intensity Progression:
-    tl.to('#groundingAxis', {
-      boxShadow: '0 0 80px rgba(56, 189, 248, 0.9), 0 0 160px rgba(245, 158, 11, 0.8)',
-      width: '8px',
-      duration: 320,
-      ease: 'power2.inOut'
-    }, 448); // Grounding build
+    // =========================================================================
+    // 8. INTERACTIVE UI HANDLERS (Browser scrub & Engine switcher)
+    // =========================================================================
+    const scrubBar = document.getElementById('scrub-bar');
+    const scrubTime = document.getElementById('scrub-time');
 
-    tl.to('#groundingAxis', {
-      boxShadow: '0 0 30px rgba(56, 189, 248, 0.4), 0 0 60px rgba(245, 158, 11, 0.3)',
-      width: '4px',
-      duration: 192,
-      ease: 'power2.out'
-    }, 1088); // Transfiguration resolution
+    scrubBar.addEventListener('input', (e) => {
+      const targetSec = parseFloat(e.target.value);
+      animObj.time = targetSec;
+      tl.time(targetSec);
+      scrubTime.textContent = `${formatTime(targetSec)} / 24:00`;
+      renderFrame(targetSec);
+    });
+
+    document.querySelectorAll('.ctrl-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentEngine = btn.getAttribute('data-engine');
+        renderFrame(currentSeconds);
+      });
+    });
+
+    // Keyboard Shortcuts: 1, 2, 3, 4 to switch engines; Space to play/pause
+    let isPlaying = true;
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '1') document.querySelector('[data-engine="lsystem"]').click();
+      if (e.key === '2') document.querySelector('[data-engine="apollonian"]').click();
+      if (e.key === '3') document.querySelector('[data-engine="sierpinski"]').click();
+      if (e.key === '4') document.querySelector('[data-engine="hybrid"]').click();
+      if (e.key === ' ') {
+        e.preventDefault();
+        isPlaying = !isPlaying;
+        if (isPlaying) tl.play(); else tl.pause();
+      }
+    });
+
+    // Start auto-playback
+    tl.play();
   </script>
 </body>
 </html>

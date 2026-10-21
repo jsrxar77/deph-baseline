@@ -104,12 +104,12 @@ async function main() {
       params: { track_index: trackIndex, clip_index: 0 }
     });
 
-    // Convert notes to beats
+    // Convert notes to beats with ambient calibration (soft pianissimo touch, never harsh v127)
     const notesPayload = t.notes.map((n) => ({
       pitch: n.pitch,
       start_time: +(n.begin * 4).toFixed(4),
       duration: +Math.max(0.1, (n.end - n.begin) * 4).toFixed(4),
-      velocity: n.velocity,
+      velocity: Math.max(25, Math.min(65, Math.round(28 + (n.velocity / 127) * 32))),
       mute: false
     }));
 
@@ -147,10 +147,10 @@ async function main() {
   console.log('\nCreating section locators...');
   const locators = [
     { name: '1. Pleroma', beat: 0.0 },          // 0:00 (Bar 1)
-    { name: '2. Descent', beat: 108 * 4 },       // 3:36 (Bar 109 = 432 beats)
-    { name: '3. Density', beat: (108 + 144) * 4 }, // 8:24 (Bar 253 = 1008 beats)
-    { name: '4. Grounding', beat: (108 + 144 + 180) * 4 }, // 14:24 (Bar 433 = 1728 beats)
-    { name: '5. Transfiguration', beat: (108 + 144 + 180 + 180) * 4 }, // 20:24 (Bar 613 = 2448 beats)
+    { name: '2. Descent', beat: 120 * 4 },       // 4:00 (Bar 121 = 480 beats)
+    { name: '3. Density', beat: (120 + 150) * 4 }, // 9:00 (Bar 271 = 1080 beats)
+    { name: '4. Grounding', beat: (120 + 150 + 180) * 4 }, // 15:00 (Bar 451 = 1800 beats)
+    { name: '5. Transfiguration', beat: (120 + 150 + 180 + 150) * 4 }, // 20:00 (Bar 601 = 2400 beats)
     { name: 'End', beat: totalBeats }            // 24:00 (Bar 721 = 2880 beats)
   ];
 

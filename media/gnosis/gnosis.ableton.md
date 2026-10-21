@@ -82,12 +82,12 @@ Si abres tu plantilla estándar de 8 canales (`Strudel Temaplte.als`) o creas la
 * **Regla de oro**: Mantener **100% SECA** (sin Reverb ni Delay), para preservar la fase y la separación estéreo estricta requerida por el cerebro.
 * **Fader sugerido**: `-16.0 dB`.
 
-### Pista 8: Voz de la Revelación / Solo Lead (`tracks/08-solo-lead.mid`)
-* **Rol**: Canto lírico monofónico que emerge con gracia en los momentos de elevación.
-* **Instrumento**: **Serum 2**.
-* **Preset sugerido**: En Serum 2 → `Factory/Lead/` → **`LD - Analog Glow.SerumPreset`**.
-* **Ajuste clave**: Modo Mono / Legato con Portamento suave (80–120 ms), ataque suave de 1.5s y release de 5.5s con amplio delay.
-* **Fader sugerido**: `-12.0 dB`.
+### Pista 8: Voz Cálida de la Revelación / Contrapunto Modal (`tracks/08-solo-lead.mid`)
+* **Rol**: Canto meditativo lírico en registro de violonchelo/barítono (**D2 a A2**, frecuencias fundamentales entre 73 y 110 Hz). Dialoga en contrapunto de llamada y respuesta con las Campanas de Sophía (Pista 3). En Pleroma guarda silencio reverente; despierta a los 5:40 con ataque de 10 segundos y concluye su despedida en el compás 640 (21:20).
+* **Instrumento**: **Serum 2** (dentro de Instrument Rack).
+* **Preset sugerido**: En Serum 2 → `Factory/Lead/` → **`LD - Analog Glow.SerumPreset`** (o `Factory/Pad/` → **`PD - Warm Cello Pad`**).
+* **Ajuste clave**: Filtro Low Pass cerrado por debajo de 500 Hz (en el EQ Eight de la pista, banda 4 High Cut calibrada en 0.60 para eliminar todo brillo metálico o sierra estridente). Modo Poly/Legato con ataque largo (8 a 10s) y release amplio (16 a 20s).
+* **Fader sugerido**: `-8.1 dB`.
 
 ---
 
