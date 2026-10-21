@@ -17,10 +17,9 @@ domains:
     file: sounds/gnosis.strudel
     source: strudel
   visual:
-    status: in-progress
-    framework: remotion
-    composition_id: gnosis
-    entry: tools/visuals/src/compositions/gnosis/gnosis.tsx
+    status: planned
+    framework: hyperframes
+    entry: media/gnosis/visuals/index.html
   sync:
     status: not-built
     output: sync/

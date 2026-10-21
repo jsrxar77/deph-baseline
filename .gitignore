@@ -33,3 +33,5 @@ media/*/ableton/**/Backup/
 *.asd
 Icon?
 
+# Graphify knowledge graph outputs
+graphify-out/
