@@ -1,0 +1,397 @@
+{
+  "lastUpdated": "2026-10-20T22:19:25.817Z",
+  "totalPlugins": 48,
+  "counts": {
+    "instruments": 19,
+    "effects": 29
+  },
+  "instruments": [
+    {
+      "name": "Analog Lab V",
+      "vendor": "Arturia",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "5.12.6.6914",
+      "path": "/Library/Audio/Plug-Ins/VST3/Analog Lab V.vst3"
+    },
+    {
+      "name": "Dexed",
+      "vendor": "Digital Suburban",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "1.0.1",
+      "path": "/Library/Audio/Plug-Ins/VST3/Dexed.vst3"
+    },
+    {
+      "name": "Jura",
+      "vendor": "AIR Music Technology",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "66048",
+      "path": "/Library/Audio/Plug-Ins/VST3/Jura.vst3"
+    },
+    {
+      "name": "Komplete Kontrol",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument",
+      "version": "3.5.4 (R0)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Komplete Kontrol.vst3"
+    },
+    {
+      "name": "Kontakt",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument",
+      "version": "6.8.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Kontakt.vst3"
+    },
+    {
+      "name": "Kontakt 7",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument",
+      "version": "7.10.9",
+      "path": "/Library/Audio/Plug-Ins/VST3/Kontakt 7.vst3"
+    },
+    {
+      "name": "Kontakt 8",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument",
+      "version": "8.13.1",
+      "path": "/Library/Audio/Plug-Ins/VST3/Kontakt 8.vst3"
+    },
+    {
+      "name": "Maschine 3",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument",
+      "version": "3.7.1 (R0)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Maschine 3.vst3"
+    },
+    {
+      "name": "Massive",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "1.7.0 (R0)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Massive.vst3"
+    },
+    {
+      "name": "Massive X",
+      "vendor": "Native Instruments",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "1.7.1 (R0)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Massive X.vst3"
+    },
+    {
+      "name": "Mini D",
+      "vendor": "AIR Music Technology",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "66048",
+      "path": "/Library/Audio/Plug-Ins/VST3/Mini D.vst3"
+    },
+    {
+      "name": "MPC 3",
+      "vendor": "Akai Professional",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "3.9",
+      "path": "/Library/Audio/Plug-Ins/VST3/MPC 3.vst3"
+    },
+    {
+      "name": "OB-Xf",
+      "vendor": "Surge Synth Team",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "0.9.67",
+      "path": "/Library/Audio/Plug-Ins/VST3/OB-Xf.vst3"
+    },
+    {
+      "name": "OPx-4",
+      "vendor": "AIR Music Technology",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "66048",
+      "path": "/Library/Audio/Plug-Ins/VST3/OPx-4.vst3"
+    },
+    {
+      "name": "Scaler 3",
+      "vendor": "Scaler Music",
+      "type": "Instrument",
+      "categories": "Instrument",
+      "version": "3.2.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Scaler 3.vst3"
+    },
+    {
+      "name": "Serum 2",
+      "vendor": "Xfer Records",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "2.0.19",
+      "path": "/Library/Audio/Plug-Ins/VST3/Serum2.vst3"
+    },
+    {
+      "name": "Surge XT",
+      "vendor": "Surge Synth Team",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "1.3.4",
+      "path": "/Library/Audio/Plug-Ins/VST3/Surge XT.vst3"
+    },
+    {
+      "name": "UADx PolyMAX Synth",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "1.0.16",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_polymax.vst3"
+    },
+    {
+      "name": "Vital",
+      "vendor": "Vital Audio",
+      "type": "Instrument",
+      "categories": "Instrument, Synth",
+      "version": "66821",
+      "path": "/Library/Audio/Plug-Ins/VST3/Vital.vst3"
+    }
+  ],
+  "effects": [
+    {
+      "name": "AIR Flavor Pro",
+      "vendor": "AIR Music Technology",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "66048",
+      "path": "/Library/Audio/Plug-Ins/VST3/AIR Flavor Pro.vst3"
+    },
+    {
+      "name": "AIR Jura Chorus",
+      "vendor": "AIR Music Technology",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "66048",
+      "path": "/Library/Audio/Plug-Ins/VST3/AIR Jura Chorus.vst3"
+    },
+    {
+      "name": "AIR Multiband Filterbank",
+      "vendor": "AIR Music Technology",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "65537",
+      "path": "/Library/Audio/Plug-Ins/VST3/AIR Multiband Filterbank.vst3"
+    },
+    {
+      "name": "AIR Tape Double Track",
+      "vendor": "AIR Music Technology",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "65536",
+      "path": "/Library/Audio/Plug-Ins/VST3/AIR Tape Double Track.vst3"
+    },
+    {
+      "name": "Choral",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Modulation",
+      "version": "1.3.7 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Choral.vst3"
+    },
+    {
+      "name": "Driver",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Filter",
+      "version": "1.4.11 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Driver.vst3"
+    },
+    {
+      "name": "Flair",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Modulation",
+      "version": "1.3.7 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Flair.vst3"
+    },
+    {
+      "name": "Guitar Rig 7",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "7.0.2 (R0)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Guitar Rig 7.vst3"
+    },
+    {
+      "name": "Ozone 11 Equalizer",
+      "vendor": "iZotope",
+      "type": "Effect",
+      "categories": "Fx, EQ",
+      "version": "11.3.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Ozone 11 Equalizer.vst3"
+    },
+    {
+      "name": "Ozone 12 Elements",
+      "vendor": "iZotope",
+      "type": "Effect",
+      "categories": "Fx, Mastering",
+      "version": "12.1.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Ozone 12 Elements.vst3"
+    },
+    {
+      "name": "Ozone Imager 2",
+      "vendor": "iZotope",
+      "type": "Effect",
+      "categories": "Fx, Spatial",
+      "version": "2.3.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Ozone Imager 2.vst3"
+    },
+    {
+      "name": "Phasis",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Modulation",
+      "version": "1.3.7 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Phasis.vst3"
+    },
+    {
+      "name": "Raum",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Reverb",
+      "version": "1.3.7 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Raum.vst3"
+    },
+    {
+      "name": "Replika",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Delay",
+      "version": "1.6.7 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Replika.vst3"
+    },
+    {
+      "name": "Replika XT",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Delay",
+      "version": "1.3.7 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Replika XT.vst3"
+    },
+    {
+      "name": "Scaler 3 Audio",
+      "vendor": "Scaler Music",
+      "type": "Effect",
+      "categories": "Fx, Generator",
+      "version": "3.2.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Scaler 3 Audio.vst3"
+    },
+    {
+      "name": "Serum 2 FX",
+      "vendor": "Xfer Records",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "2.0.19",
+      "path": "/Library/Audio/Plug-Ins/VST3/Serum2.vst3"
+    },
+    {
+      "name": "Supercharger",
+      "vendor": "Native Instruments",
+      "type": "Effect",
+      "categories": "Fx, Dynamics",
+      "version": "1.4.11 (R34)",
+      "path": "/Library/Audio/Plug-Ins/VST3/Supercharger.vst3"
+    },
+    {
+      "name": "Surge XT Effects",
+      "vendor": "Surge Synth Team",
+      "type": "Effect",
+      "categories": "Fx",
+      "version": "1.3.4",
+      "path": "/Library/Audio/Plug-Ins/VST3/Surge XT Effects.vst3"
+    },
+    {
+      "name": "Trash",
+      "vendor": "iZotope",
+      "type": "Effect",
+      "categories": "Fx, Distortion",
+      "version": "1.3.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Trash.vst3"
+    },
+    {
+      "name": "UADx 1176 FET Compressor",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, Dynamics",
+      "version": "1.0.3",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_ua_1176.vst3"
+    },
+    {
+      "name": "UADx 610-A Preamp and EQ",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, EQ",
+      "version": "1.0.15",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_610_a.vst3"
+    },
+    {
+      "name": "UADx 610-B Preamp and EQ",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, EQ",
+      "version": "1.0.15",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_610_b.vst3"
+    },
+    {
+      "name": "UADx Century Tube Channel Strip",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, Channel, Strip, EQ, Dynamics",
+      "version": "1.0.16",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_century_channel_strip.vst3"
+    },
+    {
+      "name": "UADx LA-2A Tube Compressor",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, Dynamics",
+      "version": "1.0.8",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_teletronix_la-2a_tc.vst3"
+    },
+    {
+      "name": "UADx Pure Plate Reverb",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, Reverb",
+      "version": "1.4.16",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_pure_plate.vst3"
+    },
+    {
+      "name": "UADx Showtime 64 Tube Amp",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, Guitar",
+      "version": "1.0.1",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_showtime_amp.vst3"
+    },
+    {
+      "name": "UADx Vibe Analog Machines Essentials",
+      "vendor": "Universal Audio (UADx)",
+      "type": "Effect",
+      "categories": "Fx, Distortion",
+      "version": "1.1.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/uaudio_verve_essentials.vst3"
+    },
+    {
+      "name": "Vinyl",
+      "vendor": "iZotope",
+      "type": "Effect",
+      "categories": "Fx, Distortion",
+      "version": "1.13.0",
+      "path": "/Library/Audio/Plug-Ins/VST3/Vinyl.vst3"
+    }
+  ],
+  "systemFilesCount": 123
+}

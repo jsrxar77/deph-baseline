@@ -3,7 +3,6 @@ import { Composition } from "remotion";
 import { SlowDriftCompositions } from "./compositions/slow-drift/slow-drift";
 import { SongcordCompositions } from "./compositions/songcord/songcord";
 import { MusicaUniversalisCompositions, MusicaUniversalis } from "./compositions/musica-universalis/musica-universalis";
-import { MorphoGenesisCompositions } from "./compositions/morpho-genesis/morpho-genesis";
 import { TheField, TheFieldCompositions } from "./compositions/the-field/the-field";
 import { FractalVisualizer } from "./compositions/slow-drift/FractalVisualizer";
 import { ChannelBanner } from "./brand/ChannelBanner";
@@ -24,7 +23,6 @@ export const RemotionRoot: React.FC = () => {
       <SlowDriftCompositions />
       <SongcordCompositions />
       <MusicaUniversalisCompositions />
-      <MorphoGenesisCompositions />
       <TheFieldCompositions />
       <Composition id="deph-banner" component={ChannelBanner} durationInFrames={1} fps={60} width={2560} height={1440} />
       <Composition id="deph-avatar" component={ChannelAvatar} durationInFrames={1} fps={60} width={800} height={800} />

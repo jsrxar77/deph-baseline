@@ -1,0 +1,82 @@
+name: gnosis
+title: Gnosis
+created: 2026-10-20
+key: D:dorian # Tuned to A4 = 432 Hz
+tempo:
+  cpm: 30 # 1 cycle = 2s (120 BPM in 4/4)
+arc:
+  - { name: pleroma, cycles: 96 }          # 0:00 - 3:12 (The Unmanifest Light & Theta seed)
+  - { name: descent, cycles: 128 }         # 3:12 - 7:28 (Emanation of Sophia & Bell Arp)
+  - { name: density, cycles: 160 }         # 7:28 - 12:48 (The Crucible & Apparent Prison / Sub enters)
+  - { name: grounding, cycles: 160 }       # 12:48 - 18:08 (The Earthing Rod / Climax & Full Integration)
+  - { name: transfiguration, cycles: 96 }  # 18:08 - 21:20 (The Awakened Physical Vessel)
+total_cycles: 640 # 1280s = 21:20 exact (>20 min meditative transport)
+domains:
+  sound:
+    status: in-progress
+    file: sounds/gnosis.strudel
+    source: strudel
+  visual:
+    status: planned
+    framework: hyperframes
+    entry: media/gnosis/visuals/index.html
+  sync:
+    status: not-built
+    output: sync/
+  daw:
+    status: provisioned
+    template: "Strudel Temaplte.als"
+    channels: 8
+    guide: gnosis.ableton.md
+    tracks:
+      - channel: 1
+        name: "Earth Pulse"
+        vst_source: "Surge XT"
+        preset_uri: "query:Plugins#VST3:Surge%20Synth%20Team:Surge%20XT"
+        preset_category: "Percussion"
+        preset_name: "Kick Tech 1"
+      - channel: 2
+        name: "Grounding Sub"
+        vst_source: "Surge XT"
+        preset_uri: "query:Plugins#VST3:Surge%20Synth%20Team:Surge%20XT"
+        preset_category: "Basses"
+        preset_name: "Sub 1"
+      - channel: 3
+        name: "Sophia Motif"
+        vst_source: "Serum 2"
+        preset_uri: "query:Plugins#VST3:Xfer%20Records:Serum%202"
+        preset_category: "Factory/Bell"
+        preset_name: "BL - Zenatrope 02"
+      - channel: 4
+        name: "Pleroma Pad"
+        vst_source: "Serum 2"
+        preset_uri: "query:Plugins#VST3:Xfer%20Records:Serum%202"
+        preset_category: "Factory/Pad"
+        preset_name: "PD - Analog Soft Cotton"
+      - channel: 5
+        name: "Tintinnabuli"
+        vst_source: "Surge XT"
+        preset_uri: "query:Plugins#VST3:Surge%20Synth%20Team:Surge%20XT"
+        preset_category: "Pads"
+        preset_name: "Harmonic Sweep"
+      - channel: 6
+        name: "Astral Textures"
+        vst_source: "Serum 2"
+        preset_uri: "query:Plugins#VST3:Xfer%20Records:Serum%202"
+        preset_category: "Factory/Soundscape"
+        preset_name: "SC - Astral Projection"
+      - channel: 7
+        name: "Theta Binaural"
+        vst_source: "Utility"
+        preset_uri: "query:AudioFx#Utility"
+        preset_name: "Pure Tone 432Hz"
+      - channel: 8
+        name: "Solo Lead"
+        vst_source: "Serum 2"
+        preset_uri: "query:Plugins#VST3:Xfer%20Records:Serum%202"
+        preset_category: "Factory/Lead"
+        preset_name: "LD - Analog Glow"
+publish:
+  status: planned
+  file: gnosis.youtube.md
+doc: gnosis.md
