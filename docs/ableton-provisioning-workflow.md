@@ -34,17 +34,37 @@ Por cada pista requerida por el manifiesto `<name>.yaml` (de la pista 1 a la N),
    * Surge XT: `query:Plugins#VST3:Surge%20Synth%20Team:Surge%20XT`
    * Serum 2: `query:Plugins#VST3:Xfer%20Records:Serum%202`
    * Utility / Efectos nativos: `query:AudioFx#Utility`
-3. **Hard Verification Gate Inmediato**: Consultar `get_track_info(track_index)` y verificar que `devices` **no esté vacío**.
-4. **Protocolo Obligatorio de Comunicación y Handoff (Agente vs Usuario)**:
+3. **Envoltura Automática Obligatoria en Instrument Rack (Regla Cardinal para Plugins Externos)**:
+   * **SIEMPRE que el instrumento cargado sea un VST3 o AU externo** (Surge XT, Serum 2, Vital, Kontakt, etc.):
+     * El agente DEBE ejecutar inmediatamente:
+       ```bash
+       node tools/sounds/ableton-controller.mjs wrap <track_index> "Ch {N} - {Rol} Rack"
+       ```
+     * **Razón técnica ineludible**: Ableton Live aísla los parámetros internos de los VSTs de terceros y no los expone por defecto. Al envolver el VST en un **Instrument Rack**, Ableton despliega de inmediato sus **16 Macros** (`Macro 1` al `Macro 16`), permitiendo que el usuario o el agente mapeen knobs esenciales (Cutoff, Reverb, Decay, etc.) y la IA pueda modularlos y automatizarlos en tiempo real.
+4. **Hard Verification Gate Inmediato**: 
+   * Consultar `get_track_info(track_index)`.
+   * Para plugins externos, verificar que `devices` contenga `InstrumentGroupDevice` (Instrument Rack) y no un `PluginDevice` desnudo.
+   * Si una pista tiene `devices: []`, está estrictamente prohibido avanzar a la siguiente pista.
+5. **Protocolo Obligatorio de Comunicación y Handoff (Agente vs Usuario)**:
    * El agente DEBE reportar explícitamente al usuario:
-     1. **Lo que hizo el agente automáticamente**: Pista renombrada y VST instanciado y verificado en `devices`.
-     2. **Lo que le queda al usuario manualmente**: Indicar la categoría, el nombre literal del preset verificado en disco y los ajustes finos (ej. *Vel > Gain en −40 dB*) para que el usuario los seleccione en la ventana gráfica del VST en Ableton.
+     1. **Lo que hizo el agente automáticamente**: Pista renombrada, VST cargado y envuelto en su Instrument Rack con 16 Macros listos.
+     2. **Lo que le queda al usuario manualmente**: Indicar el preset sugerido a seleccionar en la ventana del VST y sugerir el mapeo del Macro 1 al Cutoff del filtro.
    * El paso NO se da por finalizado hasta que el usuario confirma que seleccionó el preset en el sintetizador.
-5. **Control**: Si una pista tiene `devices: []`, está prohibido avanzar a la siguiente pista.
 
 ### PASO 4: Sincronización Global de Tempo y Snapshot
 * **Objetivo**: Fijar el tempo exacto de la pieza (`set_tempo(bpm)`) y tomar `get_session_snapshot`.
 * **Verificación**: Todas las pistas activas deben tener sus nombres y sus instrumentos cargados.
+
+### PASO 4b: Aprovisionamiento Automático de la Cadena Master
+* **Objetivo**: Garantizar el pegamento dinámico, la limpieza de subgraves y el cumplimiento de sonoridad meditativa (-16 LUFS / -1.0 dBTP ceiling).
+* **Comando**:
+  ```bash
+  node tools/sounds/ableton-controller.mjs master-setup
+  ```
+* **Dispositivos instanciados y calibrados en `mt`**:
+  1. **EQ Eight**: High Pass 48 dB/oct @ 25 Hz, Bell dip @ 320 Hz (-1.2 dB), High Shelf @ 11.5 kHz (+0.8 dB).
+  2. **Glue Compressor**: Ratio 2:1, Attack 30 ms, Release Auto, Output +0.5 dB.
+  3. **Limiter**: Ceiling -1.0 dBTP, Mode True Peak, Lookahead 6 ms, Release Auto.
 
 ### PASO 5: Audición y Prueba en Vivo (Play Strudel)
 * **Objetivo**: Escuchar la música sonar en tiempo real a través de los instrumentos reales en Ableton.

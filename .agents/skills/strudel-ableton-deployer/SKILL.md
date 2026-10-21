@@ -42,6 +42,12 @@ When the user asks to "pasar a Ableton" ("pass it to Ableton" or "cargar los ins
      - Call `set_track_name` with `track_index: index` and format: `Ch {channel} - {name} ({vst_source})` (e.g., `Ch 2 - Bass (Serum 2)`).
      - **CALL `load_instrument_or_effect` IMMEDIATELY**: Both native presets (`query:Drums#...`, `query:Synths#...`) and 3rd-party VST3 plugins (`query:Plugins#VST3:Vendor:PluginName`) CAN and MUST be loaded directly via `load_instrument_or_effect`.
      - **NEVER delegate loading to the user** if a URI is known or discoverable in Ableton's browser (`Plugins/VST3/` or `Instruments/`).
+     - **AUTOMATIC INSTRUMENT RACK WRAPPING (MANDATORY FOR EXTERNAL PLUGINS)**:
+       - Whenever the loaded instrument is a 3rd-party VST3/AU plugin (`Surge XT`, `Serum 2`, `Vital`, etc.), the agent MUST immediately wrap it in an Instrument Rack:
+         ```bash
+         node tools/sounds/ableton-controller.mjs wrap <track_index> "Ch {channel} - {name} Rack"
+         ```
+       - **Why**: External VSTs isolate their internal parameters from Ableton Live's API. Wrapping them in an Instrument Rack exposes all 16 Macros (`Macro 1..16`) directly to the API, allowing the user to map Cutoff, Resonance, or Decay, and enabling the AI to modulate and automate these parameters in real time.
 
 4. **Tempo Synchronization**:
    - Call `set_tempo` using the `bpm` defined in the YAML manifest.
@@ -50,7 +56,8 @@ When the user asks to "pasar a Ableton" ("pass it to Ableton" or "cargar los ins
    - Call `get_session_snapshot`.
    - Inspect the returned `tracks` array.
    - For every track defined in the YAML, assert that `track.devices` is NOT empty.
-   - **PROHIBITED:** It is strictly prohibited to declare the deployment complete or tell the user it is ready if any target track has `devices: []`. If a device failed to load, diagnose the URI with `get_browser_items_at_path` and retry immediately.
+   - For 3rd-party VSTs, assert that the device class is `InstrumentGroupDevice` (Instrument Rack).
+   - **PROHIBITED:** It is strictly prohibited to declare the deployment complete or tell the user it is ready if any target track has `devices: []` or if an external VST is left unwrapped as a raw `PluginDevice`. If a device failed to load, diagnose the URI with `get_browser_items_at_path` and retry immediately.
 
 ## 3. Phase 2: Full Arrangement MIDI Deployment (MANDATORY STANDARD)
 When the user asks to "pasar toda la pieza a midi en ableton", "desplegar en arrangement" o "pasar todo a ableton":
@@ -103,14 +110,17 @@ When the user asks to master the project or balance track volumes:
      - Read parameters via `get_device_parameters(track_index, device_index)`.
      - Set `Gain` parameter in dB via `set_device_parameter`.
 
-2. **Master Bus Processing Chain**:
-   - Load standard mastering devices onto the Master track (or master bus) using `load_instrument_or_effect`:
-     - **EQ Eight** (`query:AudioFx#EQ%20Eight`): High-pass filter at 25-30 Hz (removes inaudible sub-mud), slight dip at 250-350 Hz (clarity), gentle high-shelf at 10-12 kHz (air).
-     - **Glue Compressor** (`query:AudioFx#Glue%20Compressor`): SSL Bus compressor behavior (Attack 30ms, Release Auto, Ratio 2:1, 1-2 dB gentle gain reduction).
-     - **Saturator** (`query:AudioFx#Saturator`): Subtle analog warmth and harmonic peak rounding.
-     - **Limiter** (`query:AudioFx#Limiter`): True peak ceiling at -0.3 dB to -1.0 dB (streaming standard) and transparent gain drive.
+2. **Master Bus Processing Chain (AUTOMATED)**:
+   - Run the automated master provisioning command:
+     ```bash
+     node tools/sounds/ableton-controller.mjs master-setup
+     ```
+   - This automatically creates and calibrates on the Master track (`mt`):
+     - **EQ Eight** (`mt/d0`): High-pass filter at 25 Hz (removes inaudible sub-rumble), slight dip at 320 Hz (-1.2 dB, Q 0.8) for clarity, and gentle high-shelf at 11.5 kHz (+0.8 dB) for cosmic air.
+     - **Glue Compressor** (`mt/d1`): SSL Bus compressor (Ratio 2:1, Attack 30ms, Release Auto, Output +0.5 dB, 0.5-1 dB gentle gain reduction).
+     - **Limiter** (`mt/d2`): True peak ceiling at -1.0 dBTP (streaming standard with zero inter-sample distortion), Lookahead 6 ms, Release Auto.
 
 3. **Fine-Tuning Parameters**:
-   - Use `get_device_parameters` to discover parameter indices, minimums, and maximums.
-   - Use `set_device_parameter` to adjust thresholds, gains, frequencies, and releases.
-   - Verify final balance with `get_session_snapshot`.
+   - Use `node tools/sounds/ableton-controller.mjs inspect <track> [device]` to discover parameter indices and names.
+   - Use `node tools/sounds/ableton-controller.mjs set <track> <device> <param> <value>` to adjust thresholds, gains, frequencies, and releases.
+   - Verify final balance with `node tools/sounds/ableton-controller.mjs tracks`.
