@@ -72,8 +72,9 @@ mkdirSync(args.outDir, { recursive: true });
 rmSync(join(args.outDir, 'tracks'), { recursive: true, force: true }); // no stale files from renamed tracks
 mkdirSync(join(args.outDir, 'tracks'));
 writeFileSync(join(args.outDir, `${title}.mid`), smf(tracks, { bpm, title }));
-tracks.forEach((t, i) => {
-  const file = `${String(i + 1).padStart(2, '0')}-${t.name.replace(/[^\w-]+/g, '_')}.mid`;
+tracks.forEach((t) => {
+  const fileNum = (t.channel !== undefined ? t.channel : t.slotIndex !== undefined ? t.slotIndex : 0) + 1;
+  const file = `${String(fileNum).padStart(2, '0')}-${t.name.replace(/[^\w-]+/g, '_')}.mid`;
   t.file = `tracks/${file}`;
   writeFileSync(join(args.outDir, t.file), smf([t], { bpm, title: t.name }));
 });

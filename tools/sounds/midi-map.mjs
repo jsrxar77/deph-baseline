@@ -85,7 +85,13 @@ export function buildTracks(haps, { noteToMidi, bendRange = 2, velRange = 40, na
       warnings.push(`${layer}: ${events.length - pitched.length} event(s) without a note were skipped`);
     }
 
-    const name = names[tracks.length] ?? layer;
+    const layerMatch = String(layer).match(/\$?(\d+)/);
+    const layerNum = layerMatch ? parseInt(layerMatch[1], 10) : tracks.length;
+    const explicitMidiChan = pitched.find((e) => e.value && e.value.midichan !== undefined)?.value?.midichan;
+    const slotIndex = (explicitMidiChan !== undefined && Number.isFinite(explicitMidiChan))
+      ? explicitMidiChan - 1
+      : layerNum;
+    const name = (names.length > slotIndex && names[slotIndex]) ? names[slotIndex] : (names[tracks.length] ?? layer);
     const synthTuned = noBend.includes(name) || noBend.includes(layer);
     const residuals = pitched.map((e) => (e.midi - Math.round(e.midi)) * 100);
     const cents = median(residuals);
@@ -133,6 +139,7 @@ export function buildTracks(haps, { noteToMidi, bendRange = 2, velRange = 40, na
     tracks.push({
       layer,
       name,
+      slotIndex,
       notes,
       cents: +cents.toFixed(2),
       bend: !synthTuned && Math.abs(cents) >= 0.5 ? bendValue(cents, bendRange) : null,
@@ -146,7 +153,7 @@ export function buildTracks(haps, { noteToMidi, bendRange = 2, velRange = 40, na
   if (tracks.length > 16) throw new Error(`${tracks.length} pitched layers; MIDI has 16 channels`);
   const loudest = Math.max(...tracks.map((t) => t.peakGain));
   tracks.forEach((t, i) => {
-    t.channel = i;
+    t.channel = t.slotIndex !== undefined ? t.slotIndex : i;
     t.suggestedFaderDb = +(20 * Math.log10(t.peakGain / loudest)).toFixed(1);
   });
   return { tracks, audioOnly, warnings };

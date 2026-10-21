@@ -89,7 +89,7 @@ async function main() {
   // 2. Deploy each track
   for (let i = 0; i < tracks.length; i++) {
     const t = tracks[i];
-    const trackIndex = i;
+    const trackIndex = (t.channel !== undefined) ? t.channel : (t.slotIndex !== undefined ? t.slotIndex : i);
     console.log(`\nDeploying Track ${trackIndex} [${t.name}] (${t.notes.length} notes)...`);
 
     // Create session clip of total length (beats)

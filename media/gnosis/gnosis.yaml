@@ -67,9 +67,8 @@ domains:
         preset_name: "SC - Astral Projection"
       - channel: 7
         name: "Theta Binaural"
-        vst_source: "Utility"
-        preset_uri: "query:AudioFx#Utility"
-        preset_name: "Pure Tone 432Hz"
+        vst_source: "Audio Stem"
+        preset_name: "07-theta-binaural.wav"
       - channel: 8
         name: "Solo Lead"
         vst_source: "Serum 2"

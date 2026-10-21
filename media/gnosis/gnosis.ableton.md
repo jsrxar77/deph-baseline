@@ -10,13 +10,13 @@ Esta guía lleva la pieza **Gnosis** (24:00 exactos, 720 compases a 120 BPM) des
 * **Duración total**: `720 compases` = 24 minutos y 00 segundos exactos.
 * **Archivos listos en `media/gnosis/daw/`**:
   * `gnosis.mid` (el archivo MIDI maestro con todos los canales)
-  * `tracks/01-earth-pulse.mid` (Canal 1 - Pulso Terrestre / Kick C1)
-  * `tracks/02-grounding-sub.mid` (Canal 2 - Sub-Bass / Varilla de Anclaje)
-  * `tracks/03-sophia-motif.mid` (Canal 3 - Motivo de Sophía / Campanas Arpegiadas)
-  * `tracks/04-pleroma-pad.mid` (Canal 4 - Pleroma Pad)
-  * `tracks/05-tintinnabuli.mid` (Canal 5 - Acordes / Armonía)
-  * `tracks/06-cosmic-textures.mid` (Canal 6 - Texturas Cósmicas / Viento Astral)
-  * `tracks/07-binaural.mid` (Canal 7 - Melodía de la Revelación / Solo Lead)
+  * `tracks/01-primordial-drone.mid` (Canal 1 - Primordial Drone / Surge XT)
+  * `tracks/02-grounding-sub.mid` (Canal 2 - Sub-Bass / Surge XT)
+  * `tracks/03-sophia-motif.mid` (Canal 3 - Motivo de Sophía / Serum 2)
+  * `tracks/04-pleroma-pad.mid` (Canal 4 - Pleroma Pad / Serum 2)
+  * `tracks/05-tintinnabuli.mid` (Canal 5 - Tintinnabuli / Surge XT)
+  * `tracks/06-astral-textures.mid` (Canal 6 - Texturas Cósmicas / Serum 2)
+  * `tracks/08-solo-lead.mid` (Canal 8 - Melodía de la Revelación / Serum 2)
   * `tracks.json` (Parámetros y faders sugeridos)
 
 ---
