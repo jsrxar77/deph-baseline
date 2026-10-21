@@ -30,11 +30,11 @@ domains:
     guide: gnosis.ableton.md
     tracks:
       - channel: 1
-        name: "Earth Pulse"
+        name: "Primordial Drone"
         vst_source: "Surge XT"
         preset_uri: "query:Plugins#VST3:Surge%20Synth%20Team:Surge%20XT"
-        preset_category: "Percussion"
-        preset_name: "Kick Tech 1"
+        preset_category: "Basses"
+        preset_name: "Eighties Drone"
       - channel: 2
         name: "Grounding Sub"
         vst_source: "Surge XT"

@@ -38,14 +38,21 @@ Diseñado de origen para la plantilla estándar de 8 canales de Ableton Live (`S
 
 | Ch | Pista en Ableton | Rol Musical | Plugin Recomendado (Mac) | Preset / Carácter |
 | :---: | :--- | :--- | :--- | :--- |
-| **1** | `1 MIDI 1` | Pulso Primordial / Earth Pulse | Ableton Drum Rack / Surge XT | Latido sutil subsónico y textura de percusión orgánica |
-| **2** | `2 MIDI 2` | Sub-Bass / Varilla de Anclaje | **Surge XT** / **Serum 2** | Seno puro con saturación sutil, 40–55 Hz, Vel > Gain −40 dB |
-| **3** | `3 MIDI 3` | Motivo de Sophía / Arp | **Surge XT** / **Vital** | Campana armónica FM/Wavetable, ratios enteros 2 y 3, reverb larga |
-| **4** | `4 MIDI 4` | Pad Pleroma | **Serum 2** / **Analog Lab V** | Pad analógico cálido, filtro LP modulado en ondas lentas |
-| **5** | `5 MIDI 5` | Armonía / Tintinnabuli Chords | **Vital** / **Surge XT** | Acordes diatónicos en Re dórico con voicings automáticos |
-| **6** | `6 MIDI 6` | Texturas Cósmicas / Viento Astral | **Kontakt 8** / **Surge XT FX** | Granular wash, armónicos superiores sin estridencias |
-| **7** | `7 MIDI 7` | Capa Theta Binaural (432 Hz) | Strudel Native / Surge XT | Sines L/R secos con separación exacta de 6 Hz para audífonos |
-| **8** | `8 MIDI 8` | Revelación / Solo Lead | **Vital** / **Serum 2** | Lead fluido, legato con portamento suave para los momentos cumbre |
+| **1** | `Ch 1 - Primordial Drone` | Drone Armónico / Nota Pedal Primordial | **Surge XT** | `Basses/Eighties Drone.fxp` — Sostenido, etéreo, envolvente, sin percusión |
+| **2** | `Ch 2 - Grounding Sub` | Sub-Bass / Varilla de Anclaje | **Surge XT** | `Basses/Sub 1.fxp` — Seno puro y profundo (36–55 Hz), Vel > Gain −40 dB |
+| **3** | `Ch 3 - Sophia Motif` | Motivo de Sophía / Arp Bells | **Serum 2** | `Factory/Bell/BL - Zenatrope 02` — Campana FM pura y cálida con delay difuso |
+| **4** | `Ch 4 - Pleroma Pad` | Pad Pleroma | **Serum 2** | `Factory/Pad/PD - Analog Soft Cotton` — Pad analógico sedoso y envolvente |
+| **5** | `Ch 5 - Tintinnabuli` | Tintinnabuli / Contra-canto Armónico | **Surge XT** | `Pads/Harmonic Sweep.fxp` — Líneas secundarias suspendidas cruzando el pad |
+| **6** | `Ch 6 - Astral Textures`| Texturas Cósmicas / Viento Astral | **Serum 2** | `Factory/Soundscape/SC - Astral Projection` — Respiración cósmica espacial |
+| **7** | `Ch 7 - Theta Binaural` | Capa Theta Binaural 6 Hz (432 Hz) | **Utility** / Strudel | Portadora D4 (288.33 Hz), beat de 6 Hz (285.33 / 291.33 Hz) para audífonos |
+| **8** | `Ch 8 - Solo Lead` | Revelación / Solo Lead | **Serum 2** | `Factory/Lead/LD - Analog Glow` — Canto melódico fluido cruzando los motivos |
+
+---
+
+## Principios de Mezcla y Rango Dinámico
+* **Caminos que se cruzan**: Polimetría y desfase temporal orgánico entre las 8 voces (ciclos de 16, 18, 20, 24, 28, 32 y 36 ciclos). Las líneas entran y salen sin coincidir en cortes rígidos.
+* **Rango dinámico sutil**: Ninguna pista salta abruptamente; las ganancias se mantienen calibradas entre 0.05 y 0.13 en todo el trayecto de 21:20 para inducir y proteger estados profundos de meditación.
+* **Marca Inviolable de deph**: Afinación exacta de referencia **A4 = 432 Hz** (-31.77 cents) y pulso de ondas cerebrales **Theta a 6 Hz** constante.
 
 ---
 

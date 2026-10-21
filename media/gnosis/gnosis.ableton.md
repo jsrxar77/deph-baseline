@@ -36,12 +36,12 @@ Esta guía lleva la pieza **Gnosis** (21:20 exactos, 640 compases a 120 BPM) des
 
 Si abres tu plantilla estándar de 8 canales (`Strudel Temaplte.als`) o creas las pistas MIDI manualmente, carga los siguientes plugins y presets literales verificados en tu sistema:
 
-### Pista 1: Pulso Terrestre (`tracks/01-earth-pulse.mid`)
-* **Rol**: El pulso y latido biológico de la Tierra que ancla la experiencia.
-* **Instrumento**: **Surge XT** (o Ableton Drum Rack).
-* **Preset sugerido**: `/Library/Application Support/Surge XT/patches_factory/Percussion/` → **`Sub Kick.fxp`** (o `Soft Click.fxp`).
-* **Ajuste clave**: Filtro Low Pass alrededor de 200 Hz para mantenerlo cálido y orgánico, sin pegada agresiva.
-* **Fader sugerido**: `-0.6 dB`.
+### Pista 1: Primordial Drone (`tracks/01-primordial-drone.mid`)
+* **Rol**: Drone armónico continuo y nota pedal flotante sobre Re (D2) que sostiene el viaje meditativo sin desconcentrar con percusión.
+* **Instrumento**: **Surge XT**.
+* **Preset sugerido**: `/Library/Application Support/Surge XT/patches_factory/Basses/` → **`Eighties Drone.fxp`** (o en `Pads/` → **`MKS-70 Warm Pad.fxp`**).
+* **Ajuste clave**: Filtro Low Pass cálido (200–300 Hz) con ataque lento (4–6s) y release largo (10–14s) para un colchón etéreo y envolvente.
+* **Fader sugerido**: `-3.5 dB`.
 
 ### Pista 2: Varilla de Anclaje / Grounding Sub-Bass (`tracks/02-grounding-sub.mid`)
 * **Rol**: El electrodo de puesta a tierra. Frecuencias fundamentales de 36 a 55 Hz.
