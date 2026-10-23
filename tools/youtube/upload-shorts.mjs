@@ -88,7 +88,7 @@ Series playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 
 This is music, not medical advice or treatment.
 
-#Shorts #ambientmusic #432hz #binauralbeats #sacredgeometry #cymatics #thefield`,
+#Shorts #ambientmusic #432hz #binauralbeats #cymatics #thefield`,
       tags: [
         "the field",
         "ambient music",
@@ -96,7 +96,7 @@ This is music, not medical advice or treatment.
         "432 hz",
         "binaural beats",
         "cymatics",
-        "sacred geometry",
+        "resonance",
         "generative art",
         "sound design",
         "sound healing",
@@ -119,7 +119,7 @@ Playlist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 
 Esto es música, no consejo ni tratamiento médico.
 
-#Shorts #ambientmusic #432hz #binauralbeats #geometriasagrada #cimatica #meditacion #thefield`,
+#Shorts #ambientmusic #432hz #binauralbeats #cimatica #meditacion #thefield`,
       tags: [
         "the field",
         "musica ambiental",
@@ -127,7 +127,7 @@ Esto es música, no consejo ni tratamiento médico.
         "432 hz",
         "ondas binaurales",
         "cimatica",
-        "geometria sagrada",
+        "resonancia",
         "relajacion",
         "frecuencias",
         "meditacion guiada",

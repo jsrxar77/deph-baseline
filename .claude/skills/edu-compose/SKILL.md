@@ -7,7 +7,7 @@ description: Use whenever the user wants to create an instructional or education
 
 ## Standing architectural rule (composition-first)
 
-Because instructional and educational videos address **general topics** in acoustics, mathematics, sacred geometry, and generative code (even when they reference or draw examples from a musical piece on the channel), **they are NEVER stored as secondary files inside a musical piece's folder**.
+Because instructional and educational videos address **general topics** in acoustics, mathematics, harmonic geometry, and generative code (even when they reference or draw examples from a musical piece on the channel), **they are NEVER stored as secondary files inside a musical piece's folder**.
 
 Every instructional video is **its own standalone composition hanging directly from `/media/<name>/`**, created with the exact same template as any piece in `deph` (`deph-compose`):
 

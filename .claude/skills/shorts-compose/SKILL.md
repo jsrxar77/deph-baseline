@@ -156,8 +156,8 @@ Source piece: `media/<name>/<name>.yaml` · Full video: <YouTube URL or pending>
   "durationSeconds": 45,
   "hookText": "4:16 · THREE VOICES CONVERGE",
   "subText": "500,000 quartz grains · Fibonacci canon 21 : 13 : 8",
-  "titleEn": "The Field (4:16) · Fibonacci Canon & Sacred Geometry | 432 Hz Ambient #Shorts",
-  "titleEs": "The Field (4:16) · Canon de Fibonacci y Geometría Sagrada | 432 Hz #Shorts",
+  "titleEn": "The Field (4:16) · Fibonacci Canon & Cymatics | 432 Hz Ambient #Shorts",
+  "titleEs": "The Field (4:16) · Canon de Fibonacci y Cimática | 432 Hz #Shorts",
   "descriptionEn": "...",
   "descriptionEs": "...",
   "props": {

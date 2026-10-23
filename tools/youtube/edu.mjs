@@ -239,14 +239,14 @@ Source piece: \`media/${cleanName}/${cleanName}.yaml\` · Video file: \`media/${
 
 **Recommended:**
 \`\`\`
-${title} Explained — Acoustic Physics & Sacred Geometry in 432 Hz | deph
+${title} Explained — Acoustic Physics & Resonance in 432 Hz | deph
 \`\`\`
 
 ### Español (traducción localizada en YouTube)
 
 **Recomendado:**
 \`\`\`
-${title} Explicado — Física Acústica y Geometría Sagrada a 432 Hz | deph
+${title} Explicado — Física Acústica y Resonancia a 432 Hz | deph
 \`\`\`
 
 ---
@@ -268,7 +268,7 @@ Channel: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 This is music and acoustic physics, not medical advice or treatment.
 
-#cymatics #432hz #sacredgeometry #binauralbeats #generativemusic
+#cymatics #432hz #resonance #binauralbeats #generativemusic
 \`\`\`
 
 ### Español (traducción localizada en YouTube)
@@ -286,7 +286,7 @@ Canal: https://www.youtube.com/channel/UC1cFX0dl77im5F5V-RRi6hA
 
 Esto es música y física acústica, no consejo médico.
 
-#cymatics #432hz #sacredgeometry #binauralbeats #generativemusic
+#cymatics #432hz #resonance #binauralbeats #generativemusic
 \`\`\`
 
 ---
@@ -294,7 +294,7 @@ Esto es música y física acústica, no consejo médico.
 ## 3. Tags
 
 \`\`\`
-cymatics, chladni figures, 432 hz, binaural beats, sacred geometry, fibonacci music, generative music, ambient music
+cymatics, chladni figures, 432 hz, binaural beats, resonance, fibonacci music, generative music, ambient music
 \`\`\`
 `;
 
@@ -303,7 +303,7 @@ cymatics, chladni figures, 432 hz, binaural beats, sacred geometry, fibonacci mu
 Source piece: \`media/${cleanName}/${cleanName}.yaml\`
 Shorts directory: \`media/${cleanName}/shorts/\` (\`.shorts.md\` tracked in git; rendered \`.mp4\` git-ignored) · Skill: \`shorts-compose\`
 
-**Tags:** cymatics, chladni figures, 432 hz, binaural beats, sacred geometry, generative music, shorts.
+**Tags:** cymatics, chladni figures, 432 hz, binaural beats, resonance, generative music, shorts.
 
 ---
 
@@ -320,8 +320,8 @@ Shorts directory: \`media/${cleanName}/shorts/\` (\`.shorts.md\` tracked in git;
   "subText": "Acoustic physics & mathematics · Tuned to A = 432 Hz",
   "titleEn": "${title} Explained in 45 Seconds | 432 Hz Acoustics #Shorts",
   "titleEs": "${title} Explicado en 45 Segundos | Acústica a 432 Hz #Shorts",
-  "descriptionEn": "How ${title} works in acoustic physics and generative music tuned to A = 432 Hz.\\n\\nSeries playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\\n\\nThis is music and acoustic physics, not medical advice.\\n\\n#Shorts #cymatics #432hz #sacredgeometry #generativemusic",
-  "descriptionEs": "Cómo funciona ${title} en la física acústica y la música generativa afinada a A = 432 Hz.\\n\\nPlaylist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\\n\\nEsto es música y física acústica, no consejo médico.\\n\\n#Shorts #cymatics #432hz #sacredgeometry #generativemusic",
+  "descriptionEn": "How ${title} works in acoustic physics and generative music tuned to A = 432 Hz.\\n\\nSeries playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\\n\\nThis is music and acoustic physics, not medical advice.\\n\\n#Shorts #cymatics #432hz #resonance #generativemusic",
+  "descriptionEs": "Cómo funciona ${title} en la física acústica y la música generativa afinada a A = 432 Hz.\\n\\nPlaylist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\\n\\nEsto es música y física acústica, no consejo médico.\\n\\n#Shorts #cymatics #432hz #resonance #generativemusic",
   "props": {
     "title": "${title.toUpperCase()}",
     "series": "EDU",
