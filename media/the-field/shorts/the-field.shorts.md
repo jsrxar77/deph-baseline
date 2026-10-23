@@ -36,7 +36,9 @@ Starts at the peak disassembly (`04:55` -> `05:40`, `45 s` total): the complete 
     "subText": "Frequencies & Harmonics in The Field",
     "ctaText": "FULL 6-MINUTE PIECE ON CHANNEL",
     "bgShift": 0
-  }
+  },
+  "youtubeEn": "https://youtube.com/shorts/joDFMXec1Io",
+  "youtubeEs": "https://youtube.com/shorts/1ERj4BEWkvg"
 }
 ```
 

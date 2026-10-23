@@ -36,6 +36,7 @@ media/*/shorts/**/*.wav
 media/*/shorts/**/*.jpg
 media/*/shorts/**/*.jpeg
 media/*/shorts/**/*.png
+!media/*/shorts/renders/thumbnails/*.jpg
 media/*/shorts/**/.thumbnails/
 media/*/shorts/**/.hyperframes/
 tools/visuals/public/*-voice.mp3

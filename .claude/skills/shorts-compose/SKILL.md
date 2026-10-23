@@ -12,9 +12,14 @@ Every composition has a dedicated **`media/<name>/shorts/`** subfolder (part of 
 ```text
 media/<name>/shorts/
 ├── <name>.shorts.md                  # Pack maestro de Shorts (metadatos, títulos, descripciones, tags)
-├── renders/                          # Carpeta limpia de videos finales compilados (listos para publicar)
+├── renders/                          # Carpeta limpia de videos finales compilados y portadas
 │   ├── <name>-short-01-en.mp4        # Short 01 Inglés (1080x1920 @ 30fps)
-│   └── <name>-short-01-es.mp4        # Short 01 Castellano Rioplatense (1080x1920 @ 30fps)
+│   ├── <name>-short-01-es.mp4        # Short 01 Castellano Rioplatense (1080x1920 @ 30fps)
+│   └── thumbnails/                   # Portadas oficiales del Short (16:9 para API/Desktop y 9:16 para Reels/Mobile)
+│       ├── <name>-short-01-en-thumbnail.jpg    # 1280x720 (16:9, subida vía youtube.thumbnails.set)
+│       ├── <name>-short-01-es-thumbnail.jpg    # 1280x720 (16:9, subida vía youtube.thumbnails.set)
+│       ├── <name>-short-01-en-cover-9x16.jpg   # 1080x1920 (9:16 vertical cover)
+│       └── <name>-short-01-es-cover-9x16.jpg   # 1080x1920 (9:16 vertical cover)
 └── <id>/                             # Carpeta autónoma del Short (ej. 01, 02)
     ├── hyperframes-en/               # Proyecto HyperFrames autónomo en inglés
     │   ├── index.html
@@ -48,7 +53,18 @@ media/<name>/shorts/
 2. **Smooth entry and exit (never a hard cut).** Both rendering modes apply a `1.2 s` fade-in and a `1.8 s` fade-out to picture and audio (`-14 LUFS`), so a meditative excerpt never starts or stops with a jolt.
 3. **Bilingual Production by Default (EN & ES Mandatory):**
    - Every Short MUST be produced in both **English (`EN`)** and **Spanish (`ES`)**.
-   - YouTube metadata includes primary English titles/descriptions with Spanish attached via `localizations.es`.
+   - YouTube metadata includes primary English titles/descriptions with Spanish attached via dedicated individual uploads or `localizations.es`.
+   - **Configuración estricta de idioma en YouTube Data API:**
+     - Video en Inglés: `defaultLanguage: "en"`, `defaultAudioLanguage: "en"`, título, descripción y tags en inglés.
+     - Video en Español: `defaultLanguage: "es"`, `defaultAudioLanguage: "es"`, título, descripción y tags en español rioplatense.
+     - Privacidad inicial: siempre `private` para permitir que el creador revise el render y enlace el video relacionado ("Related Video" hacia la obra en 4K) en YouTube Studio.
+
+4. **Thumbnails Obligatorias por Short (16:9 y 9:16):**
+   - PROHIBIDO dejar los Shorts con miniaturas automáticas generadas por YouTube.
+   - Cada Short debe tener sus portadas en `media/<name>/shorts/renders/thumbnails/`:
+     - **16:9 (`1280x720`, JPG < 2MB):** Para la YouTube Data API (`youtube.thumbnails.set`). Se muestra en búsquedas de escritorio, listas de reproducción y páginas del canal.
+     - **9:16 (`1080x1920`, JPG):** Para feeds verticales de Shorts móviles, Instagram Reels y TikTok.
+   - **Estética idéntica a la obra:** Fotograma de partículas 3D en máxima resolución, chip oficial de marca (`deph · <series> #SHORTS`), tarjeta de glassmorphism translúcida con acento de color de la obra, tipografía limpia sin `-webkit-text-stroke`, y esquina inferior derecha libre para los badges de duración de YouTube.
 
 4. Typography, Safe Zones, and Giant Mobile Text (Reglas de Oro Inviolables):
    - REGLA DE ORO: SUBTÍTULOS SIEMPRE EN EXACTAMENTE 2 LÍNEAS:
