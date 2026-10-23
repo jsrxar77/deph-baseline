@@ -1,0 +1,746 @@
+{
+  "script": "¿Y si lo que llamamos sonido es solo la consecuencia?\n\nPor debajo de lo que escuchás, frecuencias y armónicos se mueven a través del campo.\n\nMirá medio millón de granos de cuarzo soltar su geometría y volver a la quietud.\n\nSi la resonancia puede alinear y disolver este orden, imaginá lo que hace con el ruido en tu mente.\n\nViví la obra completa de seis minutos en nuestro canal.\n\nY si esto resuena con vos, suscribite para explorar el campo.\n\nPonete auriculares.",
+  "voice": "Lionel (ElevenLabs)",
+  "leadInSeconds": 1.5,
+  "totalDurationSeconds": 28.34,
+  "words": [
+    {
+      "idx": 0,
+      "word": "¿Y",
+      "cleanWord": "Y",
+      "startSec": 1.5,
+      "endSec": 1.62,
+      "startFrame": 45,
+      "endFrame": 49
+    },
+    {
+      "idx": 1,
+      "word": "si",
+      "cleanWord": "SI",
+      "startSec": 1.62,
+      "endSec": 1.74,
+      "startFrame": 49,
+      "endFrame": 52
+    },
+    {
+      "idx": 2,
+      "word": "lo",
+      "cleanWord": "LO",
+      "startSec": 1.74,
+      "endSec": 1.84,
+      "startFrame": 52,
+      "endFrame": 55
+    },
+    {
+      "idx": 3,
+      "word": "que",
+      "cleanWord": "QUE",
+      "startSec": 1.84,
+      "endSec": 1.94,
+      "startFrame": 55,
+      "endFrame": 58
+    },
+    {
+      "idx": 4,
+      "word": "llamamos",
+      "cleanWord": "LLAMAMOS",
+      "startSec": 1.94,
+      "endSec": 2.3,
+      "startFrame": 58,
+      "endFrame": 69
+    },
+    {
+      "idx": 5,
+      "word": "sonido",
+      "cleanWord": "SONIDO",
+      "startSec": 2.3,
+      "endSec": 2.8,
+      "startFrame": 69,
+      "endFrame": 84
+    },
+    {
+      "idx": 6,
+      "word": "es",
+      "cleanWord": "ES",
+      "startSec": 2.8,
+      "endSec": 3.24,
+      "startFrame": 84,
+      "endFrame": 97
+    },
+    {
+      "idx": 7,
+      "word": "solo",
+      "cleanWord": "SOLO",
+      "startSec": 3.24,
+      "endSec": 3.5,
+      "startFrame": 97,
+      "endFrame": 105
+    },
+    {
+      "idx": 8,
+      "word": "la",
+      "cleanWord": "LA",
+      "startSec": 3.5,
+      "endSec": 3.66,
+      "startFrame": 105,
+      "endFrame": 110
+    },
+    {
+      "idx": 9,
+      "word": "consecuencia?",
+      "cleanWord": "CONSECUENCIA",
+      "startSec": 3.66,
+      "endSec": 4.36,
+      "startFrame": 110,
+      "endFrame": 131
+    },
+    {
+      "idx": 10,
+      "word": "Por",
+      "cleanWord": "POR",
+      "startSec": 5.04,
+      "endSec": 5.24,
+      "startFrame": 151,
+      "endFrame": 157
+    },
+    {
+      "idx": 11,
+      "word": "debajo",
+      "cleanWord": "DEBAJO",
+      "startSec": 5.24,
+      "endSec": 5.54,
+      "startFrame": 157,
+      "endFrame": 166
+    },
+    {
+      "idx": 12,
+      "word": "de",
+      "cleanWord": "DE",
+      "startSec": 5.54,
+      "endSec": 5.66,
+      "startFrame": 166,
+      "endFrame": 170
+    },
+    {
+      "idx": 13,
+      "word": "lo",
+      "cleanWord": "LO",
+      "startSec": 5.66,
+      "endSec": 5.74,
+      "startFrame": 170,
+      "endFrame": 172
+    },
+    {
+      "idx": 14,
+      "word": "que",
+      "cleanWord": "QUE",
+      "startSec": 5.74,
+      "endSec": 5.84,
+      "startFrame": 172,
+      "endFrame": 175
+    },
+    {
+      "idx": 15,
+      "word": "escuchas,",
+      "cleanWord": "ESCUCHAS",
+      "startSec": 5.84,
+      "endSec": 6.36,
+      "startFrame": 175,
+      "endFrame": 191
+    },
+    {
+      "idx": 16,
+      "word": "frecuencias",
+      "cleanWord": "FRECUENCIAS",
+      "startSec": 6.72,
+      "endSec": 7.22,
+      "startFrame": 202,
+      "endFrame": 217
+    },
+    {
+      "idx": 17,
+      "word": "y",
+      "cleanWord": "Y",
+      "startSec": 7.22,
+      "endSec": 7.38,
+      "startFrame": 217,
+      "endFrame": 221
+    },
+    {
+      "idx": 18,
+      "word": "armónicos",
+      "cleanWord": "ARMÓNICOS",
+      "startSec": 7.38,
+      "endSec": 7.82,
+      "startFrame": 221,
+      "endFrame": 235
+    },
+    {
+      "idx": 19,
+      "word": "se",
+      "cleanWord": "SE",
+      "startSec": 7.82,
+      "endSec": 8.04,
+      "startFrame": 235,
+      "endFrame": 241
+    },
+    {
+      "idx": 20,
+      "word": "mueven",
+      "cleanWord": "MUEVEN",
+      "startSec": 8.04,
+      "endSec": 8.38,
+      "startFrame": 241,
+      "endFrame": 251
+    },
+    {
+      "idx": 21,
+      "word": "a",
+      "cleanWord": "A",
+      "startSec": 8.38,
+      "endSec": 8.5,
+      "startFrame": 251,
+      "endFrame": 255
+    },
+    {
+      "idx": 22,
+      "word": "través",
+      "cleanWord": "TRAVÉS",
+      "startSec": 8.5,
+      "endSec": 8.7,
+      "startFrame": 255,
+      "endFrame": 261
+    },
+    {
+      "idx": 23,
+      "word": "del",
+      "cleanWord": "DEL",
+      "startSec": 8.7,
+      "endSec": 8.9,
+      "startFrame": 261,
+      "endFrame": 267
+    },
+    {
+      "idx": 24,
+      "word": "campo.",
+      "cleanWord": "CAMPO",
+      "startSec": 8.9,
+      "endSec": 9.24,
+      "startFrame": 267,
+      "endFrame": 277
+    },
+    {
+      "idx": 25,
+      "word": "Mirad",
+      "cleanWord": "MIRAD",
+      "startSec": 9.72,
+      "endSec": 10.02,
+      "startFrame": 292,
+      "endFrame": 301
+    },
+    {
+      "idx": 26,
+      "word": "medio",
+      "cleanWord": "MEDIO",
+      "startSec": 10.02,
+      "endSec": 10.38,
+      "startFrame": 301,
+      "endFrame": 311
+    },
+    {
+      "idx": 27,
+      "word": "millón",
+      "cleanWord": "MILLÓN",
+      "startSec": 10.38,
+      "endSec": 10.74,
+      "startFrame": 311,
+      "endFrame": 322
+    },
+    {
+      "idx": 28,
+      "word": "de",
+      "cleanWord": "DE",
+      "startSec": 10.74,
+      "endSec": 10.88,
+      "startFrame": 322,
+      "endFrame": 326
+    },
+    {
+      "idx": 29,
+      "word": "granos",
+      "cleanWord": "GRANOS",
+      "startSec": 10.88,
+      "endSec": 11.16,
+      "startFrame": 326,
+      "endFrame": 335
+    },
+    {
+      "idx": 30,
+      "word": "de",
+      "cleanWord": "DE",
+      "startSec": 11.16,
+      "endSec": 11.26,
+      "startFrame": 335,
+      "endFrame": 338
+    },
+    {
+      "idx": 31,
+      "word": "cuarzo",
+      "cleanWord": "CUARZO",
+      "startSec": 11.26,
+      "endSec": 11.64,
+      "startFrame": 338,
+      "endFrame": 349
+    },
+    {
+      "idx": 32,
+      "word": "soltar",
+      "cleanWord": "SOLTAR",
+      "startSec": 11.64,
+      "endSec": 12.02,
+      "startFrame": 349,
+      "endFrame": 361
+    },
+    {
+      "idx": 33,
+      "word": "su",
+      "cleanWord": "SU",
+      "startSec": 12.02,
+      "endSec": 12.22,
+      "startFrame": 361,
+      "endFrame": 367
+    },
+    {
+      "idx": 34,
+      "word": "geometría",
+      "cleanWord": "GEOMETRÍA",
+      "startSec": 12.22,
+      "endSec": 12.74,
+      "startFrame": 367,
+      "endFrame": 382
+    },
+    {
+      "idx": 35,
+      "word": "y",
+      "cleanWord": "Y",
+      "startSec": 12.74,
+      "endSec": 13.62,
+      "startFrame": 382,
+      "endFrame": 409
+    },
+    {
+      "idx": 36,
+      "word": "volver",
+      "cleanWord": "VOLVER",
+      "startSec": 13.62,
+      "endSec": 13.88,
+      "startFrame": 409,
+      "endFrame": 416
+    },
+    {
+      "idx": 37,
+      "word": "a",
+      "cleanWord": "A",
+      "startSec": 13.88,
+      "endSec": 14.02,
+      "startFrame": 416,
+      "endFrame": 421
+    },
+    {
+      "idx": 38,
+      "word": "la",
+      "cleanWord": "LA",
+      "startSec": 14.02,
+      "endSec": 14.1,
+      "startFrame": 421,
+      "endFrame": 423
+    },
+    {
+      "idx": 39,
+      "word": "quietud.",
+      "cleanWord": "QUIETUD",
+      "startSec": 14.1,
+      "endSec": 14.44,
+      "startFrame": 423,
+      "endFrame": 433
+    },
+    {
+      "idx": 40,
+      "word": "Si",
+      "cleanWord": "SI",
+      "startSec": 15.12,
+      "endSec": 15.3,
+      "startFrame": 454,
+      "endFrame": 459
+    },
+    {
+      "idx": 41,
+      "word": "la",
+      "cleanWord": "LA",
+      "startSec": 15.3,
+      "endSec": 15.4,
+      "startFrame": 459,
+      "endFrame": 462
+    },
+    {
+      "idx": 42,
+      "word": "resonancia",
+      "cleanWord": "RESONANCIA",
+      "startSec": 15.4,
+      "endSec": 15.86,
+      "startFrame": 462,
+      "endFrame": 476
+    },
+    {
+      "idx": 43,
+      "word": "pueda",
+      "cleanWord": "PUEDA",
+      "startSec": 15.86,
+      "endSec": 16.18,
+      "startFrame": 476,
+      "endFrame": 485
+    },
+    {
+      "idx": 44,
+      "word": "alinear",
+      "cleanWord": "ALINEAR",
+      "startSec": 16.18,
+      "endSec": 16.68,
+      "startFrame": 485,
+      "endFrame": 500
+    },
+    {
+      "idx": 45,
+      "word": "y",
+      "cleanWord": "Y",
+      "startSec": 16.68,
+      "endSec": 16.84,
+      "startFrame": 500,
+      "endFrame": 505
+    },
+    {
+      "idx": 46,
+      "word": "disolver",
+      "cleanWord": "DISOLVER",
+      "startSec": 16.84,
+      "endSec": 17.26,
+      "startFrame": 505,
+      "endFrame": 518
+    },
+    {
+      "idx": 47,
+      "word": "este",
+      "cleanWord": "ESTE",
+      "startSec": 17.26,
+      "endSec": 17.54,
+      "startFrame": 518,
+      "endFrame": 526
+    },
+    {
+      "idx": 48,
+      "word": "orden,",
+      "cleanWord": "ORDEN",
+      "startSec": 17.54,
+      "endSec": 17.84,
+      "startFrame": 526,
+      "endFrame": 535
+    },
+    {
+      "idx": 49,
+      "word": "imagina",
+      "cleanWord": "IMAGINA",
+      "startSec": 18.28,
+      "endSec": 18.66,
+      "startFrame": 548,
+      "endFrame": 560
+    },
+    {
+      "idx": 50,
+      "word": "lo",
+      "cleanWord": "LO",
+      "startSec": 18.66,
+      "endSec": 18.84,
+      "startFrame": 560,
+      "endFrame": 565
+    },
+    {
+      "idx": 51,
+      "word": "que",
+      "cleanWord": "QUE",
+      "startSec": 18.84,
+      "endSec": 18.98,
+      "startFrame": 565,
+      "endFrame": 569
+    },
+    {
+      "idx": 52,
+      "word": "hace",
+      "cleanWord": "HACE",
+      "startSec": 18.98,
+      "endSec": 19.18,
+      "startFrame": 569,
+      "endFrame": 575
+    },
+    {
+      "idx": 53,
+      "word": "con",
+      "cleanWord": "CON",
+      "startSec": 19.18,
+      "endSec": 19.36,
+      "startFrame": 575,
+      "endFrame": 581
+    },
+    {
+      "idx": 54,
+      "word": "el",
+      "cleanWord": "EL",
+      "startSec": 19.36,
+      "endSec": 19.52,
+      "startFrame": 581,
+      "endFrame": 586
+    },
+    {
+      "idx": 55,
+      "word": "ruido",
+      "cleanWord": "RUIDO",
+      "startSec": 19.52,
+      "endSec": 19.78,
+      "startFrame": 586,
+      "endFrame": 593
+    },
+    {
+      "idx": 56,
+      "word": "en",
+      "cleanWord": "EN",
+      "startSec": 19.78,
+      "endSec": 19.86,
+      "startFrame": 593,
+      "endFrame": 596
+    },
+    {
+      "idx": 57,
+      "word": "tu",
+      "cleanWord": "TU",
+      "startSec": 19.86,
+      "endSec": 19.98,
+      "startFrame": 596,
+      "endFrame": 599
+    },
+    {
+      "idx": 58,
+      "word": "mente.",
+      "cleanWord": "MENTE",
+      "startSec": 19.98,
+      "endSec": 20.24,
+      "startFrame": 599,
+      "endFrame": 607
+    },
+    {
+      "idx": 59,
+      "word": "Viví",
+      "cleanWord": "VIVÍ",
+      "startSec": 21.04,
+      "endSec": 21.22,
+      "startFrame": 631,
+      "endFrame": 637
+    },
+    {
+      "idx": 60,
+      "word": "la",
+      "cleanWord": "LA",
+      "startSec": 21.22,
+      "endSec": 21.34,
+      "startFrame": 637,
+      "endFrame": 640
+    },
+    {
+      "idx": 61,
+      "word": "obra",
+      "cleanWord": "OBRA",
+      "startSec": 21.34,
+      "endSec": 21.48,
+      "startFrame": 640,
+      "endFrame": 644
+    },
+    {
+      "idx": 62,
+      "word": "completa",
+      "cleanWord": "COMPLETA",
+      "startSec": 21.48,
+      "endSec": 21.94,
+      "startFrame": 644,
+      "endFrame": 658
+    },
+    {
+      "idx": 63,
+      "word": "de",
+      "cleanWord": "DE",
+      "startSec": 21.94,
+      "endSec": 22.14,
+      "startFrame": 658,
+      "endFrame": 664
+    },
+    {
+      "idx": 64,
+      "word": "6",
+      "cleanWord": "6",
+      "startSec": 22.14,
+      "endSec": 22.42,
+      "startFrame": 664,
+      "endFrame": 673
+    },
+    {
+      "idx": 65,
+      "word": "minutos",
+      "cleanWord": "MINUTOS",
+      "startSec": 22.42,
+      "endSec": 22.72,
+      "startFrame": 673,
+      "endFrame": 682
+    },
+    {
+      "idx": 66,
+      "word": "en",
+      "cleanWord": "EN",
+      "startSec": 22.72,
+      "endSec": 23,
+      "startFrame": 682,
+      "endFrame": 690
+    },
+    {
+      "idx": 67,
+      "word": "nuestro",
+      "cleanWord": "NUESTRO",
+      "startSec": 23,
+      "endSec": 23.26,
+      "startFrame": 690,
+      "endFrame": 698
+    },
+    {
+      "idx": 68,
+      "word": "canal.",
+      "cleanWord": "CANAL",
+      "startSec": 23.26,
+      "endSec": 23.52,
+      "startFrame": 698,
+      "endFrame": 706
+    },
+    {
+      "idx": 69,
+      "word": "Y",
+      "cleanWord": "Y",
+      "startSec": 24.06,
+      "endSec": 24.14,
+      "startFrame": 722,
+      "endFrame": 724
+    },
+    {
+      "idx": 70,
+      "word": "si",
+      "cleanWord": "SI",
+      "startSec": 24.14,
+      "endSec": 24.26,
+      "startFrame": 724,
+      "endFrame": 728
+    },
+    {
+      "idx": 71,
+      "word": "esto",
+      "cleanWord": "ESTO",
+      "startSec": 24.26,
+      "endSec": 24.46,
+      "startFrame": 728,
+      "endFrame": 734
+    },
+    {
+      "idx": 72,
+      "word": "resuena",
+      "cleanWord": "RESUENA",
+      "startSec": 24.46,
+      "endSec": 24.78,
+      "startFrame": 734,
+      "endFrame": 743
+    },
+    {
+      "idx": 73,
+      "word": "con",
+      "cleanWord": "CON",
+      "startSec": 24.78,
+      "endSec": 24.94,
+      "startFrame": 743,
+      "endFrame": 748
+    },
+    {
+      "idx": 74,
+      "word": "vos,",
+      "cleanWord": "VOS",
+      "startSec": 24.94,
+      "endSec": 25.2,
+      "startFrame": 748,
+      "endFrame": 756
+    },
+    {
+      "idx": 75,
+      "word": "suscríbete",
+      "cleanWord": "SUSCRÍBETE",
+      "startSec": 25.56,
+      "endSec": 26.06,
+      "startFrame": 767,
+      "endFrame": 782
+    },
+    {
+      "idx": 76,
+      "word": "para",
+      "cleanWord": "PARA",
+      "startSec": 26.06,
+      "endSec": 26.24,
+      "startFrame": 782,
+      "endFrame": 787
+    },
+    {
+      "idx": 77,
+      "word": "explorar",
+      "cleanWord": "EXPLORAR",
+      "startSec": 26.24,
+      "endSec": 26.66,
+      "startFrame": 787,
+      "endFrame": 800
+    },
+    {
+      "idx": 78,
+      "word": "el",
+      "cleanWord": "EL",
+      "startSec": 26.66,
+      "endSec": 26.8,
+      "startFrame": 800,
+      "endFrame": 804
+    },
+    {
+      "idx": 79,
+      "word": "campo.",
+      "cleanWord": "CAMPO",
+      "startSec": 26.8,
+      "endSec": 27.12,
+      "startFrame": 804,
+      "endFrame": 814
+    },
+    {
+      "idx": 80,
+      "word": "Ponete",
+      "cleanWord": "PONETE",
+      "startSec": 27.62,
+      "endSec": 27.84,
+      "startFrame": 829,
+      "endFrame": 835
+    },
+    {
+      "idx": 81,
+      "word": "auriculares.",
+      "cleanWord": "AURICULARES",
+      "startSec": 27.84,
+      "endSec": 28.34,
+      "startFrame": 835,
+      "endFrame": 850
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 <!doctype html>
 <!--
-  HyperFrames Composition · The Field (Short 01 · Castellano Rioplatense)
-  Moment: Disassembly of the Flower of Life (04:55 -> 05:40)
+  HyperFrames Composition · The Field (Short 01 · Castellano Lionel)
   Aspect: 9:16 Vertical (1080x1920 @ 30fps)
-  Language: Español Rioplatense
-  Palette: Nácar Night (Intense Violet #C084FC / #A855F7, Indigo #A5B4FC, Pearl #FDFBFA)
-  Layout: Strict 2-Line Captions, Refined 20px corners, generous Subscribe gap
+  Language: Español Rioplatense (Lionel · ElevenLabs)
+  Safe Zones: Strict top/bottom/right clearance
+  Glassmorphism: Translucent 0.35 opacity (background visible)
+  Typography: 50px font, 2 lines, NO stroke (clean counters)
 -->
 <html lang="es">
   <head>
@@ -51,7 +51,7 @@
       .vignette {
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at 50% 50%, rgba(5, 5, 8, 0.05) 35%, rgba(5, 5, 8, 0.65) 100%);
+        background: radial-gradient(circle at 50% 50%, rgba(5, 5, 8, 0.02) 40%, rgba(5, 5, 8, 0.60) 100%);
         pointer-events: none;
         z-index: 5;
       }
@@ -86,31 +86,31 @@
         text-transform: uppercase;
       }
 
-      /* Hook Card (0.3s -> 4.5s): Refined 20px corners, 180px gap from Subscribe */
+      /* Hook Card (0.3s -> 4.5s): Y: 480px (180px gap from Subscribe), Translucent 0.35 */
       .hook-card {
         position: absolute;
         top: 480px;
         left: 50%;
         transform: translateX(-50%);
-        width: 920px;
+        width: 860px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        background: rgba(11, 14, 26, 0.52);
-        backdrop-filter: blur(28px) saturate(190%);
-        -webkit-backdrop-filter: blur(28px) saturate(190%);
-        border: 1.5px solid rgba(168, 85, 247, 0.35);
+        background: rgba(11, 14, 26, 0.35);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1.5px solid rgba(168, 85, 247, 0.30);
         border-radius: 20px;
-        padding: 40px 48px;
+        padding: 36px 44px;
         gap: 12px;
         z-index: 20;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.80), inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0 32px rgba(168, 85, 247, 0.15);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.70), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 28px rgba(168, 85, 247, 0.12);
         pointer-events: none;
         opacity: 0;
       }
       .hook-badge {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 700;
         letter-spacing: 0.16em;
         color: #C084FC;
@@ -118,29 +118,29 @@
       }
       .hook-heading {
         font-weight: 900;
-        font-size: 64px;
+        font-size: 56px;
         line-height: 1.15;
         letter-spacing: 0.02em;
         color: #FDFBFA;
         text-transform: uppercase;
-        text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.90);
       }
       .hook-subtext {
         font-weight: 600;
-        font-size: 46px;
+        font-size: 42px;
         line-height: 1.25;
         letter-spacing: 0.03em;
         color: #A5B4FC;
-        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
       }
 
-      /* Dynamic Kinetic Subtitles (Lower-Middle Safe Zone: Y: 1220px) */
-      /* REGLA DE ORO: ALWAYS EXACTLY 2 LINES, Refined 20px corners, Intense Violet highlight */
+      /* Dynamic Kinetic Subtitles (SAFE ZONE: Y: 1120px, well above bottom 480px UI) */
+      /* REGLA DE ORO: EXACTLY 2 LINES, Translucent 0.35, ZERO STROKE */
       .captions-wrap {
         position: absolute;
         left: 0;
         right: 0;
-        top: 1220px;
+        top: 1120px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -152,19 +152,20 @@
         left: 50%;
         transform: translateX(-50%);
         width: fit-content;
-        max-width: 960px;
+        max-width: 860px;
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        background: rgba(11, 14, 26, 0.50);
-        backdrop-filter: blur(28px) saturate(190%);
-        -webkit-backdrop-filter: blur(28px) saturate(190%);
-        border: 1.5px solid rgba(168, 85, 247, 0.35);
+        background: rgba(11, 14, 26, 0.35);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1.5px solid rgba(168, 85, 247, 0.30);
         border-radius: 20px;
-        padding: 20px 44px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.80), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 28px rgba(168, 85, 247, 0.14);
+        padding: 20px 38px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.70), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 24px rgba(168, 85, 247, 0.12);
         visibility: hidden;
         opacity: 0;
       }
@@ -172,125 +173,101 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
         white-space: nowrap;
-        max-width: 900px;
+        max-width: 820px;
       }
       .caption-word {
-        font-size: 64px;
-        line-height: 1.15;
+        font-size: 50px;
+        line-height: 1.2;
         letter-spacing: 0.02em;
         font-weight: 800;
         color: #FDFBFA;
-        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.90), 0 2px 4px rgba(0, 0, 0, 0.85);
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
         display: inline-block;
       }
 
-      /* Closing CTA (Centered Vertically and Horizontally) */
+      /* Closing CTA (30.5s -> 43.5s): Centered Vertically and Horizontally, Width 860px */
       .closing-cta {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 920px;
+        width: 860px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        background: rgba(11, 14, 26, 0.54);
-        backdrop-filter: blur(28px) saturate(190%);
-        -webkit-backdrop-filter: blur(28px) saturate(190%);
-        border: 1.5px solid rgba(168, 85, 247, 0.35);
+        background: rgba(11, 14, 26, 0.38);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1.5px solid rgba(168, 85, 247, 0.30);
         border-radius: 20px;
-        padding: 44px 48px;
+        padding: 40px 44px;
         gap: 14px;
         z-index: 35;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.80), inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0 32px rgba(168, 85, 247, 0.15);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.70), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 28px rgba(168, 85, 247, 0.12);
         opacity: 0;
         pointer-events: none;
       }
       .cta-badge {
         font-weight: 700;
-        font-size: 24px;
+        font-size: 22px;
         letter-spacing: 0.16em;
         color: #C084FC;
         text-transform: uppercase;
       }
       .cta-link {
         font-weight: 900;
-        font-size: 60px;
+        font-size: 52px;
         line-height: 1.15;
         letter-spacing: 0.02em;
         color: #FDFBFA;
         text-transform: uppercase;
-        text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.90);
       }
       .cta-sub {
         font-weight: 600;
-        font-size: 46px;
+        font-size: 40px;
         line-height: 1.25;
         letter-spacing: 0.03em;
         color: #A5B4FC;
-        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
       }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="the-field-short-01-es" data-width="1080" data-height="1920" data-duration="45">
-      <!-- Background Video: 4K Master Crop 1080x1920 (45s) -->
-      <video
-        id="bgVideo"
-        class="bg-video"
-        src="bg.mp4"
-        data-start="0s"
-        data-duration="45s"
-        muted
-        playsinline
-      ></video>
+      <div class="clip">
+        <!-- 4K Disassembly Footage -->
+        <video id="bgVideo" class="bg-video" src="bg.mp4" data-start="0s" data-duration="45s" muted playsinline></video>
 
-      <!-- Music Layer: 432 Hz Master Excerpt at soft ambient bed (-19dB) -->
-      <audio
-        id="musicAudio"
-        src="music.mp3"
-        data-start="0s"
-        data-duration="45s"
-      ></audio>
-
-      <!-- Voiceover Layer: Spanish Rioplatense with exact 1.5s lead-in -->
-      <audio
-        id="voiceAudio"
-        src="voice.mp3"
-        data-start="0s"
-        data-duration="32.0s"
-      ></audio>
-
-      <!-- Visual Stage -->
-      <div id="ui-stage" class="clip">
+        <!-- Vignette -->
         <div class="vignette"></div>
 
-        <!-- Official YouTube Subscribe Button (Y: 240px) -->
-        <div class="yt-subscribe-btn" id="subscribeBtn">
+        <!-- YouTube Subscribe Pill -->
+        <div class="yt-subscribe-btn">
           <div class="yt-play-icon"></div>
-          <span class="yt-subscribe-text">SUSCRIBIRSE</span>
+          <span class="yt-subscribe-text">Suscribirse</span>
         </div>
 
-        <!-- Hook Card (Y: 480px, generous gap from Subscribe) -->
-        <div class="hook-card" id="hookCard">
-          <div class="hook-badge">EL CAMPO</div>
-          <h1 class="hook-heading">¿EL SONIDO ES SOLO LA SUPERFICIE?</h1>
-          <p class="hook-subtext">Frecuencias y Armónicos en el Campo</p>
+        <!-- Hook Card (0.3s -> 4.5s) -->
+        <div id="hookCard" class="hook-card">
+          <div class="hook-badge">El Campo</div>
+          <div class="hook-heading">¿El sonido es solo la superficie?</div>
+          <div class="hook-subtext">Frecuencias y Armónicos en el Campo</div>
         </div>
 
-        <!-- Dynamic Kinetic Captions (Always 2 Lines!) -->
+        <!-- Captions Wrap -->
         <div class="captions-wrap" id="captionsWrap" data-layout-allow-overlap="true">
           <div id="phrase-0" class="caption-phrase">
             <div class="caption-line">
               <span id="word-0" class="caption-word">¿Y</span>
               <span id="word-1" class="caption-word">si</span>
               <span id="word-2" class="caption-word">lo</span>
+              <span id="word-3" class="caption-word">que</span>
             </div>
             <div class="caption-line">
-              <span id="word-3" class="caption-word">que</span>
               <span id="word-4" class="caption-word">llamamos</span>
               <span id="word-5" class="caption-word">sonido</span>
             </div>
@@ -299,9 +276,9 @@
             <div class="caption-line">
               <span id="word-6" class="caption-word">es</span>
               <span id="word-7" class="caption-word">solo</span>
+              <span id="word-8" class="caption-word">la</span>
             </div>
             <div class="caption-line">
-              <span id="word-8" class="caption-word">la</span>
               <span id="word-9" class="caption-word">consecuencia?</span>
             </div>
           </div>
@@ -314,33 +291,33 @@
             <div class="caption-line">
               <span id="word-13" class="caption-word">lo</span>
               <span id="word-14" class="caption-word">que</span>
-              <span id="word-15" class="caption-word">escuchás,</span>
+              <span id="word-15" class="caption-word">escuchas,</span>
             </div>
           </div>
           <div id="phrase-3" class="caption-phrase">
             <div class="caption-line">
               <span id="word-16" class="caption-word">frecuencias</span>
               <span id="word-17" class="caption-word">y</span>
+            </div>
+            <div class="caption-line">
               <span id="word-18" class="caption-word">armónicos</span>
             </div>
+          </div>
+          <div id="phrase-4" class="caption-phrase">
             <div class="caption-line">
               <span id="word-19" class="caption-word">se</span>
               <span id="word-20" class="caption-word">mueven</span>
               <span id="word-21" class="caption-word">a</span>
             </div>
-          </div>
-          <div id="phrase-4" class="caption-phrase">
             <div class="caption-line">
               <span id="word-22" class="caption-word">través</span>
               <span id="word-23" class="caption-word">del</span>
-            </div>
-            <div class="caption-line">
               <span id="word-24" class="caption-word">campo.</span>
             </div>
           </div>
           <div id="phrase-5" class="caption-phrase">
             <div class="caption-line">
-              <span id="word-25" class="caption-word">Mirá</span>
+              <span id="word-25" class="caption-word">Mirad</span>
               <span id="word-26" class="caption-word">medio</span>
               <span id="word-27" class="caption-word">millón</span>
             </div>
@@ -348,95 +325,83 @@
               <span id="word-28" class="caption-word">de</span>
               <span id="word-29" class="caption-word">granos</span>
               <span id="word-30" class="caption-word">de</span>
+              <span id="word-31" class="caption-word">cuarzo</span>
             </div>
           </div>
           <div id="phrase-6" class="caption-phrase">
             <div class="caption-line">
-              <span id="word-31" class="caption-word">cuarzo</span>
               <span id="word-32" class="caption-word">soltar</span>
-            </div>
-            <div class="caption-line">
               <span id="word-33" class="caption-word">su</span>
-              <span id="word-34" class="caption-word">geometría...</span>
+              <span id="word-34" class="caption-word">geometría</span>
             </div>
-          </div>
-          <div id="phrase-7" class="caption-phrase">
             <div class="caption-line">
               <span id="word-35" class="caption-word">y</span>
               <span id="word-36" class="caption-word">volver</span>
               <span id="word-37" class="caption-word">a</span>
-            </div>
-            <div class="caption-line">
               <span id="word-38" class="caption-word">la</span>
               <span id="word-39" class="caption-word">quietud.</span>
             </div>
           </div>
-          <div id="phrase-8" class="caption-phrase">
+          <div id="phrase-7" class="caption-phrase">
             <div class="caption-line">
               <span id="word-40" class="caption-word">Si</span>
               <span id="word-41" class="caption-word">la</span>
               <span id="word-42" class="caption-word">resonancia</span>
+              <span id="word-43" class="caption-word">pueda</span>
             </div>
             <div class="caption-line">
-              <span id="word-43" class="caption-word">puede</span>
               <span id="word-44" class="caption-word">alinear</span>
               <span id="word-45" class="caption-word">y</span>
+              <span id="word-46" class="caption-word">disolver</span>
+            </div>
+          </div>
+          <div id="phrase-8" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-47" class="caption-word">este</span>
+              <span id="word-48" class="caption-word">orden,</span>
+              <span id="word-49" class="caption-word">imagina</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-50" class="caption-word">lo</span>
+              <span id="word-51" class="caption-word">que</span>
+              <span id="word-52" class="caption-word">hace</span>
+              <span id="word-53" class="caption-word">con</span>
+              <span id="word-54" class="caption-word">el</span>
+              <span id="word-55" class="caption-word">ruido</span>
             </div>
           </div>
           <div id="phrase-9" class="caption-phrase">
             <div class="caption-line">
-              <span id="word-46" class="caption-word">disolver</span>
-              <span id="word-47" class="caption-word">este</span>
+              <span id="word-56" class="caption-word">en</span>
+              <span id="word-57" class="caption-word">tu</span>
             </div>
             <div class="caption-line">
-              <span id="word-48" class="caption-word">orden,</span>
+              <span id="word-58" class="caption-word">mente.</span>
             </div>
           </div>
           <div id="phrase-10" class="caption-phrase">
             <div class="caption-line">
-              <span id="word-49" class="caption-word">imaginá</span>
-              <span id="word-50" class="caption-word">lo</span>
-              <span id="word-51" class="caption-word">que</span>
+              <span id="word-59" class="caption-word">Viví</span>
+              <span id="word-60" class="caption-word">la</span>
+              <span id="word-61" class="caption-word">obra</span>
+              <span id="word-62" class="caption-word">completa</span>
             </div>
             <div class="caption-line">
-              <span id="word-52" class="caption-word">hace</span>
-              <span id="word-53" class="caption-word">con</span>
-              <span id="word-54" class="caption-word">el</span>
+              <span id="word-63" class="caption-word">de</span>
+              <span id="word-64" class="caption-word">6</span>
+              <span id="word-65" class="caption-word">minutos</span>
             </div>
           </div>
           <div id="phrase-11" class="caption-phrase">
             <div class="caption-line">
-              <span id="word-55" class="caption-word">ruido</span>
-              <span id="word-56" class="caption-word">en</span>
-            </div>
-            <div class="caption-line">
-              <span id="word-57" class="caption-word">tu</span>
-              <span id="word-58" class="caption-word">mente.</span>
-            </div>
-          </div>
-          <div id="phrase-12" class="caption-phrase">
-            <div class="caption-line">
-              <span id="word-59" class="caption-word">Viví</span>
-              <span id="word-60" class="caption-word">la</span>
-              <span id="word-61" class="caption-word">obra</span>
-            </div>
-            <div class="caption-line">
-              <span id="word-62" class="caption-word">completa</span>
-              <span id="word-63" class="caption-word">de</span>
-              <span id="word-64" class="caption-word">seis</span>
-            </div>
-          </div>
-          <div id="phrase-13" class="caption-phrase">
-            <div class="caption-line">
-              <span id="word-65" class="caption-word">minutos</span>
               <span id="word-66" class="caption-word">en</span>
+              <span id="word-67" class="caption-word">nuestro</span>
             </div>
             <div class="caption-line">
-              <span id="word-67" class="caption-word">nuestro</span>
               <span id="word-68" class="caption-word">canal.</span>
             </div>
           </div>
-          <div id="phrase-14" class="caption-phrase">
+          <div id="phrase-12" class="caption-phrase">
             <div class="caption-line">
               <span id="word-69" class="caption-word">Y</span>
               <span id="word-70" class="caption-word">si</span>
@@ -448,18 +413,18 @@
               <span id="word-74" class="caption-word">vos,</span>
             </div>
           </div>
-          <div id="phrase-15" class="caption-phrase">
+          <div id="phrase-13" class="caption-phrase">
             <div class="caption-line">
-              <span id="word-75" class="caption-word">suscribite</span>
+              <span id="word-75" class="caption-word">suscríbete</span>
               <span id="word-76" class="caption-word">para</span>
-              <span id="word-77" class="caption-word">explorar</span>
             </div>
             <div class="caption-line">
+              <span id="word-77" class="caption-word">explorar</span>
               <span id="word-78" class="caption-word">el</span>
               <span id="word-79" class="caption-word">campo.</span>
             </div>
           </div>
-          <div id="phrase-16" class="caption-phrase">
+          <div id="phrase-14" class="caption-phrase">
             <div class="caption-line">
               <span id="word-80" class="caption-word">Ponete</span>
             </div>
@@ -467,254 +432,268 @@
               <span id="word-81" class="caption-word">auriculares.</span>
             </div>
           </div>
+
         </div>
 
-        <!-- Closing CTA: Centered Vertically and Horizontally -->
-        <div class="closing-cta" id="closingCta">
-          <span class="cta-badge">Experimentá El Campo</span>
-          <h2 class="cta-link">OBRA COMPLETA DE 6 MINUTOS EN EL CANAL</h2>
-          <p class="cta-sub">Y si esto resuena con vos, suscribite para explorar el campo.</p>
+        <!-- Closing CTA (Centered at 30.5s -> 43.5s) -->
+        <div id="closingCta" class="closing-cta">
+          <div class="cta-badge">Experimentá El Campo</div>
+          <div class="cta-link">Obra Completa de 6 Minutos en el Canal</div>
+          <div class="cta-sub">Y si esto resuena con vos, suscribite para explorar el campo.</div>
         </div>
       </div>
     </div>
+
+    <!-- Audio Elements -->
+    <audio id="musicAudio" src="music.mp3" data-start="0s" data-duration="45s"></audio>
+    <audio id="voiceAudio" src="voice.mp3" data-start="0s" data-duration="28.8s"></audio>
 
     <script>
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["the-field-short-01-es"] = tl;
 
-      // Subscribe Button: fades in at 0.5s, stays visible until 44.2s
-      tl.fromTo("#subscribeBtn", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, 0.5);
-      tl.to("#subscribeBtn", { opacity: 0, duration: 0.5, ease: "power2.in" }, 44.2);
+      // Hook Card Animation (0.3s in, 4.3s out)
+      tl.fromTo("#hookCard", 
+        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power2.out" },
+        0.3
+      );
+      tl.to("#hookCard", {
+        opacity: 0,
+        y: -20,
+        scale: 0.97,
+        duration: 0.6,
+        ease: "power2.in"
+      }, 4.3);
 
-      // Hook Card: 0.3s -> 4.2s
-      tl.fromTo("#hookCard", { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 0.3);
-      tl.to("#hookCard", { opacity: 0, duration: 0.6, ease: "power2.in" }, 4.2);
-
-      // Captions Timeline (Always 2 lines, intense violet highlight)
-      // Frase 0: "¿Y si lo que llamamos sonido"
+      // Captions Timeline
+      // Phrase 0: "¿Y si lo que llamamos sonido"
       tl.fromTo("#phrase-0", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 1.460);
-      tl.to("#phrase-0", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 3.318);
-      tl.to("#word-0", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 1.500);
-      tl.to("#word-0", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 1.604);
-      tl.to("#word-1", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 1.721);
-      tl.to("#word-1", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 1.821);
-      tl.to("#word-2", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 1.883);
-      tl.to("#word-2", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 1.983);
-      tl.to("#word-3", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 2.034);
-      tl.to("#word-3", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 2.134);
-      tl.to("#word-4", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 2.150);
-      tl.to("#word-4", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 2.673);
-      tl.to("#word-5", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 2.707);
-      tl.to("#word-5", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 3.265);
-      // Frase 1: "es solo la consecuencia?"
-      tl.fromTo("#phrase-1", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 3.318);
-      tl.to("#phrase-1", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 5.175);
-      tl.to("#word-6", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 3.358);
-      tl.to("#word-6", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 3.474);
-      tl.to("#word-7", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 3.520);
-      tl.to("#word-7", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 3.799);
-      tl.to("#word-8", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 3.845);
-      tl.to("#word-8", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 3.945);
-      tl.to("#word-9", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 3.973);
-      tl.to("#word-9", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 4.774);
-      // Frase 2: "Por debajo de lo que escuchás,"
-      tl.fromTo("#phrase-2", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 5.175);
-      tl.to("#phrase-2", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 7.160);
-      tl.to("#word-10", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 5.215);
-      tl.to("#word-10", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 5.401);
-      tl.to("#word-11", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 5.471);
-      tl.to("#word-11", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 5.842);
-      tl.to("#word-12", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 5.889);
-      tl.to("#word-12", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 5.989);
-      tl.to("#word-13", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 5.981);
-      tl.to("#word-13", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 6.081);
-      tl.to("#word-14", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 6.098);
-      tl.to("#word-14", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 6.198);
-      tl.to("#word-15", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 6.190);
-      tl.to("#word-15", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 6.992);
-      // Frase 3: "frecuencias y armónicos se mueven a"
-      tl.fromTo("#phrase-3", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 7.160);
-      tl.to("#phrase-3", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 9.125);
-      tl.to("#word-16", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 7.200);
-      tl.to("#word-16", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 7.781);
-      tl.to("#word-17", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 7.839);
-      tl.to("#word-17", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 7.939);
-      tl.to("#word-18", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 7.897);
-      tl.to("#word-18", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 8.512);
-      tl.to("#word-19", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 8.547);
-      tl.to("#word-19", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 8.652);
-      tl.to("#word-20", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 8.710);
-      tl.to("#word-20", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 9.023);
-      tl.to("#word-21", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 9.081);
-      tl.to("#word-21", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 9.181);
-      // Frase 4: "través del campo."
-      tl.fromTo("#phrase-4", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 9.111);
-      tl.to("#phrase-4", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 10.562);
-      tl.to("#word-22", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 9.151);
-      tl.to("#word-22", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 9.453);
-      tl.to("#word-23", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 9.476);
-      tl.to("#word-23", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 9.592);
-      tl.to("#word-24", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 9.650);
-      tl.to("#word-24", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 10.161);
-      // Frase 5: "Mirá medio millón de granos de"
-      tl.fromTo("#phrase-5", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 10.562);
-      tl.to("#phrase-5", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 12.132);
-      tl.to("#word-25", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 10.602);
-      tl.to("#word-25", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 10.869);
-      tl.to("#word-26", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 10.939);
-      tl.to("#word-26", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 11.171);
-      tl.to("#word-27", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 11.229);
-      tl.to("#word-27", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 11.543);
-      tl.to("#word-28", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 11.589);
-      tl.to("#word-28", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 11.689);
-      tl.to("#word-29", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 11.694);
-      tl.to("#word-29", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 12.019);
-      tl.to("#word-30", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 12.053);
-      tl.to("#word-30", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 12.153);
-      // Frase 6: "cuarzo soltar su geometría..."
-      tl.fromTo("#phrase-6", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 12.118);
-      tl.to("#phrase-6", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 14.684);
-      tl.to("#word-31", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 12.158);
-      tl.to("#word-31", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 12.657);
-      tl.to("#word-32", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 12.866);
-      tl.to("#word-32", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 13.389);
-      tl.to("#word-33", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 13.447);
-      tl.to("#word-33", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 13.547);
-      tl.to("#word-34", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 13.598);
-      tl.to("#word-34", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 14.399);
-      // Frase 7: "y volver a la quietud."
-      tl.fromTo("#phrase-7", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 14.684);
-      tl.to("#phrase-7", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 16.437);
-      tl.to("#word-35", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 14.724);
-      tl.to("#word-35", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 14.824);
-      tl.to("#word-36", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 14.886);
-      tl.to("#word-36", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 15.258);
-      tl.to("#word-37", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 15.304);
-      tl.to("#word-37", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 15.404);
-      tl.to("#word-38", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 15.374);
-      tl.to("#word-38", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 15.474);
-      tl.to("#word-39", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 15.490);
-      tl.to("#word-39", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 16.036);
-      // Frase 8: "Si la resonancia puede alinear y"
-      tl.fromTo("#phrase-8", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 16.437);
-      tl.to("#phrase-8", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 18.515);
-      tl.to("#word-40", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 16.477);
-      tl.to("#word-40", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 16.651);
-      tl.to("#word-41", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 16.721);
-      tl.to("#word-41", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 16.821);
-      tl.to("#word-42", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 16.860);
-      tl.to("#word-42", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 17.499);
-      tl.to("#word-43", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 17.545);
-      tl.to("#word-43", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 17.766);
-      tl.to("#word-44", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 17.789);
-      tl.to("#word-44", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 18.277);
-      tl.to("#word-45", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 18.393);
-      tl.to("#word-45", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 18.493);
-      // Frase 9: "disolver este orden,"
-      tl.fromTo("#phrase-9", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 18.515);
-      tl.to("#phrase-9", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 20.071);
-      tl.to("#word-46", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 18.555);
-      tl.to("#word-46", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 19.066);
-      tl.to("#word-47", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 19.113);
-      tl.to("#word-47", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 19.275);
-      tl.to("#word-48", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 19.333);
-      tl.to("#word-48", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 19.786);
-      // Frase 10: "imaginá lo que hace con el"
-      tl.fromTo("#phrase-10", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 20.071);
-      tl.to("#phrase-10", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 21.547);
-      tl.to("#word-49", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 20.111);
-      tl.to("#word-49", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 20.657);
-      tl.to("#word-50", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 20.715);
-      tl.to("#word-50", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 20.815);
-      tl.to("#word-51", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 20.866);
-      tl.to("#word-51", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 20.966);
-      tl.to("#word-52", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 21.017);
-      tl.to("#word-52", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 21.237);
-      tl.to("#word-53", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 21.284);
-      tl.to("#word-53", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 21.411);
-      tl.to("#word-54", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 21.469);
-      tl.to("#word-54", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 21.569);
-      // Frase 11: "ruido en tu mente."
-      tl.fromTo("#phrase-11", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 21.546);
-      tl.to("#phrase-11", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 22.857);
-      tl.to("#word-55", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 21.586);
-      tl.to("#word-55", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 21.795);
-      tl.to("#word-56", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 21.818);
-      tl.to("#word-56", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 21.918);
-      tl.to("#word-57", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 21.911);
-      tl.to("#word-57", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 22.011);
-      tl.to("#word-58", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 22.038);
-      tl.to("#word-58", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 22.514);
-      // Frase 12: "Viví la obra completa de seis"
-      tl.fromTo("#phrase-12", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 22.857);
-      tl.to("#phrase-12", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 24.634);
-      tl.to("#word-59", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 22.897);
-      tl.to("#word-59", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 23.176);
-      tl.to("#word-60", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 23.234);
-      tl.to("#word-60", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 23.334);
-      tl.to("#word-61", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 23.385);
-      tl.to("#word-61", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 23.582);
-      tl.to("#word-62", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 23.640);
-      tl.to("#word-62", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 24.140);
-      tl.to("#word-63", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 24.186);
-      tl.to("#word-63", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 24.286);
-      tl.to("#word-64", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 24.337);
-      tl.to("#word-64", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 24.604);
-      // Frase 13: "minutos en nuestro canal."
-      tl.fromTo("#phrase-13", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 24.634);
-      tl.to("#phrase-13", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 26.329);
-      tl.to("#word-65", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 24.674);
-      tl.to("#word-65", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 25.080);
-      tl.to("#word-66", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 25.138);
-      tl.to("#word-66", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 25.238);
-      tl.to("#word-67", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 25.219);
-      tl.to("#word-67", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 25.475);
-      tl.to("#word-68", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 25.510);
-      tl.to("#word-68", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 25.986);
-      // Frase 14: "Y si esto resuena con vos,"
-      tl.fromTo("#phrase-14", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 26.329);
-      tl.to("#phrase-14", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 28.233);
-      tl.to("#word-69", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 26.369);
-      tl.to("#word-69", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 26.469);
-      tl.to("#word-70", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 26.566);
-      tl.to("#word-70", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 26.694);
-      tl.to("#word-71", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 26.764);
-      tl.to("#word-71", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 26.973);
-      tl.to("#word-72", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 27.042);
-      tl.to("#word-72", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 27.402);
-      tl.to("#word-73", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 27.460);
-      tl.to("#word-73", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 27.588);
-      tl.to("#word-74", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 27.634);
-      tl.to("#word-74", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 28.099);
-      // Frase 15: "suscribite para explorar el campo."
-      tl.fromTo("#phrase-15", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 28.233);
-      tl.to("#phrase-15", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 30.532);
-      tl.to("#word-75", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 28.273);
-      tl.to("#word-75", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 28.981);
-      tl.to("#word-76", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 29.028);
-      tl.to("#word-76", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 29.178);
-      tl.to("#word-77", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 29.202);
-      tl.to("#word-77", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 29.608);
-      tl.to("#word-78", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 29.654);
-      tl.to("#word-78", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 29.754);
-      tl.to("#word-79", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 29.771);
-      tl.to("#word-79", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 30.247);
-      // Frase 16: "Ponete auriculares."
-      tl.fromTo("#phrase-16", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 30.532);
-      tl.to("#phrase-16", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 32.315);
-      tl.to("#word-80", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 30.572);
-      tl.to("#word-80", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 30.990);
-      tl.to("#word-81", { color: "#C084FC", textShadow: "0 0 32px rgba(168, 85, 247, 1), 0 0 54px rgba(147, 51, 234, 0.8), 0 4px 18px rgba(0, 0, 0, 0.98)", duration: 0.05, ease: "none", overwrite: "auto" }, 31.013);
-      tl.to("#word-81", { color: "#FDFBFA", textShadow: "0 4px 18px rgba(0, 0, 0, 0.98), 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 2px rgba(0, 0, 0, 0.98)", duration: 0.08, ease: "none", overwrite: "auto" }, 31.965);
+      tl.to("#phrase-0", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 2.820);
+      tl.to("#word-0", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.500);
+      tl.to("#word-0", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.620);
+      tl.to("#word-1", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.620);
+      tl.to("#word-1", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.740);
+      tl.to("#word-2", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.740);
+      tl.to("#word-2", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.840);
+      tl.to("#word-3", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.840);
+      tl.to("#word-3", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.940);
+      tl.to("#word-4", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.940);
+      tl.to("#word-4", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 2.300);
+      tl.to("#word-5", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 2.300);
+      tl.to("#word-5", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 2.800);
+      // Phrase 1: "es solo la consecuencia?"
+      tl.fromTo("#phrase-1", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 2.760);
+      tl.to("#phrase-1", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 5.000);
+      tl.to("#word-6", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 2.800);
+      tl.to("#word-6", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 3.240);
+      tl.to("#word-7", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 3.240);
+      tl.to("#word-7", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 3.500);
+      tl.to("#word-8", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 3.500);
+      tl.to("#word-8", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 3.660);
+      tl.to("#word-9", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 3.660);
+      tl.to("#word-9", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 4.360);
+      // Phrase 2: "Por debajo de lo que escuchas,"
+      tl.fromTo("#phrase-2", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 5.000);
+      tl.to("#phrase-2", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 6.680);
+      tl.to("#word-10", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.040);
+      tl.to("#word-10", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 5.240);
+      tl.to("#word-11", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.240);
+      tl.to("#word-11", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 5.540);
+      tl.to("#word-12", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.540);
+      tl.to("#word-12", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 5.660);
+      tl.to("#word-13", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.660);
+      tl.to("#word-13", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 5.740);
+      tl.to("#word-14", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.740);
+      tl.to("#word-14", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 5.840);
+      tl.to("#word-15", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.840);
+      tl.to("#word-15", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 6.360);
+      // Phrase 3: "frecuencias y armónicos"
+      tl.fromTo("#phrase-3", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 6.680);
+      tl.to("#phrase-3", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 7.840);
+      tl.to("#word-16", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 6.720);
+      tl.to("#word-16", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 7.220);
+      tl.to("#word-17", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 7.220);
+      tl.to("#word-17", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 7.380);
+      tl.to("#word-18", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 7.380);
+      tl.to("#word-18", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 7.820);
+      // Phrase 4: "se mueven a través del campo."
+      tl.fromTo("#phrase-4", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 7.780);
+      tl.to("#phrase-4", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 9.680);
+      tl.to("#word-19", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 7.820);
+      tl.to("#word-19", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.040);
+      tl.to("#word-20", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.040);
+      tl.to("#word-20", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.380);
+      tl.to("#word-21", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.380);
+      tl.to("#word-21", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.500);
+      tl.to("#word-22", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.500);
+      tl.to("#word-22", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.700);
+      tl.to("#word-23", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.700);
+      tl.to("#word-23", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.900);
+      tl.to("#word-24", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.900);
+      tl.to("#word-24", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 9.240);
+      // Phrase 5: "Mirad medio millón de granos de cuarzo"
+      tl.fromTo("#phrase-5", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 9.680);
+      tl.to("#phrase-5", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 11.660);
+      tl.to("#word-25", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 9.720);
+      tl.to("#word-25", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 10.020);
+      tl.to("#word-26", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 10.020);
+      tl.to("#word-26", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 10.380);
+      tl.to("#word-27", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 10.380);
+      tl.to("#word-27", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 10.740);
+      tl.to("#word-28", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 10.740);
+      tl.to("#word-28", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 10.880);
+      tl.to("#word-29", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 10.880);
+      tl.to("#word-29", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 11.160);
+      tl.to("#word-30", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 11.160);
+      tl.to("#word-30", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 11.260);
+      tl.to("#word-31", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 11.260);
+      tl.to("#word-31", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 11.640);
+      // Phrase 6: "soltar su geometría y volver a la quietud."
+      tl.fromTo("#phrase-6", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 11.600);
+      tl.to("#phrase-6", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 15.080);
+      tl.to("#word-32", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 11.640);
+      tl.to("#word-32", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 12.020);
+      tl.to("#word-33", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 12.020);
+      tl.to("#word-33", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 12.220);
+      tl.to("#word-34", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 12.220);
+      tl.to("#word-34", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 12.740);
+      tl.to("#word-35", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 12.740);
+      tl.to("#word-35", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 13.620);
+      tl.to("#word-36", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 13.620);
+      tl.to("#word-36", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 13.880);
+      tl.to("#word-37", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 13.880);
+      tl.to("#word-37", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.020);
+      tl.to("#word-38", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.020);
+      tl.to("#word-38", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.100);
+      tl.to("#word-39", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.100);
+      tl.to("#word-39", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.440);
+      // Phrase 7: "Si la resonancia pueda alinear y disolver"
+      tl.fromTo("#phrase-7", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 15.080);
+      tl.to("#phrase-7", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 17.280);
+      tl.to("#word-40", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 15.120);
+      tl.to("#word-40", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 15.300);
+      tl.to("#word-41", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 15.300);
+      tl.to("#word-41", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 15.400);
+      tl.to("#word-42", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 15.400);
+      tl.to("#word-42", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 15.860);
+      tl.to("#word-43", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 15.860);
+      tl.to("#word-43", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 16.180);
+      tl.to("#word-44", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 16.180);
+      tl.to("#word-44", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 16.680);
+      tl.to("#word-45", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 16.680);
+      tl.to("#word-45", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 16.840);
+      tl.to("#word-46", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 16.840);
+      tl.to("#word-46", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.260);
+      // Phrase 8: "este orden, imagina lo que hace con el ruido"
+      tl.fromTo("#phrase-8", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 17.220);
+      tl.to("#phrase-8", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 19.800);
+      tl.to("#word-47", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 17.260);
+      tl.to("#word-47", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.540);
+      tl.to("#word-48", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 17.540);
+      tl.to("#word-48", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.840);
+      tl.to("#word-49", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 18.280);
+      tl.to("#word-49", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 18.660);
+      tl.to("#word-50", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 18.660);
+      tl.to("#word-50", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 18.840);
+      tl.to("#word-51", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 18.840);
+      tl.to("#word-51", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 18.980);
+      tl.to("#word-52", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 18.980);
+      tl.to("#word-52", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.180);
+      tl.to("#word-53", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.180);
+      tl.to("#word-53", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.360);
+      tl.to("#word-54", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.360);
+      tl.to("#word-54", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.520);
+      tl.to("#word-55", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.520);
+      tl.to("#word-55", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.780);
+      // Phrase 9: "en tu mente."
+      tl.fromTo("#phrase-9", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 19.740);
+      tl.to("#phrase-9", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 21.000);
+      tl.to("#word-56", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.780);
+      tl.to("#word-56", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.860);
+      tl.to("#word-57", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.860);
+      tl.to("#word-57", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.980);
+      tl.to("#word-58", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.980);
+      tl.to("#word-58", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 20.240);
+      // Phrase 10: "Viví la obra completa de 6 minutos"
+      tl.fromTo("#phrase-10", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 21.000);
+      tl.to("#phrase-10", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 22.740);
+      tl.to("#word-59", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.040);
+      tl.to("#word-59", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.220);
+      tl.to("#word-60", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.220);
+      tl.to("#word-60", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.340);
+      tl.to("#word-61", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.340);
+      tl.to("#word-61", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.480);
+      tl.to("#word-62", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.480);
+      tl.to("#word-62", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.940);
+      tl.to("#word-63", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.940);
+      tl.to("#word-63", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 22.140);
+      tl.to("#word-64", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 22.140);
+      tl.to("#word-64", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 22.420);
+      tl.to("#word-65", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 22.420);
+      tl.to("#word-65", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 22.720);
+      // Phrase 11: "en nuestro canal."
+      tl.fromTo("#phrase-11", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 22.680);
+      tl.to("#phrase-11", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 24.020);
+      tl.to("#word-66", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 22.720);
+      tl.to("#word-66", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 23.000);
+      tl.to("#word-67", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 23.000);
+      tl.to("#word-67", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 23.260);
+      tl.to("#word-68", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 23.260);
+      tl.to("#word-68", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 23.520);
+      // Phrase 12: "Y si esto resuena con vos,"
+      tl.fromTo("#phrase-12", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 24.020);
+      tl.to("#phrase-12", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 25.520);
+      tl.to("#word-69", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.060);
+      tl.to("#word-69", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 24.140);
+      tl.to("#word-70", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.140);
+      tl.to("#word-70", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 24.260);
+      tl.to("#word-71", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.260);
+      tl.to("#word-71", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 24.460);
+      tl.to("#word-72", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.460);
+      tl.to("#word-72", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 24.780);
+      tl.to("#word-73", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.780);
+      tl.to("#word-73", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 24.940);
+      tl.to("#word-74", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.940);
+      tl.to("#word-74", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 25.200);
+      // Phrase 13: "suscríbete para explorar el campo."
+      tl.fromTo("#phrase-13", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 25.520);
+      tl.to("#phrase-13", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 27.580);
+      tl.to("#word-75", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 25.560);
+      tl.to("#word-75", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 26.060);
+      tl.to("#word-76", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 26.060);
+      tl.to("#word-76", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 26.240);
+      tl.to("#word-77", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 26.240);
+      tl.to("#word-77", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 26.660);
+      tl.to("#word-78", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 26.660);
+      tl.to("#word-78", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 26.800);
+      tl.to("#word-79", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 26.800);
+      tl.to("#word-79", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 27.120);
+      // Phrase 14: "Ponete auriculares."
+      tl.fromTo("#phrase-14", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 27.580);
+      tl.to("#phrase-14", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 28.690);
+      tl.to("#word-80", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 27.620);
+      tl.to("#word-80", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 27.840);
+      tl.to("#word-81", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 27.840);
+      tl.to("#word-81", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 28.340);
 
+
+      // Closing CTA Animation (30.5s in, 43.5s out)
+      tl.fromTo("#closingCta",
+        { opacity: 0, scale: 0.92, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: "back.out(1.2)" },
+        30.5
+      );
+      tl.to("#closingCta", {
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.8,
+        ease: "power2.in"
+      }, 43.5);
 
       // Hide Captions completely when speech concludes
-      tl.to("#captionsWrap", { opacity: 0, visibility: "hidden", duration: 0.3, ease: "power2.in" }, 32.27);
-
-      // Closing CTA: 32.56s -> 43.8s (Centered Vertically and Horizontally)
-      tl.fromTo("#closingCta", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 32.56);
-      tl.to("#closingCta", { opacity: 0, scale: 0.96, duration: 0.6, ease: "power2.in" }, 43.8);
+      tl.to("#captionsWrap", { opacity: 0, visibility: "hidden", duration: 0.3, ease: "power2.in" }, 29.5);
     </script>
   </body>
 </html>

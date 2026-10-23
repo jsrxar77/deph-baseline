@@ -5,10 +5,42 @@ description: Use whenever the user asks to create, extract, render, or publish Y
 
 # Creating and publishing promotional YouTube Shorts for a deph piece
 
-Every composition has a dedicated **`media/<name>/shorts/`** subfolder (part of the standard `deph-compose` piece template, alongside `sounds/`, `visuals/`, `sync/`, and `renders/`). All metadata, clip definitions, and rendered `.mp4` files for a piece's Shorts live inside **`media/<name>/shorts/`**:
-- **`media/<name>/shorts/<name>.shorts.md`** — tracked in git; defines the 2 to 3 Shorts (`1080x1920`, 9:16 vertical, 60 fps, 30–55 seconds each).
-- **`media/<name>/shorts/<name>-short-<id>.mp4`** — compiled vertical video files (git-ignored).
-- **`domains.shorts`** in `media/<name>/<name>.yaml` — tracks the status (`planned` / `ready` / `published`) and path (`shorts/`).
+Every composition has a dedicated **`media/<name>/shorts/`** subfolder (part of the standard `deph-compose` piece template, alongside `sounds/`, `visuals/`, `sync/`, and `renders/`).
+
+### Estructura Estándar de Carpetas para Shorts (Obligatoria y Coherente)
+
+```text
+media/<name>/shorts/
+├── <name>.shorts.md                  # Pack maestro de Shorts (metadatos, títulos, descripciones, tags)
+├── renders/                          # Carpeta limpia de videos finales compilados (listos para publicar)
+│   ├── <name>-short-01-en.mp4        # Short 01 Inglés (1080x1920 @ 30fps)
+│   └── <name>-short-01-es.mp4        # Short 01 Castellano Rioplatense (1080x1920 @ 30fps)
+└── <id>/                             # Carpeta autónoma del Short (ej. 01, 02)
+    ├── hyperframes-en/               # Proyecto HyperFrames autónomo en inglés
+    │   ├── index.html
+    │   ├── bg.mp4
+    │   ├── music.mp3
+    │   └── voice.mp3
+    ├── hyperframes-es/               # Proyecto HyperFrames autónomo en castellano
+    │   ├── index.html
+    │   ├── bg.mp4
+    │   ├── music.mp3
+    │   └── voice.mp3
+    ├── voice/                        # Audios de locución originales y procesados
+    │   ├── voice-en.mp3              # Audio con lead-in (EN)
+    │   ├── voice-es.mp3              # Audio con lead-in (ES)
+    │   ├── voiceover-en.txt          # Guion limpio (EN)
+    │   └── voiceover-es.txt          # Guion limpio (ES)
+    ├── captions/                     # Archivos de sincronización temporal
+    │   ├── captions-en.json          # Timestamps palabra por palabra (EN)
+    │   └── captions-es.json          # Timestamps palabra por palabra (ES)
+    └── source/                       # Metrajes base 4K, stills y notas de producción
+        ├── raw-disassembly-4k.webm
+        └── script.md
+```
+
+- **PROHIBIDO mezclar proyectos o dejar borradores sueltos:** Cada idioma tiene su carpeta simétrica (`hyperframes-en` y `hyperframes-es`). Prohibido crear carpetas genéricas desalineadas como `hyperframes` a secas.
+- **PROHIBIDO enlaces simbólicos o archivos huérfanos en la raíz de `shorts/`:** En `media/<name>/shorts/` solo deben coexistir `<name>.shorts.md`, `renders/` y las carpetas numeradas de cada Short (`01/`, `02/`).
 
 ## Standing rules (house style for Shorts)
 
@@ -16,11 +48,6 @@ Every composition has a dedicated **`media/<name>/shorts/`** subfolder (part of 
 2. **Smooth entry and exit (never a hard cut).** Both rendering modes apply a `1.2 s` fade-in and a `1.8 s` fade-out to picture and audio (`-14 LUFS`), so a meditative excerpt never starts or stops with a jolt.
 3. **Bilingual Production by Default (EN & ES Mandatory):**
    - Every Short MUST be produced in both **English (`EN`)** and **Spanish (`ES`)**.
-   - Each language has its own dedicated files in `media/<name>/shorts/<id>/`:
-     - Text files: `voiceover-en.txt` and `voiceover-es.txt`.
-     - Audio files: `voice-en.mp3` and `voice-es.mp3` generated via ElevenLabs (`Brian`).
-     - Subtitle timestamps: `captions-en.json` and `captions-es.json`.
-     - Final renders: `<name>-short-<id>-en.mp4` and `<name>-short-<id>-es.mp4`.
    - YouTube metadata includes primary English titles/descriptions with Spanish attached via `localizations.es`.
 
 4. Typography, Safe Zones, and Giant Mobile Text (Reglas de Oro Inviolables):
@@ -28,18 +55,21 @@ Every composition has a dedicated **`media/<name>/shorts/`** subfolder (part of 
      - Cada subtítulo que aparece en pantalla debe estar estructurado estrictamente en 2 LÍNEAS (fila superior y fila inferior con white-space: nowrap).
      - PROHIBIDO TERMINANTEMENTE que un subtítulo quede en 3 líneas (abarrota la pantalla y tapa el video) o en 1 línea solitaria desbalanceada.
      - Ambas líneas deben estar equilibradas armónicamente (2 a 4 palabras por línea).
+   - PROHIBIDO -WEBKIT-TEXT-STROKE (Cero Manchas / Círculos Negros):
+     - PROHIBIDO usar `-webkit-text-stroke` en tipografía sobre fondos oscuros o cápsulas. En motores Chromium, el trazo colapsa hacia el interior de los ojos y huecos de letras cerradas (`e`, `a`, `o`, `b`), manchando el interior con círculos negros.
+     - Usar tipografía pura de peso 800 (`font-weight: 800`) con un `text-shadow` suave y sutil (`text-shadow: 0 4px 18px rgba(0, 0, 0, 0.90), 0 2px 4px rgba(0, 0, 0, 0.85);`) para un acabado 100% nítido, limpio y legible.
    - Paleta de Colores de Texto y Acentos por Obra:
      - PROHIBIDO usar colores arbitrarios, dorados chillones o celestes desconectados del metraje.
-     - En The Field (Nácar nocturno): la palabra hablada activa se ilumina en VIOLETA INTENSO (#C084FC / #A855F7) o AZUL ÍNDIGO INTENSO (#818CF8 / #6366F1) con aura luminosa acorde, texto inactivo en blanco cuarzo nacarado (#FDFBFA), subtextos en índigo suave (#A5B4FC).
+     - En The Field (Nácar nocturno): la palabra hablada activa se ilumina en VIOLETA INTENSO (#C084FC / #A855F7) con aura luminosa acorde (`0 0 28px rgba(168, 85, 247, 0.95)`), texto inactivo en blanco cuarzo nacarado (#FDFBFA), subtextos en índigo suave (#A5B4FC).
    - Esquinas Moderadas (Puntas No Tan Redondeadas):
      - PROHIBIDO usar píldoras o cápsulas circulares ovaladas gigantes (border-radius: 999px descartado en cards y subtítulos).
      - Usar esquinas refinadas y sobrias de border-radius: 18px a 20px tanto en cards de gancho/CTA como en la cápsula de subtítulos.
-   - Glassmorphism Permanente en Todos los Cards y Subtítulos:
-     - Fondo de cristal oscuro satinado: background: rgba(11, 14, 26, 0.78); backdrop-filter: blur(28px a 32px) saturate(180%);
-     - Borde de 1.5px en el tono de acento (violeta/azul tenue rgba(168, 85, 247, 0.35)).
-     - Sombra profunda (box-shadow: 0 16px 40px rgba(0,0,0,0.85)) y bisel con reflejo interior sutil (inset 0 1px 0 rgba(255,255,255,0.12 a 0.15)).
+   - Glassmorphism Translúcido y Aireado:
+     - Fondo de cristal oscuro translúcido (menos opaco para dejar ver las partículas): `background: rgba(11, 14, 26, 0.50)` a `0.54`; `backdrop-filter: blur(28px) saturate(190%);`
+     - Borde de 1.5px en el tono de acento (violeta/azul tenue `rgba(168, 85, 247, 0.35)`).
+     - Sombra profunda (`box-shadow: 0 16px 40px rgba(0,0,0,0.80)`) y bisel con reflejo interior sutil (`inset 0 1px 0 rgba(255,255,255,0.16 a 0.18)`).
    - Cápsula Dinámica para Subtítulos (Fit-Content):
-     - La cápsula de los subtítulos debe ser 100% DINÁMICA (width: fit-content; max-width: 960px).
+     - La cápsula de los subtítulos debe ser 100% DINÁMICA (`width: fit-content; max-width: 960px`).
      - Se ajusta matemáticamente al ancho exacto de las 2 líneas habladas, eliminando cualquier espacio muerto o márgenes vacíos a los lados.
    - Distancia de Seguridad del Botón YouTube Subscribe:
      - Botón oficial en cápsula roja (#ff0000) con play blanco (▶) en zona superior (top: 240px; left: 80px).

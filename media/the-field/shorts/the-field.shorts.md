@@ -7,30 +7,30 @@ Shorts directory: `media/the-field/shorts/` (`.shorts.md` tracked in git; render
 
 ---
 
-## Clip 01 — The 4:16 Convergence (Flower of Life)
+## Clip 01 — What if Sound is Only the Surface? (Disassembly into the Field)
 
-Starts 20 seconds before the `4:16` convergence (`236 s` -> `281 s`, `45 s` total): the grains finish rising into the three Fibonacci canon rings (`21 : 13 : 8`), align at `4:16` (`20 s` into the Short) to form the complete 19-sphere Flower of Life as dawn light warms the scene, and hold the complete form.
+Starts at the peak disassembly (`04:55` -> `05:40`, `45 s` total): the complete Flower of Life releases and half a million grains of quartz dissolve back into 3D space, demonstrating cymatic resonance and form dissolving into stillness.
 
 ```json short-clip
 {
   "id": "01",
-  "slug": "convergence",
-  "label": "The 4:16 Convergence : Flower of Life",
-  "startSeconds": 236,
+  "slug": "sound-surface",
+  "label": "What if Sound is Only the Surface? : 500,000 Quartz Grains",
+  "startSeconds": 295,
   "durationSeconds": 45,
   "hookText": "IS SOUND ONLY THE SURFACE?",
   "subText": "Frequencies & Harmonics in The Field",
-  "scriptEn": "What if what you hear as music is only the surface? In The Field, sound frequencies arrange half a million quartz particles into geometry. When the vibration shifts, the shape dissolves back into stillness. Experience the full 6-minute piece on the channel.",
-  "scriptEs": "¿Y si lo que llamamos sonido es solo la superficie? En The Field, frecuencias y armónicos se mueven a través de medio millón de partículas de cuarzo. Cuando la vibración cambia, la forma se disuelve en el silencio. Experimentá la obra completa de 6 minutos en el canal.",
-  "titleEn": "The Field (4:16) : Fibonacci Canon & Flower of Life | 432 Hz Ambient #Shorts",
-  "titleEs": "The Field (4:16) : Canon de Fibonacci y Flor de la Vida | 432 Hz #Shorts",
-  "descriptionEn": "At 4:16 in The Field, three voices moving at Fibonacci speeds (21 : 13 : 8) arrive at the same note at the same instant and half a million grains of quartz complete the Flower of Life.\n\nTuned to A = 432 Hz with a 7 Hz to 4 Hz binaural layer (best with headphones).\n\nWatch the full 6-minute 4K piece: https://youtu.be/8QGj_FvP5Xo\nSeries playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\n\nThis is music, not medical advice or treatment.\n\n#Shorts #ambientmusic #432hz #binauralbeats #sacredgeometry #cymatics",
-  "descriptionEs": "En el minuto 4:16 de The Field, tres voces que avanzan en proporción de Fibonacci (21 : 13 : 8) llegan a la misma nota en el mismo instante y medio millón de granos de cuarzo completan la Flor de la Vida.\n\nAfinada a A = 432 Hz con una capa binaural de 7 Hz a 4 Hz (mejor con auriculares).\n\nMirá la obra completa en 4K (6 min): https://youtu.be/8QGj_FvP5Xo\nPlaylist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\n\nEsto es música, no consejo ni tratamiento médico.\n\n#Shorts #ambientmusic #432hz #binauralbeats #sacredgeometry #cymatics",
+  "scriptEn": "What if what we call sound is only the consequence? Beneath what you hear, frequencies and harmonics move through the field. Watch half a million grains of quartz release their geometry and fall back into stillness. If resonance can align and dissolve this order, imagine what it does to the noise in your mind. Experience the full six-minute piece on our channel. And if this resonates with you, subscribe to explore the field. Headphones on.",
+  "scriptEs": "¿Y si lo que llamamos sonido es solo la consecuencia? Por debajo de lo que escuchás, frecuencias y armónicos se mueven a través del campo. Mirá medio millón de granos de cuarzo soltar su geometría y volver a la quietud. Si la resonancia puede alinear y disolver este orden, imaginá lo que hace con el ruido en tu mente. Viví la obra completa de seis minutos en nuestro canal. Y si esto resuena con vos, suscribite para explorar el campo. Ponete auriculares.",
+  "titleEn": "The Field · What if Sound is Only the Surface? | 432 Hz Ambient #Shorts",
+  "titleEs": "The Field · ¿Y si el sonido es solo la consecuencia? | 432 Hz #Shorts",
+  "descriptionEn": "What if what we call sound is only the consequence? Beneath what you hear, frequencies and harmonics move through the field. Watch half a million grains of quartz release their geometry and fall back into stillness.\n\nTuned to A = 432 Hz with a gentle binaural layer (best with headphones).\n\nWatch the full 6-minute 4K piece: https://youtu.be/8QGj_FvP5Xo\nSeries playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\n\nThis is music, not medical advice or treatment.\n\n#Shorts #ambientmusic #432hz #binauralbeats #sacredgeometry #cymatics #thefield",
+  "descriptionEs": "¿Y si lo que llamamos sonido es solo la consecuencia? Por debajo de lo que escuchás, frecuencias y armónicos se mueven a través del campo. Mirá medio millón de granos de cuarzo soltar su geometría y volver a la quietud.\n\nAfinada a A = 432 Hz con una capa binaural sutil (mejor con auriculares).\n\nMirá la obra completa en 4K (6 min): https://youtu.be/8QGj_FvP5Xo\nPlaylist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30\n\nEsto es música, no consejo ni tratamiento médico.\n\n#Shorts #ambientmusic #432hz #binauralbeats #geometriasagrada #cimatica #meditacion #thefield",
   "props": {
     "title": "THE FIELD",
     "series": "03",
     "facts": "432 Hz · BINAURAL",
-    "startSeconds": 236,
+    "startSeconds": 295,
     "durationSeconds": 45,
     "hookText": "IS SOUND ONLY THE SURFACE?",
     "subText": "Frequencies & Harmonics in The Field",
