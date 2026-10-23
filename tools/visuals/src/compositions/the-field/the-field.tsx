@@ -239,13 +239,13 @@ const Scene: React.FC<{ tl: Timeline; t: number; width: number; height: number }
   );
 };
 
-export const TheField: React.FC = () => {
+export const TheField: React.FC<{ audioVolume?: number | ((f: number) => number) }> = ({ audioVolume = 1 }) => {
   const tl = useTimeline();
   const t = useCurrentFrame() / FPS;
   const { width, height } = useVideoConfig();
   return (
     <AbsoluteFill style={{ backgroundColor: "#0B0E1A" }}>
-      <Audio src={staticFile("the-field-youtube.wav")} />
+      <Audio src={staticFile("the-field-youtube.wav")} volume={audioVolume} />
       <ThreeCanvas
         width={width}
         height={height}

@@ -1,0 +1,16 @@
+{
+  "name": "deph-youtube",
+  "version": "1.0.0",
+  "description": "YouTube Data API v3 publishing, Shorts extraction and metadata localization tools for deph",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "googleapis": "^144.0.0",
+    "yaml": "^2.7.0"
+  },
+  "scripts": {
+    "auth": "node auth.mjs",
+    "publish": "node publish.mjs",
+    "short": "node short.mjs"
+  }
+}

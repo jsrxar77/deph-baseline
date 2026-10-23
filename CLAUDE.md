@@ -61,6 +61,9 @@ rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-co
     `npx remotion render <CompositionId> ../../media/<name>/renders/<name>.mp4` from `tools/visuals/`.
     Git-ignored (several GB each, regenerable). Not `sync/`, which is the audio/video bridge data, and not
     `~/Movies` or the Desktop, which sit outside the project (a file left on the Desktop vanished once).
+  - **`media/<name>/shorts/`** — everything belonging to the promotional YouTube Shorts of this piece:
+    `shorts/<name>.shorts.md` (clips, timestamps, and metadata, tracked in git) and compiled vertical videos
+    (`<name>-short-<id>.mp4`, git-ignored), rendered with `node tools/youtube/short.mjs <name>`.
 - **`/docs`** — cross-cutting documentation only: the composing workflow (`composition-workflow.md`), the
   audio/video sync pipeline spec (`sync-pipeline.md`), the Strudel → Ableton bridge spec (`daw-bridge.md`), the visuals-bridge overview
   (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `deph-banner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
@@ -89,8 +92,15 @@ rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-co
   - `visuals-compose` — building the actual Remotion composition (in `tools/visuals/src/compositions/`,
     wiring in the real `audio.wav`).
   - `youtube-publish` — the last step of the pipeline: builds and maintains each composition's YouTube publish
-    pack once a video exists (honest claims, verified YouTube rules, EN/ES). **Whenever a video is rendered or
-    changes, create or refresh the pack**; Claude never uploads anything.
+    pack once a video exists (honest claims, verified YouTube rules, EN/ES) and deploys via `tools/youtube/publish.mjs`
+    (resumable upload, EN + ES localizations, custom thumbnail, playlist, creator comment; defaults to `private`).
+    **Whenever a video is rendered or changes, create or refresh the pack.**
+  - `shorts-compose` — promotional YouTube Shorts (`1080x1920`, 9:16 @ 60fps): builds `media/<name>/shorts/<name>.shorts.md`,
+    renders via `tools/youtube/short.mjs` (both fast 4K FFmpeg crop and native Remotion `ShortPromo.tsx`), and uploads.
+  - `edu-compose` — educational visual essays (`9:16` Shorts or `16:9` 4K) explaining general topics in acoustics,
+    mathematics and generative code (Chladni figures, Fibonacci canons, Pythagorean harmony, Shepard tones, 432 Hz,
+    binaural phase): treats every educational topic as its own standalone composition under `media/<name>/` using
+    the standard composition scaffold, and renders/uploads via `tools/youtube/edu.mjs`.
   - `deph-style` — not a pipeline step: the accumulating record of deph's evolving style (what the user liked
     and rejected and why, measured findings, how they like to work, open questions, a dated decision log).
     Read it before proposing a creative direction; **append to it after every user-guided creative decision.**

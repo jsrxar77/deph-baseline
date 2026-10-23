@@ -124,6 +124,27 @@ Source video: media/<name>/renders/<name>.mp4 (<duration>, <resolution>, <LUFS>)
 ## Upload checklist                                  ## Open decisions (TODO for the user)
 ```
 
+## Automated Upload & Deployment (`tools/youtube/publish.mjs`)
+
+Once `<name>.youtube.md`, the 4K `.mp4` render (`media/<name>/renders/<name>.mp4`) and the thumbnail (`media/<name>/renders/thumbnails/<name>-thumbnail.jpg`) exist, you can validate and deploy the entire pack automatically via YouTube Data API v3:
+
+1. **One-time OAuth setup:** follow `tools/youtube/SETUP-OAUTH-ES.md` to place `client_secret.json` in `tools/youtube/.credentials/` and run `node tools/youtube/auth.mjs`.
+2. **Validate the pack (`--dry-run`, no credentials required):**
+   ```bash
+   node tools/youtube/publish.mjs <name> --dry-run
+   ```
+   Verifies EN/ES title lengths (≤ 100 chars), description length (≤ 5000 chars), chapters (`0:00` first, ≥ 3 ascending timestamps ≥ 10 s apart), hashtag count (≤ 60), tags total length (< 500 chars), honesty rules (no medical claims), and thumbnail file size (< 2 MB).
+3. **Upload the video, EN + ES localizations, thumbnail, playlist & creator comment:**
+   ```bash
+   # Safe default: uploads as `private` so 4K processing finishes before going public
+   node tools/youtube/publish.mjs <name>
+
+   # Or publish directly / schedule:
+   node tools/youtube/publish.mjs <name> --privacy=public
+   node tools/youtube/publish.mjs <name> --publish-at=2026-10-25T20:00:00Z
+   ```
+   This performs a resumable upload (logging progress to `<video>.upload.jsonl`), sets English metadata + Spanish `localizations.es` in one pass, uploads the custom thumbnail (`thumbnails.set`), inserts the video into the series playlist (`PLX0Afm4O4W30`), posts the creator engagement comment (`commentThreads.insert`), and updates `<name>.yaml`.
+
 ## After publishing
 
 Set `domains.publish.status: published`, add the URL and date to the pack and yaml, and add a `deph-style`

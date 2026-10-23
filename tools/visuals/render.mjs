@@ -27,6 +27,12 @@ const flag = (name) => rest.find((a) => a.startsWith(`--${name}=`))?.split("=")[
 const framesArg = flag("frames");
 const frameRange = framesArg ? framesArg.split("-").map(Number) : undefined;
 const concurrency = flag("concurrency") ? Number(flag("concurrency")) : undefined;
+const propsArg = flag("props");
+const inputProps = propsArg
+  ? fs.existsSync(propsArg)
+    ? JSON.parse(fs.readFileSync(propsArg, "utf8"))
+    : JSON.parse(propsArg)
+  : undefined;
 
 const chromiumOptions = { gl: "angle" }; // WebGL2 needs this in headless Chrome on Remotion 4.x — see visuals-compose
 
@@ -41,7 +47,7 @@ const bundleLocation = await bundle({
   rspack: true,
 });
 
-const composition = await selectComposition({ serveUrl: bundleLocation, id: compositionId, chromiumOptions });
+const composition = await selectComposition({ serveUrl: bundleLocation, id: compositionId, inputProps, chromiumOptions });
 log({ stage: "bundled", compositionId, width: composition.width, height: composition.height, fps: composition.fps, durationInFrames: composition.durationInFrames });
 console.log(`Rendering ${compositionId}: ${composition.width}x${composition.height} @ ${composition.fps}fps, ${composition.durationInFrames} frames -> ${outputPath}`);
 console.log(`Progress: tail -f ${progressPath}`);
@@ -51,6 +57,7 @@ await renderMedia({
   serveUrl: bundleLocation,
   codec: "h264",
   outputLocation: outputPath,
+  inputProps,
   chromiumOptions,
   pixelFormat: "yuv420p",
   colorSpace: "bt709",

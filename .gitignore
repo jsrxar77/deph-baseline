@@ -1,5 +1,8 @@
 node_modules/
 .DS_Store
+.env
+.env.*
+.env.local
 
 # Rendered audio — large, and fully regenerable from the .strudel source via
 # node tools/sounds/render.mjs (see docs/sync-pipeline.md). Not worth tracking in git.
@@ -11,10 +14,33 @@ media/*/sync/source.*
 tools/visuals/public/*.wav
 
 # Rendered videos — several GB each, fully regenerable with `npx remotion render` (see the
-# visuals-compose skill). Kept next to their composition in media/<name>/renders/, never in git.
+# visuals-compose skill). Kept next to their composition in media/<name>/renders/ and media/<name>/shorts/, never in git.
 media/*/renders/*.mp4
 media/*/renders/*.mov
 media/*/renders/*.webm
+media/*/renders/*.upload.jsonl
+media/*/shorts/*.mp4
+media/*/shorts/**/*.mp4
+media/*/shorts/*.mov
+media/*/shorts/**/*.mov
+media/*/shorts/*.webm
+media/*/shorts/**/*.webm
+media/*/shorts/*.props.json
+media/*/shorts/**/*.props.json
+media/*/shorts/*.progress.jsonl
+media/*/shorts/**/*.progress.jsonl
+media/*/shorts/*.upload.jsonl
+media/*/shorts/**/*.upload.jsonl
+media/*/shorts/**/*.mp3
+media/*/shorts/**/*.wav
+media/*/shorts/**/*.jpg
+media/*/shorts/**/*.jpeg
+media/*/shorts/**/*.png
+media/*/shorts/**/.thumbnails/
+media/*/shorts/**/.hyperframes/
+tools/visuals/public/*-voice.mp3
+tools/visuals/public/*-voice.wav
+tools/youtube/.credentials/
 
 # Copies of the sync data that Remotion reads from public/ (the originals in media/<name>/sync/ are tracked).
 tools/visuals/public/*-frames.json
@@ -29,3 +55,7 @@ media/*/daw/**/Backup/
 # Ableton's per-file analysis data (next to any audio it has seen) and macOS folder-icon files.
 *.asd
 Icon?
+
+# Graphify knowledge graph outputs
+graphify-out/
+

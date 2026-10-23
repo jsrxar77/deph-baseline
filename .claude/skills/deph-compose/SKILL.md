@@ -33,7 +33,8 @@ stem anything of that composition carries. The user insisted on this after findi
 
 - **A suffix only when it is needed to tell two things apart**, and then it names the purpose: `<name>.yaml` (the one
   manifest), `<name>.md` (the doc), `<name>.youtube.md` and `<name>.ableton.md` (two more docs, so they need a purpose),
-  `<name>.strudel`, `<name>.mid`, `renders/<name>.mp4`, public copies `<name>-audio.wav`, `<name>-master.wav`,
+  `shorts/<name>.shorts.md` (the Shorts pack inside `shorts/`), `<name>.strudel`, `<name>.mid`, `renders/<name>.mp4`,
+  `shorts/<name>-short-<id>.mp4`, public copies `<name>-audio.wav`, `<name>-master.wav`,
   `<name>-youtube.wav`, `<name>-frames.json`, `<name>-analysis.json`, a thumbnail `<name>-thumbnail`.
 - **Never a word of more**: no brand ("deph"), no technique ("Fractal", "Flow"), no stage ("Final", "v2", "Proto"), no
   resolution ("4K") in a name. The current version simply carries the name; replaced versions the user wants kept go to a
@@ -57,16 +58,20 @@ media/<name>/
   sounds/
   visuals/
   sync/
-  renders/             (compiled final videos; git-ignored — see the visuals-compose skill)
+  renders/             (compiled final 4K 16:9 videos; git-ignored — see the visuals-compose skill)
+  shorts/              (Shorts pack `shorts/<name>.shorts.md` + compiled 9:16 Short `.mp4` videos; see shorts-compose)
 ```
 
-Always create all four subfolders together, even if only one domain was requested — an audio-only piece
-today may get a visual later, and `strudel-sync` expects `sync/` to already exist rather than creating
-top-level structure itself (it only writes files, not folders). `visuals/` is created too, as an empty directory: the real Remotion code lives in
+Always create all five subfolders (`sounds/`, `visuals/`, `sync/`, `renders/`, `shorts/`) together, even if only one domain was requested — an audio-only piece
+today may get a visual and Shorts later, and `strudel-sync` / `shorts-compose` expect their subfolders to already exist rather than creating
+top-level structure ad-hoc. `visuals/` is created too, as an empty directory: the real Remotion code lives in
 `tools/visuals/src/compositions/<name>/` (the bundler can't resolve `node_modules` from `media/`), and
 `visuals-compose` later replaces this empty directory with a symlink to it
-(`ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals`). Compiled videos go in
-`renders/`.
+(`ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals`). Compiled 16:9 videos go in
+`renders/`; everything related to Shorts of this piece (its `<name>.shorts.md` pack and compiled 9:16 `.mp4` files) goes in `shorts/`.
+
+> **Standing rule for Instructional / Educational videos (`edu-compose`):**
+> Because instructional videos explain general topics (e.g. Cymatics & Chladni figures, Fibonacci canons, 432 Hz & binaural phase, Shepard tones & Pythagorean ratios), **they are never buried inside a musical piece's folder**. Every instructional video is treated as its own standalone composition hanging directly from `/media/<name>/` using this exact same scaffold (`<name>.yaml` with `type: educational`, `<name>.md`, `<name>.youtube.md`, `sounds/`, `visuals/`, `sync/`, `renders/`, `shorts/`).
 
 The yaml — see `media/slow-drift/slow-drift.yaml` for a filled-in example:
 
@@ -92,6 +97,10 @@ domains:
   sync:
     status: not-built
     output: sync/
+  shorts:
+    status: planned
+    dir: shorts/
+    file: shorts/<name>.shorts.md
 doc: <name>.md
 ```
 

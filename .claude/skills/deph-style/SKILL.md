@@ -80,9 +80,15 @@ How to use this file:
 ## How the user likes to work with Claude
 
 - For anything with real creative judgment (visual/audio design, layout, reorganizing work): **explain the
-  understanding and a concrete plan, and wait for an OK** — then execute. Mechanical follow-through on an
+  understanding and a concrete plan, and wait for an OK**, then execute. Mechanical follow-through on an
   agreed plan needs no re-confirmation. When the user says "do the one you think is best first", do it and
   offer the alternative afterwards.
+- **PROHIBIDO USAR GUIONES (Regla de Oro Inviolable)**: Nunca usar guiones largos ni dobles en textos, guiones de voz, subtítulos o comentarios. Los seres humanos no hablan ni escriben así. Usar puntos, comas, dos puntos o puntos suspensivos para separar ideas.
+- **Shorts: Metraje Cumbre Real**: Usar siempre el metraje 4K original de la pieza publicado en YouTube. En The Field, usar el momento cumbre donde se desarma la flor de la vida (04:55 a 05:40), donde se aprecia con total claridad la nube tridimensional de 500.000 puntos de cuarzo cayendo en el espacio.
+- **Shorts: Locución Pausada y Meditativa**: Para 432 Hz, la locución debe ser profundamente pausada, con aire y silencios intencionales entre ideas. Máximo 60 a 70 palabras en 45 segundos. Voz Brian de ElevenLabs. Prohibido usar Adam.
+- **Shorts: Mezcla de Audio**: Música ambiental atenuada (-18 dB a -22 dB) y voz en off protagónica al frente (-1 dBTP).
+- **Shorts: Regla de Oro de 2 Líneas, Esquinas Moderadas (20px), Glassmorphism y Paleta Coherente**: Subtítulos SIEMPRE en exactamente 2 líneas (prohibido 3 líneas); esquinas no tan redondeadas (border-radius: 18px a 20px, nada de píldoras ovaladas gigantes de 999px); glassmorphism permanente en todos los elementos de texto (saturate 180%, blur 28px-32px, bisel interior tenue); palabra activa en color intenso derivado de la obra (en The Field: violeta intenso #C084FC / #A855F7 o azul índigo #818CF8, prohibido dorados o celestes arbitrarios); separación generosa de 160px entre el botón Subscribe oficial (top: 240px) y el card de entrada (top: 480px).
+- **Shorts: Flujo de Idiomas y Revisión**: Producir y revisar primero la versión en inglés. Esperar el OK explícito del usuario. Luego producir la versión en castellano.
 - **Measure, don't guess.** Claude cannot hear: back every claim with the inspector, a render, an FFT, or a
   frame check, and say plainly what was and wasn't verified. Several "it sounds wrong" reports were traced
   to measurable causes (missing decay, reverb `size` in seconds, shared reverb, non-scale FM partials,
@@ -449,3 +455,33 @@ Also update the distilled sections above if the decision changes a principle, an
 - 2026-10-06 — The Field published on YouTube (https://youtu.be/8QGj_FvP5Xo) as series 03. Social media launch pack created at
   `media/the-field/the-field.social.md` (Facebook, Instagram, X) with warm, nature-centric invitations to relax and subscribe —
   `media/the-field/the-field.social.md`, `the-field.yaml`.
+- 2026-10-22 — YouTube deployment, Shorts and educational breakdowns automated at the user's request: (1) `tools/youtube/`
+  (`auth.mjs`, `parse-pack.mjs`, `publish.mjs`, `short.mjs`, `edu.mjs`, `SETUP-OAUTH-ES.md`) uploads 4K videos with EN default +
+  ES localizations, custom thumbnail, series playlist (`PLX0Afm4O4W30`) and creator comment (safe default: `private` + `--dry-run`);
+  (2) `ShortPromo.tsx` + `shorts-compose` skill + `<name>.shorts.md` packs support both fast 4K FFmpeg 9:16 cuts and native Remotion
+  9:16 renders with soft 1.2s/1.8s fades; (3) `EduBreakdown.tsx` + `edu-compose` skill + `<name>.edu.md` packs build 9:16 and 16:9 4K
+  educational visual essays with procedural SVG diagrams (Chladni, Fibonacci 21:13:8, binaural phase, Pythagorean ratios); (4) `.agents/skills/`
+  and `GEMINI.md`/`AGENTS.md` symlinked at the root for Antigravity workspace discovery, documented in `docs/TUTORIAL-ANTIGRAVITY-YOUTUBE.md`.
+- 2026-10-22 — Default language for Shorts and educational videos set to English (`EN`) by user decision ("que por default los shorts se creen en inglés como así los videos educativos"): all on-screen text (`hookText`, `subText`, `ctaText`, and educational `steps` cards) and primary YouTube metadata (`titleEn`, `descriptionEn`, `defaultLanguage: "en"`) are authored in English by default across `shorts-compose` and `edu-compose`, with Spanish metadata (`titleEs`, `descriptionEs`) attached automatically via YouTube `localizations.es` — `.claude/skills/shorts-compose/SKILL.md`, `.claude/skills/edu-compose/SKILL.md`, `tools/youtube/short.mjs`, `tools/youtube/edu.mjs`.
+- 2026-10-22 — Narrative scripts, ElevenLabs voiceover and word-synchronized kinetic captions established as mandatory for all Shorts and educational pieces by user decision ("que tanto para los shorts como para los instructivos se utilice una voz de fondo que hable y con subtitulos sincronizados que diga algo referente al tema con un guion que sea atractivo... es decir todo debe tener un guion"): (1) `tools/voice/tts.mjs` connects to ElevenLabs API using `ELEVENLABS_API_KEY` from `~/.env`, synthesizes narrator voice (`Adam` / `pNInz6obpgDQGcFmaJgB`) and generates word-level timestamps; (2) `Captions.tsx` renders kinetic animated subtitles with the active spoken word highlighted in cyan (`#7fd4f5`) over a glassmorphic backdrop; (3) all Short clips in `<name>.shorts.md` carry narrative storytelling scripts in English by default — `tools/visuals/src/brand/Captions.tsx`, `tools/voice/tts.mjs`, `tools/youtube/short.mjs`.
+- 2026-10-22 — Shorts scripting, hook philosophy and tone strictly corrected by user ("es para abrir su cabeza no bajarle linea!!!!!! es un canal de meditacion"):
+  - PROHIBIDO bajar línea: nunca confrontar, debatir con escépticos ("¿Placebo o física?", "¿Es 432 Hz un mito?"), ni imponer conclusiones al espectador ("esto prueba la física", "esto te va a calmar"). Eso es marketing agresivo de redes, antitético a la meditación.
+  - PROHIBIDO usar lenguaje eclesiástico o New Age dogmático ("geometría sagrada" prohibido: "parece una iglesia"). Usar "geometría", "patrón", "orden armónico".
+  - El hook y el guion deben ABRIR LA CABEZA: expandir la perspectiva, evocar asombro, misterio, presencia y quietud. Plantear una invitación abierta que despierte curiosidad genuina y deje que la consciencia del oyente decida.
+  - Enfoque Holístico No-Dual: no separar la física de la mente ("uno y otro"). El sonido es la superficie; las ondas, frecuencias y armónicos en el campo estructuran la materia (Chladni + Fibonacci a 432 Hz) al mismo tiempo que aquietan el ruido mental.
+  - Objetivo central de conversión (INNEGOCIABLE en todos los Shorts): todo Short debe cerrar explícitamente invitando a (1) escuchar la obra completa en el canal, y (2) suscribirse al canal si resuena ("Experience the full piece on our channel. And if this resonates with you, subscribe to explore the field" / "Vive la obra completa en nuestro canal. Y si esto resuena contigo, suscríbete para explorar el campo").
+  - Bilingüe obligatorio por defecto (EN y ES): cada Short se produce en inglés y en castellano con sus respectivos archivos (`voiceover-en.txt`, `voiceover-es.txt`, audios ElevenLabs `voice-en.mp3`, `voice-es.mp3`, timestamps y renders de video independientes).
+  - La voz de Adam (el cliché más quemado de TikTok) queda descartada; se adopta Brian (ElevenLabs), voz madura, serena, pausada y contemplativa.
+  - Fondo visual: usar siempre el metraje original 4K de la pieza oficial (el clímax 4:16 con la Flor de la Vida 3D real de The Field vía `yt-dlp`), nunca placas sintéticas planas o genéricas.
+  - Subtítulos: subtítulos cinéticos de 65px a 75px (peso 800) flotando sin caja negra opaca, con doble sombra profunda y trazo fino para legibilidad total sin cubrir el metraje; titulares de 80px a 100px; textos secundarios y CTA de 50px a 60px (nunca menores a 48px).
+- 2026-10-22 — Shorts: Diseño visual y tipografía móvil profesional consolidados tras iteración con el usuario:
+  - REGLA DE ORO INVIOLABLE: Subtítulos SIEMPRE en exactamente 2 líneas (prohibido 3 líneas y prohibido 1 línea solitaria). Estructura fija en 2 filas semánticas con white-space: nowrap y alineación centrada.
+  - Paleta de color y acento por obra: palabra activa destacada en VIOLETA INTENSO (#C084FC / #A855F7) o AZUL ÍNDIGO (#818CF8 / #6366F1), texto inactivo en blanco cuarzo nacarado (#FDFBFA), subtextos en índigo suave (#A5B4FC). Prohibido dorados o celestes arbitrarios.
+  - Esquinas moderadas y elegantes: border-radius de 18px a 20px en cards y cápsulas (descartadas las píldoras ovaladas gigantes de 999px).
+  - Glassmorphism permanente: cristal satinado con backdrop-filter (blur 28px-32px, saturate 180%), borde tenue a juego de 1.5px y reflejo interior sutil (inset 0 1px 0 rgba(255,255,255,0.12-0.15)).
+  - Cápsula dinámica (fit-content): la pastilla de subtítulos abraza dinámicamente el ancho de las 2 líneas sin dejar márgenes muertos a los costados.
+  - Separación generosa del botón Subscribe: botón oficial de YouTube [ ▶ SUBSCRIBE ] en rojo (#ff0000) a top: 240px; card de gancho (Hook) con separación de más de 160px libre (top: 480px). Card final de CTA centrado matemáticamente horizontal y verticalmente (top: 50%, left: 50%, transform: translate(-50%, -50%)).
+  - Regla de oro de Cero Guiones: prohibido el uso de guiones largos o dobles en textos, locución o comentarios.
+  - Flujo de aprobación: inglés primero con visto bueno del usuario antes de proceder a la versión en español.
+
+

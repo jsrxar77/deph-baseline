@@ -35,6 +35,10 @@ domains:
   sync:
     status: done # audio.wav (7 layers rendered in parallel with --only, summed), audio-master.wav (-16 LUFS), audio-youtube.wav (-14 LUFS, for the video), frames.json + manifest.json, analysis.json
     output: sync/
+  shorts:
+    status: ready # 2 clips in shorts/musica-universalis.shorts.md (01: 2:24 Shepard Flight, 02: 4:20 Water Orbits)
+    dir: shorts/
+    file: shorts/musica-universalis.shorts.md
 publish:
   status: ready # titles, description, chapters, hashtags, tags, thumbnail (musica-universalis-thumbnail.jpg) done; waiting on the user's open decisions and to actually upload
   file: musica-universalis.youtube.md

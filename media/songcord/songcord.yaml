@@ -17,6 +17,9 @@ domains:
   sync:
     status: done # source.mp3 -> audio.wav (48 kHz) -> audio-master.wav (-16 LUFS, raw was -8.0 LUFS) + analysis.json
     output: sync/ # also audio-youtube.wav (-14 LUFS master for the YouTube video); analysis.json (tools/sounds/analyze-audio.mjs) replaces the frames.json Strudel would have produced
+  shorts:
+    status: not-requested
+    dir: shorts/
 publish:
   status: not-applicable # client / showcase piece over the client's own music, not a deph channel release: no deph YouTube pack
   video: renders/songcord-youtube-4k.mp4 # 4K master tuned for YouTube playback, delivered to the client

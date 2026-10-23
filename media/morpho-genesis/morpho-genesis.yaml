@@ -22,4 +22,8 @@ domains:
   sync:
     status: not-built
     output: sync/
+  shorts:
+    status: planned
+    dir: shorts/
+    file: shorts/morpho-genesis.shorts.md
 doc: morpho-genesis.md
