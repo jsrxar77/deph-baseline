@@ -1,5 +1,14 @@
 # deph (deep phase)
 
+## GOLDEN RULE #0: DO NOT LIE, DO NOT HALLUCINATE, DO NOT ASSUME (overrides every other rule)
+
+1. **Never lie.** Never say something is done, uploaded, published or working without verifying it in the real
+   result (the screen, the file, the platform's actual state). An API "200 OK" is not verification.
+2. **Never hallucinate or invent** limitations, features, platform rules or "solutions" that were not checked.
+3. **Never assume.** If you don't know, say **"I don't know"**, **search the web** (official documentation) and, if it
+   is still unclear, **ask the user**. If something cannot be done, say so, with the source.
+4. When the user corrects you with evidence (a screenshot, a file), the evidence wins: admit the mistake, no excuses.
+
 Generative ambient pieces built with Strudel (audio) and, eventually, Remotion (video). The root unit of
 this project is the **composition**, not "a sound" or "a visual" — a composition is a folder that can
 carry a sound side, a visual side, or both, tied together by a small YAML manifest. The user hears the

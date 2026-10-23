@@ -7,45 +7,45 @@ description: Use whenever the user asks to create, extract, render, or publish Y
 
 Every composition has a dedicated **`media/<name>/shorts/`** subfolder (part of the standard `deph-compose` piece template, alongside `sounds/`, `visuals/`, `sync/`, and `renders/`).
 
-### Estructura Estándar de Carpetas para Shorts (Obligatoria y Coherente)
+### Standard Folder Structure for Shorts (Mandatory & Consistent)
 
 ```text
 media/<name>/shorts/
-├── <name>.shorts.md                  # Pack maestro de Shorts (metadatos, títulos, descripciones, tags)
-├── renders/                          # Carpeta limpia de videos finales compilados y portadas
-│   ├── <name>-short-01-en.mp4        # Short 01 Inglés (1080x1920 @ 30fps)
-│   ├── <name>-short-01-es.mp4        # Short 01 Castellano Rioplatense (1080x1920 @ 30fps)
-│   └── thumbnails/                   # Portadas oficiales del Short (16:9 para API/Desktop y 9:16 para Reels/Mobile)
-│       ├── <name>-short-01-en-thumbnail.jpg    # 1280x720 (16:9, subida vía youtube.thumbnails.set)
-│       ├── <name>-short-01-es-thumbnail.jpg    # 1280x720 (16:9, subida vía youtube.thumbnails.set)
+├── <name>.shorts.md                  # Master Shorts pack (metadata, titles, descriptions, tags)
+├── renders/                          # Clean folder for compiled final videos and covers
+│   ├── <name>-short-01-en.mp4        # Short 01 English (1080x1920 @ 30fps)
+│   ├── <name>-short-01-es.mp4        # Short 01 Spanish Rioplatense (1080x1920 @ 30fps)
+│   └── thumbnails/                   # Official Short covers (16:9 for API/Desktop & 9:16 for Reels/Mobile)
+│       ├── <name>-short-01-en-thumbnail.jpg    # 1280x720 (16:9, upload via youtube.thumbnails.set)
+│       ├── <name>-short-01-es-thumbnail.jpg    # 1280x720 (16:9, upload via youtube.thumbnails.set)
 │       ├── <name>-short-01-en-cover-9x16.jpg   # 1080x1920 (9:16 vertical cover)
 │       └── <name>-short-01-es-cover-9x16.jpg   # 1080x1920 (9:16 vertical cover)
-└── <id>/                             # Carpeta autónoma del Short (ej. 01, 02)
-    ├── hyperframes-en/               # Proyecto HyperFrames autónomo en inglés
+└── <id>/                             # Autonomous Short folder (e.g. 01, 02)
+    ├── hyperframes-en/               # Autonomous HyperFrames project in English
     │   ├── index.html
     │   ├── bg.mp4
     │   ├── music.mp3
     │   └── voice.mp3
-    ├── hyperframes-es/               # Proyecto HyperFrames autónomo en castellano
+    ├── hyperframes-es/               # Autonomous HyperFrames project in Spanish
     │   ├── index.html
     │   ├── bg.mp4
     │   ├── music.mp3
     │   └── voice.mp3
-    ├── voice/                        # Audios de locución originales y procesados
-    │   ├── voice-en.mp3              # Audio con lead-in (EN)
-    │   ├── voice-es.mp3              # Audio con lead-in (ES)
-    │   ├── voiceover-en.txt          # Guion limpio (EN)
-    │   └── voiceover-es.txt          # Guion limpio (ES)
-    ├── captions/                     # Archivos de sincronización temporal
-    │   ├── captions-en.json          # Timestamps palabra por palabra (EN)
-    │   └── captions-es.json          # Timestamps palabra por palabra (ES)
-    └── source/                       # Metrajes base 4K, stills y notas de producción
+    ├── voice/                        # Original and processed voiceover audio
+    │   ├── voice-en.mp3              # Audio with lead-in (EN)
+    │   ├── voice-es.mp3              # Audio with lead-in (ES)
+    │   ├── voiceover-en.txt          # Clean script (EN)
+    │   └── voiceover-es.txt          # Clean script (ES)
+    ├── captions/                     # Timing and synchronization files
+    │   ├── captions-en.json          # Word-level timestamps (EN)
+    │   └── captions-es.json          # Word-level timestamps (ES)
+    └── source/                       # 4K base footage, stills, and production notes
         ├── raw-disassembly-4k.webm
         └── script.md
 ```
 
-- **PROHIBIDO mezclar proyectos o dejar borradores sueltos:** Cada idioma tiene su carpeta simétrica (`hyperframes-en` y `hyperframes-es`). Prohibido crear carpetas genéricas desalineadas como `hyperframes` a secas.
-- **PROHIBIDO enlaces simbólicos o archivos huérfanos en la raíz de `shorts/`:** En `media/<name>/shorts/` solo deben coexistir `<name>.shorts.md`, `renders/` y las carpetas numeradas de cada Short (`01/`, `02/`).
+- **DO NOT mix projects or leave orphan drafts:** Each language has its own symmetrical folder (`hyperframes-en` and `hyperframes-es`). Do not create generic unaligned folders like a bare `hyperframes`.
+- **NO symlinks or orphan files in `shorts/` root:** Only `<name>.shorts.md`, `renders/`, and numbered Short folders (`01/`, `02/`) must reside in `media/<name>/shorts/`.
 
 ## Standing rules (house style for Shorts)
 
@@ -54,61 +54,58 @@ media/<name>/shorts/
 3. **Bilingual Production by Default (EN & ES Mandatory):**
    - Every Short MUST be produced in both **English (`EN`)** and **Spanish (`ES`)**.
    - YouTube metadata includes primary English titles/descriptions with Spanish attached via dedicated individual uploads or `localizations.es`.
-   - **Configuración estricta de idioma en YouTube Data API:**
-     - Video en Inglés: `defaultLanguage: "en"`, `defaultAudioLanguage: "en"`, título, descripción y tags en inglés.
-     - Video en Español: `defaultLanguage: "es"`, `defaultAudioLanguage: "es"`, título, descripción y tags en español rioplatense.
-     - Privacidad inicial: siempre `private` para permitir que el creador revise el render y enlace el video relacionado ("Related Video" hacia la obra en 4K) en YouTube Studio.
+   - **Strict Language Configuration in YouTube Data API:**
+     - English video: `defaultLanguage: "en"`, `defaultAudioLanguage: "en"`, title, description, and tags in English.
+     - Spanish video: `defaultLanguage: "es"`, `defaultAudioLanguage: "es"`, title, description, and tags in Spanish (Rioplatense).
+     - Initial privacy: always `private` so the creator can review the rendered video and link the Related Video (to the 4K piece) in YouTube Studio.
 
-4. **Thumbnails Obligatorias por Short (16:9 y 9:16):**
-   - PROHIBIDO dejar los Shorts con miniaturas automáticas generadas por YouTube.
-   - Cada Short debe tener sus portadas en `media/<name>/shorts/renders/thumbnails/`:
-     - **16:9 (`1280x720`, JPG < 2MB):** Para la YouTube Data API (`youtube.thumbnails.set`). Se muestra en búsquedas de escritorio, listas de reproducción y páginas del canal.
-     - **9:16 (`1080x1920`, JPG):** Para feeds verticales de Shorts móviles, Instagram Reels y TikTok.
-   - **Estética idéntica a la obra:** Fotograma de partículas 3D en máxima resolución, chip oficial de marca (`deph · <series> #SHORTS`), tarjeta de glassmorphism translúcida con acento de color de la obra, tipografía limpia sin `-webkit-text-stroke`, y esquina inferior derecha libre para los badges de duración de YouTube.
+4. **Mandatory Thumbnails per Short (16:9 and 9:16):**
+   - NEVER leave Shorts with auto-selected random video frames.
+   - Each Short must have dedicated covers in `media/<name>/shorts/renders/thumbnails/`:
+     - **16:9 (`1280x720`, JPG < 2MB):** Required for YouTube Data API (`youtube.thumbnails.set`). Displayed on desktop search, playlists, and channel video tabs.
+     - **9:16 (`1080x1920`, JPG):** Required for vertical mobile Shorts feeds, Instagram Reels, and TikTok. Also usable via YouTube Studio's desktop "Change" thumbnail dialog.
+   - **Aesthetics matching the piece:** High-resolution 3D particle frame from the climax/dissolution, official brand chip (`deph · <series> #SHORTS`), translucent glassmorphic card with the piece's accent color, pure typography without `-webkit-text-stroke`, and the bottom-right corner left empty for YouTube's duration badge.
 
-4. Typography, Safe Zones, and Giant Mobile Text (Reglas de Oro Inviolables):
-   - REGLA DE ORO: SUBTÍTULOS SIEMPRE EN EXACTAMENTE 2 LÍNEAS:
-     - Cada subtítulo que aparece en pantalla debe estar estructurado estrictamente en 2 LÍNEAS (fila superior y fila inferior con white-space: nowrap).
-     - PROHIBIDO TERMINANTEMENTE que un subtítulo quede en 3 líneas (abarrota la pantalla y tapa el video) o en 1 línea solitaria desbalanceada.
-     - Ambas líneas deben estar equilibradas armónicamente (2 a 4 palabras por línea).
-   - PROHIBIDO -WEBKIT-TEXT-STROKE (Cero Manchas / Círculos Negros):
-     - PROHIBIDO usar `-webkit-text-stroke` en tipografía sobre fondos oscuros o cápsulas. En motores Chromium, el trazo colapsa hacia el interior de los ojos y huecos de letras cerradas (`e`, `a`, `o`, `b`), manchando el interior con círculos negros.
-     - Usar tipografía pura de peso 800 (`font-weight: 800`) con un `text-shadow` suave y sutil (`text-shadow: 0 4px 18px rgba(0, 0, 0, 0.90), 0 2px 4px rgba(0, 0, 0, 0.85);`) para un acabado 100% nítido, limpio y legible.
-   - Paleta de Colores de Texto y Acentos por Obra:
-     - PROHIBIDO usar colores arbitrarios, dorados chillones o celestes desconectados del metraje.
-     - En The Field (Nácar nocturno): la palabra hablada activa se ilumina en VIOLETA INTENSO (#C084FC / #A855F7) con aura luminosa acorde (`0 0 28px rgba(168, 85, 247, 0.95)`), texto inactivo en blanco cuarzo nacarado (#FDFBFA), subtextos en índigo suave (#A5B4FC).
-   - Esquinas Moderadas (Puntas No Tan Redondeadas):
-     - PROHIBIDO usar píldoras o cápsulas circulares ovaladas gigantes (border-radius: 999px descartado en cards y subtítulos).
-     - Usar esquinas refinadas y sobrias de border-radius: 18px a 20px tanto en cards de gancho/CTA como en la cápsula de subtítulos.
-   - Glassmorphism Translúcido y Aireado:
-     - Fondo de cristal oscuro translúcido (menos opaco para dejar ver las partículas): `background: rgba(11, 14, 26, 0.50)` a `0.54`; `backdrop-filter: blur(28px) saturate(190%);`
-     - Borde de 1.5px en el tono de acento (violeta/azul tenue `rgba(168, 85, 247, 0.35)`).
-     - Sombra profunda (`box-shadow: 0 16px 40px rgba(0,0,0,0.80)`) y bisel con reflejo interior sutil (`inset 0 1px 0 rgba(255,255,255,0.16 a 0.18)`).
-   - Cápsula Dinámica para Subtítulos (Fit-Content):
-     - La cápsula de los subtítulos debe ser 100% DINÁMICA (`width: fit-content; max-width: 960px`).
-     - Se ajusta matemáticamente al ancho exacto de las 2 líneas habladas, eliminando cualquier espacio muerto o márgenes vacíos a los lados.
-   - Distancia de Seguridad del Botón YouTube Subscribe:
-     - Botón oficial en cápsula roja (#ff0000) con play blanco (▶) en zona superior (top: 240px; left: 80px).
-     - El card de gancho (Hook card) debe mantener al menos 150px a 180px de distancia libre vertical respecto al botón de Subscribe (ubicándose a partir de top: 470px a 480px) para garantizar total separación y que no se peguen visualmente.
-   - Estándares de Tipografía Móvil para 1080x1920:
-     - Titulares y Headings: 66px a 85px en negrita (800 o 900 bold, mayúsculas).
-     - Subtítulos Cinéticos (2 Líneas): 64px a 72px (peso 900 bold, line-height: 1.15).
-     - Textos Secundarios y Subtítulo de CTA: 48px a 54px (piso absoluto: 48px).
-     - Badges / Categoría: 22px a 26px bold uppercase (letter-spacing: 0.16em).
-   - Safe Zones Móviles:
-     - Top safe zone (>240px libre): despejada de subtítulos.
-     - Bottom safe zone (>480px libre, de 1440px a 1920px): estrictamente despejada de subtítulos y CTAs.
-     - Right safe zone (>140px libre): libre para la columna de interacción.
-     - Sweet spot de subtítulos: zona media-baja (Y: 1220px a 1280px), centrado horizontalmente.
+5. **Typography, Safe Zones, and Giant Mobile Text (Inviolable Rules):**
+   - **GOLDEN RULE: SUBTITLES ALWAYS IN EXACTLY 2 LINES:**
+     - Every subtitle appearing on screen must be structured strictly in 2 LINES (top row and bottom row with `white-space: nowrap`).
+     - STRICTLY FORBIDDEN: 3 lines (crowds the canvas and obscures the art) or a single isolated unbalanced line.
+     - Both lines must be harmoniously balanced (2 to 4 words per line).
+   - **NO `-webkit-text-stroke` (Zero Dark Spots / Black Artifacts):**
+     - FORBIDDEN to use `-webkit-text-stroke` on typography over dark backgrounds or cards. In Chromium engines, stroke collapses inward into the counters and loops of closed letters (`e`, `a`, `o`, `b`), filling them with black artifacts.
+     - Use pure font weight 800 (`font-weight: 800`) with subtle text shadow (`text-shadow: 0 4px 18px rgba(0, 0, 0, 0.90), 0 2px 4px rgba(0, 0, 0, 0.85);`) for pristine, clean legibility.
+   - **Text Color Palette and Piece Accents:**
+     - In *The Field* (night nacre): active spoken word illuminates in INTENSE VIOLET (`#C084FC` / `#A855F7`) with matching glow (`0 0 28px rgba(168, 85, 247, 0.95)`), inactive text in pearlescent quartz white (`#FDFBFA`), secondary text in soft indigo (`#A5B4FC`).
+   - **Moderate Corners:**
+     - Refined corner radii of `18px` to `20px` on both cards and subtitle capsules (`border-radius: 999px` is reserved only for pills).
+   - **Translucent, Airy Glassmorphism:**
+     - Dark translucent glass background: `background: rgba(11, 14, 26, 0.45)` to `0.54`; `backdrop-filter: blur(24px) saturate(190%);`
+     - Fine border in accent tone (`rgba(168, 85, 247, 0.35)`).
+     - Deep shadow (`box-shadow: 0 16px 40px rgba(0,0,0,0.80)`) and subtle interior reflection (`inset 0 1px 0 rgba(255,255,255,0.15)`).
+   - **Dynamic Subtitle Capsule (`fit-content`):**
+     - Subtitle capsule must be dynamic (`width: fit-content; max-width: 960px`).
+     - Clamps to the exact width of the 2 spoken lines, eliminating dead margins.
+   - **YouTube Subscribe Button Clearance:**
+     - Official Subscribe badge at `top: 240px; left: 80px`.
+     - Hook card maintains at least 150px to 180px vertical clearance below it (placed from `top: 470px` to `480px`).
+   - **Mobile Typography Standards (1080x1920):**
+     - Headings: 66px to 85px bold uppercase.
+     - Kinetic Subtitles (2 Lines): 50px to 64px (line-height: 1.15 to 1.2).
+     - Secondary text and CTA Subtitle: 48px to 54px.
+   - **Mobile Safe Zones:**
+     - Top safe zone (>240px clear): free of text.
+     - Bottom safe zone (>480px clear, 1440px to 1920px): strictly clear of subtitles and CTAs (avoids channel title and audio pill).
+     - Right safe zone (>140px clear): clear for YouTube vertical engagement buttons (Like, Dislike, Comments).
+     - Subtitle placement: centered horizontally, Y between 1120px and 1280px.
 
-5. Narrative Voiceover, Cadence, and Synchronized Captions (Reglas de Oro):
-   - PROHIBIDO USAR GUIONES (Regla de Oro Inviolable): Prohibido usar guiones largos o dobles en textos, guiones de voz, subtítulos o comentarios. Los seres humanos no hablan ni redactan con guiones. Usar puntos, comas, dos puntos o puntos suspensivos para separar ideas.
-   - Metraje Visual Real (Regla de Oro): Usar siempre el metraje 4K original de la pieza publicado en YouTube. En The Field, usar el momento cumbre donde se desarma la flor de la vida (04:55 a 05:40), donde se aprecia con total claridad la nube tridimensional de 500.000 puntos de cuarzo cayendo en el espacio.
-   - Locución Pausada y Meditativa: Para obras de 432 Hz, la locución no puede sonar apresurada. Debe ser serena, profunda y pausada, con silencios intencionales entre frases. Máximo 60 a 70 palabras en 45 segundos (80 a 90 palabras por minuto). Voz oficial: Brian de ElevenLabs. Prohibido usar Adam.
-   - Sincronización Estricta 1 a 1: Cero desfase temporal. Las marcas de tiempo de las palabras deben corresponder con exactitud matemática al audio generado.
-   - Mezcla de Audio Profesional: La música ambiental 432 Hz debe estar suave de fondo (-18 dB a -22 dB). La voz en off debe sonar al frente, nítida, cálida y protagónica (-1 dBTP).
-   - Doble Llamado a la Acción (CTA Obligatorio): Todo Short debe invitar a escuchar la obra completa de 6 minutos en el canal y pedir la suscripción si la experiencia resuena.
-   - Flujo de Idiomas y Revisión: Producir y validar primero la versión en inglés. Esperar el OK explícito del usuario. Solo después de la aprobación producir la versión en castellano.
+6. **Narrative Voiceover, Cadence, and Synchronized Captions:**
+   - **NO HYPHENS:** Avoid long dashes or hyphens in voiceover scripts or captions. Use periods, commas, colons, or ellipses.
+   - **Real Visual Footage:** Always use real 4K footage from the published piece. In *The Field*, use the flower dissolution climax (04:55 to 05:40) showing 500,000 quartz grains falling in 3D space.
+   - **Deliberate, Meditative Cadence:** Calm, deep, unhurried voiceover with intentional pauses. Maximum 60 to 70 words in 45 seconds (80 to 90 wpm).
+   - **Strict 1:1 Synchronization:** Word-level timestamps must match generated audio mathematically.
+   - **Professional Audio Mix:** 432 Hz ambient music soft in background (-18 dB to -22 dB). Voiceover prominent, warm, and upfront (-1 dBTP).
+   - **Double CTA:** Every Short invites the viewer to hear the full 6-minute piece on the channel and subscribe if it resonates.
+   - **Language Workflow:** Validate English version first, get user approval, then produce the Spanish version.
 
 ## Two rendering modes (`tools/youtube/short.mjs`)
 
