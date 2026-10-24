@@ -61,6 +61,11 @@ rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-co
     `npx remotion render <CompositionId> ../../media/<name>/renders/<name>.mp4` from `tools/visuals/`.
     Git-ignored (several GB each, regenerable). Not `sync/`, which is the audio/video bridge data, and not
     `~/Movies` or the Desktop, which sit outside the project (a file left on the Desktop vanished once).
+  - **`media/<name>/shorts/`** — optional: a short vertical (1080x1920) highlight clip cut from this piece
+    once it's finished and published, for YouTube Shorts/Instagram Reels/TikTok, built with **HyperFrames**
+    (HTML5 + CSS + GSAP) instead of Remotion — the only place HyperFrames is used in this project. Full-length
+    pieces on the main channel stay on Remotion; see the `deph-shorts` skill for the convention and
+    `tools/shorts/` for the render tooling.
 - **`/docs`** — cross-cutting documentation only: the composing workflow (`composition-workflow.md`), the
   audio/video sync pipeline spec (`sync-pipeline.md`), the Strudel → Ableton bridge spec (`daw-bridge.md`), the visuals-bridge overview
   (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `deph-banner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
@@ -240,6 +245,8 @@ node tools/sounds/midi-live.mjs <file.strudel> --cycles N [--from C] [--names a,
 node tools/sounds/align-check.mjs media/<name>/sync/audio.wav --frames media/<name>/sync/frames.json
 node tools/sounds/master.mjs media/<name>/sync/audio-master.wav --measure
 node tools/sounds/scl.mjs --root D --a4 432 --out media/<name>/daw/tuning/<name>-pythagorean   # tuning file for Surge XT
+node tools/sounds/deploy-arrangement.mjs <file.strudel> --cycles N --names a,b,c --locators "Section:cycles,..."  # writes MIDI straight into Live's Arrangement via the ableton MCP's Remote Script
+node tools/sounds/ableton-controller.mjs tracks|inspect|set|wrap|master-setup   # read/tweak an already-open Live set over the same Remote Script; see docs/daw-bridge.md
 ```
 
 Strudel composes; Ableton Live 12 Suite with the Mac's plugins refines. Two paths share one mapping

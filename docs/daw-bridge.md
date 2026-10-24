@@ -207,5 +207,33 @@ segment** (up to 64 bars). The "no note longer than 4 bars" rule exists only bec
 it doesn't apply in a DAW. Check any voice whose notes rely on long attack/release overlaps (pads retriggering every bar)
 the same way.
 
-The plan/command scripts for Musica Universalis are ad hoc; generalising them into `tools/sounds/` (reading the segment
-list from the piece) is the next step if this becomes the standard path.
+### Generalised deployment tools (done for Gnosis, 2026-10-21)
+
+The Musica Universalis plan/command scripts above were ad hoc; `tools/sounds/ableton-controller.mjs` and
+`tools/sounds/deploy-arrangement.mjs` are their generalisation into real project tools, used end-to-end for
+Gnosis's 8-channel deployment:
+
+```
+node tools/sounds/deploy-arrangement.mjs media/<name>/sounds/<name>.strudel --cycles <total_cycles> \
+  --names a,b,c --locators "Section:cycles,Section:cycles,..."
+node tools/sounds/ableton-controller.mjs tracks
+node tools/sounds/ableton-controller.mjs inspect <track_index> [device_index]
+node tools/sounds/ableton-controller.mjs wrap <track_index> [rack_name]
+node tools/sounds/ableton-controller.mjs set <track_index> <device_index> <param_name_or_index> <value>
+node tools/sounds/ableton-controller.mjs master-setup
+```
+
+`deploy-arrangement.mjs` evaluates the piece itself (via `eval-strudel.mjs` + `midi-map.mjs`'s `buildTracks()`,
+the same mapping `midi.mjs` uses), then writes Session clips and duplicates them into the Arrangement at the
+right beat, sets tempo, and places locators from `--locators` — pass the piece's own `arc:` list (name:cycles
+pairs) from its yaml; it does not read the yaml itself. **`--locators` is required for correct section
+markers** — earlier it had Gnosis's own 5-section arc hardcoded as constants, which would have silently placed
+wrong locators on any other piece; fixed to take the arc as a parameter.
+
+`ableton-controller.mjs` is the read/inspect/tweak counterpart: it talks to the same AbletonMCP Remote Script
+(TCP 127.0.0.1:9877) the `ableton` MCP server uses, so Claude normally reaches the same capabilities through
+the MCP tools directly — this script exists for use outside an MCP-aware session (e.g. a plain terminal, or
+another agent without the MCP server configured) and for the Instrument Rack / macro-wrapping workaround
+(`wrap`) that exposes a plugin's hidden parameters, documented above under "Plugin parameters are invisible."
+
+Both tools assume Live is running with AbletonMCP's Remote Script active, same as the MCP server.

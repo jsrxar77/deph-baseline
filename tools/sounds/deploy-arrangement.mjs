@@ -4,7 +4,10 @@
  * into Ableton Live's Arrangement View with locators and tempo sync.
  *
  * Usage:
- *   node tools/sounds/deploy-arrangement.mjs <file.strudel> --cycles N
+ *   node tools/sounds/deploy-arrangement.mjs <file.strudel> --cycles N [--names a,b,c] [--locators "Name:cycles,Name:cycles,..."]
+ *
+ * --locators takes the piece's own arc (same name/cycles pairs as its yaml's `arc:` list), e.g. for
+ * Gnosis: --locators "Pleroma:120,Descent:150,Density:180,Grounding:150,Transfiguration:120"
  */
 
 import { readFileSync } from 'node:fs';
@@ -14,10 +17,16 @@ import { evalStrudel } from './eval-strudel.mjs';
 import { buildTracks, bpmFromCps } from './midi-map.mjs';
 
 function parseArgs(argv) {
-  const a = { file: undefined, cycles: undefined, names: [] };
+  const a = { file: undefined, cycles: undefined, names: [], locators: [] };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--cycles') a.cycles = Number(argv[++i]);
     else if (argv[i] === '--names') a.names = argv[++i].split(',');
+    else if (argv[i] === '--locators') {
+      a.locators = argv[++i].split(',').map((pair) => {
+        const [name, cycles] = pair.split(':');
+        return { name, cycles: Number(cycles) };
+      });
+    }
     else if (!a.file) a.file = argv[i];
   }
   return a;
@@ -25,7 +34,7 @@ function parseArgs(argv) {
 
 const args = parseArgs(process.argv.slice(2));
 if (!args.file || !args.cycles) {
-  console.error('Usage: node tools/sounds/deploy-arrangement.mjs <file.strudel> --cycles N [--names a,b,c]');
+  console.error('Usage: node tools/sounds/deploy-arrangement.mjs <file.strudel> --cycles N [--names a,b,c] [--locators "Name:cycles,..."]');
   process.exit(1);
 }
 
@@ -143,26 +152,27 @@ async function main() {
     });
   }
 
-  // 3. Create Locators for the 5 phases of Gnosis
-  console.log('\nCreating section locators...');
-  const locators = [
-    { name: '1. Pleroma', beat: 0.0 },          // 0:00 (Bar 1)
-    { name: '2. Descent', beat: 120 * 4 },       // 4:00 (Bar 121 = 480 beats)
-    { name: '3. Density', beat: (120 + 150) * 4 }, // 9:00 (Bar 271 = 1080 beats)
-    { name: '4. Grounding', beat: (120 + 150 + 180) * 4 }, // 15:00 (Bar 451 = 1800 beats)
-    { name: '5. Transfiguration', beat: (120 + 150 + 180 + 150) * 4 }, // 20:00 (Bar 601 = 2400 beats)
-    { name: 'End', beat: totalBeats }            // 24:00 (Bar 721 = 2880 beats)
-  ];
+  // 3. Create locators from the piece's own arc (--locators), if given
+  if (args.locators.length) {
+    console.log('\nCreating section locators...');
+    let cursor = 0;
+    const locators = args.locators.map((section, i) => {
+      const beat = cursor * 4;
+      cursor += section.cycles;
+      return { name: `${i + 1}. ${section.name}`, beat };
+    });
+    locators.push({ name: 'End', beat: totalBeats });
 
-  for (const loc of locators) {
-    try {
-      await sendCommand({
-        type: 'create_locator',
-        params: { name: loc.name, time_val: loc.beat }
-      });
-      console.log(`  Locator [${loc.name}] placed at beat ${loc.beat}`);
-    } catch (e) {
-      console.warn(`  Could not place locator [${loc.name}]: ${e.message}`);
+    for (const loc of locators) {
+      try {
+        await sendCommand({
+          type: 'create_locator',
+          params: { name: loc.name, time_val: loc.beat }
+        });
+        console.log(`  Locator [${loc.name}] placed at beat ${loc.beat}`);
+      } catch (e) {
+        console.warn(`  Could not place locator [${loc.name}]: ${e.message}`);
+      }
     }
   }
 

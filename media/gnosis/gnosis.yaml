@@ -13,21 +13,22 @@ arc:
 total_cycles: 720 # 1440s = 24:00 exact (Deep meditative transport)
 domains:
   sound:
-    status: in-progress
+    status: done # 720/720 cycles, 8 layers, verified clean with inspect.mjs --summary --cycles 720 (no errors, matches the arc table)
     file: sounds/gnosis.strudel
     source: strudel
   visual:
-    status: planned
-    framework: hyperframes
-    entry: media/gnosis/visuals/index.html
+    status: in-progress # tools/visuals/src/compositions/gnosis/ (gnosis.tsx, shaders.ts, timeline.ts) is built but not yet wired to real audio (sync/ hasn't been rendered). The visuals/index.html HyperFrames engine is a separate full-length landscape (3840x2160) exploration, not a short — see deph-shorts skill for the actual Shorts/HyperFrames convention
+    framework: remotion # the channel deliverable; see note above re: visuals/index.html
+    entry: tools/visuals/src/compositions/gnosis/gnosis.tsx
   sync:
     status: not-built
     output: sync/
   daw:
-    status: provisioned
+    status: done # full 8-channel MIDI arrangement deployed into Ableton via the ableton MCP server; Live Set now lives in daw/ (moved from a stray sibling ableton/ folder to match this project's standing convention)
     template: "Strudel Temaplte.als"
     channels: 8
     guide: gnosis.ableton.md
+    project: "daw/gnosis Project/gnosis.als"
     tracks:
       - channel: 1
         name: "Primordial Drone"

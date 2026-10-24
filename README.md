@@ -68,6 +68,19 @@ from the Strudel source. To listen while editing, open a `.strudel` file in the
 [Strudel VS Code extension](https://marketplace.visualstudio.com/items?itemName=cmillsdev.strudelvs) or paste it
 into [strudel.cc](https://strudel.cc).
 
+## Knowledge graph
+
+The repo has a [graphify](https://github.com/safishamsi/graphify) knowledge graph in `graphify-out/` (git-ignored —
+generated, not source). A local post-commit hook rebuilds it automatically after every commit, but git hooks
+aren't cloned with the repo, so run this once per clone:
+
+```bash
+pip install graphifyy   # or: uv tool install graphifyy
+graphify hook install
+```
+
+Open `graphify-out/graph.html` in a browser to explore it, or ask Claude to `/graphify query "<question>"`.
+
 ## Tuning and binaural layers, stated plainly
 
 Slow Drift is tuned to A = 432 Hz (instead of 440 Hz) and includes a binaural layer that only works with headphones.

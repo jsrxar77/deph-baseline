@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="gsap.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body, html { width: 1080px; height: 1920px; background: #050508; overflow: hidden; }
+  .dot { position: absolute; top: 940px; left: 490px; width: 100px; height: 100px; border-radius: 50%; background: #e2e8f0; }
+</style>
+</head>
+<body>
+  <div id="root" data-composition-id="test-fixture">
+    <div class="dot" id="dot"></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.to('#dot', { x: 400, duration: 3 });
+    window.__timelines = { 'test-fixture': tl };
+  </script>
+</body>
+</html>

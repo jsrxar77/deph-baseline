@@ -5,6 +5,13 @@ description: Produce el video final (MP4) de un reel usando HyperFrames (framewo
 
 # hyperframes-video
 
+> **Nota (2026-10-24, agregada por Claude, no por el autor de este skill):** este archivo describe el toolchain
+> de otro proyecto (`clients/<cliente>/assets/reels/<slug>/`, el CLI `hyperframes`, `tools/render-hyperframes.mjs`)
+> — ninguno de los dos existe en `deph-baseline`. Si estás trabajando en una pieza de deph y necesitás un short/reel
+> en HyperFrames, usá el skill `deph-shorts` (`.claude/skills/deph-shorts/SKILL.md`) en su lugar: layout, convenciones
+> y herramientas (`tools/shorts/`) propias de este repo. Este archivo queda intacto por si corresponde a otro
+> proyecto — no se reescribió su cuerpo.
+
 > **Regla de oro (ver `CLAUDE.md`):** hacé únicamente lo que se te pidió. No agregues, quites, reemplaces ni rediseñes nada por tu cuenta (estilos, audio, textos, archivos, nombres, estructura). Al modificar algo existente se cambia solo lo pedido y se conserva todo lo demás. **Jamás rompas algo que ya funcionaba.** Si algo debería cambiar, se propone y se espera el OK.
 
 Es el camino equivalente a `video`/`custom-reel`, pero con **HyperFrames** en vez de Remotion: composición en HTML/CSS puro animada con GSAP, renderizada a MP4 por el CLI `hyperframes` (FFmpeg por dentro). Se elige por reel, no por cliente: un mismo cliente puede tener reels en Remotion y otros en HyperFrames.
