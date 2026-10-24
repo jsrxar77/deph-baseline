@@ -1,49 +1,62 @@
 // "gnosis-live" — Gnosis for Strudel alone (no MIDI, no Ableton). gnosis.strudel in this folder is the separate,
-// Ableton-oriented source and is untouched. An earlier, cinematic version (chords, arpeggio, violin line) is kept in
-// sounds/backup/gnosis-live-cinematic.strudel: rejected as melodrama, not meditation.
+// Ableton-oriented source and is untouched. Two earlier drafts are kept in sounds/backup/ for reference: a cinematic
+// one (strings/choir/violin/heartbeat — rejected as melodrama) and a purely spectral one (two beating clusters, no
+// motif — rejected as too simple, "una repetición constante"). This version keeps the cinematic draft's actual
+// compositional architecture (a motif with real transformations, a voice-led chord cycle, a canon, a flowing
+// harmonic arpeggio — the same techniques `the-field.strudel` uses) but re-orchestrated with calmer, non-vocal
+// timbres: FM bell for Sophia (no choir, no vibrato violin), filtered saw for the Demiurge (no vowel formant), no
+// heartbeat.
 //
-// A MEDITATION, NOT A SCORE: no chord progression, no arpeggio, no tune. Depth comes from timbre and time.
+// THE STORY
+// The Demiurge (matter: low, dark, heavy) and Sophia (the spark: a bell-like FM voice, rising) talk. Her phrase
+// asks; his is the same phrase turned upside down, sung from below, three cycles later. The talk deepens — the
+// chords darken, the phrase ornaments, a second and third voice of hers answer each other in canon (5 and 8 cycles
+// apart, Fibonacci-proportioned, after The Field) — until matter is at its heaviest. Then, with no jump, the
+// Demiurge fades while the canon voices converge and Sophia rises an octave: the chord opens wide, the arpeggio
+// soars, the filter brightens. She wins. What follows is not a triumph but peace: harmless, open, slowing until
+// nothing is left at 12:00.
 //
-// THE STORY, TOLD BY SPECTRUM
-// The Demiurge is matter: a low, dense cluster of frequencies a hair apart, beating against each other. Sophia is light:
-// pure high partials of the same harmonic series that open and fade. They never share a melody; they take turns (the
-// cluster swells while she recedes, then the reverse), each answering the other in a slow exchange that deepens until
-// matter is at its heaviest. Then, with no jump, the beating slows until the cluster collapses into pure unisons and
-// fifths, and her light gains overtones upward: the dissonance resolves into consonance and she wins. What remains is
-// peace: two or three pure tones, harmless, fading to nothing at 24:00.
-//
-// TUNING: just intonation on D, with A4 = 432 Hz. 432 = 6 x 72, so the fundamental D2 is exactly 72 Hz and A4 is its 6th
-// harmonic; D4 is exactly 288 Hz (the binaural carrier). D dorian in just ratios: D 1, E 9/8, F 6/5, G 4/3, A 3/2,
-// B 5/3, C 7/4 (the natural seventh, the harmonic series' own).
+// MATERIAL
+// - Sophia's phrase S: A B D C B A F (degrees 4 5 7 6 5 4 2), stepwise. Each statement transforms S (transposed,
+//   retrograde, ornamented), chosen to grind least against the chord sounding under it; every third statement is S
+//   itself so it stays recognisable. Statements lengthen with the arc (4, 5, 6, 7.5, 10 cycles).
+// - The Demiurge: the inversion of her last phrase around A, three cycles later, low. Tintinnabuli (Pärt): the D
+//   minor triad tone above each Sophia note.
+// - Canon: a second voice sings her phrase an octave below, 5 cycles late (Density only); a third sings it an
+//   octave above, 8 cycles late, converging with the first two right as the Transcendence begins.
+// - Harmony: a seeded walk over D dorian chords free of internal semitones (Dm7 Dm6 Em7 F6 G69 Am7 C6), one every 2
+//   cycles, 180 chords, never repeating; dark chords weigh most in Density, bright ones (G69, C6, F6) in
+//   Transcendence. A second, higher voicing of the same chords opens wide only in Transcendence.
+// - Flow: a continuous arpeggio of each chord's own tones (the "flying" voice), sparse in the Pleroma, dense in
+//   Transcendence, thinning to almost nothing in peace. A walking bass connects the chord roots.
+// - A4 = 432 Hz everywhere. Binaural theta, a constant 6 Hz around D4 — deph's standing mark for this piece — from
+//   the first second. D dorian throughout.
 //
 // DYNAMICS: every level is a continuous ramp across tens of cycles (`env`); nothing steps at a section boundary.
 //
-// CHAPTERS (30 cpm, 1 cycle = 2 s)
-//   I   Pleroma          0 - 120   0:00 - 4:00   the cluster, a first pure tone, the ground drone, breath and binaural from 0:00
-//   II  Descent        120 - 270   4:00 - 9:00   the exchange deepens; a human voice (formant) joins; the beating quickens
-//   III Density        270 - 450   9:00 - 15:00  matter at its heaviest: widest beating, darkest rumble
-//   IV  Transcendence  450 - 600  15:00 - 20:00  the beating slows to unison; Sophia's overtones open upward; air rises
-//   V   Eternal peace  600 - 720  20:00 - 24:00  pure D and A, a few high tones, everything ebbs to silence
+// CHAPTERS (30 cpm, 1 cycle = 2 s) — 360 cycles = 12:00 exact, same proportions as the 24:00 Ableton source, halved.
+//   I   Pleroma          0 -  60   0:00 - 2:00    phrase, pad, bass, arpeggio, binaural from 0:00; tintinnabuli 0:16; his answer 0:24
+//   II  Descent         60 - 135   2:00 - 4:30    the dialogue deepens; he grows; the canon's first voice readies
+//   III Density        135 - 225   4:30 - 7:30    dark chords, ornaments, two-voice canon, Demiurge at his loudest
+//   IV  Transcendence  225 - 300   7:30 - 10:00   the canon converges; he fades; she rises an octave; the chord opens
+//   V   Eternal peace  300 - 360  10:00 - 12:00   slow phrases, consonance only, everything ebbs to silence at 12:00
 
-setcpm(30) // 1 cycle = 2 s. 720 cycles = 24:00 exact.
+setcpm(30) // 1 cycle = 2 s. 360 cycles = 12:00 exact.
 
-// ---- just intonation on D (A4 = 432 Hz) ------------------------------------------------------------------------------
+// ---- key and tuning (D dorian, A4 = 432 Hz) -----------------------------------------------------------------------
+const ROOT = 'D';
+const KEY_SUFFIX = ':dorian';
+const scaleAt = (octave) => ROOT + octave + KEY_SUFFIX; // scaleAt(4) => "D4:dorian"
 const A4 = 432;
-const F0 = A4 / 6; // 72 Hz = D2
-const RATIOS = [1, 9 / 8, 6 / 5, 4 / 3, 3 / 2, 5 / 3, 7 / 4]; // D E F G A B C (just; C is the harmonic seventh)
-const hzOf = (i, octave) => F0 * RATIOS[((i % 7) + 7) % 7] * Math.pow(2, octave + Math.floor(i / 7));
+const TUNE = 12 * Math.log2(A4 / 440);
+const midiOf = (v) => (typeof v === 'string' ? noteToMidi(v) : v); // scale() yields note names
+const tune = (p) => p.withValue((v) => ({ ...v, note: midiOf(v.note) + TUNE }));
+const hz = (midi) => A4 * Math.pow(2, (midi - 69) / 12);
 
 // ---- continuous levels: piecewise-linear ramps over the whole piece ---------------------------------------------
-// env([[cycle, value], ...]) starts at cycle 0 and ends at 720. Segment ends match, so nothing steps.
+// env([[cycle, value], ...]) starts at cycle 0 and ends at 360. Segment ends match, so nothing steps.
 const env = (pts) =>
   arrange(...pts.slice(1).map(([c, v], i) => [c - pts[i][0], saw.slow(c - pts[i][0]).range(pts[i][1], v)]));
-
-const seeded = (seed) => () => {
-  seed = (seed + 0x6d2b79f5) | 0;
-  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
 const lerpAt = (c, pts) => {
   for (let i = 1; i < pts.length; i++) {
     if (c <= pts[i][0]) { const [c0, v0] = pts[i - 1], [c1, v1] = pts[i]; return v0 + ((v1 - v0) * (c - c0)) / (c1 - c0); }
@@ -51,136 +64,308 @@ const lerpAt = (c, pts) => {
   return pts[pts.length - 1][1];
 };
 
-// ---- taking turns: matter and light swell in opposite phase, 36 cycles per exchange --------------------------------
-// LO is how deep each one recedes while the other speaks (1 = no turn-taking); the exchange deepens toward Density and
-// dissolves into Transcendence, where both finally sound together.
-const LO = env([[0, 0.7], [120, 0.55], [270, 0.4], [420, 0.25], [480, 0.5], [560, 0.95], [720, 1]]);
-const swell = (late) => LO.add(sine.slow(36).mul(0.5).add(0.5).late(late).mul(LO.mul(-1).add(1)));
-const MATTER_TURN = swell(0);
-const LIGHT_TURN = swell(18);
-
-// ---- the Demiurge: a cluster of low frequencies a hair apart, beating --------------------------------------------
-// `delta` is the relative detuning (0.016 at 72 Hz = 1.15 Hz of beating); it grows to Density and falls to 0 (unison).
-const DELTA = env([[0, 0.004], [120, 0.007], [270, 0.012], [420, 0.017], [470, 0.014], [560, 0.0], [720, 0]]);
-const matter = (g, cutoff) => {
-  const note = (hz, mult, pan) => freq(pure(hz).slow(2).mul(mult)).pan(pan);
-  return stack(
-    note(F0, pure(1), 0.35),
-    note(F0, DELTA.add(1), 0.65),
-    note(F0, DELTA.mul(-1.3).add(1), 0.5),
-    note(F0 * 2, DELTA.mul(0.6).add(1), 0.3),
-    note(F0 * 1.5, DELTA.mul(-0.8).add(1), 0.7), // the fifth, beating against itself
-  )
-    .s("sawtooth")
-    .attack(2.5).decay(1).sustain(1).release(4)
-    .lpf(cutoff)
-    .gain(g)
-    .room(0.6).size(7).orbit(1);
+// ---- seeded randomness (the same piece every time) ---------------------------------------------------------------
+const seeded = (seed) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
 };
 
-// ---- Sophia: pure tones walking slowly along the just-intonation D dorian ladder ----------------------------------------
-// One tone per 4 cycles. Before Transcendence the walk uses all seven degrees; in peace only D and A.
-const walkRng = seeded(432);
-const OCTAVE_UP = [[0, 0.05], [450, 0.1], [520, 0.45], [600, 0.3], [720, 0.2]];
-const TONES = [];
-let pos = 0;
-for (let k = 0; k < 180; k++) {
-  const c = k * 4;
-  if (c >= 600) pos = walkRng() < 0.5 ? 0 : 4;
-  else if (k > 0) {
-    const stepSet = [-2, -1, 1, 2, 3];
-    pos = Math.max(0, Math.min(6, pos + stepSet[Math.floor(walkRng() * stepSet.length)]));
-  }
-  const octave = walkRng() < lerpAt(c, OCTAVE_UP) ? 2 : 1;
-  TONES.push(hzOf(pos, octave));
+// ---- the harmonic walk: one chord per 2 cycles, 180 chords -------------------------------------------------------
+// `tones` are the chord's own degrees from D (the arpeggio plays them); `sym` is for Strudel's voicing engine.
+// Every chord is free of internal semitones (no maj7 or 9th rubbing), so the arpeggio and the voices never grind.
+const CH = {
+  Dm7: { sym: 'Dm7', deg: 0, tones: [0, 2, 4, 6] },
+  Dm6: { sym: 'Dm6', deg: 0, tones: [0, 2, 4, 5] }, // the dorian chord: B natural
+  Em7: { sym: 'Em7', deg: 1, tones: [1, 3, 5, 7] },
+  F6: { sym: 'F6', deg: 2, tones: [2, 4, 6, 7] },
+  G69: { sym: 'G69', deg: 3, tones: [3, 5, 7, 8, 11] },
+  Am7: { sym: 'Am7', deg: 4, tones: [4, 6, 8, 10] },
+  C6: { sym: 'C6', deg: 6, tones: [6, 8, 10, 11] },
+};
+const MOODS = [
+  [60, { Dm7: 3, G69: 2, Am7: 2, C6: 2, Dm6: 1 }],
+  [135, { Dm7: 2, G69: 2, Am7: 2, Em7: 1, F6: 1, C6: 2, Dm6: 1 }],
+  [225, { Dm7: 3, Dm6: 2, Em7: 3, Am7: 3, F6: 2, G69: 1 }],
+  [300, { G69: 4, C6: 3, F6: 3, Am7: 1, Dm7: 1 }],
+  [360, { Dm7: 3, G69: 2, Dm6: 2, Am7: 1 }],
+];
+const chordRng = seeded(432);
+const pickChord = (weights, prev) => {
+  const entries = Object.entries(weights).filter(([k]) => k !== prev);
+  let r = chordRng() * entries.reduce((s, [, w]) => s + w, 0);
+  for (const [k, w] of entries) { r -= w; if (r <= 0) return k; }
+  return entries[entries.length - 1][0];
+};
+const PROG = [];
+let prevChord = null;
+for (let i = 0; i < 180; i++) {
+  const mood = MOODS.find(([end]) => i * 2 < end)[1];
+  const key = i === 0 || i === 179 ? 'Dm7' : i === 178 ? 'G69' : pickChord(mood, prevChord);
+  PROG.push(CH[key]);
+  prevChord = key;
 }
-const TONE_HZ = cat(...TONES.map((h) => pure(h))).slow(4);
-const light = (g, delta, g2, g3, g4) =>
-  stack(
-    freq(TONE_HZ).s("sine").gain(g),
-    freq(TONE_HZ.mul(delta.add(1))).s("sine").gain(g.mul(0.6)),
-    freq(TONE_HZ.mul(2)).s("sine").gain(g2),
-    freq(TONE_HZ.mul(3)).s("sine").gain(g3),
-    freq(TONE_HZ.mul(4)).s("sine").gain(g4),
-  )
-    .attack(3).decay(1.5).sustain(0.8).release(6)
-    .pan(sine.slow(23).range(0.3, 0.7))
-    .delay(0.3).delaytime(1.13).delayfeedback(0.45)
-    .room(0.9).size(9).orbit(2);
+const CHORDS = cat(...PROG.map((c) => pure(c.sym))).slow(2);
+const ROOT_DEGREES = cat(...PROG.map((c) => pure(c.deg))).slow(2);
+const voiced = (anchor) => chord(CHORDS).dict('ireal').anchor(anchor).mode('below').voicing();
+const chordAt = (cyc) => PROG[Math.min(179, Math.floor(cyc / 2))];
 
-// ---- the ground: D1 and D2, then the pure fifth as peace arrives ---------------------------------------------------
-const ground = (hz, g) => freq(pure(hz).slow(4)).s("sine").attack(3).decay(1).sustain(1).release(5).gain(g);
+// ---- melodic material: Sophia's phrase, its transformations, the Demiurge's mirror, the tintinnabuli ---------------
+const S0 = [4, 5, 7, 6, 5, 4, 2, null];
+const num = (a, f) => a.map((d) => (d === null ? null : f(d)));
+const shift = (a, k) => num(a, (d) => d + k);
+const invert = (a, axis) => num(a, (d) => 2 * axis - d);
+const retro = (a) => a.filter((d) => d !== null).reverse().concat([null]);
+const VARIANTS = [
+  (a) => shift(a, 1), (a) => shift(a, -1), (a) => shift(a, 2), (a) => shift(a, -2), (a) => shift(a, 3), (a) => shift(a, -3),
+  retro, (a) => shift(retro(a), 1), (a) => shift(retro(a), -1), (a) => shift(retro(a), 2),
+];
+const triadAbove = (d) => { let x = d + 1; while (![0, 2, 4].includes(((x % 7) + 7) % 7)) x++; return x; };
+const ornamentChance = { 4: 0.05, 5: 0.12, 6: 0.25, 7.5: 0.12, 10: 0 };
+const SECTIONS = [[60, 4], [135, 5], [225, 6], [300, 7.5], [360, 10]];
 
-// ---- a human presence: a sustained sawtooth through a vowel formant that changes with the chapters -------------------
-const voice = (hz, g, vow, cutoff) =>
-  stack(freq(pure(hz).slow(4)).pan(0.4), freq(pure(hz * 1.002).slow(4)).pan(0.6))
+// Which transformation of S grinds least against the chords sounding under it? A note grinds when a chord tone sits
+// a semitone from it (pitch class, any octave). Sophia, his mirror and the tintinnabuli are scored together.
+const SEMI = [0, 2, 3, 5, 7, 9, 10];
+const pcOf = (d) => SEMI[((d % 7) + 7) % 7];
+const grinds = (d, chordC) => chordC.tones.some((x) => { const k = Math.abs(pcOf(x) - pcOf(d)); return k === 1 || k === 11; });
+const lineCost = (a, start, len) =>
+  a.reduce((sum, d, k) => {
+    if (d === null) return sum;
+    const t0 = start + (k * len) / 8, t1 = start + ((k + 1) * len) / 8 - 1e-6;
+    return sum + [t0, t1].filter((tt) => grinds(d, chordAt(tt))).length;
+  }, 0);
+const slotCost = (base, start, len) =>
+  lineCost(base, start, len) + lineCost(invert(base, 4), start, len) + lineCost(num(base, triadAbove), start, len) +
+  lineCost(shift(base, -2), start, len);
+
+const phraseRng = seeded(2026);
+const SLOTS = [];
+const str = (a) => a.map((d) => (d === null ? '~' : d)).join(' ');
+let t = 0;
+let count = 0;
+for (const [end, len] of SECTIONS) {
+  while (t + len <= end + 1e-9) {
+    let base = S0;
+    if (count % 3 !== 0) {
+      const options = VARIANTS.map((f) => f(S0)).map((a) => ({ a, cost: slotCost(a, t, len) + phraseRng() * 0.5 }));
+      base = options.sort((x, y) => x.cost - y.cost)[0].a;
+    }
+    const sophia = base.map((d, i) => (d !== null && i > 0 && phraseRng() < ornamentChance[len] && !grinds(d + 1, chordAt(t + (i * len) / 8)) ? '[' + d + ' ' + (d + 1) + ']' : d));
+    SLOTS.push({ len, sophia: str(sophia), mirror: str(invert(base, 4)), tint: str(num(base, triadAbove)) });
+    t += len;
+    count++;
+  }
+}
+const line = (key, octave) => arrange(...SLOTS.map((s) => [s.len, n(mini(s[key])).scale(scaleAt(octave)).slow(s.len)]));
+
+// ---- the flowing arpeggio: each chord's own tones, a contour that wanders up and down the chord ladder -------------
+const DENS = [[0, 0.45], [60, 0.6], [135, 0.75], [225, 0.85], [260, 0.92], [300, 0.6], [345, 0.25], [360, 0.1]];
+const LO = [[0, 2], [225, 3], [270, 5], [300, 5], [345, 1], [360, 0]];
+const HI = [[0, 9], [135, 10], [225, 11], [270, 14], [300, 14], [345, 9], [360, 8]];
+const arpRng = seeded(99);
+let ladderPos = 3;
+let ladderDir = 1;
+const arpSlot = (c, i) => {
+  const pcs = new Set(c.tones.map((d) => d % 7));
+  const toks = [];
+  for (let s = 0; s < 32; s++) {
+    const cyc = i * 2 + s / 16;
+    const lo = Math.round(lerpAt(cyc, LO)), hi = Math.round(lerpAt(cyc, HI));
+    const ladder = [];
+    for (let d = lo; d <= hi; d++) if (pcs.has(((d % 7) + 7) % 7)) ladder.push(d);
+    const accent = s % 4 === 0 ? 0.25 : s % 2 === 0 ? 0 : -0.2;
+    if (arpRng() > Math.min(0.97, Math.max(0.03, lerpAt(cyc, DENS) + accent))) { toks.push('~'); continue; }
+    ladderPos = Math.min(ladderPos, ladder.length - 1);
+    if (ladderPos <= 0) ladderDir = 1;
+    else if (ladderPos >= ladder.length - 1) ladderDir = -1;
+    else if (arpRng() < 0.12) ladderDir = -ladderDir;
+    ladderPos = Math.max(0, Math.min(ladder.length - 1, ladderPos + ladderDir * (arpRng() < 0.75 ? 1 : 2)));
+    toks.push(ladder[ladderPos]);
+  }
+  return toks.join(' ');
+};
+
+// ---- the walking bass: root, then fifth and the next chord's root by section --------------------------------------
+const SECTION_OF = (cycle) => [60, 135, 225, 300, 360].findIndex((end) => cycle < end);
+const bassSlot = (c, i) => {
+  const sec = SECTION_OF(i * 2);
+  const next = PROG[Math.min(i + 1, 179)].deg;
+  const r = c.deg;
+  const fig = [
+    [r, '~', '~', '~', '~', '~', '~', '~'],
+    [r, '~', '~', r + 4, '~', '~', '~', '~'],
+    [r, '~', '~', r + 4, r + 2, '~', next, '~'],
+    [r, '~', '~', '~', r + 4, '~', '~', '~'],
+    [r, '~', '~', '~', '~', '~', '~', '~'],
+  ][sec];
+  return fig.join(' ');
+};
+
+// ---- voices ---------------------------------------------------------------------------------------------------------
+
+// Pad: the harmonic walk on two sawtooth layers 7 cents apart, panned apart (from The Field) — one clean pad, no
+// vowel formant, no ensemble wall.
+const pad = (notes, g, cutoff) =>
+  stack(tune(notes).add(note(0.07)).pan(0.3), tune(notes).add(note(-0.07)).pan(0.7))
     .s("sawtooth")
-    .attack(3).decay(1).sustain(0.9).release(5)
-    .vowel(vow)
+    .attack(2.5).decay(2).sustain(0.7).release(4)
     .lpf(cutoff)
     .gain(g)
+    .room(0.7).size(8).orbit(1);
+
+// Glass (Sophia): two harmonic FM operators (ratios 2 and 3: no non-scale partials), long non-metric echo — one
+// consistent timbre for every register and role she takes (lead, octave-up, canon), not a choir of different voices.
+const glass = (p, g, cutoff) =>
+  stack(tune(p).fm(1).fmh(2).gain(g), tune(p).fm(0.5).fmh(3).gain(g).velocity(0.5))
+    .s("sine")
+    .attack(0.04).decay(1.2).sustain(0.25).release(4)
+    .fmattack(0.012).fmdecay(0.4).fmsustain(0.08).fmenv('exp')
+    .lpf(cutoff)
+    .pan(sine.slow(10).range(0.35, 0.65))
+    .delay(0.3).delaytime(1.13).delayfeedback(0.45)
     .room(0.85).size(9).orbit(2);
 
-// ---- breath: noise in 4-cycle swells -------------------------------------------------------------------------------
-const rumble = (g) => s("brown").slow(4).attack(3).decay(1).sustain(1).release(5).lpf(110).gain(g);
-const air = (g, hi, lo) =>
-  s("pink").slow(4).attack(3).decay(1).sustain(1).release(5).hpf(hi).lpf(lo).gain(g)
-    .pan(sine.slow(17).range(0.2, 0.8)).room(0.8).size(8).orbit(3);
+// Tintinnabuli: a soft triangle under Sophia.
+const tint = (p, g) =>
+  tune(p)
+    .s("triangle")
+    .attack(0.1).decay(2).sustain(0.3).release(4)
+    .gain(g)
+    .pan(sine.slow(10).range(0.65, 0.35))
+    .room(0.85).size(9).orbit(2);
 
-// ---- binaural theta: D4 = 288 Hz, 6 Hz beat, headphones --------------------------------------------------------------
-const CARRIER = 288;
-const binaural = (beat, g) =>
-  stack(freq(CARRIER - beat / 2).s("sine").pan(0), freq(CARRIER + beat / 2).s("sine").pan(1))
-    .slow(4)
+// Demiurge: dark and heavy, not vocal — filtered saw with a sub-octave layer, no vowel, no vibrato.
+const demiurge = (p, g, cutoff) =>
+  stack(tune(p).gain(g), tune(p).add(note(-12)).gain(g.mul(0.6)))
+    .s("sawtooth")
+    .attack(0.6).decay(3).sustain(0.55).release(5)
+    .lpf(cutoff)
+    .room(0.7).size(7).orbit(4);
+
+// Arpeggio: a plucked harp-like voice (triangle), echo, ping-pong pan.
+const arp = (p, g, cutoff) =>
+  tune(p)
+    .s("triangle")
+    .attack(0.008).decay(0.9).sustain(0.1).release(2)
+    .velocity(perlin.slow(6).range(0.55, 1))
+    .lpf(cutoff)
+    .gain(g)
+    .pan(sine.slow(7).range(0.3, 0.7))
+    .delay(0.35).delaytime(1.13).delayfeedback(0.45)
+    .room(0.3).size(3).orbit(3);
+
+// Bass: roots, walking figure; saw through a dark filter so its harmonics are audible on small speakers.
+const bass = (p, g) =>
+  tune(p)
+    .s("sawtooth")
+    .attack(0.05).decay(1.5).sustain(0.5).release(2)
+    .lpf(260)
+    .gain(g)
+    .room(0.3).size(4).orbit(5);
+
+// Sub: the chord roots, a floor that does not beat.
+const sub = (g) =>
+  tune(n(ROOT_DEGREES).scale(scaleAt(1)))
+    .s("sine")
+    .attack(2).decay(1).sustain(0.9).release(4)
+    .lpf(220)
+    .gain(g);
+
+// Wind: pink noise in 2-cycle breaths, the filter swept by `cutoff`.
+const wind = (g, cutoff) =>
+  s("pink").slow(2)
+    .attack(2).decay(1).sustain(1).release(4)
+    .lpf(cutoff)
+    .gain(g)
+    .pan(sine.slow(9).range(0.25, 0.75))
+    .room(0.7).size(8).orbit(1);
+
+// Binaural: a sine hard-left and one hard-right around D4 (A4 = 432), a constant 6 Hz beat, dry, headphones only.
+const CARRIER = hz(62);
+const binaural = (g) =>
+  stack(freq(CARRIER - 3).s("sine").pan(0), freq(CARRIER + 3).s("sine").pan(1))
+    .slow(2)
     .attack(3).decay(1).sustain(1).release(5)
     .gain(g);
 
 // ---- arrangement: one layer per voice; every level is an `env` ramp ---------------------------------------------
 
-// The Demiurge's cluster
-$: matter(
-  env([[0, 0.012], [60, 0.018], [270, 0.026], [420, 0.034], [470, 0.03], [540, 0.02], [620, 0.012], [720, 0]]).mul(MATTER_TURN),
-  env([[0, 160], [270, 260], [420, 420], [480, 300], [560, 180], [720, 120]]),
+// Pad
+$: pad(
+  voiced("A3"),
+  env([[0, 0.02], [12, 0.04], [60, 0.05], [135, 0.06], [225, 0.07], [249, 0.05], [270, 0.075], [300, 0.075], [330, 0.05], [360, 0]]),
+  env([[0, 700], [16, 1100], [60, 1300], [135, 1100], [225, 900], [250, 800], [280, 2400], [300, 2400], [360, 500]]),
 )
 
-// Sophia's tones and, from Transcendence, her overtones opening upward
-$: light(
-  env([[0, 0.03], [120, 0.036], [450, 0.04], [540, 0.055], [620, 0.05], [700, 0.02], [720, 0]]).mul(LIGHT_TURN),
-  DELTA.mul(0.35),
-  env([[0, 0], [400, 0], [500, 0.012], [580, 0.02], [660, 0.01], [720, 0]]),
-  env([[0, 0], [440, 0], [540, 0.01], [600, 0.014], [680, 0.006], [720, 0]]),
-  env([[0, 0], [480, 0], [570, 0.006], [620, 0.008], [700, 0.003], [720, 0]]),
+// High pad: an octave and a half above, opening wide only in Transcendence — the chord, breaking open.
+$: pad(
+  voiced("D5"),
+  env([[0, 0], [150, 0], [225, 0.012], [270, 0.035], [300, 0.035], [345, 0.01], [360, 0]]),
+  env([[0, 1500], [225, 1800], [280, 3200], [360, 1200]]),
 )
 
-// Ground
-$: ground(36, env([[0, 0.05], [60, 0.08], [450, 0.09], [600, 0.09], [700, 0.04], [720, 0]]))
-$: ground(72, env([[0, 0.03], [60, 0.05], [450, 0.06], [600, 0.06], [700, 0.03], [720, 0]]))
-$: ground(108, env([[0, 0], [440, 0], [540, 0.03], [620, 0.04], [700, 0.02], [720, 0]]))
+// Sub
+$: sub(env([[0, 0.04], [20, 0.12], [225, 0.15], [250, 0.10], [265, 0.16], [320, 0.14], [360, 0]]))
 
-// A human presence, D3 and the fifth: dark vowels in matter, open ones as light wins, "oo" in peace
-$: voice(
-  144,
-  env([[0, 0], [100, 0], [180, 0.012], [420, 0.02], [480, 0.014], [560, 0.022], [660, 0.012], [720, 0]]),
-  arrange([120, pure('u')], [150, pure('o')], [180, pure('o')], [150, pure('a')], [120, pure('u')]),
-  env([[0, 900], [450, 1100], [560, 2200], [720, 700]]),
-)
-$: voice(
-  216,
-  env([[0, 0], [160, 0], [240, 0.008], [440, 0.012], [500, 0.008], [570, 0.016], [680, 0.008], [720, 0]]),
-  arrange([120, pure('u')], [150, pure('o')], [180, pure('o')], [150, pure('e')], [120, pure('u')]),
-  env([[0, 900], [450, 1100], [560, 2600], [720, 700]]),
+// Walking bass
+$: bass(
+  arrange(...PROG.map((c, i) => [2, n(mini(bassSlot(c, i))).scale(scaleAt(1)).slow(2)])),
+  env([[0, 0.025], [50, 0.05], [135, 0.07], [225, 0.08], [250, 0.05], [270, 0.07], [310, 0.06], [340, 0.02], [360, 0]]),
 )
 
-// Breath: matter's rumble (Density) and the air that rises with the light
-$: rumble(env([[0, 0.02], [270, 0.05], [420, 0.08], [480, 0.05], [560, 0.01], [720, 0]]))
-$: air(
-  env([[0, 0.004], [270, 0.006], [450, 0.008], [560, 0.022], [640, 0.016], [720, 0]]),
-  env([[0, 1200], [450, 1500], [560, 3000], [720, 1200]]),
-  env([[0, 2500], [450, 3500], [560, 7000], [720, 2500]]),
+// Sophia: her phrase from the first second
+$: glass(
+  line('sophia', 4),
+  env([[0, 0.04], [15, 0.05], [225, 0.052], [250, 0.04], [270, 0.06], [300, 0.06], [345, 0.03], [360, 0]]),
+  env([[0, 2200], [225, 2400], [270, 3000], [360, 1600]]),
 )
 
-// Binaural theta, 6 Hz, from the first second
-$: binaural(6, env([[0, 0.02], [12, 0.03], [600, 0.035], [720, 0]]))
+// Sophia an octave up: her transcendence register, blooming from 7:30
+$: glass(
+  line('sophia', 5),
+  env([[0, 0], [235, 0], [270, 0.025], [300, 0.028], [345, 0.01], [360, 0]]),
+  pure(2600),
+)
 
-// One master level for the whole piece (+9 dB): the layers above are balanced against each other, this sets how loud.
-all((x) => x.postgain(2.8))
+// Canon A: a second voice of hers, an octave below, 5 cycles late — Density only (Fibonacci, after The Field)
+$: glass(
+  line('sophia', 3),
+  env([[0, 0], [150, 0], [165, 0.03], [215, 0.03], [235, 0], [360, 0]]),
+  pure(1700),
+).late(5)
+
+// Canon B: a third voice, an octave above, 8 cycles late — converges with the main line and Canon A right as the
+// Transcendence begins, then recedes (the lead and the octave-up voice carry the glow from there).
+$: glass(
+  line('sophia', 5),
+  env([[0, 0], [150, 0], [195, 0.018], [222, 0.032], [228, 0.022], [260, 0.01], [300, 0], [360, 0]]),
+  pure(2400),
+).late(8)
+
+// Tintinnabuli
+$: tint(line('tint', 4), env([[0, 0], [8, 0], [20, 0.028], [225, 0.032], [260, 0.025], [300, 0.02], [350, 0], [360, 0]]))
+
+// The Demiurge: the mirror of her phrase, three cycles later, fading while she rises
+$: demiurge(
+  line('mirror', 2),
+  env([[0, 0.014], [30, 0.025], [135, 0.045], [210, 0.075], [228, 0.075], [270, 0], [360, 0]]),
+  env([[0, 400], [135, 550], [228, 700], [270, 350], [360, 300]]),
+).late(1.5)
+
+// The flowing arpeggio
+$: arp(
+  arrange(...PROG.map((c, i) => [2, n(mini(arpSlot(c, i))).scale(scaleAt(3)).slow(2)])),
+  env([[0, 0.03], [15, 0.04], [135, 0.055], [225, 0.06], [249, 0.03], [270, 0.055], [320, 0.04], [350, 0.015], [360, 0]]),
+  env([[0, 1800], [135, 2400], [225, 2000], [270, 3200], [360, 1400]]),
+)
+
+// Wind: a breath under the inhale and the rise
+$: wind(
+  env([[0, 0], [220, 0], [250, 0.012], [280, 0.02], [310, 0.012], [350, 0], [360, 0]]),
+  env([[0, 300], [225, 500], [280, 2600], [360, 400]]),
+)
+
+// Binaural theta, constant 6 Hz, from the first second
+$: binaural(env([[0, 0.02], [6, 0.03], [300, 0.035], [360, 0]]))

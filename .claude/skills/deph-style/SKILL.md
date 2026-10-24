@@ -461,3 +461,28 @@ Also update the distilled sections above if the decision changes a principle, an
   makes D2 exactly 72 Hz and D4 exactly 288 Hz, so the harmonic series of D sits on 432 naturally; D dorian in just ratios
   (1, 9/8, 6/5, 4/3, 3/2, 5/3, 7/4). General rule: for deph's meditative pieces, depth comes from spectrum and time, not
   from harmonic or melodic drama — avoid orchestral/cinematic gestures (strings + choir + arpeggio) unless asked.
+- 2026-10-24 (later still) — gnosis-live.strudel compressed from 24:00 (720 cycles) to 12:00 (360 cycles): the user found
+  24:00 too long to sit through for feedback. Halved every cycle breakpoint in the `env()` ramps and the arc boundaries,
+  same proportions (2:00/2:30/3:00/2:30/2:00), same cpm — not a different piece, the same one at half the runtime.
+  gnosis.strudel (the Ableton source) stays at 24:00, untouched. General rule: when asked to compress a piece's duration
+  without changing its material, scale the arc's cycle breakpoints uniformly rather than cutting sections out.
+- 2026-10-24 (gnosis, third pass) — the spectral-only draft (two beating clusters, random tone walk, no motif) was
+  rejected too: "muy simplona... repetición constante" — the turn-taking swell was a literal fixed-period LFO
+  (`sine.slow(18)`, same 36s cycle forever), measurably repetitive, and with no motif there was nothing to follow.
+  Fix, confirmed by the user's explicit instruction to respect `strudel-compose`/deph-style and match `the-field`'s
+  level: recovered the REJECTED cinematic draft's actual architecture (a motif with real transformations chosen to
+  minimize dissonance against the harmony, a voice-led chord cycle, a canon at Fibonacci offsets [5, 8 cycles], a
+  flowing harmonic-series arpeggio — exactly The Field's techniques) but re-orchestrated it with calmer, non-vocal
+  timbres (two-operator FM bell for the light voice, filtered saw for the dark one, no choir/vowel formant, no
+  vibrato violin, no heartbeat). General rule for this project: "not melodrama" is a TIMBRE instruction (no
+  choir/strings/vibrato-lead), never a license to drop structure (motif, harmony, canon, real development) —
+  dropping structure to avoid melodrama produces the opposite complaint, generic/boring. Depth and restraint are
+  independent axes; both must be served at once.
+- 2026-10-24 (tooling) — built `tools/sounds/studio.mjs`: a generic local dev server (not a per-piece generator) that
+  auto-discovers every composition, shows an arrangement-view timeline (one lane per voice, loudness as brightness),
+  and plays the piece for real via `@strudel/web` (a second instance of Strudel's own browser engine) so clicking a
+  point in time actually plays from there. The user was explicit that an earlier version of this (a CLI that
+  generated one static HTML file per piece, with the audio baked in at generation time) was wrong — "GENERICO"
+  means one tool/server that reads the current file state on demand, modeled after `remotion studio` /
+  `hyperframes preview`, not a build step. There is no way to control the VS Code Strudel extension from outside it
+  (no API bridge) — the honest alternative is a second, independent playback engine, not a remote control.

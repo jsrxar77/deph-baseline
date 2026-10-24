@@ -180,6 +180,24 @@ Example: `node tools/sounds/inspect.mjs media/slow-drift/sounds/slow-drift.strud
 (use enough cycles to cover a piece built with `arrange()` — the default windows are sized for short
 loops, not full pieces).
 
+## Arrangement-view timeline and live playback (`studio.mjs`)
+
+```
+node tools/sounds/studio.mjs [--port 5678]
+```
+
+A single generic local dev server, in the spirit of `remotion studio` / `hyperframes preview` — not a
+tool you point at one file, a server you run once. It finds every `media/<name>/sounds/*.strudel`
+itself (skipping `sounds/backup/`), lists them in a sidebar, and reads the file fresh on every request,
+so editing a piece and it's reflected without regenerating anything. Draws one lane per voice (same
+headless event data as `inspect.mjs`) over a time axis, and embeds the real Strudel browser engine
+(`@strudel/web`, from a CDN, pinned to the same version as `@strudel/webaudio` in `package.json`) so
+clicking the timeline actually plays the piece from that point — a second, independent instance of the
+engine, **not** a remote control for the VS Code extension (there is no API bridge between a web page
+and that extension). Seeking re-evaluates the code with `all((x) => x.early(cycles))` appended. The
+page polls the file's mtime and reloads automatically when it changes, replaying from the same position
+if it was already playing.
+
 ## What it cannot tell you
 
 - How anything sounds: timbre, loudness, mix, effect character. Ask the user.

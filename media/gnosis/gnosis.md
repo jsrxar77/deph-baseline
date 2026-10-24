@@ -39,42 +39,58 @@ La obra se desarrolla en **15 etapas progresivas continuas**, erradicando bucles
 
 `sounds/gnosis.strudel` (más abajo) es la fuente para exportar a Ableton: canales con ganancias bajas tipo velocity y
 notas sostenidas, pensados para sonar vestidos con Surge XT / Serum 2. **No se tocó.** `gnosis-live.strudel` es una
-versión aparte, completa dentro de Strudel (sin MIDI, sin DAW). Una versión anterior, cinematográfica (acordes,
-arpegio, línea de violín, latido), quedó en `sounds/backup/gnosis-live-cinematic.strudel`: se descartó por ser
-melodrama y no meditación.
+versión aparte, completa dentro de Strudel (sin MIDI, sin DAW). Tuvo dos borradores previos, descartados y guardados
+en `sounds/backup/` para no repetir el error:
 
-**Es una obra para meditar, no una partitura:** sin progresión de acordes, sin arpegio, sin melodía. La profundidad
-está en el timbre y en el tiempo. Mismo D dórico, 24:00 (720 ciclos), capa binaural theta de 6 Hz desde el segundo 0.
+1. **Cinematográfico** (cuerdas, coro, línea de violín con vibrato, latido) — rechazado como melodrama ("música para
+   novela de las 3 de la tarde"), no meditación.
+2. **Espectral puro** (dos racimos que laten, sin motivo, sin acordes, sin arpegio) — rechazado por simplón y
+   repetitivo: el vaivén entre las dos voces era un LFO de período fijo, literalmente la misma repetición cada 36
+   segundos, y no había ninguna idea musical que seguir.
 
-### Afinación: entonación justa sobre Re, con A4 = 432 Hz
+**La versión actual recupera la arquitectura del borrador cinematográfico** (la que de verdad tenía profundidad:
+motivo con transformaciones reales, acordes con voice-leading automático, canon, arpegio armónico — las mismas
+técnicas de `the-field.strudel`) y la reorquesta con timbres acordes a `strudel-compose`/`deph-style`: campana FM de
+dos operadores para Sofía (sin coro, sin violín con vibrato), sierra filtrada para el Demiurgo (sin formante vocal),
+sin latido. Mismo D dórico, A4 = 432 Hz, binaural theta constante a 6 Hz. 12:00 (360 ciclos), mismas proporciones de
+movimiento que la fuente de 24:00, a la mitad de duración.
 
-432 = 6 × 72: la fundamental Re2 es exactamente **72 Hz** y el La4 es su sexto armónico; el Re4 (portadora binaural)
-es exactamente **288 Hz**. El Re dórico en razones justas: Re 1, Mi 9/8, Fa 6/5, Sol 4/3, La 3/2, Si 5/3, Do 7/4 (el
-séptimo armónico natural). Los batidos entre voces son reales, no efectos.
+### El relato, con arquitectura real
 
-### El relato, contado por el espectro
-
-- **El Demiurgo (la materia)** es un racimo grave y denso: cinco sierras filtradas, a unas centésimas de distancia,
-  que laten entre sí. El batido crece hasta Density (hasta ~1 Hz en el Re2, el doble en el Re3) y se oscurece el
-  filtro y el murmullo de ruido marrón.
-- **Sofía (la luz)** son tonos puros que caminan despacio por la escalera dórica justa, un tono cada 4 ciclos, con un
-  gemelo apenas desafinado que bate. En Transcendence se le abren sobretonos hacia arriba (2.º, 3.º, 4.º parciales) y
-  sube el aire.
-- **No comparten melodía: se turnan.** El racimo se hincha mientras ella cede, y al revés, en fase opuesta, con un
-  intercambio de 36 ciclos que se profundiza hasta Density y se disuelve al entrar la trascendencia.
-- **Trascendencia sin salto:** el batido del racimo baja hasta cero (unísonos y quintas puras) entre los ciclos 470 y
-  560, mientras ella gana sobretonos. La disonancia lenta se resuelve en consonancia. Gana Sofía.
-- **Paz eterna:** Re y La puros, algunos tonos agudos, una presencia vocal (formantes u / o / a / e que cambian con los
-  movimientos), todo se apaga hasta el silencio en el ciclo 720.
+- **El motivo de Sofía**: La Si Re Do Si La Fa (grados 4 5 7 6 5 4 2), por grados. Cada enunciado es una
+  transformación (transporte, retrógrado, adorno) elegida por cuál roza menos contra el acorde que suena debajo; cada
+  tercer enunciado es el motivo original, para que se reconozca. Los enunciados se alargan con el arco (4, 5, 6, 7.5,
+  10 ciclos).
+- **El Demiurgo** responde con la inversión de su última frase, tres ciclos después, grave — el mismo gesto, al
+  revés, desde abajo.
+- **Canon**: una segunda voz de ella canta su frase una octava abajo, 5 ciclos tarde (solo en Density); una tercera la
+  canta una octava arriba, 8 ciclos tarde (5 y 8, Fibonacci, como en *The Field*), y las tres convergen justo al
+  entrar la Transcendencia.
+- **Armonía**: una caminata sembrada sobre acordes dóricos sin semitonos internos (Dm7 Dm6 Em7 F6 G69 Am7 C6), uno
+  cada 2 ciclos, 180 acordes, nunca se repite. Un segundo acorde, más agudo, se abre de par en par solo en la
+  Transcendencia.
+- **El arpegio fluido**: los tonos propios de cada acorde, un contorno que sube y baja por la escalera armónica —
+  ralo en el Pleroma, denso en la Transcendencia. Un bajo caminante conecta las raíces.
+- **Trascendencia sin salto**: el Demiurgo se apaga mientras el canon converge y Sofía sube una octava; el acorde
+  agudo se abre, el arpegio crece, el filtro se ilumina. Gana Sofía. Lo que sigue es la paz: solo consonancia, todo
+  se apaga hasta el silencio en el ciclo 360.
 
 ### Verificación
 
-- 10 capas, 4.680 eventos, toda nota dentro del Re dórico justo; ninguna nota dura más de 4 ciclos.
-- Presente desde el ciclo 0: racimo, tono de Sofía, tierra (Re1, Re2), murmullo, aire y binaural. La voz humana entra
-  hacia los ciclos 100-180.
-- Mayor salto de nivel entre dos eventos consecutivos de una misma capa: ~10 % del pico de esa capa (todo son rampas).
-- Renderizada con el motor headless: inicio -26,8 LUFS (pico -14,7 dBFS), trascendencia -20,8 LUFS (pico -9,2 dBFS).
-- **Falta lo principal: que la escuches en Strudel y digas si el rumbo es el correcto.**
+- 13 capas, 13.098 eventos sobre 360 ciclos, 100 % de las notas dentro del Re dórico. Las capas FM muestran `fmh`
+  2-3 (armónico, nunca metálico) en los parámetros reales, no solo en el código.
+- Choques de semitono entre voces distintas: 205 sobre 6.518 notas (3,1 %), concentrados en Descent/Density; cero en
+  Transcendencia y en la Paz — la resolución a consonancia está confirmada estructuralmente, no solo en la intención.
+- Medido con el inspector; no se renderizó audio real todavía. **Falta lo principal: que la escuches y digas si
+  ahora sí tiene algo que te haga seguir escuchando.**
+
+### Para escucharla con una línea de tiempo y reproducirla desde cualquier punto
+
+`node tools/sounds/studio.mjs` (una sola vez) y abrir `http://localhost:5678/` — un servidor genérico tipo
+`remotion studio`/`hyperframes preview`: encuentra solas todas las piezas en `media/*/sounds/*.strudel`, las lista
+para elegir, y se recarga sola cuando edito el archivo. Reproduce con una copia real del motor de Strudel (no
+controla la extensión de VS Code, no hay forma de hacerlo) — al hacer click en cualquier minuto, suena de verdad
+desde ahí.
 
 ---
 
