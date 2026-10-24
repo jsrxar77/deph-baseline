@@ -7,16 +7,17 @@ Visual Framework: **HyperFrames** (HTML5 + CSS + GSAP).
 
 ---
 
-## Abstract: Cuerpo Material — ¿Prisión para el Alma o Varillas de Conexión a Tierra para Sophía?
+## Abstract: El Demiurgo y Sofía — Diálogo, Densidad y la Trascendencia
 
-Inspirada conceptualmente en la divulgación de **Agencia Cósmica** sobre la naturaleza de la materia, la encarnación y el mito gnóstico de Sophía:
+Inspirada conceptualmente en la divulgación de **Agencia Cósmica** sobre la naturaleza de la materia, la encarnación y el mito gnóstico de Sofía. A diferencia de una lectura en paridad (cuerpo y espíritu como iguales necesarios), **Gnosis cuenta un conflicto con un desenlace**: el diálogo entre dos polos que no termina en equilibrio, sino en la victoria de uno de ellos.
 
-> *¿Es la densidad del cuerpo biológico una trampa impuesta por el Demiurgo para aprisionar la chispa divina, o es en realidad una indispensable varilla de conexión a tierra para que la consciencia universal pueda operar sin destruirse?*
+1. **El Demiurgo** es lo material: denso, filtrado, lo que retiene y atrapa la luz. No es malvado, es gravedad — el peso que une todo lo que desciende a la tercera dimensión.
+2. **Sofía** es la chispa arquetípica: luz, lo eterno, la fuerza vital. Desciende al Pleroma indiferenciada, y en el descenso encuentra al Demiurgo — no como enemigo abstracto, sino como interlocutor real: se preguntan y se responden, en contrapunto, cada vez con más urgencia.
+3. **El diálogo se intensifica** (Descent → Density) hasta un punto de máxima densidad y tensión — el crisol, donde el Demiurgo pesa más que nunca y Sofía debe cantar a través de él.
+4. **La Transcendencia (el clímax real de la obra)**: el Demiurgo se retira — no destruido, disuelto, como quien suelta — y Sofía salta de registro, se abre en brillo y resonancia. Ella gana. Este es el único evento de la pieza que de verdad importa; todo lo anterior existe para llevar hasta ahí.
+5. **La Paz Eterna**: lo que sigue a la trascendencia no es un triunfo que resuena ni un final que se impone — es la calma, lo eterno, algo que trae paz y que al mismo tiempo es **inocuo**: sin aristas, sin tensión que resolver, sin nada que perturbe. El viaje no cierra en fuerza, cierra en reposo.
 
-La narrativa de **Gnosis** rechaza el dualismo derrotista del escape espiritual:
-1. **El Dilema Gnóstico**: Si la consciencia pura (Sophía, la sabiduría arquetípica del Pleroma) descendiera a la tercera dimensión sin un vehículo de disipación y anclaje, la altísima frecuencia de su energía provocaría una sobrecarga incontrolable o una dispersión inmediata.
-2. **El Cuerpo como Transductor**: El cuerpo material no es una celda (*soma-sema*), sino una sofisticada **jabalina o varilla de puesta a tierra (*grounding rod*)**. Permite que la corriente divina circule de manera segura, experimentando la textura, el tacto, la emoción y la geometría física.
-3. **El Viaje Meditativo (24:00 exactos)**: Un transporte progresivo y no estático. No es un bucle pasivo: es una experiencia evolutiva e intensa que transita desde la luminosidad informe del Pleroma, a través del peso aparente de la carne en el crisol material, hasta el clímax extático donde cielo y tierra se acoplan en perfecta resonancia armónica.
+**El viaje (24:00 exactos)** es progresivo y no estático: de la luz informe del Pleroma, al diálogo que se densifica en el crisol material, a la trascendencia de Sofía, a la paz que no exige nada.
 
 ---
 
@@ -31,6 +32,49 @@ La obra se desarrolla en **15 etapas progresivas continuas**, erradicando bucles
 | **III. Density** | 180 (60+60+60) | 9:00 – 15:00 | **El Tejido Polifónico (Crisol)**: Canon modal en imitación a la quinta. La melodía se expande a frases de 4 y 6 notas con la 6ª dórica (B3 natural). Modulaciones de pad sin saltos (Gsus2/D $\rightarrow$ Bm7/D $\rightarrow$ Dm9). Cero repetición de frases. |
 | **IV. Grounding** | 150 (50+50+50) | 15:00 – 20:00 | **La Resonancia Plena (Clímax)**: Integración total cielo-tierra. Líneas cantábiles nobles en décimas y sextas. Polifonía serena, sin notas estridentes. |
 | **V. Transfiguration**| 120 (40+40+40) | 20:00 – 24:00 | **La Deconstrucción Asimétrica**: Despedida progresiva: primero calla Ch 8 en el min 21:20 (c 640), luego Tintinnabuli y Sophia con su campana final a las 22:00. Solo el drone D2 y el beat Theta se disuelven hacia el segundo 1440 (24:00 exacto). |
+
+---
+
+## Variante para escucha directa en Strudel: `sounds/gnosis-live.strudel`
+
+`sounds/gnosis.strudel` (más abajo) es la fuente para exportar a Ableton: canales con ganancias bajas tipo velocity y
+notas sostenidas, pensados para sonar vestidos con Surge XT / Serum 2. **No se tocó.** `gnosis-live.strudel` es una
+versión aparte, completa dentro de Strudel (sin MIDI, sin DAW). Una versión anterior, cinematográfica (acordes,
+arpegio, línea de violín, latido), quedó en `sounds/backup/gnosis-live-cinematic.strudel`: se descartó por ser
+melodrama y no meditación.
+
+**Es una obra para meditar, no una partitura:** sin progresión de acordes, sin arpegio, sin melodía. La profundidad
+está en el timbre y en el tiempo. Mismo D dórico, 24:00 (720 ciclos), capa binaural theta de 6 Hz desde el segundo 0.
+
+### Afinación: entonación justa sobre Re, con A4 = 432 Hz
+
+432 = 6 × 72: la fundamental Re2 es exactamente **72 Hz** y el La4 es su sexto armónico; el Re4 (portadora binaural)
+es exactamente **288 Hz**. El Re dórico en razones justas: Re 1, Mi 9/8, Fa 6/5, Sol 4/3, La 3/2, Si 5/3, Do 7/4 (el
+séptimo armónico natural). Los batidos entre voces son reales, no efectos.
+
+### El relato, contado por el espectro
+
+- **El Demiurgo (la materia)** es un racimo grave y denso: cinco sierras filtradas, a unas centésimas de distancia,
+  que laten entre sí. El batido crece hasta Density (hasta ~1 Hz en el Re2, el doble en el Re3) y se oscurece el
+  filtro y el murmullo de ruido marrón.
+- **Sofía (la luz)** son tonos puros que caminan despacio por la escalera dórica justa, un tono cada 4 ciclos, con un
+  gemelo apenas desafinado que bate. En Transcendence se le abren sobretonos hacia arriba (2.º, 3.º, 4.º parciales) y
+  sube el aire.
+- **No comparten melodía: se turnan.** El racimo se hincha mientras ella cede, y al revés, en fase opuesta, con un
+  intercambio de 36 ciclos que se profundiza hasta Density y se disuelve al entrar la trascendencia.
+- **Trascendencia sin salto:** el batido del racimo baja hasta cero (unísonos y quintas puras) entre los ciclos 470 y
+  560, mientras ella gana sobretonos. La disonancia lenta se resuelve en consonancia. Gana Sofía.
+- **Paz eterna:** Re y La puros, algunos tonos agudos, una presencia vocal (formantes u / o / a / e que cambian con los
+  movimientos), todo se apaga hasta el silencio en el ciclo 720.
+
+### Verificación
+
+- 10 capas, 4.680 eventos, toda nota dentro del Re dórico justo; ninguna nota dura más de 4 ciclos.
+- Presente desde el ciclo 0: racimo, tono de Sofía, tierra (Re1, Re2), murmullo, aire y binaural. La voz humana entra
+  hacia los ciclos 100-180.
+- Mayor salto de nivel entre dos eventos consecutivos de una misma capa: ~10 % del pico de esa capa (todo son rampas).
+- Renderizada con el motor headless: inicio -26,8 LUFS (pico -14,7 dBFS), trascendencia -20,8 LUFS (pico -9,2 dBFS).
+- **Falta lo principal: que la escuches en Strudel y digas si el rumbo es el correcto.**
 
 ---
 

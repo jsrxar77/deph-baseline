@@ -440,3 +440,24 @@ Also update the distilled sections above if the decision changes a principle, an
 - 2026-10-06 — The Field published on YouTube (https://youtu.be/8QGj_FvP5Xo) as series 03. Social media launch pack created at
   `media/the-field/the-field.social.md` (Facebook, Instagram, X) with warm, nature-centric invitations to relax and subscribe —
   `media/the-field/the-field.social.md`, `the-field.yaml`.
+- 2026-10-24 — Gnosis gets a Strudel-only version (`media/gnosis/sounds/gnosis-live.strudel`), the Ableton source left untouched.
+  Narrative fixed by the user: the Demiurge (matter) and Sophia (light) talk, the talk intensifies, Sophia's transcendence wins
+  at the climax, then peace that is harmless ("inocuo"). Rejected on first listen: a repeated single note for a minute, a
+  sparse bell/sine texture ("un loco tocando cuencos tibetanos" — Gnosis needs depth and complexity), an abrupt level jump
+  at the climax, harsh/high notes that break the meditation. Chosen: the whole texture from second 0 (phrase, strings, bass,
+  arpeggio, binaural, his answer within seconds); a singing line instead of bells; a seeded, never-repeating chord walk on
+  semitone-free dorian chords; phrases that pick their transformation to grind least with the chords (676 semitone overlaps
+  over 10,730 notes vs 1,765 before); every level an `env` ramp (largest step 10 % of a layer's peak); transcendence as a slow
+  crossfade (he ebbs, she rises, the choir opens), not a jump. Technique learned: backtick template literals and runtime
+  strings are not mini-notation in Strudel (wrap generated strings in `mini()`); the headless renderer has no `supersaw`
+  worklet, so ensembles are built by hand from detuned sawtooths (`ens`). 432 Hz and the 6 Hz binaural layer kept. Open: the
+  user's ear on the whole direction; whether matter's heartbeat (`heartbeat`, one `$:` line) fits deph's no-pulse identity.
+- 2026-10-24 (later) — Gnosis: the cinematic version (chords, arpeggio, violin line, heartbeat) was rejected on first listen as
+  "música para novela de las 3 de la tarde", not meditation: "más experimental, menos notas, acordes". Kept in
+  `media/gnosis/sounds/backup/gnosis-live-cinematic.strudel`. Replacement, chosen with the user (timbre-and-register dialogue,
+  just intonation): no chords, no arpeggio, no tune; the Demiurge is a cluster of low sawtooths a hair apart beating against
+  each other, Sophia is pure partials; they take turns (opposite-phase swells), the beating slows to unison and her overtones
+  open upward (dissonance resolves into consonance, without a jump), then pure D and A fading to silence. Tuning: A4 = 432
+  makes D2 exactly 72 Hz and D4 exactly 288 Hz, so the harmonic series of D sits on 432 naturally; D dorian in just ratios
+  (1, 9/8, 6/5, 4/3, 3/2, 5/3, 7/4). General rule: for deph's meditative pieces, depth comes from spectrum and time, not
+  from harmonic or melodic drama — avoid orchestral/cinematic gestures (strings + choir + arpeggio) unless asked.
