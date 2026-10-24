@@ -410,12 +410,14 @@ sized for short loops. Check per-section voice presence and gain trends with `--
 section boundary) before telling the user a fade or an entrance works as intended, rather than reading
 the raw event list by eye.
 
-Once the piece evaluates cleanly, point the user at `node strudel-studio` (see `CLAUDE.md`'s
+Once the piece evaluates cleanly, point the user at `node deph-studio` (see `CLAUDE.md`'s
 "Arrangement-view timeline and live playback" section) rather than only reporting numbers — it draws
 one lane per voice over the real time axis and plays the piece for real (a second instance of Strudel's
 own engine, since there's no way to control the VS Code extension from outside it), so the user can
 scrub to any point they have feedback about without you having to guess which cycle a timestamp they
-mention corresponds to.
+mention corresponds to. Give each voice a real name (`pad:`, `sophia:`, not a bare `$:`) so its lane in
+the studio is labelled usefully — see CLAUDE.md's "Name layers..." note for the one exception
+(a piece whose Remotion code already filters by the anonymous `$N` key).
 
 ## Looking ahead: pairing pieces with visuals
 

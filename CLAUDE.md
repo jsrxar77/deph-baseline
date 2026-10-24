@@ -183,12 +183,23 @@ loops, not full pieces).
 ## Arrangement-view timeline and live playback (`studio.mjs`)
 
 ```
-node strudel-studio [--port 5678]
+node deph-studio [--port 5678]
 ```
 
-(`strudel-studio`, at the project root, is a thin CommonJS launcher that execs the real tool,
-`tools/sounds/studio.mjs`, regardless of cwd — `node tools/sounds/studio.mjs` from the project root
-still works the same way, this is just the shorter command.)
+(`deph-studio`, at the project root, is a thin CommonJS launcher that execs the real tool,
+`tools/sounds/deph-studio.mjs`, regardless of cwd — `node tools/sounds/deph-studio.mjs` from the
+project root still works the same way, this is just the shorter command. Serves deph's own avatar,
+`docs/youtube-channel/avatar.jpg`, as the page's branding — no other asset needed.)
+
+**Name layers so the studio shows something useful.** A bare `$:` label gets auto-numbered (`$0`,
+`$1`, ...) by Strudel itself (any label containing `$` always gets an index appended — that's true in
+the real browser REPL too, not a quirk of this project's tooling). Use a plain word instead — `pad:`,
+`sophia:`, `demiurge:` — and the studio's lanes (and the inspector's layer list) show that name
+directly, no `--names`/`names=` override needed. Keep each piece's names short and matched to what
+`<name>.md` calls that voice. **Exception:** if the piece already has (or is planned to get) Remotion
+code that filters events by the literal anonymous key (`bellPulses.ts` does this for Slow Drift,
+matching `$3` — see `docs/daw-bridge.md`), keep `$:` for that piece so the video code's filter doesn't
+silently break, or update that filter to the new name in the same change.
 
 A single generic local dev server, in the spirit of `remotion studio` / `hyperframes preview` — not a
 tool you point at one file, a server you run once. It finds every `media/<name>/sounds/*.strudel`

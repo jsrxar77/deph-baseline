@@ -12,7 +12,7 @@
 // page and that extension, so this page plays the audio itself instead. Seeking re-evaluates the code
 // with `all((x) => x.early(cycles))` appended, the same trick documented for manual use elsewhere.
 //
-// Usage: node tools/sounds/studio.mjs [--port 5678]
+// Usage: node deph-studio [--port 5678]   (a launcher at the project root; or node tools/sounds/deph-studio.mjs)
 import http from 'node:http';
 import { readFileSync, statSync, readdirSync, existsSync } from 'node:fs';
 import { evalStrudel } from './eval-strudel.mjs';
@@ -87,8 +87,13 @@ const PAGE = `<!doctype html>
   * { box-sizing: border-box; }
   html, body { margin:0; height:100%; background:var(--bg); color:var(--text); font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; }
   #app { display:flex; height:100%; }
-  #sidebar { width: 260px; flex: 0 0 260px; background:var(--panel); border-right:1px solid #1b2230; overflow-y:auto; padding: 10px 0; }
-  #sidebar h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding: 6px 14px; margin: 6px 0 0; }
+  #sidebar { width: 260px; flex: 0 0 260px; background:var(--panel); border-right:1px solid #1b2230; overflow-y:auto; padding: 0 0 10px; }
+  #brand { display:flex; align-items:center; gap:10px; padding: 16px 14px 14px; border-bottom: 1px solid #1b2230;
+    background: linear-gradient(135deg, var(--panel), #0d1222 60%, #140c20); }
+  #brand img { width: 34px; height: 34px; border-radius: 50%; border: 1px solid #232b3d; box-shadow: 0 0 12px rgba(56,189,248,0.25); }
+  #brand .name { font-size: 14px; font-weight: 700; letter-spacing: 0.02em; color: var(--text); }
+  #brand .tag { font-size: 10px; color: var(--muted); margin-top: 1px; }
+  #sidebar h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding: 6px 14px; margin: 10px 0 0; }
   .piece { padding: 8px 14px; font-size: 13px; color: var(--text); cursor: pointer; border-left: 2px solid transparent; }
   .piece:hover { background: var(--row); }
   .piece.active { background: var(--row); border-left-color: var(--accent); color: var(--accent); }
@@ -118,7 +123,10 @@ const PAGE = `<!doctype html>
 </style></head>
 <body>
 <div id="app">
-  <div id="sidebar"><h2>compositions</h2><div id="list"></div></div>
+  <div id="sidebar">
+    <div id="brand"><img src="/avatar.jpg" alt="deph" /><div><div class="name">deph studio</div><div class="tag">deep phase</div></div></div>
+    <h2>compositions</h2><div id="list"></div>
+  </div>
   <div id="main">
     <h1 id="title">deph studio</h1>
     <div class="sub" id="subtitle">pick a piece on the left</div>
@@ -324,6 +332,16 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
+    if (url.pathname === '/avatar.jpg') {
+      try {
+        res.writeHead(200, { 'content-type': 'image/jpeg' });
+        res.end(readFileSync(`${ROOT}/docs/youtube-channel/avatar.jpg`));
+      } catch {
+        res.writeHead(404);
+        res.end();
+      }
+      return;
+    }
     if (url.pathname === '/api/pieces') {
       res.writeHead(200, { 'content-type': 'application/json' });
       res.end(JSON.stringify(discover()));

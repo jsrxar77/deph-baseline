@@ -86,11 +86,12 @@ movimiento que la fuente de 24:00, a la mitad de duración.
 
 ### Para escucharla con una línea de tiempo y reproducirla desde cualquier punto
 
-`node tools/sounds/studio.mjs` (una sola vez) y abrir `http://localhost:5678/` — un servidor genérico tipo
-`remotion studio`/`hyperframes preview`: encuentra solas todas las piezas en `media/*/sounds/*.strudel`, las lista
-para elegir, y se recarga sola cuando edito el archivo. Reproduce con una copia real del motor de Strudel (no
-controla la extensión de VS Code, no hay forma de hacerlo) — al hacer click en cualquier minuto, suena de verdad
-desde ahí.
+`node deph-studio` (una sola vez, desde la raíz del repo) y abrir `http://localhost:5678/` — un servidor genérico
+tipo `remotion studio`/`hyperframes preview`, con la marca de deph: encuentra solas todas las piezas en
+`media/*/sounds/*.strudel`, las lista para elegir, y se recarga sola cuando edito el archivo. Las voces de esta
+pieza (`pad`, `sophia`, `canonA`, `demiurge`...) ya tienen nombre propio en el `.strudel` mismo, así que se ven con
+ese nombre en el timeline, no como `$0`/`$1`. Reproduce con una copia real del motor de Strudel (no controla la
+extensión de VS Code, no hay forma de hacerlo) — al hacer click en cualquier minuto, suena de verdad desde ahí.
 
 ---
 

@@ -492,3 +492,12 @@ Also update the distilled sections above if the decision changes a principle, an
   ("Depth and restraint are independent axes", "Choosing a motif's transformation by its harmonic cost", "A
   macro-level trade-off... needs incommensurate periods too") and as new mandatory checklist items (8 and 9) —
   read those sections first for any future piece, not just this log line.
+- 2026-10-24 (tooling, follow-up) — renamed strudel-studio to deph-studio (`node deph-studio` at the project root,
+  `tools/sounds/deph-studio.mjs`) and branded its page with deph's own avatar (`docs/youtube-channel/avatar.jpg`,
+  served at `/avatar.jpg`) in the Deep Decay palette already used for its colors. Also: gave gnosis-live.strudel's
+  13 `$:` layers real names (`pad:`, `sophia:`, `demiurge:`, ...) instead of anonymous `$0`/`$1` — any label
+  containing a literal `$` gets auto-numbered by Strudel itself (confirmed in the real browser REPL's source, not
+  just this project's headless evaluator), so a plain word is what shows up clean in the studio and the inspector.
+  New standing rule for future pieces, in `CLAUDE.md`: name layers with plain words unless the piece's Remotion
+  code already filters events by the anonymous key (Slow Drift's `bellPulses.ts` does, via `docs/daw-bridge.md`'s
+  documented convention) — don't break that silently.
