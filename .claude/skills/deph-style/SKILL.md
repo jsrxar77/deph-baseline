@@ -486,3 +486,9 @@ Also update the distilled sections above if the decision changes a principle, an
   means one tool/server that reads the current file state on demand, modeled after `remotion studio` /
   `hyperframes preview`, not a build step. There is no way to control the VS Code Strudel extension from outside it
   (no API bridge) — the honest alternative is a second, independent playback engine, not a remote control.
+- 2026-10-24 (gnosis, confirmed) — the third pass (motif+transformations+voice-led chords+Fibonacci canon+arpeggio,
+  re-orchestrated with FM bell/filtered saw instead of choir/strings/violin) was approved: "es perfecta, kudos!
+  increible. Capaste todo bien esta vez." Promoted to standing technique, written up in full in `strudel-compose`
+  ("Depth and restraint are independent axes", "Choosing a motif's transformation by its harmonic cost", "A
+  macro-level trade-off... needs incommensurate periods too") and as new mandatory checklist items (8 and 9) —
+  read those sections first for any future piece, not just this log line.

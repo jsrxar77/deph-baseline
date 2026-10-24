@@ -37,6 +37,58 @@ exists yet, stop and use `deph-compose` first.
   there, it's audible-value-zero — not a bug, but give it a small floor (`range(0.06, target)`) unless
   true silence-to-something is wanted.
 
+## Depth and restraint are independent axes — don't drop structure to sound less cinematic
+
+Gnosis (2026-10-24) was rejected three times before it worked, and the three rejections point at the
+same confusion from opposite sides:
+
+1. A first draft (chords, arpeggio, a vibrato violin lead, a literal heartbeat) was rejected as
+   melodrama — "música para novela de las 3 de la tarde", not meditation.
+2. The fix *removed the chords, the arpeggio and the motif entirely* (two detuned clusters beating
+   against each other, a random tone walk, no melodic material) and was rejected as simplistic and
+   repetitive — "una repetición constante", nothing to follow.
+3. The actual fix was to **put the chords, the motif-with-transformations, the canon and the arpeggio
+   back**, and only change the *timbre*: an FM bell instead of a choir, a filtered saw instead of a
+   vowel-formant voice, no vibrato, no heartbeat.
+
+The lesson: "too cinematic/melodramatic" is a complaint about **timbre** (a choir, a solo violin with
+vibrato, a literal heartbeat — instruments that imitate the human voice or body read as emotional
+underscore no matter what they play), never a license to remove **structure** (a real motif that gets
+transposed/inverted/retrograded, a chord progression with voice leading, a canon, an arpeggio that
+traces the harmony). Removing structure to "sound less dramatic" produces the opposite complaint:
+generic, boring, nothing to listen for. Serve both at once — keep the compositional architecture
+(motif, harmony, development, canon) in every piece regardless of genre, and reach for restrained,
+non-vocal timbres (FM bells with integer ratios, filtered saws/sines, no choir/strings ensembles, no
+imitation of a human voice or pulse) when the brief calls for meditative/non-dramatic.
+
+## Choosing a motif's transformation by its harmonic cost
+
+When a short motif has to recur many times across a piece that also has a moving harmony underneath it
+(a chord progression, a harmonic walk), transposing or inverting it by a fixed, hand-picked amount each
+time either goes stale (always the same transposition) or risks grinding against whatever chord happens
+to be sounding. A general, reusable technique (built for Gnosis, works for any motif/harmony pair):
+
+1. Define a small set of candidate transformations of the motif (a few transpositions, the retrograde,
+   retrograde-plus-transposition — a half-dozen or so).
+2. For each candidate, at the actual cycle position it would play, score how many of its notes sit a
+   semitone (pitch class, any octave) from a tone of the chord sounding there — the same "grinds"
+   check used for FM partials vs. the scale (see below), applied to melody vs. harmony instead.
+2b. Score every derived voice that will actually sound together with it (its inversion for a second
+    character's answer, a tintinnabuli voice built from it, a transposed echo) in the same pass, not
+    just the motif itself — a transformation that's clean for the lead voice can still be the wrong
+    choice once its own derived voices are added in.
+3. Pick the lowest-cost candidate for that slot (adding a small amount of seeded random noise to the
+   cost before sorting keeps the choice from being too mechanically "optimal" — some mild friction is
+   fine, a trained ear is listening for suspensions, not a clean sheet). Every third statement or so,
+   skip the optimization and use the motif unchanged, so it stays recognisable across the piece instead
+   of drifting into only ever hearing its variants.
+
+Verified measurably on Gnosis: semitone-clash rate (the same "grinds" check, counted over the whole
+rendered event list) dropped from 1,765 clashes over 10,730 notes in a version that transposed by ear,
+hand-picked offset, to 205 over 6,518 once the motif's transformation was chosen this way per slot — and
+zero clashes at all in the piece's climax and closing section, confirming the resolution to consonance
+holds structurally, not just by intention.
+
 ## Key/scale as the single source of truth
 
 Declare every scale the piece actually uses as a named constant near the top of the file — usually just
@@ -233,6 +285,17 @@ directly fights a piece built specifically to have no fixed beat (see "Structure
 `delaytime` that isn't a round fraction of the tempo, and keep `delayfeedback` low, so the echo reads as
 added space/depth rather than a rhythmic repeat.
 
+## A macro-level "trade-off"/swell between two voices needs incommensurate periods too
+
+The same non-metric-repetition problem above applies one level up, to slow structural things — two
+voices taking turns, a texture that "breathes" by swelling and receding. A single `sine.slow(N)` LFO
+driving that trade-off is a real, measurable, exact repetition every `N` cycles — it will be heard and
+named as such ("una repetición constante"), the same way a round-fraction `delaytime` is heard as a
+beat in a beatless piece. If two or more voices need to phase in and out of prominence over the course
+of a piece, give the ebb-and-flow itself incommensurate periods (several LFOs/canon offsets that don't
+share a common small factor — Fibonacci numbers are a reliable source of these, see "Choosing a motif's
+transformation" above and `the-field.strudel`'s 21/13/8-cycle canon), not one clean oscillator.
+
 ## A percussive "pluck" is the attack→decay *shape*, not the release length — and "pedal" is overlap
 
 After fixing a missing-`decay` snap (see above), a struck voice can still be reported as "dry"/"cutting"
@@ -310,6 +373,15 @@ the check that makes sure it is applied. Run all of it, with numbers, before tel
    that share a register with a sustained pad usually cause most of them; separate the registers.
 7. Every layer sums to the piece's total cycles; no note longer than 4 cycles (superdough keeps a long note sounding after
    Strudel is stopped).
+8. **No single-period macro-repetition.** If the piece has any kind of slow trade-off/swell between voices (not just
+   the fast melodic/rhythmic repetition items 1-2 already cover), check it isn't one `sine`/`saw`-type LFO with one
+   period — that is an exact, nameable repeat every N cycles (Gnosis, 2026-10-24: rejected as "una repetición
+   constante" for exactly this). Needs incommensurate periods instead (see "A macro-level trade-off... " above).
+9. **Depth did not get removed in the name of restraint.** If a brief asked for something calmer/less dramatic and a
+   draft had already been rejected as "too much" (cinematic, melodramatic), confirm the fix changed *timbre* (voices
+   swapped for calmer ones) and not *structure* (motif, harmony, canon, development all still present) — see "Depth
+   and restraint are independent axes" above. A piece that lost its motif/harmony/development to sound calmer will
+   fail this same checklist's item 4.
 
 ## Sources behind the compositional techniques (verify before relying on them again)
 
@@ -337,6 +409,13 @@ Use enough cycles to cover the whole arranged piece — the inspector's default 
 sized for short loops. Check per-section voice presence and gain trends with `--json` (group events by
 section boundary) before telling the user a fade or an entrance works as intended, rather than reading
 the raw event list by eye.
+
+Once the piece evaluates cleanly, point the user at `node strudel-studio` (see `CLAUDE.md`'s
+"Arrangement-view timeline and live playback" section) rather than only reporting numbers — it draws
+one lane per voice over the real time axis and plays the piece for real (a second instance of Strudel's
+own engine, since there's no way to control the VS Code extension from outside it), so the user can
+scrub to any point they have feedback about without you having to guess which cycle a timestamp they
+mention corresponds to.
 
 ## Looking ahead: pairing pieces with visuals
 
