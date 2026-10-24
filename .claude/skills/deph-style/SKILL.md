@@ -501,3 +501,11 @@ Also update the distilled sections above if the decision changes a principle, an
   New standing rule for future pieces, in `CLAUDE.md`: name layers with plain words unless the piece's Remotion
   code already filters events by the anonymous key (Slow Drift's `bellPulses.ts` does, via `docs/daw-bridge.md`'s
   documented convention) — don't break that silently.
+- 2026-10-24 (gnosis, mix balance) — Sofía/Demiurgo's dialogue got lost under the rest of the texture. Measured
+  (not guessed): isolated-layer renders of the Density section (`render.mjs --only <layers>`) plus `ffmpeg -af
+  astats` RMS showed the two lead voices at -34.9 dBFS against -27.4 dBFS for the accompaniment (pad, arp, bass,
+  canon, tint, wind) — 7.5 dB buried. Fixed by raising the leads (`.mul(2.0-2.3)` on their gain envelopes) and
+  lowering pad/arp (`.mul(0.65-0.7)`), landing at -27.7 vs -28.1 dBFS (leads now slightly on top, full mix peak
+  still only -12 dBFS, no clipping risk). General technique for any future "X is buried in the mix" report: render
+  the suspect layer(s) alone and the rest alone over the same window with `--only`, measure RMS with `ffmpeg -af
+  astats=metadata=0:reset=0`, and fix the actual measured gap — don't just nudge a number and hope.

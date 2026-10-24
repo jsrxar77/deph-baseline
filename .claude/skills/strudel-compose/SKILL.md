@@ -198,6 +198,28 @@ that stage to snap through, regardless of attack speed. When this bug is found i
 every other voice's `sustain` value** for the same exposure rather than waiting for it to be reported
 again per-voice — it's a piece-wide check, not a one-off fix.
 
+## Diagnosing a reported "X is buried in the mix": measure the actual gap, don't just nudge a gain
+
+When the user says one or more voices (often a lead/dialogue pair) get lost under everything else, don't
+guess at a gain bump. Render the suspect voice(s) alone and the rest of the piece alone, over the same
+window (pick a section where everything is actually playing, e.g. the densest part), using
+`render.mjs`'s `--only layer1,layer2` against a copy of the file with `all((x) => x.early(startCycle))`
+appended so the window doesn't have to start at cycle 0:
+
+```
+node tools/sounds/render.mjs <copy-with-early>.strudel --cycles <windowLength> --only lead1,lead2 --out leads.wav
+node tools/sounds/render.mjs <copy-with-early>.strudel --cycles <windowLength> --only rest,of,the,layers --out accomp.wav
+ffmpeg -i leads.wav -af astats=metadata=0:reset=0 -f null - 2>&1 | grep "RMS level dB"
+ffmpeg -i accomp.wav -af astats=metadata=0:reset=0 -f null - 2>&1 | grep "RMS level dB"
+```
+
+The dB gap between the two RMS numbers is the actual size of the problem — on Gnosis this was 7.5 dB, not
+a subtle imbalance. Fix by raising the lead(s) and lowering the loudest accompaniment voices with
+`.mul(k)` on their gain `env()` (keep the full mix's peak dB in view so the boost doesn't start clipping;
+there's usually plenty of headroom in an ambient mix), then re-render and re-measure the same two windows
+to confirm the gap actually closed (aim for the leads at or slightly above the accompaniment, not just
+"less far below") before telling the user it's fixed.
+
 ## Diagnosing a reported "click"/"glitch": test the actual failure pattern, not just one hit
 
 If the report is inconsistent ("sometimes at the start, sometimes at the end") that itself is a clue —

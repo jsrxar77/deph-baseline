@@ -81,8 +81,19 @@ movimiento que la fuente de 24:00, a la mitad de duración.
   2-3 (armónico, nunca metálico) en los parámetros reales, no solo en el código.
 - Choques de semitono entre voces distintas: 205 sobre 6.518 notas (3,1 %), concentrados en Descent/Density; cero en
   Transcendencia y en la Paz — la resolución a consonancia está confirmada estructuralmente, no solo en la intención.
-- Medido con el inspector; no se renderizó audio real todavía. **Falta lo principal: que la escuches y digas si
-  ahora sí tiene algo que te haga seguir escuchando.**
+- Medido con el inspector; no se renderizó audio real completo todavía.
+
+### Balance de mezcla: Sofía y el Demiurgo por encima del resto
+
+El usuario reportó que el diálogo entre Sofía y el Demiurgo se perdía contra el resto de la textura. Medido
+(no solo ajustado al oído): renderizando el tramo de Density (ciclos 150-180) por separado, las voces del
+diálogo (sophia + demiurge) sonaban **-34,9 dBFS RMS** contra **-27,4 dBFS RMS** del resto del acompañamiento
+(pad, padHigh, bajo, arpegio, canon, tintinnabuli, viento) — el acompañamiento sonaba 7,5 dB más fuerte, exactamente
+lo que se reportó. Corregido subiendo sophia/sophiaUp/canonA/canonB/demiurge (×2,3 / ×2,0) y bajando
+pad/padHigh/arpegio (×0,7 / ×0,65), más un filtro algo más abierto para el Demiurgo (más presencia sin más
+distorsión). Resultado medido tras el ajuste: diálogo en **-27,7 dBFS**, acompañamiento en **-28,1 dBFS** — el
+diálogo ahora suena ligeramente por encima, sin saturar (pico de la mezcla completa: -12 dB, con margen).
+**Falta lo principal: que la escuches y confirmes si ahora el diálogo se distingue bien.**
 
 ### Para escucharla con una línea de tiempo y reproducirla desde cualquier punto
 
