@@ -183,8 +183,12 @@ loops, not full pieces).
 ## Arrangement-view timeline and live playback (`studio.mjs`)
 
 ```
-node tools/sounds/studio.mjs [--port 5678]
+node strudel-studio [--port 5678]
 ```
+
+(`strudel-studio`, at the project root, is a thin CommonJS launcher that execs the real tool,
+`tools/sounds/studio.mjs`, regardless of cwd — `node tools/sounds/studio.mjs` from the project root
+still works the same way, this is just the shorter command.)
 
 A single generic local dev server, in the spirit of `remotion studio` / `hyperframes preview` — not a
 tool you point at one file, a server you run once. It finds every `media/<name>/sounds/*.strudel`

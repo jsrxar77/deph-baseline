@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+// Thin launcher so `node strudel-studio` works from the project root, regardless of cwd — the real
+// tool is tools/sounds/studio.mjs (see CLAUDE.md's "Arrangement-view timeline and live playback"
+// section). Plain CommonJS on purpose: this file has no extension, so Node parses it as CJS unless a
+// package.json sets "type": "module" — there is none at the project root (see CLAUDE.md's `/tools`
+// section for why), so `require` is what actually runs here, not `import`.
+const { spawn } = require('child_process');
+const path = require('path');
+
+const target = path.join(__dirname, 'tools', 'sounds', 'studio.mjs');
+const child = spawn(process.execPath, [target, ...process.argv.slice(2)], { stdio: 'inherit' });
+child.on('exit', (code) => process.exit(code ?? 0));
