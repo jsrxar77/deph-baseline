@@ -591,3 +591,13 @@ Also update the distilled sections above if the decision changes a principle, an
   melody rewrites: "repetitive/boring" with real harmonic structure already present almost always means the
   SUPPORTING voices are derived from (not independent of) the lead voice — check that before touching the lead
   voice's own material again.
+- 2026-10-24 (deph-studio, cycle guess — the real fix this time) — reported broken a third time: "couldn't guess
+  the cycle count" for gnosis-live.strudel. Root cause: the regex scanner was capped at the file's first 4000
+  characters (a leftover from before the yaml lookup existed), and the fugue rewrite's longer header comment pushed
+  the actual "360 cycles = 12:00 exact" phrase to byte 4133 — just past the cap. Fixed by removing the truncation
+  entirely (these files are small; scanning the whole thing costs nothing) and dropping the loose "N cycles"
+  fallback regex that used to cause wrong guesses before the yaml lookup existed (now: only the exact "N cycles =
+  H:MM exact" phrasing counts, or the field is left blank for the user to fill in — never a confident wrong guess).
+  General rule: any string-matching heuristic over a growing file (a header comment, in this case) needs either no
+  truncation or a generous, explicitly-justified one — a hardcoded character cap that happened to work once is a
+  ticking bug, not a fix, the same class of mistake as a hardcoded array length.

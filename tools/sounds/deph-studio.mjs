@@ -52,9 +52,14 @@ function discover() {
       const rel = `media/${d.name}/sounds/${f.name}`;
       let cycles = rel === canonicalFile ? yamlCycles : null;
       if (cycles == null) {
+        // Scan the WHOLE file, not a truncated prefix — a `slice(0, N)` here already broke twice as comment
+        // headers grew past it (most recently: the real duration moved to byte 4133, past a 4000-char cap). Only
+        // the specific "N cycles = H:MM exact" phrasing counts; the looser "N cycles" fallback this used to have
+        // was what guessed wrong for slow-drift/the-field before the yaml lookup existed — better to leave cycles
+        // null (the page asks for it) than confidently guess wrong from an unrelated number in the file.
         try {
-          const head = readFileSync(`${ROOT}/${rel}`, 'utf8').slice(0, 4000);
-          const m = head.match(/(\d+)\s*cycles\s*=\s*\d+:\d\d\s*exact/i) || head.match(/(\d+)\s*cycles/i);
+          const whole = readFileSync(`${ROOT}/${rel}`, 'utf8');
+          const m = whole.match(/(\d+(?:\.\d+)?)\s*cycles\s*=\s*\d+:\d\d\s*exact/i);
           if (m) cycles = Number(m[1]);
         } catch { /* leave cycles null; the page asks for it */ }
       }
