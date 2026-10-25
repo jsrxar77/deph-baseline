@@ -573,3 +573,21 @@ Also update the distilled sections above if the decision changes a principle, an
   concept's stated technology from HyperFrames (stale — that's reserved for shorts only, per the deph-shorts
   convention established earlier) to Remotion + @react-three/fiber/three, which gnosis already uses. Nothing built
   yet — this is a written proposal awaiting approval before visuals-compose actually builds it.
+- 2026-10-24 (gnosis, real fugue) — the sequence+anchor rework was still rejected, hard: "son 2 patrones... no
+  genera tensión, no genera espera... es como escuchar 2 repeticiones... entiendes contrapunto, quizá fuga." Real
+  diagnosis: Demiurge/canon voices were mirrors or octave-copies of Sophia's own line — never independent material,
+  so no amount of varying Sophia alone could produce real counterpoint. Rewritten as an actual fugue: a FIXED
+  subject (never regenerated — a real recurring theme), a tonal answer (subject a fifth up), an INDEPENDENT
+  countersubject for the Demiurge with complementary rhythm (moves when the subject holds, holds when it moves —
+  the actual definition of counterpoint, not parallel motion), modulating entries (the subject re-enters at
+  different scale degrees as the piece progresses), episodes built from the subject's own first three notes
+  sequenced through a passage (real developmental technique, not new unrelated filler), and stretto (Canon A from
+  Density, Canon B from the Density/Transcendence hinge, imitating the subject/answer on a short late() offset —
+  genuine overlapping imitation, the real source of climactic density, not more voices playing the same thing).
+  Implemented as a block-schedule system (`buildLine(blocks)`): each voice's full 360-cycle part is a list of
+  {len, role, deg, oct} blocks (silence when role is omitted) that must sum exactly to the piece's length — this
+  made a 20+ event, 4-voice hand-composed timeline tractable and bug-checkable (the inspector either evaluates
+  cleanly or doesn't) instead of error-prone manual cycle arithmetic. General rule, the real lesson across all three
+  melody rewrites: "repetitive/boring" with real harmonic structure already present almost always means the
+  SUPPORTING voices are derived from (not independent of) the lead voice — check that before touching the lead
+  voice's own material again.

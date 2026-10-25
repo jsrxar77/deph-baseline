@@ -102,6 +102,30 @@ unas 30 veces seguidas, y el pad usaba un voice-leading tan suave que el agudo c
 - **El pad ya no está clavado en una nota**: el ancla del voice-leading recorre un ciclo corto de notas del Re
   dórico en vez de quedarse fija, así el agudo del acorde se mueve de verdad a lo largo de cada sección.
 
+### De 2 patrones a una fuga real
+
+El arreglo anterior (secuencia + ancla) seguía siendo, en palabras del usuario, "2 patrones" rotando — y las otras
+voces (Demiurgo, canon) eran la misma frase espejada o copiada, no voces independientes. "No genera tensión, no
+genera espera... entiendes contrapunto, quizá fuga." Reescrito de cero como una fuga real:
+
+- **Un sujeto fijo** (Re . Fa La Do La Fa Re) que nunca se regenera al azar — un tema que el oído puede aprender de
+  verdad, no una plantilla que se repite con variaciones.
+- **Una respuesta tonal**: cuando el Demiurgo entra, no copia a Sofía — canta el mismo sujeto transportado una
+  quinta arriba, la convención real de una fuga.
+- **Un contrasujeto independiente** para el Demiurgo: material propio, no un espejo — se mueve cuando el sujeto
+  está quieto y al revés (eso es contrapunto de verdad, no paralelismo).
+- **Entradas moduladas**: el sujeto vuelve en distintos grados de la escala a medida que avanza la pieza, como en
+  una fuga real, no siempre en la misma altura.
+- **Episodios**: fragmentos de las primeras tres notas del sujeto, secuenciados hacia arriba o abajo entre
+  entradas — desarrollo construido con el material del propio tema, no relleno.
+- **Stretto hacia la Transcendencia**: Canon A (desde Density) y Canon B (desde el quiebre Density/Transcendencia)
+  imitan el sujeto muy cerca en el tiempo de las otras voces — entradas superpuestas, la fuente real de tensión y
+  densidad, no más voces haciendo lo mismo.
+- El arpegio, el bajo y el pad quedan igual que en el ajuste anterior (ya funcionaban).
+
+Verificado con el inspector: 244 choques de semitono sobre 6.010 notas (4,1%), cero en Transcendencia y Paz — la
+resolución a consonancia se sostiene. Renderizado el arranque sin errores ni warnings.
+
 ### Ritmo: de marcha a vuelo
 
 El usuario notó que al principio cada nota caía exactamente en el pulso — una grilla perfecta, no un viaje. La
