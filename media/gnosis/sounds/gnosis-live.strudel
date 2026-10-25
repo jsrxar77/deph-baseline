@@ -174,7 +174,10 @@ const line = (key, octave) => arrange(...SLOTS.map((s) => [s.len, n(mini(s[key])
 // Humanize: a small random onset offset (0-30 ms at this tempo) so notes stop landing exactly on the grid — the
 // same technique the-field.strudel uses on its arpeggio. Applied to every melodic line below so none of them
 // reads as a metronome, which is what made the opening feel like a march instead of floating.
-const humanize = (p) => p.late(rand.segment(16).range(0, 0.015));
+// `rand.segment(16)` here was the actual bottleneck in the studio (confirmed: ~6s per voice instead of ~0.2s) —
+// segmenting a continuous signal and combining it with `.late()` across an arrange()-nested pattern is expensive in
+// Strudel; a plain continuous `rand` sampled at each note's own onset is just as random note-to-note and ~25x cheaper.
+const humanize = (p) => p.late(rand.range(0, 0.015));
 
 // ---- the flowing arpeggio: each chord's own tones, a contour that wanders up and down the chord ladder -------------
 const DENS = [[0, 0.45], [60, 0.6], [135, 0.75], [225, 0.85], [260, 0.92], [300, 0.6], [345, 0.25], [360, 0.1]];

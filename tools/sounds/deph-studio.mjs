@@ -17,6 +17,7 @@ import http from 'node:http';
 import { readFileSync, statSync, readdirSync, existsSync } from 'node:fs';
 import { evalStrudel } from './eval-strudel.mjs';
 import { toEvents } from './analyze.mjs';
+import { load as loadYaml } from 'js-yaml';
 
 const STRUDEL_WEB_VERSION = '1.3.0'; // matches @strudel/webaudio in package.json
 const ROOT = process.cwd(); // run from the project root, like every other tool in tools/sounds
@@ -37,22 +38,41 @@ function discover() {
     if (!existsSync(soundsDir)) continue;
     let files = [];
     try { files = readdirSync(soundsDir, { withFileTypes: true }); } catch { continue; }
+    // The composition's own yaml is the real source of truth for duration (`total_cycles`) — but only for the
+    // one file it actually names (`domains.sound.file`); a variant like gnosis-live.strudel has its own, different
+    // duration and must fall back to its own comment guess instead of inheriting the canonical file's length.
+    let yamlCycles = null, canonicalFile = null;
+    try {
+      const doc = loadYaml(readFileSync(`${ROOT}/media/${d.name}/${d.name}.yaml`, 'utf8'));
+      if (typeof doc?.total_cycles === 'number') yamlCycles = doc.total_cycles;
+      if (typeof doc?.domains?.sound?.file === 'string') canonicalFile = `media/${d.name}/${doc.domains.sound.file}`;
+    } catch { /* no yaml, or no total_cycles field — fall back to the per-file guess below */ }
     for (const f of files) {
       if (f.isDirectory() || !f.name.endsWith('.strudel')) continue;
       const rel = `media/${d.name}/sounds/${f.name}`;
-      let cycles = null;
-      try {
-        const head = readFileSync(`${ROOT}/${rel}`, 'utf8').slice(0, 4000);
-        const m = head.match(/(\d+)\s*cycles\s*=\s*\d+:\d\d\s*exact/i) || head.match(/(\d+)\s*cycles/i);
-        if (m) cycles = Number(m[1]);
-      } catch { /* leave cycles null; the page asks for it */ }
+      let cycles = rel === canonicalFile ? yamlCycles : null;
+      if (cycles == null) {
+        try {
+          const head = readFileSync(`${ROOT}/${rel}`, 'utf8').slice(0, 4000);
+          const m = head.match(/(\d+)\s*cycles\s*=\s*\d+:\d\d\s*exact/i) || head.match(/(\d+)\s*cycles/i);
+          if (m) cycles = Number(m[1]);
+        } catch { /* leave cycles null; the page asks for it */ }
+      }
       out.push({ path: rel, label: `${d.name} / ${f.name}`, cycles });
     }
   }
   return out.sort((a, b) => a.label.localeCompare(b.label));
 }
 
+// Some pieces use a `.late(rand.segment(N)...)`-style humanize (The Field, Musica Universalis) that's genuinely
+// expensive to query over a full piece in Strudel — 20s+ for a 12-minute piece, confirmed by profiling. Caching
+// the computed result per (file, cycles, names, bin, mtime) means that cost is only ever paid once per edit, not
+// on every reload/switch — the actual fix for "se queda colgado" when flipping between pieces repeatedly.
+const dataCache = new Map();
 async function computeData(file, cycles, namesParam, bin) {
+  const mtime = statSync(`${ROOT}/${file}`).mtimeMs;
+  const cacheKey = `${file}|${cycles}|${namesParam.join(',')}|${bin}|${mtime}`;
+  if (dataCache.has(cacheKey)) return dataCache.get(cacheKey);
   const code = readFileSync(`${ROOT}/${file}`, 'utf8');
   const { pattern, cps, layers, core } = await evalStrudel(code);
   const haps = pattern.queryArc(0, cycles).filter((h) => h.hasOnset());
@@ -76,7 +96,9 @@ async function computeData(file, cycles, namesParam, bin) {
   }
   const peaks = grid.map((row) => Math.max(...row, 1e-6));
   const norm = grid.map((row, i) => row.map((v) => v / peaks[i]));
-  return { names, grid: norm, totalSec, binSec, cps, source: code, mtime: statSync(`${ROOT}/${file}`).mtimeMs };
+  const result = { names, grid: norm, totalSec, binSec, cps, source: code, mtime };
+  dataCache.set(cacheKey, result);
+  return result;
 }
 
 const PAGE = `<!doctype html>
@@ -118,7 +140,6 @@ const PAGE = `<!doctype html>
   #axis { position:relative; margin: 2px 12px 0 140px; height: 16px; font-size: 10px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; }
   #axis span { position:absolute; transform: translateX(-50%); }
   #playhead { position:absolute; top:0; bottom:0; width:1px; background: var(--accent); left:140px; pointer-events:none; box-shadow: 0 0 6px var(--accent); }
-  #hint { font-size: 11px; color: var(--muted); margin-top: 14px; max-width: 640px; }
   #reloadBadge { display:none; font-size: 11px; color: var(--live); margin-left: 8px; }
 </style></head>
 <body>
@@ -144,9 +165,6 @@ const PAGE = `<!doctype html>
     <div id="track"><div id="playhead"></div><div id="lanes"></div></div>
     <div id="axis"></div>
     <div id="status"></div>
-    <div id="hint">This page plays with its own copy of the Strudel audio engine (loaded from a CDN) — a second,
-      independent instance, not a remote control for the VS Code extension. It watches the open file and
-      reloads automatically when you save an edit.</div>
   </div>
 </div>
 <script type="module">
@@ -199,18 +217,25 @@ async function load() {
   const forPath = current.path; // snapshot: if the user picks a different piece before this fetch
                                  // resolves, the stale response below must not overwrite the new one.
   stopPlayback();
-  statusEl.textContent = 'reading ' + forPath + '…';
   playBtn.disabled = true; playBtn.textContent = 'loading…';
   const q = { file: forPath, cycles: paramsForm.cycles.value, names: paramsForm.names.value, bin: paramsForm.bin.value || '1' };
+  // Some pieces (anything using a per-note random humanize) take 10-25s to evaluate the first time — say so,
+  // with a running clock, so a slow first load doesn't read as a hang. Cached on the server after that.
+  const startedAt = Date.now();
+  const tick = () => { if (current && current.path === forPath) statusEl.textContent = 'reading ' + forPath + '… (' + Math.round((Date.now() - startedAt) / 1000) + 's — first load of a complex piece can take up to ~25s; faster after)'; };
+  tick();
+  const statusTimer = setInterval(tick, 1000);
   let result;
   try {
     const res = await fetch('/api/data?' + new URLSearchParams(q));
     if (!res.ok) throw new Error(await res.text());
     result = await res.json();
   } catch (err) {
+    clearInterval(statusTimer);
     if (current && current.path === forPath) { statusEl.textContent = 'could not load: ' + err.message; statusEl.classList.add('live'); }
     return;
   }
+  clearInterval(statusTimer);
   if (!current || current.path !== forPath) return; // superseded by a newer selection while this was in flight
   DATA = result;
   statusEl.textContent = ''; statusEl.classList.remove('live');

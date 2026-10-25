@@ -548,3 +548,18 @@ Also update the distilled sections above if the decision changes a principle, an
   canon) usually means a parameter that's supposed to vary is actually frozen somewhere — find which one (here:
   the transformation pool was too narrow, the bass figure was hardcoded, the anchor was a bare string) rather than
   assuming more structure is needed when the structure is already there.
+- 2026-10-24 (deph-studio, performance) — reported as hanging/"se queda colgado cargando" when picking pieces. Real
+  cause, found by profiling: `rand.segment(16).late(...)` (the humanize technique used on gnosis-live, The Field,
+  and Musica Universalis) is genuinely ~35x slower to query than a plain `rand.range(...)` with no `.segment()` —
+  24-28s to evaluate gnosis-live's full 360 cycles, every single load. Fixed: humanize now uses plain continuous
+  `rand` (still different per note, just not pre-segmented) — same piece dropped to ~3s. Also cached /api/data
+  results server-side per (file, cycles, names, bin, mtime), so switching back to an already-loaded piece is
+  instant even for genuinely slow pieces, and added a running "Ns elapsed, up to ~25s for complex pieces" status
+  message so a necessarily-slow first load doesn't read as broken. Separately fixed the cycle-count auto-guess:
+  it now reads each composition's own `<name>.yaml` `total_cycles` (reliable) instead of scanning the .strudel
+  file's comments for the first "N cycles" match (wrong for slow-drift/the-field, and wrongly inherited the
+  Ableton-source file's 720 onto gnosis-live's own 360 variant in a first pass of this fix — the yaml value must
+  only apply to the exact file `domains.sound.file` names, not every .strudel in that composition's sounds/
+  folder). General rule: `rand.segment(N)` combined with `.late()` across an `arrange()`-nested pattern is a known
+  expensive combination in this project's Strudel setup — profile before assuming a "stuck" studio load is a
+  tooling bug rather than a genuinely slow pattern.
