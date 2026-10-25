@@ -404,6 +404,18 @@ the check that makes sure it is applied. Run all of it, with numbers, before tel
    swapped for calmer ones) and not *structure* (motif, harmony, canon, development all still present) — see "Depth
    and restraint are independent axes" above. A piece that lost its motif/harmony/development to sound calmer will
    fail this same checklist's item 4.
+10. **Interest never came from more notes, speed, or simultaneous density.** Read this before fixing a "boring/too
+    repetitive" report on a meditative piece — it is the mistake this project's own pieces keep almost making. "Pedal,
+    not melody" (Sound style, above) and "Sparse and spacious beats dense and busy" are standing rules, not
+    suggestions: every melodic line moves by step or a third at most, long held notes, no runs of three or more
+    notes in a row ascending/descending (Gnosis, 2026-10-24: a fugue subject that arched up to the 7th and
+    sequenced episodes of running notes, and a stretto that stacked simultaneous entries for climax, were both
+    rejected — "no puede haber muchas notas juntas porque desconcentra"). When a piece genuinely needs a real
+    musical "event" (an ascent, an arrival, a climax), reach for a slow large-scale device instead — a Shepard tone
+    (built the piece's own pace, one chord change at a time, never stepping through scale degrees quickly — see
+    `musica-universalis.strudel`'s "flight"), a drone, a drift, an accompaniment that actually ducks out and
+    returns (a real large-scale dynamic arc: build, peak, release, not uniform presence throughout) — never more
+    notes played faster or more voices stacked at once.
 
 ## Sources behind the compositional techniques (verify before relying on them again)
 

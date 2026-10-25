@@ -125,46 +125,39 @@ const ANCHOR_HIGH = cat(...PROG.map((c, i) => pure(['D5', 'F5', 'E5', 'G5', 'F5'
 const voiced = (anchor) => chord(CHORDS).dict('ireal').anchor(anchor).mode('below').voicing();
 const chordAt = (cyc) => PROG[Math.min(179, Math.floor(cyc / 2))];
 
-// ---- the fugue: a real subject, an independent countersubject, modulating entries, episodes, stretto --------------
-// Earlier drafts always transposed or inverted the SAME line — recognisable transformation is not development, and
-// a "mirror" voice is not counterpoint (it's the same notes). Real fix: a fixed, recurring SUBJECT (not regenerated
-// each time — a theme the ear can actually learn) answered by an independent COUNTERSUBJECT with complementary
-// rhythm (moves while the subject holds, holds while the subject moves) in the Demiurge's own register. The subject
-// re-enters at different scale degrees as the piece goes on (modulating entries, real fugal technique), canonA and
-// canonB later imitate it at a short time offset (stretto — overlapping entries, the actual source of the tension
-// and density the piece was missing, not just more voices doing the same thing). Short fragments of the subject's
-// own first three notes get sequenced through episodes between entries, so the piece keeps travelling instead of
-// alternating between two fixed templates.
-const SUBJ = [0, null, 2, 4, 6, 4, 2, 0];                  // D . F A C A F D — the subject
-const SUBJ_W = [2, 1, 2, 2, 3, 2, 2, 4];
-const ANSWER = SUBJ.map((d) => (d === null ? null : d + 4)); // the subject a fifth up — the tonal answer
-const CSUBJ = [null, null, null, null, 5, 4, 3, 2, 1, 0];  // independent: fills in while the subject holds its peak
-const CSUBJ_W = [2, 2, 2, 2, 1, 1, 1, 1, 1, 4];
+// ---- the dialogue: two distinct voices, turns, real counterpoint — pedal, not melody --------------------------------
+// Three earlier versions got this wrong in opposite directions: a fugue subject with running episodes and stretto
+// was too busy ("no puede haber muchas notas juntas"); the fix after that overcorrected into near-silence, both
+// voices reusing the same 2-3 shapes transposed, rarely overlapping — "cada vez lo haces peor, se repite todo
+// constantemente, dónde quedó el contrapunto, dónde quedó el Demiurgo hablando con Sofía". The actual target was
+// never "fewer notes" — it's a small family of DISTINCT held-note cells per character (so transposition isn't the
+// only thing that varies) and TRUE TURN-TAKING (each one truly silent while the other sings, not overlapping drone)
+// so a casual listener can follow who is "speaking" — real dialogue, legible, without a single fast note anywhere.
+// Every cell still moves by step or a third at most.
+const S_CELLS = { // Sophia: five distinct shapes, D-rooted, reaching upward (A B D flavour)
+  A: [[0, null, 2, null, 0], [4, 2, 5, 2, 6]],        // D . F . D
+  B: [[2, null, 0, null, -1], [4, 2, 4, 2, 6]],       // F . D . C
+  C: [[0, 1, 0, null, 2], [3, 3, 3, 2, 7]],           // D E D . F
+  D: [[4, null, 2, null, 0], [4, 2, 4, 2, 6]],        // A . F . D
+  E: [[null, 0, 2, 0, null], [2, 4, 4, 4, 4]],        // . D F D .
+};
+const D_CELLS = { // The Demiurge: three distinct shapes, narrower and lower — his own character, not her material
+  A: [[0, null, -1, null, 0], [5, 2, 4, 2, 6]],       // D . C . D — grounded
+  B: [[-1, null, 0, null, 1], [4, 2, 4, 2, 6]],       // C . D . E — a slow climb, answering her
+  C: [[0, null, 0, null, -1], [5, 2, 5, 2, 8]],       // D . D . C — a held pedal that droops at the end
+};
 const num = (a, f) => a.map((d) => (d === null ? null : f(d)));
 const triadAbove = (d) => { let x = d + 1; while (![0, 2, 4].includes(((x % 7) + 7) % 7)) x++; return x; };
 const dur = (a, w) => a.map((d, i) => (d === null ? '~' : d) + '@' + w[i]).join(' ');
-
-// A fragment: the subject's own first three pitched notes (D F A), sequenced up or down through `reps` statements —
-// real "episode" technique (development built from the theme's own material, not new unrelated material).
-const fragment = (dir, reps) => {
-  const notes = [], weights = [];
-  for (let r = 0; r < reps; r++) { const b = dir * r; notes.push(b, b + 2, b + 4); weights.push(1, 1, 2); }
-  notes.push(null); weights.push(2);
-  return { notes, weights };
-};
 const materialFor = (b) => {
-  let notes, weights;
-  if (b.role === 'subj') { notes = SUBJ; weights = SUBJ_W; }
-  else if (b.role === 'answer') { notes = ANSWER; weights = SUBJ_W; }
-  else if (b.role === 'csubj') { notes = CSUBJ; weights = CSUBJ_W; }
-  else { const f = fragment(b.dir, b.reps); notes = f.notes; weights = f.weights; }
+  const [notes, weights] = (b.voice === 'S' ? S_CELLS : D_CELLS)[b.cell];
   return { notes: notes.map((d) => (d === null ? null : d + (b.deg || 0))), weights };
 };
-// Builds one voice's whole 360-cycle pattern from a list of blocks (role + register, or silence) — every block's
+// Builds one voice's whole 360-cycle pattern from a list of blocks (cell + register, or silence) — every block's
 // `len` sums to the piece's total, so there's no manual cycle bookkeeping to get wrong.
 const buildLine = (blocks, useTint) => {
   const segs = blocks.map((b) => {
-    if (!b.role) return [b.len, silence];
+    if (!b.cell) return [b.len, silence];
     const { notes, weights } = materialFor(b);
     const final = useTint ? num(notes, triadAbove) : notes;
     return [b.len, n(mini(dur(final, weights))).scale(scaleAt(b.oct)).slow(b.len)];
@@ -172,71 +165,68 @@ const buildLine = (blocks, useTint) => {
   return arrange(...segs);
 };
 
-// Sophia — states the subject and answer at modulating degrees, carries the countersubject when the Demiurge takes
-// the subject, and threads episodes between entries. Always active: she's the piece's own throughline.
-const SOPHIA_BLOCKS = [
-  // I. Pleroma — exposition, alone.
-  { len: 14, role: 'subj', deg: 0, oct: 4 }, { len: 10, role: 'frag', dir: 1, reps: 3, deg: 4, oct: 4 },
-  { len: 14, role: 'subj', deg: 0, oct: 4 }, { len: 12, role: 'frag', dir: -1, reps: 3, deg: 2, oct: 4 },
-  { len: 10, role: 'csubj', deg: 7, oct: 4 },
-  // II. Descent — the Demiurge answers; she takes the countersubject, then a modulating entry a step up.
-  { len: 16, role: 'csubj', deg: 4, oct: 4 }, { len: 12, role: 'frag', dir: 1, reps: 3, deg: 6, oct: 4 },
-  { len: 16, role: 'subj', deg: 2, oct: 4 }, { len: 15, role: 'frag', dir: 1, reps: 4, deg: 4, oct: 4 },
-  { len: 16, role: 'csubj', deg: 7, oct: 4 },
-  // III. Density — canonA joins (stretto begins); the heaviest, most contrapuntally dense movement.
-  { len: 16, role: 'answer', deg: 0, oct: 5 }, { len: 12, role: 'frag', dir: 1, reps: 3, deg: 0, oct: 4 },
-  { len: 16, role: 'csubj', deg: 7, oct: 4 }, { len: 14, role: 'subj', deg: 2, oct: 4 },
-  { len: 12, role: 'frag', dir: -1, reps: 3, deg: 4, oct: 4 }, { len: 20, role: 'csubj', deg: 4, oct: 4 },
-  // IV. Transcendence — her own register lifts to the octave above; canonB joins the stretto.
-  { len: 10, role: 'subj', deg: 0, oct: 5 }, { len: 14, role: 'answer', deg: 0, oct: 5 },
-  { len: 16, role: 'csubj', deg: 4, oct: 5 }, { len: 16, role: 'subj', deg: 0, oct: 5 },
-  { len: 19, role: 'csubj', deg: 7, oct: 5 },
-  // V. Eternal peace — one last fragment, spacious, then true silence before 12:00.
-  { len: 25, role: 'frag', dir: 0, reps: 1, deg: 0, oct: 4 }, { len: 35 },
+// ONE shared timeline: every entry is one character's turn (the other is silent for it), so the dialogue is always
+// legible. Turns get shorter (more frequent exchanges) as the arc intensifies, without ever adding fast notes —
+// density comes from how OFTEN they trade turns, not from notes-per-turn. Movement IV ends in a gap that the
+// Shepard fills alone (see below); movement V is Sophia's last word.
+const TIMELINE = [
+  // I. Pleroma (60) — Sophia alone; three distinct cells, not one repeated.
+  { len: 20, voice: 'S', cell: 'A', deg: 0, oct: 4 }, { len: 20, voice: 'S', cell: 'B', deg: 2, oct: 4 },
+  { len: 20, voice: 'S', cell: 'C', deg: 4, oct: 4 },
+  // II. Descent (75) — the Demiurge enters; true alternation, five turns.
+  { len: 15, voice: 'S', cell: 'D', deg: 0, oct: 4 }, { len: 15, voice: 'D', cell: 'A', deg: 0, oct: 2 },
+  { len: 15, voice: 'S', cell: 'A', deg: 2, oct: 4 }, { len: 15, voice: 'D', cell: 'B', deg: 3, oct: 2 },
+  { len: 15, voice: 'S', cell: 'E', deg: 4, oct: 4 },
+  // III. Density (90) — shorter, more frequent turns (more exchange, not more notes); the darkest harmony.
+  { len: 10, voice: 'S', cell: 'C', deg: 0, oct: 4 }, { len: 10, voice: 'D', cell: 'C', deg: -1, oct: 2 },
+  { len: 10, voice: 'S', cell: 'D', deg: 2, oct: 4 }, { len: 10, voice: 'D', cell: 'A', deg: 0, oct: 2 },
+  { len: 10, voice: 'S', cell: 'B', deg: 4, oct: 4 }, { len: 10, voice: 'D', cell: 'B', deg: 2, oct: 2 },
+  { len: 10, voice: 'S', cell: 'A', deg: 2, oct: 4 }, { len: 10, voice: 'D', cell: 'A', deg: -1, oct: 2 },
+  { len: 10, voice: 'S', cell: 'E', deg: 0, oct: 4 },
+  // IV. Transcendence (75) — his farewell, her last question in her higher register, then she falls silent too —
+  // the Shepard (255-305) carries the rest of this movement and the start of the next alone.
+  { len: 13, voice: 'D', cell: 'C', deg: 0, oct: 2 }, { len: 12, voice: 'S', cell: 'A', deg: 0, oct: 5 },
+  { len: 50 },
+  // V. Eternal peace (60) — one last pedal, spacious, then true silence before 12:00.
+  { len: 30, voice: 'S', cell: 'A', deg: 0, oct: 4 }, { len: 30 },
 ];
-// The Demiurge — an independent countersubject voice (not a mirror of Sophia), absent until matter manifests in
-// Descent, states the answer himself twice (he gets to carry the subject too, low), and fades out mid-Transcendence.
-const DEMIURGE_BLOCKS = [
-  { len: 60 }, // I. Pleroma — matter hasn't manifested yet
-  { len: 16, role: 'answer', deg: 0, oct: 2 }, { len: 12, role: 'frag', dir: -1, reps: 3, deg: 0, oct: 2 },
-  { len: 16, role: 'csubj', deg: 6, oct: 2 }, { len: 15, role: 'frag', dir: 1, reps: 3, deg: 2, oct: 2 },
-  { len: 16, role: 'answer', deg: 3, oct: 2 },
-  { len: 16, role: 'csubj', deg: 0, oct: 2 }, { len: 12, role: 'frag', dir: -1, reps: 3, deg: 4, oct: 2 },
-  { len: 16, role: 'answer', deg: 3, oct: 2 }, { len: 14, role: 'csubj', deg: 2, oct: 2 },
-  { len: 12, role: 'frag', dir: 1, reps: 3, deg: 0, oct: 2 }, { len: 20, role: 'answer', deg: 0, oct: 2 },
-  { len: 10, role: 'csubj', deg: 0, oct: 2 }, { len: 14, role: 'answer', deg: 0, oct: 2 }, { len: 51 }, // fades, dissolved
-  { len: 60 }, // V. gone
-];
-// Canon A — imitates the subject in stretto (close time-offset via .late below), Density onward only.
-const CANONA_BLOCKS = [
-  { len: 60 }, { len: 75 },
-  { len: 16, role: 'subj', deg: 0, oct: 3 }, { len: 12, role: 'frag', dir: -1, reps: 3, deg: 4, oct: 3 },
-  { len: 16, role: 'answer', deg: 0, oct: 3 }, { len: 14, role: 'subj', deg: 3, oct: 3 },
-  { len: 12, role: 'frag', dir: 1, reps: 3, deg: 0, oct: 3 }, { len: 20, role: 'answer', deg: 3, oct: 3 },
-  { len: 10, role: 'subj', deg: 0, oct: 3 }, { len: 14, role: 'answer', deg: 0, oct: 3 }, { len: 51 },
-  { len: 60 },
-];
-// Canon B — joins right at the Density/Transcendence hinge, the highest stretto voice, then recedes.
-const CANONB_BLOCKS = [
-  { len: 60 }, { len: 75 },
-  { len: 70 }, { len: 20, role: 'subj', deg: 4, oct: 5 },
-  { len: 14, role: 'answer', deg: 4, oct: 5 }, { len: 16, role: 'csubj', deg: 0, oct: 5 },
-  { len: 16, role: 'subj', deg: 4, oct: 5 }, { len: 29 },
-  { len: 60 },
-];
-// Sophia, doubled an octave higher — only in Transcendence, for brightness/shimmer at the climax. An honest
-// doubling of her own material (not a claim of independent voice), the same orchestration trick as padHigh.
-const SOPHIA_UP_BLOCKS = [
-  { len: 60 }, { len: 75 }, { len: 90 },
-  { len: 10, role: 'subj', deg: 0, oct: 6 }, { len: 14, role: 'answer', deg: 0, oct: 6 },
-  { len: 16, role: 'csubj', deg: 4, oct: 6 }, { len: 16, role: 'subj', deg: 0, oct: 6 },
-  { len: 19, role: 'csubj', deg: 7, oct: 6 },
-  { len: 60 },
-];
+const voiceBlocks = (v) => TIMELINE.map((e) => (e.voice === v ? e : { len: e.len }));
+const SOPHIA_BLOCKS = voiceBlocks('S');
+const DEMIURGE_BLOCKS = voiceBlocks('D');
 // Humanize: a small random onset offset (0-30 ms at this tempo) so notes stop landing exactly on the grid — the
 // same technique the-field.strudel uses on its arpeggio. A plain continuous `rand` sampled at each note's own
 // onset (not `rand.segment(N)`, which profiled ~25x more expensive for the same perceptual effect — see CLAUDE.md).
 const humanize = (p) => p.late(rand.range(0, 0.015));
+
+// ---- the flight: a Shepard tone, built the same way as musica-universalis.strudel's "flight" (same lesson learned
+// there: it must move at the piece's own pace, one chord per 2 cycles, never step through every degree quickly) —
+// the "toroide"/endless-ascent idea, carrying Sophia's transcendence without a single fast note. Four chords that
+// voice-lead upward and land exactly an octave above where they started, so the harmony itself is the endless rise;
+// five copies an octave apart, each heard only near its own height in a 5-octave window (level = sin² of its place
+// in the window), so one voice fades in at the bottom as another fades out at the top — the classic illusion.
+// 70 cycles (not 40): it fills almost all of the Transcendence movement and tails 20 cycles into the Peace, so it
+// never reads as a short cameo that just stops — the fade bleeds into what follows instead of cutting.
+const SHEP_CYCLES = 70;
+const SHEP_WINDOW = 35; // 5 octaves x 7 degrees
+const SHEP_ROOTS = [0, 2, 4, 7];
+const SHEP_SHAPES = [[0, 2, 4, 6], [0, 2, 4, 5], [0, 2, 4, 6], [0, 2, 4, 6]]; // Dm7, F6, Am7, Dm7 (an octave up)
+const shepVoice = (octave, slot) => {
+  const steps = Array.from({ length: SHEP_CYCLES / 2 }, (_, i) => {
+    const phrase = Math.floor(i / 4), chord = i % 4, shape = SHEP_SHAPES[chord];
+    if (slot >= shape.length) return null;
+    const d = (((7 * phrase + SHEP_ROOTS[chord] + shape[slot] + 7 * octave) % SHEP_WINDOW) + SHEP_WINDOW) % SHEP_WINDOW;
+    return { d, w: Math.sin((Math.PI * (d + 0.5)) / SHEP_WINDOW) ** 2 };
+  });
+  return n(cat(...steps.map((x) => (x ? pure(x.d) : silence))).slow(2))
+    .velocity(cat(...steps.map((x) => pure(x ? x.w : 0))).slow(2));
+};
+const shepard = (g, cutoff) =>
+  tune(stack(...[0, 1, 2, 3, 4].flatMap((o) => [0, 1, 2, 3].map((slot) => shepVoice(o, slot)))).scale(scaleAt(2)))
+    .s("triangle")
+    .attack(1.5).decay(1).sustain(0.8).release(3)
+    .gain(g)
+    .lpf(cutoff)
+    .room(0.75).size(8).orbit(6);
 
 // ---- the flowing arpeggio: each chord's own tones, a contour that wanders up and down the chord ladder -------------
 const DENS = [[0, 0.45], [60, 0.6], [135, 0.75], [225, 0.85], [260, 0.92], [300, 0.6], [345, 0.25], [360, 0.1]];
@@ -397,55 +387,52 @@ padHigh: pad(
 // Sub
 sub: sub(env([[0, 0.04], [20, 0.12], [225, 0.15], [250, 0.10], [265, 0.16], [320, 0.14], [360, 0]]))
 
+// How present the bass/arp are — they duck out around the flight (250-320) so the Shepard tone is the one thing
+// happening, then return: the accompaniment actually changes shape across the piece instead of staying uniform.
+const FLIGHT_DUCK = env([[0, 1], [240, 1], [250, 0.1], [310, 0.1], [325, 1], [360, 1]]);
+
 // Walking bass
 bass: bass(
   arrange(...PROG.map((c, i) => [2, n(mini(bassSlot(c, i))).scale(scaleAt(1)).slow(2)])),
-  env([[0, 0.025], [50, 0.05], [135, 0.07], [225, 0.08], [250, 0.05], [270, 0.07], [310, 0.06], [340, 0.02], [360, 0]]).mul(0.85),
+  env([[0, 0.025], [50, 0.05], [135, 0.07], [225, 0.08], [250, 0.05], [270, 0.07], [310, 0.06], [340, 0.02], [360, 0]]).mul(0.85).mul(FLIGHT_DUCK),
 )
 
-// Sophia: subject, answer, countersubject and episodes — her own throughline, from the first second
+// Sophia: five distinct cells in true alternation with the Demiurge — her own throughline, from the first second.
+// The turn-taking silence comes from the note content itself (TIMELINE); this envelope is just her overall level
+// across the arc, a smooth curve, not trying to re-shape every individual turn on top of that.
 sophia: glass(
   humanize(buildLine(SOPHIA_BLOCKS, false)),
-  env([[0, 0.04], [15, 0.05], [225, 0.052], [250, 0.04], [270, 0.06], [300, 0.06], [345, 0.03], [360, 0]]).mul(2.3),
-  env([[0, 2200], [225, 2400], [270, 3000], [360, 1600]]),
+  env([[0, 0.045], [60, 0.05], [135, 0.055], [225, 0.06], [250, 0.065], [300, 0], [330, 0.04], [360, 0]]).mul(2.3),
+  env([[0, 2200], [225, 2400], [250, 2800], [360, 1600]]),
 )
-
-// Sophia doubled an octave up: pure brightness in Transcendence, not an independent voice
-sophiaUp: glass(
-  humanize(buildLine(SOPHIA_UP_BLOCKS, false)),
-  env([[0, 0], [235, 0], [270, 0.025], [300, 0.028], [345, 0.01], [360, 0]]).mul(2.3),
-  pure(2600),
-)
-
-// Canon A: imitates the subject/answer in stretto — close behind Sophia and the Demiurge, Density onward
-canonA: glass(
-  humanize(buildLine(CANONA_BLOCKS, false)),
-  env([[0, 0], [150, 0], [165, 0.035], [215, 0.035], [228, 0.03], [250, 0.02], [300, 0], [360, 0]]).mul(2.0),
-  pure(1900),
-).late(4)
-
-// Canon B: the highest stretto voice, joining right at the Density/Transcendence hinge, then receding
-canonB: glass(
-  humanize(buildLine(CANONB_BLOCKS, false)),
-  env([[0, 0], [195, 0], [215, 0.022], [228, 0.032], [250, 0.022], [270, 0.01], [300, 0], [360, 0]]).mul(2.0),
-  pure(2400),
-).late(3)
 
 // Tintinnabuli: the triad tone above whatever Sophia is singing, same register she's in
-tint: tint(buildLine(SOPHIA_BLOCKS, true), env([[0, 0], [8, 0], [20, 0.028], [225, 0.032], [260, 0.025], [300, 0.02], [350, 0], [360, 0]]))
+tint: tint(buildLine(SOPHIA_BLOCKS, true), env([[0, 0], [8, 0], [20, 0.028], [225, 0.032], [250, 0.025], [300, 0.01], [350, 0], [360, 0]]))
 
-// The Demiurge: his own countersubject, not a mirror — absent until matter manifests, fades while she rises
+// The Demiurge: his own countersubject, not a mirror — absent until matter manifests, true turns with Sophia
+// through Descent and Density, one last farewell, then dissolved before the flight. Same principle as Sophia's
+// envelope: the turns themselves come from the note content, this is just his overall level across the arc.
 demiurge: demiurge(
   humanize(buildLine(DEMIURGE_BLOCKS, false)),
-  env([[0, 0], [60, 0], [90, 0.025], [135, 0.045], [210, 0.075], [228, 0.075], [270, 0], [360, 0]]).mul(2.3),
-  env([[0, 520], [135, 720], [228, 910], [270, 450], [360, 390]]),
+  env([[0, 0], [60, 0], [90, 0.05], [135, 0.06], [225, 0.075], [238, 0.075], [250, 0], [360, 0]]).mul(2.3),
+  env([[0, 520], [135, 720], [225, 850], [238, 850], [250, 350], [360, 300]]),
+)
+
+// The flight: a Shepard tone carrying Sophia's ascent, right where she and the Demiurge fall silent — the one
+// event of the piece, not stacked against other busy voices. It runs long enough (70 cycles, almost all of
+// Transcendence) to feel like the climax it is, and tails into the Peace instead of stopping at a hard boundary.
+shepard: arrange(
+  [250, silence],
+  // Local cycle positions (0-70), not absolute — this pattern is nested inside its own 70-cycle slot above.
+  [70, shepard(env([[0, 0], [12, 0.08], [50, 0.08], [70, 0]]), env([[0, 1400], [35, 2700], [70, 1700]]))],
+  [40, silence],
 )
 
 // The flowing arpeggio
 arp: arp(
   arrange(...PROG.map((c, i) => [2, n(mini(arpSlot(c, i))).scale(scaleAt(3)).slow(2)])),
-  env([[0, 0.03], [15, 0.04], [135, 0.055], [225, 0.06], [249, 0.03], [270, 0.055], [320, 0.04], [350, 0.015], [360, 0]]).mul(0.65),
-  env([[0, 1800], [135, 2400], [225, 2000], [270, 3200], [360, 1400]]),
+  env([[0, 0.03], [15, 0.04], [135, 0.055], [225, 0.06], [249, 0.03], [270, 0.04], [320, 0.035], [350, 0.015], [360, 0]]).mul(0.65).mul(FLIGHT_DUCK),
+  env([[0, 1800], [135, 2400], [225, 2000], [270, 2600], [360, 1400]]),
 )
 
 // Wind: a breath under the inhale and the rise

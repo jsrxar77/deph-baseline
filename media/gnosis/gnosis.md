@@ -126,6 +126,57 @@ genera espera... entiendes contrapunto, quizá fuga." Reescrito de cero como una
 Verificado con el inspector: 244 choques de semitono sobre 6.010 notas (4,1%), cero en Transcendencia y Paz — la
 resolución a consonancia se sostiene. Renderizado el arranque sin errores ni warnings.
 
+### De fuga a pedal: volver a la regla que ya existía
+
+La fuga seguía sin convencer — y con razón: "no puede haber muchas notas juntas porque desconcentra... todo tiene
+que fluir orgánicamente". El sujeto subía hasta la séptima y volvía bajando (un arco amplio) y los episodios eran
+secuencias de notas corridas, ascendentes o descendentes — exactamente lo que `deph-style` ya había descartado en
+Slow Drift ("Pedal, not melody": rechazado un arpegio ascendente amplio; elegido un pedal de pasos de a lo sumo una
+tercera) y el stretto sumaba densidad simultánea a propósito, lo opuesto de "sparse beats busy". Corregido sin
+perder lo que sí era genuino (el contrasujeto independiente, las entradas moduladas):
+
+- **Sujeto y contrasujeto ahora se mueven por grados conjuntos**, pasos de a lo sumo una tercera, notas largas
+  sostenidas — Re . Fa . Re, nada de arcos ni de notas corridas.
+- **Se sacaron los episodios de secuencia** y el stretto (Canon A y Canon B) — eran, literalmente, el patrón ya
+  prohibido por el proyecto.
+- **El Shepard tone, la idea del "toroide"**: en vez de generar tensión con más notas, la ascensión de Sofía ahora
+  es un tono Shepard real — la misma técnica ya probada en `musica-universalis.strudel` (la sección de "vuelo"),
+  adaptada al Re dórico de gnosis. Cuatro acordes que suben por voice-leading y terminan exactamente una octava
+  arriba de donde empezaron, cinco copias a distancia de octava, cada una audible solo cerca de su propia altura
+  (nivel = sin² de su posición en una ventana de 5 octavas) — así una voz se apaga arriba mientras otra aparece
+  abajo, la ilusión de ascenso infinito. Nada de notas rápidas: un acorde cada 2 ciclos, al ritmo de la pieza misma
+  (la lección ya aprendida con Musica Universalis: la primera vez que se probó un Shepard más rápido, "sonó
+  agarrado de los pelos, en otro tiempo").
+- **El acompañamiento ahora cambia de forma real**, no es uniforme de principio a fin: el bajo y el arpegio se
+  apagan casi del todo durante el vuelo (245-285, dentro de la Transcendencia) para que el Shepard sea lo único
+  que pasa, y vuelven después — construir hasta un punto, bajar, como pediste.
+- Sofía y el Demiurgo cantan mucho menos seguido ahora (33/360 y 21/360 ciclos activos) — frases largas y
+  espaciadas, no un flujo constante de eventos.
+
+Verificado con el inspector sin errores. La voz del Shepard renderizada sola, limpia, sin clipping.
+
+### El pedal se había pasado de simple
+
+Corregido el ritmo, el usuario volvió a escuchar y el diagnóstico fue preciso: "dónde quedó el contrapunto, dónde
+quedó el Demiurgo hablando con Sofía... se repite todo constantemente... recién al minuto 8 hay un cambio, el resto
+es todo igual... el Shepard aparece casi al final y se corta". Al simplificar para sacar las corridas de notas, se
+perdió lo que sí tenía que quedar: diálogo audible y variedad real. No era "menos notas" lo que hacía falta —
+era un reparto más rico de las mismas notas largas. Corregido sin agregar una sola nota rápida:
+
+- **Cinco formas distintas para Sofía, tres para el Demiurgo** (antes: 2-3 formas recicladas por transposición).
+  Cada una sigue siendo un pedal — pasos de a lo sumo una tercera, notas largas — pero ya no es la misma silueta
+  una y otra vez.
+- **El Demiurgo tiene carácter propio**: sus tres formas son más graves y más angostas que las de Sofía (Re . Do .
+  Re; Do . Re . Mi; un pedal que decae al final), no su material transportado.
+- **Diálogo real, por turnos**: cada uno está en silencio de verdad mientras el otro canta — no las dos voces
+  superpuestas en segundo plano, sino una sola línea de tiempo compartida donde se alternan. Los turnos se acortan
+  hacia Density (de 15 a 10 ciclos) para que el intercambio se sienta más vivo, sin agregar notas por turno.
+- **El Shepard ahora dura 70 ciclos** (antes 40) — casi toda la Transcendencia, y su cola se extiende 20 ciclos
+  dentro de la Paz en vez de cortar justo en el límite del movimiento.
+
+Verificado con el inspector: Sofía activa en 41/360 ciclos, el Demiurgo en 21/360 — en turnos reales, no silencio
+sin más. Renderizado el arranque sin errores ni warnings.
+
 ### Ritmo: de marcha a vuelo
 
 El usuario notó que al principio cada nota caía exactamente en el pulso — una grilla perfecta, no un viaje. La

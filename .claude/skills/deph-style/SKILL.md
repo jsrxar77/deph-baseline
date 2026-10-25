@@ -601,3 +601,33 @@ Also update the distilled sections above if the decision changes a principle, an
   General rule: any string-matching heuristic over a growing file (a header comment, in this case) needs either no
   truncation or a generous, explicitly-justified one — a hardcoded character cap that happened to work once is a
   ticking bug, not a fix, the same class of mistake as a hardcoded array length.
+- 2026-10-24 (gnosis, back to pedal — the rule was already written) — the fugue was rejected too: "no puede haber
+  muchas notas juntas porque desconcentra... todo tiene que fluir orgánicamente". The subject's wide arch (up to the
+  7th and back) and the episodes' ascending/descending note-runs were exactly what "Pedal, not melody" (above, from
+  Slow Drift) already forbids — adding density/speed to fix "boring" directly violated an existing rule instead of
+  reading it first. Fixed by keeping what was genuinely good (an independent countersubject for the Demiurge, not a
+  mirror; modulating entries) while making every line move by step or a third at most, long held notes, no runs —
+  and replacing the fugue's stretto (deliberate simultaneous density) with a Shepard tone for Sophia's ascent,
+  reusing the proven technique and its lessons from musica-universalis.strudel's "flight" (one chord per 2 cycles,
+  never step through degrees quickly — the first attempt there "sonó agarrado de los pelos" at a faster rate). Bass
+  and arp now duck out during the flight and return after, giving the accompaniment a real large-scale arc (build,
+  peak, release) instead of uniform presence throughout, matching Musica Universalis's own flight-break structure.
+  General rule, stated plainly because it had to be repeated: THIS PROJECT'S MEDITATION PIECES NEVER GET MORE
+  INTERESTING BY ADDING NOTES, SPEED, OR SIMULTANEOUS DENSITY — interest comes from timbre, register, harmony,
+  modulating entries, and slow large-scale devices (Shepard tones, drones, drift) matching "Pedal, not melody" and
+  "Sparse and spacious beats dense and busy" above. Read those two lines before any future "boring" fix.
+- 2026-10-24 (gnosis, dialogue needed turns and variety, not just fewer notes) — after the pedal/Shepard fix, the
+  user's follow-up was sharp and correct: "dónde quedó el contrapunto, dónde quedó el Demiurgo hablando con
+  Sofía... se repite todo constantemente... recién al minuto 8 hay un cambio". Simplifying to remove fast notes had
+  also (unintentionally) removed real variety and real dialogue: only 2-3 cell shapes recycled by transposition, and
+  Sophia/Demiurge often sounded concurrently rather than in legible turns, so the Demiurge read as background
+  texture, not a second voice. The fix was never "fewer notes" per se — it was richer casting of the same kind of
+  slow, held material. Fixed by giving Sophia five distinct pedal cells and the Demiurge three of his own (narrower,
+  lower register — his own character, not her material transposed), and by building ONE shared timeline where the
+  two voices take real turns (one is genuinely silent while the other sings), with turns shortening toward Density
+  for a livelier exchange without adding notes per turn. Also extended the Shepard from 40 to 70 cycles (user: "el
+  Shepard aparece casi al final y se corta") so it fills nearly all of Transcendence and tails into Peace instead of
+  stopping at the movement boundary. General rule: "interesting without more notes" has (at least) two independent
+  requirements — real material variety (not the same 2-3 shapes recycled) AND legible interaction between voices
+  (true turns a listener can follow, not simultaneous independent lines that blur together) — fixing pacing/density
+  alone satisfies neither.
