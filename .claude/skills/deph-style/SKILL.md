@@ -637,3 +637,12 @@ Also update the distilled sections above if the decision changes a principle, an
   bass/sub voices already sit. New range B1-A3, clear of bass's D1-G2 and sub's D1-C2 — the fix is about frequency
   overlap/masking (pitch), not loudness; didn't re-touch his gain multiplier. Awaiting the user's ear on whether
   this alone fixes it or more (gain, timbre) is still needed.
+- 2026-10-24 (gnosis, preludio technique) — the user liked the Shepard tone's placement at the climax and asked for
+  a second, much quieter and much shorter appearance near the very start — "que entre inconsciente... el que
+  escucha queda esperando a que vuelva". A foreshadowing/reprise technique: plant a brief, barely-audible hint of
+  the climactic material early so its full return later feels like a fulfillment, not something new. Implemented by
+  parameterizing the Shepard generator by cycle count (`shepVoice`/`shepard` now take `cycles` instead of closing
+  over a module constant) so one function serves both a 16-cycle preludio (under Sophia's first phrase, ~1/5 the
+  loudness, filter mostly closed) and the 70-cycle flight, instead of duplicating the generator. General, reusable
+  technique for future pieces: a structural/thematic device meant to feel earned at its main entrance can get a
+  quiet, short preview very early — same generator, parameterized by duration/level, not copy-pasted.

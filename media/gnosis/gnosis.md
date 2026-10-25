@@ -177,6 +177,25 @@ era un reparto más rico de las mismas notas largas. Corregido sin agregar una s
 Verificado con el inspector: Sofía activa en 41/360 ciclos, el Demiurgo en 21/360 — en turnos reales, no silencio
 sin más. Renderizado el arranque sin errores ni warnings.
 
+### El Demiurgo, una octava arriba
+
+Reportado: "el Demiurgo no se termina de entender... está muy grave, se pierde en el acompañamiento". Su registro
+subió de octava 2 a 3 (B1-A3), fuera del rango del bajo (D1-G2) y el sub (D1-C2) con los que antes se superponía
+en frecuencia; también se bajó su capa de doblaje a la sub-octava (0.6x → 0.35x) para no sumar más masa grave justo
+ahí. Es un ajuste de registro, no de volumen — el multiplicador de ganancia quedó igual.
+
+### El preludio: el Shepard, dos veces
+
+El Shepard ya aprobado cerca del final se queda igual. Se agregó una segunda aparición, muchísimo más discreta, al
+principio del Pleroma — un preludio: "que entre inconsciente, que eso va a estar en algún momento... todo el
+momento se queda el que escucha esperando a que vuelva". Son 16 ciclos (ciclos 4-20), bajo la primera frase de
+Sofía, a una quinta parte del volumen de la versión completa y con el filtro casi cerrado — se siente más de lo que
+se escucha, no compite con ella. El generador del Shepard se parametrizó por duración (`cycles`) para poder llamarlo
+corto aquí y largo en la Transcendencia sin duplicar la matemática.
+
+Verificado con el inspector: la capa del Shepard pasó de 35 a 43 ciclos activos (los 8 nuevos del preludio).
+Renderizado el arranque sin errores.
+
 ### Ritmo: de marcha a vuelo
 
 El usuario notó que al principio cada nota caía exactamente en el pulso — una grilla perfecta, no un viaje. La

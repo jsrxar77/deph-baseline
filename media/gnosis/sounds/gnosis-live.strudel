@@ -204,14 +204,17 @@ const humanize = (p) => p.late(rand.range(0, 0.015));
 // voice-lead upward and land exactly an octave above where they started, so the harmony itself is the endless rise;
 // five copies an octave apart, each heard only near its own height in a 5-octave window (level = sin² of its place
 // in the window), so one voice fades in at the bottom as another fades out at the top — the classic illusion.
-// 70 cycles (not 40): it fills almost all of the Transcendence movement and tails 20 cycles into the Peace, so it
-// never reads as a short cameo that just stops — the fade bleeds into what follows instead of cutting.
-const SHEP_CYCLES = 70;
+// The main flight is 70 cycles (not 40): it fills almost all of the Transcendence movement and tails 20 cycles
+// into the Peace, so it never reads as a short cameo that just stops — the fade bleeds into what follows instead
+// of cutting. A second, much quieter, much shorter call of the same generator (16 cycles) is planted early in the
+// Pleroma, under Sophia's first phrase — a preludio: felt more than heard, so the ear half-registers it without
+// naming it, and spends the piece unconsciously waiting for it to come back. Parameterized by `cycles` so both
+// calls share one generator instead of two copies of the same math.
 const SHEP_WINDOW = 35; // 5 octaves x 7 degrees
 const SHEP_ROOTS = [0, 2, 4, 7];
 const SHEP_SHAPES = [[0, 2, 4, 6], [0, 2, 4, 5], [0, 2, 4, 6], [0, 2, 4, 6]]; // Dm7, F6, Am7, Dm7 (an octave up)
-const shepVoice = (octave, slot) => {
-  const steps = Array.from({ length: SHEP_CYCLES / 2 }, (_, i) => {
+const shepVoice = (octave, slot, cycles) => {
+  const steps = Array.from({ length: cycles / 2 }, (_, i) => {
     const phrase = Math.floor(i / 4), chord = i % 4, shape = SHEP_SHAPES[chord];
     if (slot >= shape.length) return null;
     const d = (((7 * phrase + SHEP_ROOTS[chord] + shape[slot] + 7 * octave) % SHEP_WINDOW) + SHEP_WINDOW) % SHEP_WINDOW;
@@ -220,8 +223,8 @@ const shepVoice = (octave, slot) => {
   return n(cat(...steps.map((x) => (x ? pure(x.d) : silence))).slow(2))
     .velocity(cat(...steps.map((x) => pure(x ? x.w : 0))).slow(2));
 };
-const shepard = (g, cutoff) =>
-  tune(stack(...[0, 1, 2, 3, 4].flatMap((o) => [0, 1, 2, 3].map((slot) => shepVoice(o, slot)))).scale(scaleAt(2)))
+const shepard = (g, cutoff, cycles) =>
+  tune(stack(...[0, 1, 2, 3, 4].flatMap((o) => [0, 1, 2, 3].map((slot) => shepVoice(o, slot, cycles)))).scale(scaleAt(2)))
     .s("triangle")
     .attack(1.5).decay(1).sustain(0.8).release(3)
     .gain(g)
@@ -424,9 +427,13 @@ demiurge: demiurge(
 // event of the piece, not stacked against other busy voices. It runs long enough (70 cycles, almost all of
 // Transcendence) to feel like the climax it is, and tails into the Peace instead of stopping at a hard boundary.
 shepard: arrange(
-  [250, silence],
-  // Local cycle positions (0-70), not absolute — this pattern is nested inside its own 70-cycle slot above.
-  [70, shepard(env([[0, 0], [12, 0.08], [50, 0.08], [70, 0]]), env([[0, 1400], [35, 2700], [70, 1700]]))],
+  [4, silence],
+  // The preludio: 16 cycles, barely there (peak ~0.016, a fifth of the flight's loudness), filter mostly closed —
+  // under Sophia's first phrase, not competing with it. Local cycle positions (0-16), nested in its own slot.
+  [16, shepard(env([[0, 0], [4, 0.016], [11, 0.016], [16, 0]]), env([[0, 500], [8, 750], [16, 500]]), 16)],
+  [230, silence],
+  // The flight: local cycle positions (0-70), nested in its own 70-cycle slot.
+  [70, shepard(env([[0, 0], [12, 0.08], [50, 0.08], [70, 0]]), env([[0, 1400], [35, 2700], [70, 1700]]), 70)],
   [40, silence],
 )
 
