@@ -179,10 +179,41 @@ Diseñado de origen para la plantilla estándar de 8 canales de Ableton Live (`S
 
 ---
 
-## Visual Concept: HyperFrames
+## Visual Concept (propuesta, sin construir todavía)
 
-* **Tecnología**: HTML5 + CSS + GSAP animando gráficos vectoriales SVG en 4K.
-* **Motivo visual**:
-  * La **Varilla de Conexión a Tierra**: Una línea central de energía que conecta dos polaridades (el cielo dorado/zafiro superior y la tierra esmeralda/obsidiana inferior).
-  * Geometría sagrada de Sophía: Anillos concéntricos y polígonos que se abren conforme avanza la pieza.
-  * Contrastes WCAG AA y animación fluida sin parpadeos estroboscópicos.
+**Corrección de tecnología**: el concepto original decía HyperFrames. Eso ya no aplica — por convención del
+proyecto (`CLAUDE.md`, skill `deph-shorts`), HyperFrames quedó reservado únicamente para los shorts verticales;
+las piezas completas del canal siguen en Remotion. `gnosis` ya usa Remotion + `@react-three/fiber`/`three`
+(`tools/visuals/src/compositions/gnosis/`), así que la propuesta de abajo es directamente construible con lo que
+ya está instalado, no hace falta sumar nada.
+
+### Idea: el diálogo hecho constelación
+
+Basada en la técnica del ejemplo oficial de Three.js *"buffergeometry drawrange"* (dos nubes de partículas que se
+conectan con líneas cuando están cerca — ver análisis previo en esta conversación). Acá la propuesta es usarla
+como metáfora literal del diálogo Demiurgo-Sofía, no como decoración:
+
+- **Dos nubes de partículas**, pocas centenas cada una (no miles — acá el punto es que cada conexión se lea como
+  un gesto individual, no una nube densa como *The Field*):
+  - **Demiurgo**: grave, obsidiana/violeta cósmico, registro bajo de la pantalla, movimiento lento y pesado.
+  - **Sofía**: luminosa, cian eléctrico/teal oxidado (paleta "Deep Decay" ya establecida), registro alto, movimiento
+    más libre/errático.
+- **Líneas de conexión** entre una partícula de cada nube cuando se acercan lo suficiente — el diálogo hecho
+  visible. Brillo de cada línea según la distancia (más cerca, más brillante), `AdditiveBlending` para que se
+  sientan como luz, no como geometría sólida.
+- **Atado a la música real, no animado aparte**: la cantidad/intensidad de conexiones sigue el `frames.json` real
+  de la pieza (el mismo pipeline que ya usa `bellPulses.ts` en Slow Drift) — cuando Demiurgo y Sofía suenan fuerte
+  juntos, hay más conexiones; cuando una calla, su nube se aquieta.
+- **Mapeo al arco de la pieza**:
+  - *Pleroma*: solo la nube de Sofía, dispersa y lenta; el Demiurgo todavía no existe (la materia no se manifestó).
+  - *Descent*: el Demiurgo aparece abajo, tenue; las primeras conexiones, escasas.
+  - *Density*: el máximo de conexiones — la red más densa y tensa de toda la pieza.
+  - *Transcendencia*: el Demiurgo se disuelve (sus partículas se apagan, no explotan), las conexiones se cortan una
+    por una, la nube de Sofía sube y se expande, sola.
+  - *Paz*: casi sin partículas, deriva lenta, hasta casi nada.
+- **Una sola toma continua** (como *The Field*): nunca un corte, solo movimiento 3D — empieza ancha (las dos nubes
+  a distancia, Pleroma) y termina cerca, íntima, sobre lo que queda de Sofía.
+- **Rendimiento**: con unos cientos de partículas por nube, la comparación de pares (`O(n²)`) es barata — no hace
+  falta una grilla espacial como sí haría falta para algo del tamaño de *The Field*.
+
+Esto queda como propuesta escrita, no construida — si te convence el rumbo, el siguiente paso real es `visuals-compose` para armar la composición de verdad.

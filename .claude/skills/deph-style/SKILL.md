@@ -563,3 +563,13 @@ Also update the distilled sections above if the decision changes a principle, an
   folder). General rule: `rand.segment(N)` combined with `.late()` across an `arrange()`-nested pattern is a known
   expensive combination in this project's Strudel setup — profile before assuming a "stuck" studio load is a
   tooling bug rather than a genuinely slow pattern.
+- 2026-10-24 (gnosis, visual proposal — not built) — user asked to analyze the three.js "buffergeometry drawrange"
+  official example (two particle clouds connected by lines when close, geometry buffer reused each frame with
+  `setDrawRange` instead of rebuilt) and wants it applied to gnosis. Proposed in gnosis.md: two particle clouds
+  (Demiurge — dark, low register, heavy; Sophia — luminous, high register, freer movement) connected by lines when
+  close, driven by the real frames.json audio data (same pipeline as Slow Drift's bellPulses.ts) rather than a
+  separately hand-animated timeline, mapped to the piece's arc (no Demiurge cloud in Pleroma, max connections in
+  Density, the Demiurge dissolving and connections snapping one by one in Transcendence). Corrected the visual
+  concept's stated technology from HyperFrames (stale — that's reserved for shorts only, per the deph-shorts
+  convention established earlier) to Remotion + @react-three/fiber/three, which gnosis already uses. Nothing built
+  yet — this is a written proposal awaiting approval before visuals-compose actually builds it.
