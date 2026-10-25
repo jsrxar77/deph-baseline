@@ -428,10 +428,11 @@ demiurge: demiurge(
 // Transcendence) to feel like the climax it is, and tails into the Peace instead of stopping at a hard boundary.
 shepard: arrange(
   [4, silence],
-  // The preludio: 16 cycles, barely there (peak ~0.016, a fifth of the flight's loudness), filter mostly closed —
-  // under Sophia's first phrase, not competing with it. Local cycle positions (0-16), nested in its own slot.
-  [16, shepard(env([[0, 0], [4, 0.016], [11, 0.016], [16, 0]]), env([[0, 500], [8, 750], [16, 500]]), 16)],
-  [230, silence],
+  // The preludio: 30 cycles (1:00) — longer than the first try (16), still well under half the flight's 70, same
+  // level and filter (not louder, just stretched) — crosses her first two phrases without reaching into her third.
+  // Local cycle positions (0-30), nested in its own slot.
+  [30, shepard(env([[0, 0], [6, 0.016], [24, 0.016], [30, 0]]), env([[0, 500], [13, 750], [30, 500]]), 30)],
+  [216, silence],
   // The flight: local cycle positions (0-70), nested in its own 70-cycle slot.
   [70, shepard(env([[0, 0], [12, 0.08], [50, 0.08], [70, 0]]), env([[0, 1400], [35, 2700], [70, 1700]]), 70)],
   [40, silence],

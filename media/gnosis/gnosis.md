@@ -188,12 +188,13 @@ ahí. Es un ajuste de registro, no de volumen — el multiplicador de ganancia q
 
 El Shepard ya aprobado cerca del final se queda igual. Se agregó una segunda aparición, muchísimo más discreta, al
 principio del Pleroma — un preludio: "que entre inconsciente, que eso va a estar en algún momento... todo el
-momento se queda el que escucha esperando a que vuelva". Son 16 ciclos (ciclos 4-20), bajo la primera frase de
-Sofía, a una quinta parte del volumen de la versión completa y con el filtro casi cerrado — se siente más de lo que
-se escucha, no compite con ella. El generador del Shepard se parametrizó por duración (`cycles`) para poder llamarlo
-corto aquí y largo en la Transcendencia sin duplicar la matemática.
+momento se queda el que escucha esperando a que vuelva". Son 30 ciclos (ciclos 4-34, un minuto) — se estiró después de la primera prueba de 16, pero se mantiene bien
+por debajo de la mitad de los 70 ciclos del vuelo final, mismo volumen y mismo filtro que antes, nada más fuerte,
+solo más largo. Cruza la primera y parte de la segunda frase de Sofía en el Pleroma sin llegar a la tercera. El
+generador del Shepard se parametrizó por duración (`cycles`) para poder llamarlo corto aquí y largo en la
+Transcendencia sin duplicar la matemática.
 
-Verificado con el inspector: la capa del Shepard pasó de 35 a 43 ciclos activos (los 8 nuevos del preludio).
+Verificado con el inspector: la capa del Shepard pasó de 35 a 50 ciclos activos (los 15 nuevos del preludio).
 Renderizado el arranque sin errores.
 
 ### Ritmo: de marcha a vuelo
