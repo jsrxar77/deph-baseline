@@ -646,3 +646,9 @@ Also update the distilled sections above if the decision changes a principle, an
   loudness, filter mostly closed) and the 70-cycle flight, instead of duplicating the generator. General, reusable
   technique for future pieces: a structural/thematic device meant to feel earned at its main entrance can get a
   quiet, short preview very early — same generator, parameterized by duration/level, not copy-pasted.
+- 2026-10-24 (gnosis-live, APPROVED) — after the full iteration (fugue → pedal correction → real dialogue/turns →
+  Demiurge register → Shepard preludio), the user confirmed: "esta versión sí está aprobada". Commit 14a577f is the
+  approved state of gnosis-live.strudel. The durable lessons from getting here are written up in full in
+  strudel-compose (checklist items 8-10: no single-period macro-repetition, depth/restraint are independent axes,
+  interest never comes from more notes/speed/density) and in this file's earlier entries — read those before
+  starting the next piece, not just this line.
