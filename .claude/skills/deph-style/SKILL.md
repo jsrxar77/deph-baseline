@@ -631,3 +631,9 @@ Also update the distilled sections above if the decision changes a principle, an
   requirements — real material variety (not the same 2-3 shapes recycled) AND legible interaction between voices
   (true turns a listener can follow, not simultaneous independent lines that blur together) — fixing pacing/density
   alone satisfies neither.
+- 2026-10-24 (gnosis, Demiurge register) — reported: "el Demiurgo no se termina de entender... está muy grave, se
+  pierde en el acompañamiento". Raised his register from octave 2 to 3 (test, per the user's own request) and
+  lowered his sub-octave doubling layer (0.6x -> 0.35x) since it was adding extra low-end mass right where the
+  bass/sub voices already sit. New range B1-A3, clear of bass's D1-G2 and sub's D1-C2 — the fix is about frequency
+  overlap/masking (pitch), not loudness; didn't re-touch his gain multiplier. Awaiting the user's ear on whether
+  this alone fixes it or more (gain, timbre) is still needed.

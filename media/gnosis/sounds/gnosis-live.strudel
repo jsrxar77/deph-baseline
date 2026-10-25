@@ -174,18 +174,18 @@ const TIMELINE = [
   { len: 20, voice: 'S', cell: 'A', deg: 0, oct: 4 }, { len: 20, voice: 'S', cell: 'B', deg: 2, oct: 4 },
   { len: 20, voice: 'S', cell: 'C', deg: 4, oct: 4 },
   // II. Descent (75) — the Demiurge enters; true alternation, five turns.
-  { len: 15, voice: 'S', cell: 'D', deg: 0, oct: 4 }, { len: 15, voice: 'D', cell: 'A', deg: 0, oct: 2 },
-  { len: 15, voice: 'S', cell: 'A', deg: 2, oct: 4 }, { len: 15, voice: 'D', cell: 'B', deg: 3, oct: 2 },
+  { len: 15, voice: 'S', cell: 'D', deg: 0, oct: 4 }, { len: 15, voice: 'D', cell: 'A', deg: 0, oct: 3 },
+  { len: 15, voice: 'S', cell: 'A', deg: 2, oct: 4 }, { len: 15, voice: 'D', cell: 'B', deg: 3, oct: 3 },
   { len: 15, voice: 'S', cell: 'E', deg: 4, oct: 4 },
   // III. Density (90) — shorter, more frequent turns (more exchange, not more notes); the darkest harmony.
-  { len: 10, voice: 'S', cell: 'C', deg: 0, oct: 4 }, { len: 10, voice: 'D', cell: 'C', deg: -1, oct: 2 },
-  { len: 10, voice: 'S', cell: 'D', deg: 2, oct: 4 }, { len: 10, voice: 'D', cell: 'A', deg: 0, oct: 2 },
-  { len: 10, voice: 'S', cell: 'B', deg: 4, oct: 4 }, { len: 10, voice: 'D', cell: 'B', deg: 2, oct: 2 },
-  { len: 10, voice: 'S', cell: 'A', deg: 2, oct: 4 }, { len: 10, voice: 'D', cell: 'A', deg: -1, oct: 2 },
+  { len: 10, voice: 'S', cell: 'C', deg: 0, oct: 4 }, { len: 10, voice: 'D', cell: 'C', deg: -1, oct: 3 },
+  { len: 10, voice: 'S', cell: 'D', deg: 2, oct: 4 }, { len: 10, voice: 'D', cell: 'A', deg: 0, oct: 3 },
+  { len: 10, voice: 'S', cell: 'B', deg: 4, oct: 4 }, { len: 10, voice: 'D', cell: 'B', deg: 2, oct: 3 },
+  { len: 10, voice: 'S', cell: 'A', deg: 2, oct: 4 }, { len: 10, voice: 'D', cell: 'A', deg: -1, oct: 3 },
   { len: 10, voice: 'S', cell: 'E', deg: 0, oct: 4 },
   // IV. Transcendence (75) — his farewell, her last question in her higher register, then she falls silent too —
   // the Shepard (255-305) carries the rest of this movement and the start of the next alone.
-  { len: 13, voice: 'D', cell: 'C', deg: 0, oct: 2 }, { len: 12, voice: 'S', cell: 'A', deg: 0, oct: 5 },
+  { len: 13, voice: 'D', cell: 'C', deg: 0, oct: 3 }, { len: 12, voice: 'S', cell: 'A', deg: 0, oct: 5 },
   { len: 50 },
   // V. Eternal peace (60) — one last pedal, spacious, then true silence before 12:00.
   { len: 30, voice: 'S', cell: 'A', deg: 0, oct: 4 }, { len: 30 },
@@ -316,7 +316,9 @@ const tint = (p, g) =>
 
 // Demiurge: dark and heavy, not vocal — filtered saw with a sub-octave layer, no vowel, no vibrato.
 const demiurge = (p, g, cutoff) =>
-  stack(tune(p).gain(g), tune(p).add(note(-12)).gain(g.mul(0.6)))
+  // The sub-octave double used to sit at 0.6x — raised together with his register (2 -> 3), that's quieter now
+  // (0.35x) so it still reads as weight, not mud burying him under the pad/bass.
+  stack(tune(p).gain(g), tune(p).add(note(-12)).gain(g.mul(0.35)))
     .s("sawtooth")
     .attack(0.6).decay(3).sustain(0.55).release(5)
     .lpf(cutoff)
