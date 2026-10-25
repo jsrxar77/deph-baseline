@@ -3,11 +3,11 @@ import { Composition, staticFile, useCurrentFrame, useVideoConfig } from "remoti
 import { getAudioDurationInSeconds } from "@remotion/media-utils";
 import { arcAt, hash01, onsetPosition, recentOnsets, smoothAt, useAnalysis, type Analysis } from "./analysis";
 import { commonUniforms } from "./common";
-import { HdrCanvas, type HdrParams, type UniformValue } from "../../shared/HdrCanvas";
+import { HdrCanvas, type HdrParams, type UniformValue } from "../../../tools/visuals/src/shared/HdrCanvas";
 import { FRAGMENT } from "./shader";
 import { wakeUniforms } from "./wake";
 import { beingPos, beingTrail } from "./being";
-import { N_RIPPLES } from "../../shared/ripples";
+import { N_RIPPLES } from "../../../tools/visuals/src/shared/ripples";
 
 // Songcord: the Dive world (A) with attack ripples and breath rings (B), water wakes over the whole frame (wake.ts),
 // and one being of light, all seen through moving water, in linear HDR with bloom, graded for SDR screens. Every value

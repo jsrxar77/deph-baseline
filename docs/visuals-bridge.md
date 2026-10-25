@@ -1,9 +1,12 @@
 # Bridging pieces to visuals
 
 This project pairs each composition's `media/<name>/sounds/*.strudel` piece with generated video.
-`tools/visuals/` is the Remotion engine, and — a correction to the original plan, found while building
-the first one — each composition's actual video code lives inside that engine's own tree, at
-`tools/visuals/src/compositions/<name>/`, not under `/media`; see the `visuals-compose` skill for why.
+`tools/visuals/` is the Remotion engine only; each composition's actual video code lives in its own
+folder, at `media/<name>/visuals/` — never under `/tools` (the golden rule in `CLAUDE.md`). An earlier
+version of this doc said the opposite (code forced into `tools/visuals/src/compositions/<name>/` because
+the bundler couldn't resolve `node_modules` from `media/`) — that was corrected 2026-10-25 with a
+project-root `node_modules` symlink into `tools/visuals/node_modules`; see the `visuals-compose` skill for
+the exact mechanism.
 See `docs/sync-pipeline.md` for the audio-rendering pipeline (what's confirmed to work, the phases, and
 the exact `media/<name>/sync/` output format); this document is the why, plus what changed once a real
 visual existed.

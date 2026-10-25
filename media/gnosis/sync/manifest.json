@@ -1,0 +1,81 @@
+{
+  "source": "media/gnosis/sounds/gnosis-live.strudel",
+  "cps": 0.5,
+  "cpm": 30,
+  "totalCycles": 360,
+  "fps": 60,
+  "sampleRate": 48000,
+  "durationSeconds": 726,
+  "totalFrames": 43560,
+  "frames": "frames.json",
+  "audio": "audio.wav",
+  "layers": {
+    "pad": {
+      "events": 1800,
+      "sounds": [
+        "sawtooth"
+      ]
+    },
+    "padHigh": {
+      "events": 1800,
+      "sounds": [
+        "sawtooth"
+      ]
+    },
+    "sub": {
+      "events": 180,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "bass": {
+      "events": 382,
+      "sounds": [
+        "sawtooth"
+      ]
+    },
+    "sophia": {
+      "events": 82,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "tint": {
+      "events": 41,
+      "sounds": [
+        "triangle"
+      ]
+    },
+    "arp": {
+      "events": 3515,
+      "sounds": [
+        "triangle"
+      ]
+    },
+    "wind": {
+      "events": 180,
+      "sounds": [
+        "pink"
+      ]
+    },
+    "binaural": {
+      "events": 360,
+      "sounds": [
+        "sine"
+      ]
+    },
+    "shepard": {
+      "events": 1000,
+      "sounds": [
+        "triangle"
+      ]
+    },
+    "demiurge": {
+      "events": 42,
+      "sounds": [
+        "sawtooth"
+      ]
+    }
+  },
+  "generatedAt": "2026-10-25T09:21:28.806Z"
+}

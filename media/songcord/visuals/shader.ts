@@ -1,6 +1,6 @@
 import { GLSL_COMMON } from "./common";
 import { WORLD_GLSL } from "./world";
-import { RIPPLES_GLSL } from "../../shared/ripples";
+import { RIPPLES_GLSL } from "../../../tools/visuals/src/shared/ripples";
 import { NT } from "./being";
 import { NK, NH } from "./wake";
 

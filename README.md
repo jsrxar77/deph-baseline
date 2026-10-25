@@ -27,7 +27,7 @@ media/<piece>/sounds/<piece>.strudel   the music, as Strudel patterns (one arran
         │  tools/sounds/master.mjs       one constant gain to -16 LUFS / -1 dBTP, no compression   -> sync/audio-master.wav
         │  tools/sounds/frames.mjs       every event with its exact frame number                   -> sync/frames.json
         ▼
-tools/visuals/src/compositions/<piece>/  Remotion video: a WebGL fractal driven by the audio and the events
+media/<piece>/visuals/                   Remotion video: a WebGL fractal driven by the audio and the events
         ▼
 media/<piece>/renders/<piece>.mp4        the final video (git-ignored: several GB, regenerable)
 ```

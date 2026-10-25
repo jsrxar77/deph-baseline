@@ -1,4 +1,4 @@
-import { DEPH_PHASE_RINGS_GLSL } from "../../signature/phaseRings";
+import { DEPH_PHASE_RINGS_GLSL } from "../../../tools/visuals/src/signature/phaseRings";
 
 // GLSL for the "deph / Deep Decay" Julia-set visualizer for Slow Drift.
 // Single fractal, filling the frame — tried a 3-blob layout with a self-similar zoom-in/zoom-out
@@ -215,9 +215,11 @@ void main() {
 
   color += bellGlow * vec3(0.55, 0.85, 1.0) * 0.32;
 
-  // Vignette.
+  // Vignette. Edges must stay ascending for smoothstep (GLSL ES leaves descending edges undefined —
+  // the same bug already documented in visuals-compose for musica-universalis; this file had it too,
+  // and it was zeroing the entire frame to black on this machine's driver): invert the result instead.
   float d = length(gl_FragCoord.xy / uResolution - 0.5);
-  color *= smoothstep(1.25, 0.45, d);
+  color *= 1.0 - smoothstep(0.45, 1.25, d);
 
   // Procedural grain.
   float grain = (hash(gl_FragCoord.xy + uTime * 61.0) - 0.5) * 0.03;

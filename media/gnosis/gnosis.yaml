@@ -4,30 +4,42 @@ created: 2026-10-20
 key: D:dorian # Tuned to A4 = 432 Hz
 tempo:
   cpm: 30 # 1 cycle = 2s (120 BPM in 4/4)
-arc:
-  - { name: pleroma, cycles: 120 }         # 0:00 - 4:00 (The Unmanifest Silence & Seed Motif)
-  - { name: descent, cycles: 150 }         # 4:00 - 9:00 (Emanation of Sophia & First Dialogue)
-  - { name: density, cycles: 180 }         # 9:00 - 15:00 (The Polyphonic Weave & Modal Counterpoint)
-  - { name: grounding, cycles: 150 }       # 15:00 - 20:00 (The Earthing Rod / Full Integration)
-  - { name: transfiguration, cycles: 120 } # 20:00 - 24:00 (Gradual Deconstruction & Return to Silence)
-total_cycles: 720 # 1440s = 24:00 exact (Deep meditative transport)
+arc: # gnosis-live.strudel's real structure (the approved sound domain, see domains.sound below) — half the
+     # original 24:00 Ableton source's proportions, not that source's own arc (kept as a separate, untouched file)
+  - { name: pleroma, cycles: 60 }          # 0:00 - 2:00 (Sophia alone)
+  - { name: descent, cycles: 75 }          # 2:00 - 4:30 (the Demiurge enters, true alternation)
+  - { name: density, cycles: 90 }          # 4:30 - 7:30 (shorter turns, darkest harmony)
+  - { name: transcendence, cycles: 75 }    # 7:30 - 10:00 (his farewell, her rise, the Shepard flight)
+  - { name: peace, cycles: 60 }            # 10:00 - 12:00 (one last pedal, then silence)
+total_cycles: 360 # 720s = 12:00 exact
 domains:
   sound:
-    status: done # 720/720 cycles, 8 layers, verified clean with inspect.mjs --summary --cycles 720 (no errors, matches the arc table)
-    file: sounds/gnosis.strudel
+    status: done # 360/360 cycles, 11 layers, approved by the user ("esta versio si esta aprobada") — see gnosis.md.
+      # file is gnosis-live.strudel, not gnosis.strudel: that's the separate, untouched 720-cycle Ableton-oriented
+      # source (see its own header comment) — this piece's real sound domain is the self-contained live version.
+    file: sounds/gnosis-live.strudel
     source: strudel
   visual:
-    status: planned # the toroidal-manifold/grounding-rod visual (gnosis.tsx, shaders.ts, timeline.ts) was deleted
-      # 2026-10-25 at the user's request ("lo que está hecho es horrible, borralo") — built for the old 24:00
-      # narrative, never wired to real audio. Direction now: two particle clouds (Demiurge dark/low, Sophia
-      # luminous/high) connected by travelling pulses on her/his turns (not static proximity-lines, since the
-      # approved gnosis-live.strudel has them alternate, not sound together) — see gnosis.md's "Visual Concept"
-      # for the full writeup. Not built yet. The visuals/index.html HyperFrames engine (media/gnosis/hyperframes-exploration/)
+    status: in-progress # 2026-10-25: two particle clouds (Sofía cyan/high, Demiurgo violet/low), each bouncing inside
+      # its own rotating wireframe cube — three.js's own buffergeometry-drawrange example, re-verified from source
+      # (r=800 box, group.rotation.y = time*0.1, the demo's own maxConnections cap) with one necessary departure:
+      # closed-form triangle-wave bounce instead of velocity integration, since Remotion can render frames out of
+      # order/in parallel. Each cloud also has its own intra-cloud constellation, not just the cross-cloud one. A
+      # second, slow, subtle X tilt was added on top of the source's Y spin (the user's direction: real 3D tumble,
+      # not a flat turntable). The Shepard IS the integration of the two clouds — during its two windows (preludio,
+      # flight) they're pulled toward a shared midpoint and the connecting lines (plus any particle caught in one)
+      # shift to a third color belonging to neither cloud; the source demo's own connection cap keeps that zone
+      # legible instead of saturating to a blob. Wired to the real rendered audio (gnosis-master.wav). Custom point
+      # shader (soft circular sprites) replaces the default PointsMaterial. Not yet done: per-note audio-reactive
+      # detail from frames.json (currently only the envelope/timeline-driven presence curves react), and the deph
+      # signature ring layer (shader-only so far; the-field/musica-universalis skip it too). See gnosis.md's "Visual
+      # Concept" for the full writeup. The visuals/index.html HyperFrames engine (media/gnosis/hyperframes-exploration/)
       # is a separate, unrelated full-landscape exploration — see the deph-shorts skill for the real Shorts convention.
     framework: remotion # the channel deliverable
-    entry: tools/visuals/src/compositions/gnosis/gnosis.tsx # not created yet; symlink target is an empty placeholder
+    entry: media/gnosis/visuals/gnosis.tsx # real files, see CLAUDE.md's golden rule (tools vs. pieces)
   sync:
-    status: not-built
+    status: done # audio.wav (726.0s, rendered 2026-10-25), audio-master.wav (-16 LUFS), frames.json + manifest.json
+      # all generated from gnosis-live.strudel and copied into tools/visuals/public/.
     output: sync/
   daw:
     status: done # full 8-channel MIDI arrangement deployed into Ableton via the ableton MCP server; Live Set now lives in daw/ (moved from a stray sibling ableton/ folder to match this project's standing convention)

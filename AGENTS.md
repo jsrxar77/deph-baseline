@@ -22,7 +22,7 @@ Organization is **composition-first**: everything belonging to one piece lives i
   - **`<name>.youtube.md`**: YouTube publish pack (titles EN/ES, description, chapters, tags, thumbnail brief). Managed by `youtube-publish`.
   - **`<name>.ableton.md`**: (Optional) Step-by-step Spanish guide for the user if refined in Ableton.
   - **`sounds/`**: Strudel code: `<name>.strudel`. Replaced versions go to `sounds/backup/`.
-  - **`visuals/`**: Relative symlink (`../../tools/visuals/src/compositions/<name>`) pointing to the real Remotion code.
+  - **`visuals/`**: The real Remotion code for this piece, as real files — never under `tools/` (golden rule; see CLAUDE.md).
   - **`sync/`**: Audio & video bridge data: `audio.wav` (raw), `audio-master.wav` (loudness master), `frames.json`, `manifest.json`.
   - **`daw/`**: (Optional) Ableton MIDI (`<name>.mid`), `tracks.json`, `stems/`, Live Set.
   - **`renders/`**: Compiled final videos (`<name>.mp4`, 4K 60fps). Git-ignored.
@@ -60,10 +60,10 @@ Workspace skills are located in `.agents/skills/` (and declared in `.agents/skil
 - **Mandatory Decision Question**: Before starting visuals on any composition, always ask the user whether the visual domain will be built with:
   - **Remotion**: Complex WebGL shaders, procedural fractals (Julia/Chladni), dynamic camera navigation, and FFT frequency-band audio reactivity.
   - **HyperFrames**: Clean HTML5 + CSS + GSAP vector animations, sacred geometry, typography, and symbol layout with frame-by-frame timeline control.
-- For **Remotion**, use `visuals-compose` (`tools/visuals/src/compositions/<name>/<name>.tsx`).
+- For **Remotion**, use `visuals-compose` (`media/<name>/visuals/<name>.tsx`).
 - For **HyperFrames**, use `hyperframes-video` (`media/<name>/visuals/index.html` or dedicated hyperframes asset).
 
-4. **`visuals-compose`**: Building Remotion visuals in `tools/visuals/src/compositions/<name>/<name>.tsx`.
+4. **`visuals-compose`**: Building Remotion visuals in `media/<name>/visuals/<name>.tsx`.
    - Remotion GL renderer set to `angle`.
    - Duration derived from audio with `getAudioDurationInSeconds(staticFile('<name>-audio.wav'))`.
    - Audio reactivity must be a pure function of `frame`.

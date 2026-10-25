@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Img, Sequence, staticFile } from "remotion";
-import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer";
+import { FractalVisualizer } from "../../../../media/slow-drift/visuals/FractalVisualizer";
 
 // deph's YouTube profile picture (800x800; YouTube shows it inside a circle). The user's illustrated portrait is
 // kept as it is (the face gets only a soft focus, the expression is untouched) and its background is replaced

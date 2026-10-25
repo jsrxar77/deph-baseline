@@ -1,7 +1,7 @@
 import React from "react";
 import { CalculateMetadataFunction, Composition, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { getAudioDurationInSeconds } from "@remotion/media-utils";
-import { HdrCanvas, type HdrParams } from "../../shared/HdrCanvas";
+import { HdrCanvas, type HdrParams } from "../../../tools/visuals/src/shared/HdrCanvas";
 import { beingPos, NBEING, TRAIL_SECONDS, visibleCount } from "./beings";
 import { FRAGMENT, NT } from "./shader";
 import { stoneUniforms } from "./stones";

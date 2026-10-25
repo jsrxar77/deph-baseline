@@ -68,14 +68,24 @@ export function useAudioBands(frame: number): AudioBands {
   }
 
   return {
-    bass: bassSum / weightSum,
-    mid: midSum / weightSum,
-    high: highSum / weightSum,
-    rms: rmsSum / weightSum,
+    bass: finite(bassSum / weightSum),
+    mid: finite(midSum / weightSum),
+    high: finite(highSum / weightSum),
+    rms: finite(rmsSum / weightSum),
   };
 }
 
 function average(values: number[]): number {
   if (values.length === 0) return 0;
   return values.reduce((sum, v) => sum + v, 0) / values.length;
+}
+
+// `visualizeAudio` takes a log of each bin's magnitude internally; a bin with exactly zero energy (true digital
+// silence — confirmed with a silent placeholder track, but a real recording's own silent passages can hit this
+// too) makes that log -Infinity, which then propagates through every downstream average into bass/mid/high/rms
+// and, from there, into every GLSL uniform and the shader's own math (confirmed: it corrupted `iterMax` into
+// -Infinity, collapsing the whole fractal to a single flat frame — see FractalVisualizer.tsx/shaders.ts). Guard
+// at the source instead of hoping every consumer downstream remembers to.
+function finite(v: number): number {
+  return Number.isFinite(v) ? v : 0;
 }

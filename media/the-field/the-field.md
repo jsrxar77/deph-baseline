@@ -1,7 +1,7 @@
 # The Field
 
 `sounds/the-field.strudel` — 6:09, A lydian, tuned to A4 = 432 Hz, 30 cpm (184.5 cycles of 2 s). Meditative, no pulse.
-Binaural layer (headphones). Video: `tools/visuals/src/compositions/the-field/` (composition `the-field`, 4K 60 fps).
+Binaural layer (headphones). Video: `visuals/` (composition `the-field`, 4K 60 fps).
 Named Morpho-Field until 2026-10-05.
 ▶ **Watch on YouTube:** [The Field (4K · 432 Hz · Binaural)](https://youtu.be/8QGj_FvP5Xo)
 
@@ -33,7 +33,7 @@ manifests the whole.** (The user's narrative; it follows the reference image: vi
 | Geometry | 88–152 | 2:56 – 5:04 | Canon voice 8 at 2:56; mirrored bells on Fibonacci gaps from 3:12. Inhale at 4:00 (arp out, pad filter closes, sub leaves). **The whole at 4:16.** |
 | Return | 152–184.5 | 5:04 – 6:09 | The voices drift apart and leave; the motif once more, alone (5:36); the field rests on A. |
 
-## Visual (composition `the-field`, 4K 60 fps — code in `visuals/`, the symlink to tools/visuals/src/compositions/the-field)
+## Visual (composition `the-field`, 4K 60 fps — code in `visuals/`)
 
 Art direction agreed with the user (2026-10-05), after a first version made of stacked neon layers was rejected:
 

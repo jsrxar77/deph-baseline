@@ -28,6 +28,7 @@
     "typescript": "5.9.3"
   },
   "scripts": {
+    "predev": "node scripts/ensure-public-assets.mjs",
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",

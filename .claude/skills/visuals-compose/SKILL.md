@@ -1,6 +1,6 @@
 ---
 name: visuals-compose
-description: Use when building the actual Remotion video composition for a piece, once a composition folder (media/<name>/) exists — covers where the component code actually has to live (not media/<name>/visuals/, despite that folder's name — the Remotion bundler can't resolve node_modules for files outside tools/visuals/), wiring real audio into the composition, the ANGLE GL renderer fix for WebGL/canvas visuals, audio-reactive parameter mapping, and applying deph's shared "creation torus" visual signature (tools/visuals/src/signature/phaseRings.ts, confirmed as the project's standing brand mark) that every composition should include as a background layer. For scaffolding a brand-new composition, see deph-compose first; for composing the sound itself, see strudel-compose.
+description: Use when building the actual Remotion video composition for a piece, once a composition folder (media/<name>/) exists — covers where the component code lives (media/<name>/visuals/, as real files — never under tools/, see the golden-rule fix below), wiring real audio into the composition, the ANGLE GL renderer fix for WebGL/canvas visuals, audio-reactive parameter mapping, and applying deph's shared "creation torus" visual signature (tools/visuals/src/signature/phaseRings.ts, confirmed as the project's standing brand mark) that every composition should include as a background layer. For scaffolding a brand-new composition, see deph-compose first; for composing the sound itself, see strudel-compose.
 ---
 
 # Building a composition's video side
@@ -11,31 +11,39 @@ architecture would work. Two things in `CLAUDE.md`'s file-layout section turned 
 practice; this skill documents the corrected reality. Update `CLAUDE.md` if this skill and it ever
 drift apart.
 
-## Where the code actually goes (correction to the original plan)
+## Where the code actually goes: `media/<name>/visuals/`, as real files — no exception
 
-**Not in `media/<name>/visuals/`.** That was the original plan (mirroring `media/<name>/sounds/`), but
-Remotion's bundler (Rspack/webpack, configured in `tools/visuals/remotion.config.ts`) resolves
-`node_modules` from a source file's **real path**, so a file under `media/` can never find
-`tools/visuals/node_modules`. Tested twice: importing `remotion` from a file outside `tools/visuals/`
-fails with `Module not found` (identical from `tsc` and the bundler); and a symlink from `tools/` into
-`media/` (real code in `media/`) resolved `remotion` and `react` but failed on `@remotion/media-utils`.
+**Golden rule (see `CLAUDE.md`): nothing that belongs to one piece ever physically lives under `/tools`.**
+An earlier version of this skill documented the opposite as an unavoidable "exception" — composition code
+forced into `tools/visuals/src/compositions/<name>/`, with `media/<name>/visuals/` as a symlink pointing
+into it — because Remotion's bundler (Rspack/webpack) resolves `node_modules` from a source file's real
+path, and a file under `media/` couldn't find `tools/visuals/node_modules`. That was wrong to accept as
+permanent; the real fix (2026-10-25), confirmed working:
 
-**Actual location: `tools/visuals/src/compositions/<name>/`** — a subfolder per composition, inside
-the engine's own source tree, so normal module resolution works.
+1. **A single `node_modules` symlink at the project root**, pointing at `tools/visuals/node_modules`:
+   `ln -s tools/visuals/node_modules node_modules` (run once, from the project root; already git-ignored,
+   same as any `node_modules`). Both TypeScript's and Rspack/webpack's module resolution walk UP the
+   directory tree from the importing file looking for a `node_modules` folder — with this symlink in
+   place, any file anywhere under the project (including `media/<name>/visuals/`) finds the engine's
+   dependencies via that normal walk. No bundler config override, no per-file trick.
+2. **`tools/visuals/tsconfig.json` needs an explicit `include`** (it previously had none, which defaults
+   to "everything under the tsconfig's own directory" — `media/` isn't that): `"include": ["src/**/*",
+   "../../media/*/visuals/**/*"]`.
 
-**`media/<name>/visuals/` is a symlink to it, in that direction only.** When you create the code folder,
-replace the scaffold's empty `media/<name>/visuals/` directory with a relative link:
+Verified by moving all five existing pieces' code this way and confirming both `npx tsc --noEmit` and
+`npx remotion compositions` (run from `tools/visuals/`) succeed with no module-resolution errors.
 
-```
-rmdir media/<name>/visuals && ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals
-```
+**The composition's own code is real files at `media/<name>/visuals/`** — the entry file (`<name>.tsx`,
+exporting the `<Composition>`) plus any helper files, exactly like `media/<name>/sounds/` holds the sound
+side. `tools/visuals/src/Root.tsx` imports it by relative path (e.g. `"../../../media/<name>/visuals/<name>"`
+from `Root.tsx`'s own location, `tools/visuals/src/`) and renders it. A file anywhere under
+`tools/visuals/src/compositions/` referencing a specific piece is a sign this rule was violated — there is
+no such folder anymore.
 
-The bundler never sees the link (it only reads `tools/`), git stores it as a tiny file, and opening the
-composition's folder shows its sound, visual, sync and renders side by side. Never put code in the link's
-`media/` side or make the link point into `media/`.
-
-The composition's entry file is `tools/visuals/src/compositions/<name>/<name>.tsx`; it exports the `<Composition>` and
-`tools/visuals/src/Root.tsx` renders it. Name it as the "Naming" section below says.
+Code genuinely shared across pieces (not any one piece's own) stays in `tools/visuals/src/shared/` or
+`src/signature/` — that's the engine, not a piece. A piece's own file importing one of those uses a
+relative path back into `tools/visuals/src/...` (three `../` from `media/<name>/visuals/`, since that's
+three directories below the project root: `visuals` → `<name>` → `media` → root).
 
 ## Wiring in the real audio (also a correction)
 
@@ -218,24 +226,29 @@ pulses soft and capped (photosensitivity, and deph's no-strobe rule). A 1080p fr
 
 Names follow the `deph-compose` skill's "Naming" rule: the Remotion composition id is exactly the composition's name
 (`musica-universalis`), only 4K, no 1080p twin, no Final/Flow/Proto/4K in any name; the entry file is
-`compositions/<name>/<name>.tsx`; code used by more than one piece lives in `tools/visuals/src/shared/` (today
-`HdrCanvas.tsx`). Alternatives compared side by side are deleted (id and code) as soon as one is chosen.
+`media/<name>/visuals/<name>.tsx`; code used by more than one piece lives in `tools/visuals/src/shared/` (today
+`HdrCanvas.tsx`, `ripples.ts`) — never a specific piece's own folder. Alternatives compared side by side are
+deleted (id and code) as soon as one is chosen.
 
-Every piece's `media/<name>/visuals` must be the symlink to its code — Songcord was once left as an empty directory
-after its code was built, and the user caught it. Before calling any visual work done, run from the project root and
-fix anything that isn't `symlink OK`, then check the Studio list shows only piece names and `deph-*` brand items:
+Every piece's `media/<name>/visuals` must be a real directory holding its own code, never empty and never a
+symlink — Songcord was once left as an empty directory after its code was built (back when the symlink-into-tools
+pattern was still in use), and the user caught it; that whole pattern is retired now (see "Where the code
+actually goes" above). Before calling any visual work done, run from the project root and fix anything that
+isn't `real dir, has code`, then check the Studio list shows only piece names and `deph-*` brand items, and that
+`tools/visuals/src/compositions/` doesn't exist at all:
 
 ```
-for d in media/*/; do n=$(basename "$d"); printf "%s: " "$n"; if [ -L "$d/visuals" ] && [ -d "$d/visuals/" ]; then echo "symlink OK"; else echo "FIX: not a working symlink"; fi; done
-(cd tools/visuals && npx remotion compositions)
+for d in media/*/; do n=$(basename "$d"); printf "%s: " "$n"; if [ ! -L "$d/visuals" ] && [ -d "$d/visuals" ] && [ -n "$(ls -A "$d/visuals" 2>/dev/null)" ]; then echo "real dir, has code"; else echo "FIX: missing, empty, or still a symlink"; fi; done
+test -d tools/visuals/src/compositions && echo "FIX: tools/visuals/src/compositions/ should not exist" || echo "tools/visuals/src/compositions/ OK (absent)"
+(cd tools/visuals && npx tsc --noEmit && npx remotion compositions)
 ```
 
 ## Before finishing: reconcile the whole yaml
 
 Update `media/<name>/<name>.yaml`'s `domains.visual` — `status` (`in-progress` for a first working
-pass, `done` once it's considered finished) and `entry` (point it at the real
-`tools/visuals/src/compositions/<name>/` location, not the folder the original scaffold implied). See
-`deph-compose`'s "Hand off" section for why every domain skill does this, not just this one.
+pass, `done` once it's considered finished) and `entry` (point it at the real `media/<name>/visuals/`
+location, not the folder the original scaffold implied). See `deph-compose`'s "Hand off" section for why
+every domain skill does this, not just this one.
 
 
 ## Lissajous/harmonograph motion: constant speed and a GLSL smoothstep gotcha (Musica Universalis)

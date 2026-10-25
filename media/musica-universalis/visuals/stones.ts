@@ -1,4 +1,4 @@
-import { N_RIPPLES } from "../../shared/ripples";
+import { N_RIPPLES } from "../../../tools/visuals/src/shared/ripples";
 import { recentEvents, type Timeline } from "./timeline";
 
 // Stones in the water (Songcord's ripples, tools/visuals/src/shared/ripples.ts), dropped by the piece's own notes:

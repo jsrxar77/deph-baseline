@@ -39,9 +39,10 @@ stem anything of that composition carries. The user insisted on this after findi
   resolution ("4K") in a name. The current version simply carries the name; replaced versions the user wants kept go to a
   `backup/` folder (as in `sounds/backup/`), everything else is deleted.
 - **Remotion**: the composition id is exactly `<name>` (e.g. `musica-universalis`), built only in 4K (3840x2160); no
-  1080p twin. Its code is `tools/visuals/src/compositions/<name>/<name>.tsx` plus that folder's helper files. Code shared by
-  several pieces lives in `tools/visuals/src/shared/`, never inside one piece's folder. Brand items that belong to the
-  channel, not to a piece, take the channel name: `deph-banner`, `deph-avatar`.
+  1080p twin. Its code is `media/<name>/visuals/<name>.tsx` plus that folder's helper files — real files, never under
+  `tools/` (see `CLAUDE.md`'s golden rule). Code shared by several pieces lives in `tools/visuals/src/shared/`, never
+  inside one piece's folder. Brand items that belong to the channel, not to a piece, take the channel name:
+  `deph-banner`, `deph-avatar`.
 - **While comparing alternatives**, each one may carry a descriptive id so they can be seen side by side in the Studio;
   once the user chooses, the chosen one is renamed to `<name>` and the others are deleted (id and code) the same day.
 
@@ -62,10 +63,10 @@ media/<name>/
 
 Always create all four subfolders together, even if only one domain was requested — an audio-only piece
 today may get a visual later, and `strudel-sync` expects `sync/` to already exist rather than creating
-top-level structure itself (it only writes files, not folders). `visuals/` is created too, as an empty directory: the real Remotion code lives in
-`tools/visuals/src/compositions/<name>/` (the bundler can't resolve `node_modules` from `media/`), and
-`visuals-compose` later replaces this empty directory with a symlink to it
-(`ln -s ../../tools/visuals/src/compositions/<name> media/<name>/visuals`). Compiled videos go in
+top-level structure itself (it only writes files, not folders). `visuals/` is created too, as an empty directory:
+`visuals-compose` later fills it with the piece's real Remotion code (`media/<name>/visuals/<name>.tsx` plus
+helpers) — not a symlink, not anything under `tools/` (see `CLAUDE.md`'s golden rule; the project-root
+`node_modules` symlink into `tools/visuals/node_modules` is what makes this resolve). Compiled videos go in
 `renders/`.
 
 The yaml — see `media/slow-drift/slow-drift.yaml` for a filled-in example:
@@ -88,7 +89,7 @@ domains:
     file: sounds/<name>.strudel
   visual:
     status: planned # or "not-requested" if the user said sound-only
-    entry: tools/visuals/src/compositions/<name>/ # not visuals/ — see the visuals-compose skill for why
+    entry: media/<name>/visuals/ # real files, never under tools/ — see the visuals-compose skill
   sync:
     status: not-built
     output: sync/

@@ -305,7 +305,7 @@ more than one pass, the voices phase against each other rather than repeating in
 
 ## Visuals
 
-`slow-drift` (`tools/visuals/src/compositions/slow-drift/`) — a single Julia-set fractal in WebGL,
+`slow-drift` (`visuals/`) — a single Julia-set fractal in WebGL,
 filling the frame, reacting to this piece's real rendered `audio.wav` (`media/slow-drift/sync/audio.wav`)
 rather than to Strudel's event data. "deph / Deep Decay" palette: obsidian background (`#050508`) through
 night-blue (`#121829`), cosmic violet (`#2d1b4e`), oxidized teal (`#1fa396`) and electric cyan (`#38bdf8`),

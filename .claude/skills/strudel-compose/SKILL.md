@@ -456,7 +456,7 @@ the studio is labelled usefully — see CLAUDE.md's "Name layers..." note for th
 ## Looking ahead: pairing pieces with visuals
 
 There's a Remotion engine in `tools/visuals/` for generating video for these pieces, with each
-composition's actual video code living in `tools/visuals/src/compositions/<name>/` (not under `/media` —
-see the `visuals-compose` skill for why). Once a piece is finished, its audio + video keyframes get
+composition's actual video code living in `media/<name>/visuals/` (never under `/tools` — see
+`CLAUDE.md`'s golden rule and the `visuals-compose` skill for how that resolves). Once a piece is finished, its audio + video keyframes get
 rendered to `media/<name>/sync/` — see the `strudel-sync` skill and `docs/sync-pipeline.md` for that
 pipeline; this skill only covers composing the piece itself.

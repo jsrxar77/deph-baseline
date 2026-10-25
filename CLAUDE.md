@@ -12,11 +12,29 @@ drive that extension, so it edits the file and reads the result with the headles
 Organization is composition-first: everything belonging to one piece lives together, split by domain
 inside that piece's own folder, rather than grouped by media type across the whole project.
 
+**Golden rule: tools vs. pieces, never mixed, no exception.** `/tools` is exclusively the generic
+engines and their own infrastructure — the Strudel inspector/render/sync scripts, the Remotion scaffold
+itself (`Root.tsx`, `remotion.config.ts`, `src/signature/`, `src/shared/`, `src/brand/`), HyperFrames'
+render tooling. **Nothing that belongs to one specific piece ever physically lives under `/tools`** — not
+loose at a domain's root, not in a composition-named subfolder either. A piece's own Remotion code lives
+at `media/<name>/visuals/`, as real files, the same as its sound side lives at `media/<name>/sounds/` —
+never a symlink standing in for code that actually sits in `/tools`. This used to have a documented
+"exception" (composition code forced into `tools/visuals/src/compositions/<name>/` because the bundler
+couldn't resolve `node_modules` from outside `tools/visuals/`) — that was wrong and has been corrected
+(2026-10-25): a single `node_modules` symlink at the project root, pointing at `tools/visuals/node_modules`
+(git-ignored, same as any `node_modules`), lets both TypeScript and the Rspack bundler find the engine's
+dependencies via their normal upward directory search from anywhere in the repo, including `media/`. No
+bundler config override needed, no per-piece trick — confirmed working for all five existing pieces
+(`npx tsc --noEmit` and `npx remotion compositions` from `tools/visuals/`, after moving every piece's code
+to `media/<name>/visuals/`). `tools/visuals/tsconfig.json`'s `include` lists `media/*/visuals/**/*`
+alongside `src/**/*` so these files are still type-checked from there. When in doubt whether something is
+"tooling" or "a piece's own content," ask rather than guessing which side of this line it falls on.
+
 **Naming (standing rule):** everything of a composition carries exactly its kebab-case name (`musica-universalis`):
 folder, files, Remotion composition id, public copies. A suffix only when it tells two things apart and names the
 purpose (`.yaml`, `.youtube.md`, `.ableton.md`, `-master.wav`); never a brand, technique, stage or resolution word
-(no deph/Fractal/Flow/Final/Proto/4K). Only 4K is built. Every `media/<name>/visuals` is the symlink to its code. Full
-rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-compose`, "Naming, and the consistency check".
+(no deph/Fractal/Flow/Final/Proto/4K). Only 4K is built. Full rule: the `deph-compose` skill's "Naming" section;
+the check to run: `visuals-compose`, "Naming, and the consistency check".
 
 - **`/media`** — one subfolder per composition: `media/<name>/`. Nothing else goes directly under
   `/media` — no shared/ungrouped content, no tooling.
@@ -36,15 +54,11 @@ rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-co
   - **`media/<name>/sounds/`** — the Strudel side: `<name>.strudel` (always the current main version) plus any variant
     files (e.g. an unarranged comparison version). Superseded versions the user wants kept go to `sounds/backup/`. This
     is where `strudel-compose` writes.
-  - **`media/<name>/visuals/`** — a **symlink** to the real Remotion code,
-    `../../tools/visuals/src/compositions/<name>` (relative), so opening the composition's folder shows its
-    whole visual side. The code itself cannot live here: Remotion's bundler resolves `node_modules` from a
-    file's real path, and a file under `media/` cannot find `tools/visuals/node_modules` (tested with a
-    symlink from `tools/` into `media/`: `remotion` and `react` resolved, but `@remotion/media-utils` failed
-    with `Module not found`). The link points the other way, into `tools/`, which the bundler never sees.
-    Until a visual exists the folder is just an empty directory; `visuals-compose` replaces it with the
-    link when it creates the code folder. See that skill for the other corrections found alongside it
-    (audio wiring, WebGL renderer config, YouTube color format).
+  - **`media/<name>/visuals/`** — the real Remotion code for this piece's video side: its entry file
+    (`<name>.tsx`, exporting the `<Composition>`) plus any helper files, imported from `tools/visuals/src/Root.tsx`
+    by relative path. Not a symlink and not inside `/tools` — see the golden rule above for why, and the
+    `visuals-compose` skill for the other corrections found alongside it (audio wiring, WebGL renderer
+    config, YouTube color format). Until a visual exists the folder is just an empty directory.
   - **`media/<name>/sync/`** — rendered bridge output for this piece: `audio.wav` (raw render),
     `audio-master.wav` (loudness master), `frames.json` (every event with its exact frame number) and
     `manifest.json`. See `docs/sync-pipeline.md`. This is where `strudel-sync` writes. The `.wav` files are
@@ -70,18 +84,20 @@ rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-co
   audio/video sync pipeline spec (`sync-pipeline.md`), the Strudel → Ableton bridge spec (`daw-bridge.md`), the visuals-bridge overview
   (`visuals-bridge.md`), and the YouTube channel positioning and standing copy (`youtube-channel.md`, with its brand images in `docs/youtube-channel/`, e.g. `banner.jpg`, rendered from the `deph-banner` composition in `tools/visuals/src/brand/`). Never a specific composition's doc — that's `media/<name>/<name>.md`.
 - **`/tools`** — domain-first, one subfolder per domain, each its own npm project (own `package.json`,
-  `package-lock.json`, `node_modules`; there's no project-root `package.json`). `tools/sounds/` holds
-  every Strudel/audio tool (the inspector today; the render/sync pipeline once it's built) — it reads and
-  writes files under `media/<name>/sounds/` and `media/<name>/sync/` but doesn't live there itself.
-  `tools/visuals/` holds the Remotion engine: scaffolded via `create-video`, with the Remotion Agent
+  `package-lock.json`, `node_modules`; there's no project-root `package.json` — but there IS a project-root
+  `node_modules`, a plain symlink to `tools/visuals/node_modules`, git-ignored, so that TypeScript and the
+  bundler can resolve the engine's dependencies from `media/` too — see the golden rule above). `tools/sounds/`
+  holds every Strudel/audio tool (the inspector today; the render/sync pipeline once it's built) — it reads
+  and writes files under `media/<name>/sounds/` and `media/<name>/sync/` but doesn't live there itself.
+  `tools/visuals/` holds the Remotion engine only: scaffolded via `create-video`, with the Remotion Agent
   Skills installed under `.agents/skills/` (symlinked from `.claude/skills/` — run `npx remotion skills
-  update` from inside `tools/visuals/` to refresh them). Every composition's actual video code also lives
-  here, under `tools/visuals/src/compositions/<name>/` (see the `media/<name>/visuals/` bullet above for
-  why, and the `visuals-compose` skill for the full detail) — the one place content ended up inside
-  `/tools` rather than `/media`, discovered by testing, not planned upfront. `tools/visuals/src/signature/`
-  holds deph's shared visual identity (the "creation torus" GLSL layer) — every composition should apply it,
-  not reimplement its own version; see the `visuals-compose` skill. A future non-audio, non-video tool
-  gets its own `tools/<domain>/` with its own dependencies, not a flat drop into `/tools`.
+  update` from inside `tools/visuals/` to refresh them), `Root.tsx` (imports every piece's composition from
+  `media/<name>/visuals/`), `remotion.config.ts`, and the shared, cross-piece pieces: `src/signature/` (the
+  "creation torus" GLSL layer — every composition should apply it, not reimplement its own version),
+  `src/shared/` (reusable rendering helpers), `src/brand/` (channel-wide assets, not any one piece's). No
+  composition's own code lives under `tools/visuals/src/compositions/` anymore — that path doesn't exist. A
+  future non-audio, non-video tool gets its own `tools/<domain>/` with its own dependencies, not a flat drop
+  into `/tools`.
 - **`.claude/skills/`** — one skill per real workflow:
   - `deph-compose` — the entry point for starting *any* new composition (or substantially reworking one):
     asks structure/duration/key and which domains are needed, scaffolds the `media/<name>/` folder and
@@ -91,7 +107,7 @@ rule: the `deph-compose` skill's "Naming" section; the check to run: `visuals-co
   - `ableton-bridge` — optional: taking a piece into Ableton Live to refine its sound with the Mac's VST/AU library
     (MIDI + stems export, live playback over the IAC bus, the beginner guide `<name>.ableton.md`) and bringing the
     exported mix back into `sync/` (alignment check, mastering, keyframes).
-  - `visuals-compose` — building the actual Remotion composition (in `tools/visuals/src/compositions/`,
+  - `visuals-compose` — building the actual Remotion composition (in `media/<name>/visuals/`,
     wiring in the real `audio.wav`).
   - `youtube-publish` — the last step of the pipeline: builds and maintains each composition's YouTube publish
     pack once a video exists (honest claims, verified YouTube rules, EN/ES). **Whenever a video is rendered or

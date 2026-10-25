@@ -42,7 +42,7 @@ questioning" and a resolution. The user's purpose is simply to show what can be 
 Arc reading confirmed by the user (times are the analysis boundaries; roles are the reading): 0:00 opening, the
 surface · 0:28 the orchestra grows · 0:54 tension, immersion · 1:17-1:28 the held question (quiet dip, no highs) ·
 1:28 rebuilding · 1:58-2:35 drama (peak energy) · 2:35 harmonic turn · 2:48 resolution (bright, airy, choir) ·
-3:07 closing. The narrative curve `ARC` in `tools/visuals/src/compositions/songcord/analysis.ts` encodes it as one
+3:07 closing. The narrative curve `ARC` in `visuals/analysis.ts` encodes it as one
 number, 0 (light) to 1 (the question).
 
 ## Look-development prototypes (2026-09-26)

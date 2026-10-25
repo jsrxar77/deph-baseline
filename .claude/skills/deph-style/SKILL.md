@@ -677,3 +677,19 @@ Also update the distilled sections above if the decision changes a principle, an
   technique (an example, a paper, another piece's code), re-read the actual source before finalizing the adaptation
   — a remembered summary drifts, and the drift can replace the technique's actual mechanism with something that
   merely resembles it.
+- 2026-10-25 (project-wide, tools vs. pieces — golden rule reversal, not a gnosis-specific fix) — built gnosis's
+  first real visual pass (two particle clouds, three.js drawrange connections, Shepard = the integration of the
+  two) inside `tools/visuals/src/compositions/gnosis/`, following the then-documented "one exception" in
+  `CLAUDE.md`/`visuals-compose` (composition code forced into `tools/` because the bundler couldn't resolve
+  `node_modules` from `media/`). The user rejected that exception outright, repeatedly and with no ambiguity:
+  "NADA QUEDA EN TOOLS NO HAY EXCEPCION" — `/tools` is the framework, full stop; every piece's own code, Remotion
+  included, belongs in `media/<name>/visuals/` as real files. Fixed properly rather than argued with: a single
+  `node_modules` symlink at the project root (`ln -s tools/visuals/node_modules node_modules`, git-ignored) lets
+  both `tsc` and the Rspack bundler resolve the engine's dependencies via their normal upward directory search
+  from anywhere in the repo, including `media/`; `tools/visuals/tsconfig.json` got an explicit `include` covering
+  `media/*/visuals/**/*` (it previously had none, which only covered `src/`). Migrated all five existing pieces
+  (gnosis, slow-drift, songcord, musica-universalis, the-field) the same day, not just the one being worked on —
+  confirmed with `tsc --noEmit` and `npx remotion compositions` after the move, no module-resolution errors.
+  Lesson: a "tested, documented exception" from an earlier session is still worth re-opening when the user says
+  so — don't defend a past decision just because it was carefully reasoned at the time; the real fix was one
+  symlink away and nobody had looked for it since the original test.

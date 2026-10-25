@@ -182,7 +182,7 @@ Guide: `musica-universalis.ableton.md`.
 
 ## Visual (in progress, 2026-09-27)
 
-Composition `musica-universalis` (4K), code in `tools/visuals/src/compositions/musica-universalis/` (linked from `visuals/`).
+Composition `musica-universalis` (4K), code in `visuals/`.
 Built like Songcord, as one scene rather than stacked layers:
 
 - **World:** a dark nebula and star dust at four depths (far: tiny and sharp; near: large and out of focus), drifting at

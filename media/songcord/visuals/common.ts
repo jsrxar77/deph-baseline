@@ -1,5 +1,5 @@
 import { arcAt, smoothAt, type Analysis } from "./analysis";
-import type { UniformValue } from "../../shared/HdrCanvas";
+import type { UniformValue } from "../../../tools/visuals/src/shared/HdrCanvas";
 
 // GLSL shared by every songcord prototype: uniforms measured from the audio, noise, and the Deep Decay palette.
 export const GLSL_COMMON = `

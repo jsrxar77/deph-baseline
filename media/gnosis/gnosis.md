@@ -279,8 +279,8 @@ Diseñado de origen para la plantilla estándar de 8 canales de Ableton Live (`S
 **Corrección de tecnología**: el concepto original decía HyperFrames. Eso ya no aplica — por convención del
 proyecto (`CLAUDE.md`, skill `deph-shorts`), HyperFrames quedó reservado únicamente para los shorts verticales;
 las piezas completas del canal siguen en Remotion. `gnosis` ya usa Remotion + `@react-three/fiber`/`three`
-(`tools/visuals/src/compositions/gnosis/`), así que la propuesta de abajo es directamente construible con lo que
-ya está instalado, no hace falta sumar nada.
+(`visuals/`, código real de la pieza — nunca bajo `tools/`, ver la regla de oro en `CLAUDE.md`), así que la
+propuesta de abajo es directamente construible con lo que ya está instalado, no hace falta sumar nada.
 
 ### Idea: el diálogo hecho constelación
 

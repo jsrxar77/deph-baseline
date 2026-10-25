@@ -1,9 +1,16 @@
 node_modules/
+# The project root's own node_modules is a symlink into tools/visuals/node_modules (see CLAUDE.md's golden
+# rule), not a directory — the pattern above only matches directories, so it's listed explicitly too.
+/node_modules
 .DS_Store
 
 # Rendered audio — large, and fully regenerable from the .strudel source via
 # node tools/sounds/render.mjs (see docs/sync-pipeline.md). Not worth tracking in git.
 media/*/sync/*.wav
+
+# render.mjs's own progress log (see "Reporting render progress" in CLAUDE.md) — scratch, not part of the
+# tracked sync/ output format (audio.wav, audio-master.wav, frames.json, manifest.json).
+media/*/sync/*.progress.jsonl
 
 # User-supplied source recordings for audio-first pieces (media/<name>/sync/source.mp3): someone else's music (e.g. a
 # client's), so never tracked in this public repository without an explicit decision.

@@ -1,4 +1,4 @@
-import { RIPPLES_GLSL } from "../../shared/ripples";
+import { RIPPLES_GLSL } from "../../../tools/visuals/src/shared/ripples";
 
 // GLSL for Musica Universalis, a scene for HdrCanvas (linear light in; bloom, ACES and the SDR grade out). Built the
 // way Songcord is built, because what makes Songcord work is that it is one scene, not stacked layers:

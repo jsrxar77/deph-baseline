@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
-import { FractalVisualizer } from "../compositions/slow-drift/FractalVisualizer";
+import { FractalVisualizer } from "../../../../media/slow-drift/visuals/FractalVisualizer";
 
 // deph's YouTube channel banner (2560x1440, YouTube's recommended size). A single still: a frame of the
 // Slow Drift fractal as full-bleed background, softly darkened in the middle so the text reads, with the
