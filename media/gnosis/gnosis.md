@@ -83,6 +83,25 @@ movimiento que la fuente de 24:00, a la mitad de duración.
   Transcendencia y en la Paz — la resolución a consonancia está confirmada estructuralmente, no solo en la intención.
 - Medido con el inspector; no se renderizó audio real completo todavía.
 
+### Melodía y acompañamiento: de cajita musical a desarrollo real
+
+Después de arreglar el ritmo, el usuario señaló el problema de fondo: la melodía eran siempre las mismas 7 notas
+transportadas o invertidas — reconocible las primeras veces, cajita musical después, sin tensión ni espera. Y el
+acompañamiento tenía el mismo problema: el bajo del Pleroma era una sola fórmula rítmica repetida nota por nota
+unas 30 veces seguidas, y el pad usaba un voice-leading tan suave que el agudo casi no se movía nunca. Rehecho:
+
+- **La melodía ahora se desarrolla de verdad**: en vez de transportar/invertir siempre las mismas 7 notas, una
+  célula chica de 3 notas (La Si Re) se repite en secuencia una tercera arriba o abajo — el recurso clásico para
+  generar impulso real — y aterriza en una nota sostenida que, el 40% de las veces, **a propósito** roza con el
+  acorde (una suspensión real que pide resolverse: la tensión y la "espera" que faltaban). Cada tercer enunciado
+  vuelve a ser la frase completa original (La Si Re Do Si La Fa), como ancla reconocible, también sostenida al
+  final.
+- **El bajo cambia de figura en cada acorde**, no repite una sola fórmula por movimiento — hay seis figuras
+  posibles (raíz, quinta, algo de tercera, en distintas posiciones) y cuál suena se elige por acorde, con más
+  variedad disponible en Density que en el Pleroma o la Paz.
+- **El pad ya no está clavado en una nota**: el ancla del voice-leading recorre un ciclo corto de notas del Re
+  dórico en vez de quedarse fija, así el agudo del acorde se mueve de verdad a lo largo de cada sección.
+
 ### Ritmo: de marcha a vuelo
 
 El usuario notó que al principio cada nota caía exactamente en el pulso — una grilla perfecta, no un viaje. La

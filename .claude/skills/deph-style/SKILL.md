@@ -534,3 +534,17 @@ Also update the distilled sections above if the decision changes a principle, an
   magic", don't just dial the same knob back partway — find what mechanism is ACTUALLY producing the bad symptom
   (here: the ornament, not the statement length) before changing anything, the same discipline as any other
   reported glitch.
+- 2026-10-24 (gnosis, melody and accompaniment) — reported after the rhythm fix: "la melodía es muy básica... repite
+  siempre lo mismo... no hay tensión, no hay espera" and "lo que acompaña tampoco, es siempre lo mismo". Real causes:
+  (1) the melody only ever transposed or inverted the same 7-note shape — recognisable transformation is not the
+  same as development; (2) the bass played one fixed rhythmic figure, note-for-note identical, for an entire
+  movement (~30 repeats in Pleroma); (3) the pad's voicing anchor was a single fixed note the whole piece, so its
+  top line barely moved. Fixed: melody now sequences a short 3-note cell a third up/down (real forward motion, the
+  classical "sequence" device) landing on a held note that's a deliberate dissonant suspension 40% of the time
+  (tension that wants resolving — this is what "espera" meant, not just longer silence); the full original phrase
+  still returns every third statement as a recognisable anchor. Bass picks a different rhythmic figure per chord
+  from a small pool (not one frozen formula). Pad's `.anchor()` is now a drifting pattern of D-dorian tones instead
+  of one fixed note. General rule: "repetitive/boring" on a piece that already has real structure (motif, harmony,
+  canon) usually means a parameter that's supposed to vary is actually frozen somewhere — find which one (here:
+  the transformation pool was too narrow, the bass figure was hardcoded, the anchor was a bare string) rather than
+  assuming more structure is needed when the structure is already there.

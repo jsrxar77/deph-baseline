@@ -17,19 +17,21 @@
 // nothing is left at 12:00.
 //
 // MATERIAL
-// - Sophia's phrase S: A B D C B A F (degrees 4 5 7 6 5 4 2), stepwise. Each statement transforms S (transposed,
-//   retrograde), chosen to grind least against the chord sounding under it; every third statement is S itself so
-//   it stays recognisable. Pleroma statements are 6 cycles (a middle ground: not the original tight grid, not the
-//   overcorrected 12); Descent/Density/Transcendence/Peace are 5, 6, 7.5, 10.
-// - The Demiurge: the inversion of her last phrase around A, three cycles later, low. Tintinnabuli (Pärt): the D
-//   minor triad tone above each Sophia note.
+// - Sophia's phrase: a 3-note seed (A B D) sequenced a third higher or lower — real forward motion, not just
+//   transposing the same shape — landing on a held note that, 40% of the time, is a deliberate suspension (grinds
+//   against the chord) wanting to resolve: the tension and the "espera" earlier drafts didn't have. The complete
+//   original phrase (A B D C B A F) returns every third statement as a recognisable anchor, held at the end.
+// - The Demiurge: the inversion of her phrase around A, three cycles later, low. Tintinnabuli (Pärt): the D minor
+//   triad tone above each Sophia note.
 // - Canon: a second voice sings her phrase an octave below, 5 cycles late (Density only); a third sings it an
 //   octave above, 8 cycles late, converging with the first two right as the Transcendence begins.
 // - Harmony: a seeded walk over D dorian chords free of internal semitones (Dm7 Dm6 Em7 F6 G69 Am7 C6), one every 2
 //   cycles, 180 chords, never repeating; dark chords weigh most in Density, bright ones (G69, C6, F6) in
-//   Transcendence. A second, higher voicing of the same chords opens wide only in Transcendence.
+//   Transcendence. The pad's voicing anchor drifts through a short cycle of D-dorian tones instead of sitting on
+//   one fixed note, so its top line actually goes somewhere. A second, higher voicing opens wide in Transcendence.
 // - Flow: a continuous arpeggio of each chord's own tones (the "flying" voice), sparse in the Pleroma, dense in
-//   Transcendence, thinning to almost nothing in peace. A walking bass connects the chord roots.
+//   Transcendence, thinning to almost nothing in peace. The walking bass picks a different figure per chord (root,
+//   fifth, third-ish, at different positions) instead of looping one fixed rhythm cell for an entire movement.
 // - A4 = 432 Hz everywhere. Binaural theta, a constant 6 Hz around D4 — deph's standing mark for this piece — from
 //   the first second. D dorian throughout.
 //
@@ -109,56 +111,61 @@ for (let i = 0; i < 180; i++) {
 }
 const CHORDS = cat(...PROG.map((c) => pure(c.sym))).slow(2);
 const ROOT_DEGREES = cat(...PROG.map((c) => pure(c.deg))).slow(2);
+// The voicing engine picks the inversion closest to `anchor` — a single fixed anchor for the whole piece keeps the
+// top note almost in place the entire time (smooth, but static: reported as "siempre lo mismo"). Drifting the
+// anchor through a short cycle of D-dorian tones gives the pad's top line somewhere to actually go.
+const ANCHOR_LOW = cat(...PROG.map((c, i) => pure(['A3', 'C4', 'B3', 'D4', 'C4', 'B3'][i % 6]))).slow(2);
+const ANCHOR_HIGH = cat(...PROG.map((c, i) => pure(['D5', 'F5', 'E5', 'G5', 'F5', 'E5'][i % 6]))).slow(2);
 const voiced = (anchor) => chord(CHORDS).dict('ireal').anchor(anchor).mode('below').voicing();
 const chordAt = (cyc) => PROG[Math.min(179, Math.floor(cyc / 2))];
 
-// ---- melodic material: Sophia's phrase, its transformations, the Demiurge's mirror, the tintinnabuli ---------------
-const S0 = [4, 5, 7, 6, 5, 4, 2, null];
+// ---- melodic material: a seed cell sequenced into real phrases, the Demiurge's mirror, the tintinnabuli -----------
+// Earlier drafts just transposed or reversed the same 7-note shape every time — recognisable the first couple of
+// times, then a music box. Real development instead: a short 3-note cell (SEED) is sequenced a third higher or
+// lower (the classical device for building forward motion), then lands on a held note — sometimes a deliberate
+// suspension that grinds against the chord and wants to resolve (the "espera", the tension the piece was missing),
+// most of the time a clean landing. The complete original phrase (FULL) returns every third statement, so the ear
+// has a recognisable anchor to come back to — it's held longer at the end too, the same "wait before the next
+// entrance" idea, not a flat repeat.
+const SEED = [4, 5, 7]; // A B D
+const FULL = [4, 5, 7, 6, 5, 4, 2, null]; // the complete phrase: A B D C B A F, then a held silence
 const num = (a, f) => a.map((d) => (d === null ? null : f(d)));
 const shift = (a, k) => num(a, (d) => d + k);
 const invert = (a, axis) => num(a, (d) => 2 * axis - d);
-const retro = (a) => a.filter((d) => d !== null).reverse().concat([null]);
-const VARIANTS = [
-  (a) => shift(a, 1), (a) => shift(a, -1), (a) => shift(a, 2), (a) => shift(a, -2), (a) => shift(a, 3), (a) => shift(a, -3),
-  retro, (a) => shift(retro(a), 1), (a) => shift(retro(a), -1), (a) => shift(retro(a), 2),
-];
 const triadAbove = (d) => { let x = d + 1; while (![0, 2, 4].includes(((x % 7) + 7) % 7)) x++; return x; };
-// Pleroma gets a statement length between the original tight grid (4 cycles, reported as marching) and the
-// overcorrection (12 cycles, reported as uneven/empty) — 6 is the middle ground. Density/Transcendence/Peace are
-// unchanged; the opening was the only part reported as a problem.
 const SECTIONS = [[60, 6], [135, 5], [225, 6], [300, 7.5], [360, 10]];
 
-// Which transformation of S grinds least against the chords sounding under it? A note grinds when a chord tone sits
-// a semitone from it (pitch class, any octave). Sophia, his mirror and the tintinnabuli are scored together.
+// A note "grinds" when a chord tone sits a semitone from it (pitch class, any octave).
 const SEMI = [0, 2, 3, 5, 7, 9, 10];
 const pcOf = (d) => SEMI[((d % 7) + 7) % 7];
 const grinds = (d, chordC) => chordC.tones.some((x) => { const k = Math.abs(pcOf(x) - pcOf(d)); return k === 1 || k === 11; });
-const lineCost = (a, start, len) =>
-  a.reduce((sum, d, k) => {
-    if (d === null) return sum;
-    const t0 = start + (k * len) / 8, t1 = start + ((k + 1) * len) / 8 - 1e-6;
-    return sum + [t0, t1].filter((tt) => grinds(d, chordAt(tt))).length;
-  }, 0);
-const slotCost = (base, start, len) =>
-  lineCost(base, start, len) + lineCost(invert(base, 4), start, len) + lineCost(num(base, triadAbove), start, len) +
-  lineCost(shift(base, -2), start, len);
 
 const phraseRng = seeded(2026);
 const SLOTS = [];
-const str = (a) => a.map((d) => (d === null ? '~' : d)).join(' ');
+const dur = (a, w) => a.map((d, i) => (d === null ? '~' : d) + '@' + w[i]).join(' ');
 let t = 0;
 let count = 0;
 for (const [end, len] of SECTIONS) {
   while (t + len <= end + 1e-9) {
-    let base = S0;
-    if (count % 3 !== 0) {
-      const options = VARIANTS.map((f) => f(S0)).map((a) => ({ a, cost: slotCost(a, t, len) + phraseRng() * 0.5 }));
-      base = options.sort((x, y) => x.cost - y.cost)[0].a;
+    const chord0 = chordAt(t);
+    let notes, weights;
+    if (count % 3 === 0) {
+      notes = FULL;
+      weights = [2, 2, 2, 2, 2, 2, 2, 8]; // the anchor, held at the end — the wait before the next phrase answers
+    } else {
+      const dir = phraseRng() < 0.5 ? 1 : -1;
+      const level1 = SEED;
+      const level2 = shift(SEED, 2 * dir); // the sequence: the same cell, a third up or down
+      const wantsTension = phraseRng() < 0.4; // sometimes land on purpose where it grinds — real tension, not always comfort
+      const candidates = [0, 1, -1, 2, -2, 3, -3].map((k) => level2[level2.length - 1] + k);
+      const scored = candidates.map((d) => ({ d, bad: grinds(d, chord0) }));
+      const pick = (wantsTension ? scored.find((x) => x.bad) : scored.find((x) => !x.bad)) || scored[0];
+      notes = [...level1, ...level2, pick.d];
+      weights = [2, 2, 2, 2, 2, 2, 8]; // the landing note held — the suspension gets room to be heard, not rushed past
     }
-    // No ornamentation: squeezing two notes into half a slot made some notes land under a second apart while their
-    // neighbours sat whole seconds away — exactly the "muy pegadas... muy espaciadas" unevenness that was reported.
-    // The motif still develops (transposition, retrograde, canon); it just doesn't locally double up like this.
-    SLOTS.push({ len, sophia: str(base), mirror: str(invert(base, 4)), tint: str(num(base, triadAbove)) });
+    const mirror = invert(notes, 4);
+    const tintLine = num(notes, triadAbove);
+    SLOTS.push({ len, sophia: dur(notes, weights), mirror: dur(mirror, weights), tint: dur(tintLine, weights) });
     t += len;
     count++;
   }
@@ -196,22 +203,30 @@ const arpSlot = (c, i) => {
   return toks.join(' ');
 };
 
-// ---- the walking bass: root, then fifth and the next chord's root by section --------------------------------------
+// ---- the walking bass: a different figure per chord, not one formula repeated for the whole movement --------------
 const SECTION_OF = (cycle) => [60, 135, 225, 300, 360].findIndex((end) => cycle < end);
+// Each section has a few candidate figures (root/fifth/third-ish, at different positions in the 8-step chord
+// window); which one plays is chosen per chord, so the bass itself keeps developing instead of looping the same
+// rhythm cell 15-30 times in a row — the "se repite y se repite" the accompaniment was reported to do.
+const BASS_FIGS = [
+  (r, r2, r3, nx) => [r, '~', '~', '~', '~', '~', '~', '~'],
+  (r, r2, r3, nx) => [r, '~', r2, '~', '~', '~', '~', '~'],
+  (r, r2, r3, nx) => [r, '~', '~', '~', r2, '~', '~', '~'],
+  (r, r2, r3, nx) => [r, '~', r3, '~', '~', r2, '~', '~'],
+  (r, r2, r3, nx) => [r, '~', '~', r2, '~', '~', r3, '~'],
+  (r, r2, r3, nx) => [r, '~', r2, '~', r3, '~', nx, '~'],
+];
+// Which figures are even eligible, per section — Pleroma stays mostly spare (figures 0-2), Density can use all of
+// them, Peace settles back to almost nothing.
+const BASS_POOL = [[0, 1, 2], [0, 1, 2, 3], [1, 2, 3, 4, 5], [2, 3, 4], [0, 0, 1]];
+const bassRng = seeded(777);
 const bassSlot = (c, i) => {
   const sec = SECTION_OF(i * 2);
+  const pool = BASS_POOL[sec];
+  const pick = BASS_FIGS[pool[Math.floor(bassRng() * pool.length)]];
   const next = PROG[Math.min(i + 1, 179)].deg;
   const r = c.deg;
-  const fig = [
-    // Pleroma: the bass moves on its own, at positions that fall between Sophia's notes rather than under them —
-    // something to listen to while she's silent, real counterpoint instead of empty space.
-    [r, '~', r + 4, '~', '~', r + 2, '~', '~'],
-    [r, '~', '~', r + 4, '~', '~', '~', '~'],
-    [r, '~', '~', r + 4, r + 2, '~', next, '~'],
-    [r, '~', '~', '~', r + 4, '~', '~', '~'],
-    [r, '~', '~', '~', '~', '~', '~', '~'],
-  ][sec];
-  return fig.join(' ');
+  return pick(r, r + 4, r + 2, next).join(' ');
 };
 
 // ---- voices ---------------------------------------------------------------------------------------------------------
@@ -305,14 +320,14 @@ const binaural = (g) =>
 
 // Pad
 pad: pad(
-  voiced("A3"),
+  voiced(ANCHOR_LOW),
   env([[0, 0.02], [12, 0.04], [60, 0.05], [135, 0.06], [225, 0.07], [249, 0.05], [270, 0.075], [300, 0.075], [330, 0.05], [360, 0]]).mul(0.7),
   env([[0, 700], [16, 1100], [60, 1300], [135, 1100], [225, 900], [250, 800], [280, 2400], [300, 2400], [360, 500]]),
 )
 
 // High pad: an octave and a half above, opening wide only in Transcendence — the chord, breaking open.
 padHigh: pad(
-  voiced("D5"),
+  voiced(ANCHOR_HIGH),
   env([[0, 0], [150, 0], [225, 0.012], [270, 0.035], [300, 0.035], [345, 0.01], [360, 0]]).mul(0.7),
   env([[0, 1500], [225, 1800], [280, 3200], [360, 1200]]),
 )
