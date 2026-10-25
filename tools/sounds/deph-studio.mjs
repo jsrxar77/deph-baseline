@@ -196,19 +196,23 @@ async function selectPiece(p) {
 async function load() {
   if (watchTimer) clearInterval(watchTimer);
   if (!current || !paramsForm.cycles.value) return;
+  const forPath = current.path; // snapshot: if the user picks a different piece before this fetch
+                                 // resolves, the stale response below must not overwrite the new one.
   stopPlayback();
-  statusEl.textContent = 'reading ' + current.path + '…';
+  statusEl.textContent = 'reading ' + forPath + '…';
   playBtn.disabled = true; playBtn.textContent = 'loading…';
-  const q = { file: current.path, cycles: paramsForm.cycles.value, names: paramsForm.names.value, bin: paramsForm.bin.value || '1' };
+  const q = { file: forPath, cycles: paramsForm.cycles.value, names: paramsForm.names.value, bin: paramsForm.bin.value || '1' };
+  let result;
   try {
     const res = await fetch('/api/data?' + new URLSearchParams(q));
     if (!res.ok) throw new Error(await res.text());
-    DATA = await res.json();
+    result = await res.json();
   } catch (err) {
-    statusEl.textContent = 'could not load: ' + err.message;
-    statusEl.classList.add('live');
+    if (current && current.path === forPath) { statusEl.textContent = 'could not load: ' + err.message; statusEl.classList.add('live'); }
     return;
   }
+  if (!current || current.path !== forPath) return; // superseded by a newer selection while this was in flight
+  DATA = result;
   statusEl.textContent = ''; statusEl.classList.remove('live');
   subtitleEl.textContent = fmt(DATA.totalSec) + ' total · ' + DATA.names.length + ' voices';
   drawLanes();
@@ -245,12 +249,15 @@ function drawLanes() {
 
 async function checkReload() {
   if (!current) return;
+  const watchedPath = current.path; // snapshot: don't act on this tick's result if the piece changed meanwhile
   try {
-    const res = await fetch('/api/mtime?' + new URLSearchParams({ file: current.path }));
+    const res = await fetch('/api/mtime?' + new URLSearchParams({ file: watchedPath }));
     const { mtime } = await res.json();
+    if (!current || current.path !== watchedPath) return;
     if (DATA && mtime !== DATA.mtime) {
       const wasPlaying = playing, at = seekSec + (playing && repl ? repl.scheduler.now() / DATA.cps : 0);
       await load();
+      if (current.path !== watchedPath) return; // the user switched pieces during the reload itself
       reloadBadge.style.display = 'inline';
       setTimeout(() => (reloadBadge.style.display = 'none'), 2000);
       if (wasPlaying && repl) playFrom(at);
