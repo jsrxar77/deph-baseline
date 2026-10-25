@@ -665,3 +665,15 @@ Also update the distilled sections above if the decision changes a principle, an
   torus" signature, invisible as a shape except during the flight, where an Escher-style endless rotation mirrors
   the audio illusion directly. media/gnosis/visuals/ symlink target recreated as an empty placeholder (with
   .gitkeep) per the project's own convention for an unbuilt visual. Nothing built yet — still a written proposal.
+- 2026-10-25 (gnosis, visual proposal — grounded in the real source, not a paraphrase) — "no lees lo que te pedi...
+  revisa lo que te había pasado de three.js": the particle-cloud proposal's "connection" mechanism had drifted from
+  the real example into a scripted "travelling pulse on cue", which isn't how the real `buffergeometry drawrange`
+  example works (re-read directly from source: lines are a pure emergent effect of real per-frame distance between
+  freely-moving particles — minDistance threshold, unchanged setDrawRange(0, numConnected*2) — never a scripted
+  signal). Corrected: the connection mechanism in the proposal now copies the real distance/drawRange logic
+  unmodified; only the particles' velocity is driven by the music (frames.json attracts Sophia's cluster toward the
+  Demiurge's during her turns and vice versa), so connections emerge from real proximity the same way the original
+  example produces them, instead of being hand-triggered. General rule: when adapting a specific referenced
+  technique (an example, a paper, another piece's code), re-read the actual source before finalizing the adaptation
+  — a remembered summary drifts, and the drift can replace the technique's actual mechanism with something that
+  merely resembles it.

@@ -284,24 +284,27 @@ ya está instalado, no hace falta sumar nada.
 
 ### Idea: el diálogo hecho constelación
 
-Basada en la técnica del ejemplo oficial de Three.js *"buffergeometry drawrange"* (dos nubes de partículas que se
-conectan con líneas cuando están cerca — ver análisis previo en esta conversación). Acá la propuesta es usarla
-como metáfora literal del diálogo Demiurgo-Sofía, no como decoración:
+Basada en el código real del ejemplo oficial de Three.js *"buffergeometry drawrange"* (releído de la fuente, no de
+memoria): 1000 partículas con posición y velocidad propia, rebotando dentro de un cubo; cada cuadro se recalcula
+la distancia entre cada par y si está por debajo de `minDistance` se escribe una línea en un buffer reservado una
+sola vez; al final, `setDrawRange(0, numConnected * 2)` le dice a la GPU que dibuje solo esas líneas. **Las líneas
+no están guionadas — son un efecto que emerge del movimiento real**, no una señal que se dispara. La adaptación
+tiene que respetar eso:
 
 - **Dos nubes de partículas**, pocas centenas cada una (no miles — acá el punto es que cada conexión se lea como
   un gesto individual, no una nube densa como *The Field*):
   - **Demiurgo**: grave, obsidiana/violeta cósmico, registro bajo de la pantalla, movimiento lento y pesado.
   - **Sofía**: luminosa, cian eléctrico/teal oxidado (paleta "Deep Decay" ya establecida), registro alto, movimiento
     más libre/errático.
-- **Un pulso viajero, no líneas de proximidad estática.** La versión aprobada de `gnosis-live.strudel` no las hace
-  sonar juntas — se turnan de verdad, cada uno en silencio mientras el otro canta. Así que la conexión visual no es
-  una línea que aparece cuando están "cerca" (eso asumía que suenan a la vez); es un **pulso de luz que viaja** de
-  una nube a la otra exactamente cuando el turno pasa — la pregunta de Sofía sale como una onda hacia la nube del
-  Demiurgo, su respuesta vuelve del mismo modo. Reutiliza la técnica de `drawrange` (el buffer de líneas se
-  reescribe cada frame, se dibuja solo el tramo del pulso en tránsito), pero atada al turno real, no a la distancia.
-- **Atado a la música real, no animado aparte**: el pulso y el brillo de cada nube siguen el `frames.json` real de
-  la pieza (el mismo pipeline que ya usa `bellPulses.ts` en Slow Drift) — la nube de quien canta se ilumina, la del
-  otro casi se apaga, hasta el próximo turno.
+- **El movimiento responde a la música; el mecanismo de conexión queda igual que en el original.** No se tocan
+  ni la fórmula de distancia ni el `setDrawRange` — eso se copia tal cual. Lo que cambia es la velocidad: cuando
+  Sofía canta (según el `frames.json` real, el mismo pipeline de `bellPulses.ts` en Slow Drift), sus partículas
+  reciben una leve atracción hacia la nube del Demiurgo, y al revés cuando canta él. Las líneas aparecen solas,
+  por la distancia real, casi siempre durante los turnos — porque ahí es cuando hay atracción — sin tener que
+  guionar ninguna línea a mano. Fuera de los turnos, sin atracción, las nubes se alejan y las líneas desaparecen
+  por sí solas, el mismo comportamiento del ejemplo original.
+- **El brillo de cada nube** (no las líneas) sigue el `frames.json` directamente — la nube de quien canta se
+  ilumina, la del otro casi se apaga.
 - **El Shepard, al final y en el preludio, es el toroide.** Las dos nubes y sus pulsos cuentan el diálogo; el
   Shepard es un evento aparte — en vez de partículas, la cámara revela una forma toroidal apenas insinuada en el
   fondo todo el tiempo (invisible como forma, como ya establece la firma visual de "creation torus" del proyecto),
