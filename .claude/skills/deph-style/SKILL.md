@@ -509,3 +509,14 @@ Also update the distilled sections above if the decision changes a principle, an
   still only -12 dBFS, no clipping risk). General technique for any future "X is buried in the mix" report: render
   the suspect layer(s) alone and the rest alone over the same window with `--only`, measure RMS with `ffmpeg -af
   astats=metadata=0:reset=0`, and fix the actual measured gap — don't just nudge a number and hope.
+- 2026-10-24 (gnosis, rhythm) — reported: notes landing exactly on the beat from the start, "deja de ser volador...
+  lo transforma en una marcha". Root cause: the opening statement length (4 cycles / 8 slots) put a note almost
+  exactly every 1 second — a perfectly regular grid, confirmed by the inspector reporting "onsets on a whole-cycle
+  grid" for the melodic layers. Fixed two ways: (1) lengthened the opening sections' statement duration (12, 15
+  cycles instead of 4, 5) so density grows later from more voices/ornaments entering, not from a faster note-rate
+  from second 0; (2) added real humanization — a small random onset offset (0-30ms, `late(rand.segment(16).range(0,
+  0.015))`, the same technique the-field.strudel's arpeggio uses) to every melodic voice, confirmed by the
+  inspector flipping to "onsets on a non-regular grid". General rule: "onsets on a whole-cycle grid" (or any
+  regular-grid report) in the inspector's summary is a literal, structural confirmation that a voice will read as
+  metric/marching, independent of how it sounds in isolation — check for it on any melodic layer in a piece meant
+  to feel beatless or "floating", the same way reverb `size`/shared-orbit bugs get checked, not just by ear.

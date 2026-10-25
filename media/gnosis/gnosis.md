@@ -83,6 +83,22 @@ movimiento que la fuente de 24:00, a la mitad de duración.
   Transcendencia y en la Paz — la resolución a consonancia está confirmada estructuralmente, no solo en la intención.
 - Medido con el inspector; no se renderizó audio real completo todavía.
 
+### Ritmo: de marcha a vuelo
+
+El usuario notó que al principio cada nota caía exactamente en el pulso — una grilla perfecta, no un viaje. La
+causa real: en el Pleroma la frase de Sofía repartía sus 7 notas en statements de 4 ciclos (una nota casi cada
+segundo exacto), y toda la mezcla de voces heredaba esa misma rejilla pareja. Corregido:
+
+- **Pleroma y Descent alargados a 12 y 15 ciclos por frase** (antes 4 y 5) — ahora una nota de Sofía cada ~3
+  segundos en el Pleroma en vez de cada 1 segundo. La densidad sigue subiendo hacia Density/Transcendencia, pero
+  por capas que entran (el canon) y por adornos, no por una grilla más rápida desde el arranque.
+- **Humanización real**: Sofía, el Demiurgo y las dos voces del canon llevan un corrimiento aleatorio chico en
+  cada ataque (0-30 ms a este tempo, la misma técnica del arpegio de `the-field.strudel`). Verificado con el
+  inspector: esas tres voces pasaron de "onsets on a whole-cycle grid" a **"onsets on a non-regular grid"** —
+  no es solo una sensación, la grilla rítmica regular ya no está.
+- **Volumen general, un toque más bajo** (`postgain(0.88)`), como pediste — apenas, sin tocar el balance entre
+  el diálogo y el resto que ya habías aprobado.
+
 ### Balance de mezcla: Sofía y el Demiurgo por encima del resto
 
 El usuario reportó que el diálogo entre Sofía y el Demiurgo se perdía contra el resto de la textura. Medido
