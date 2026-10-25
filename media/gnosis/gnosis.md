@@ -293,19 +293,29 @@ como metáfora literal del diálogo Demiurgo-Sofía, no como decoración:
   - **Demiurgo**: grave, obsidiana/violeta cósmico, registro bajo de la pantalla, movimiento lento y pesado.
   - **Sofía**: luminosa, cian eléctrico/teal oxidado (paleta "Deep Decay" ya establecida), registro alto, movimiento
     más libre/errático.
-- **Líneas de conexión** entre una partícula de cada nube cuando se acercan lo suficiente — el diálogo hecho
-  visible. Brillo de cada línea según la distancia (más cerca, más brillante), `AdditiveBlending` para que se
-  sientan como luz, no como geometría sólida.
-- **Atado a la música real, no animado aparte**: la cantidad/intensidad de conexiones sigue el `frames.json` real
-  de la pieza (el mismo pipeline que ya usa `bellPulses.ts` en Slow Drift) — cuando Demiurgo y Sofía suenan fuerte
-  juntos, hay más conexiones; cuando una calla, su nube se aquieta.
+- **Un pulso viajero, no líneas de proximidad estática.** La versión aprobada de `gnosis-live.strudel` no las hace
+  sonar juntas — se turnan de verdad, cada uno en silencio mientras el otro canta. Así que la conexión visual no es
+  una línea que aparece cuando están "cerca" (eso asumía que suenan a la vez); es un **pulso de luz que viaja** de
+  una nube a la otra exactamente cuando el turno pasa — la pregunta de Sofía sale como una onda hacia la nube del
+  Demiurgo, su respuesta vuelve del mismo modo. Reutiliza la técnica de `drawrange` (el buffer de líneas se
+  reescribe cada frame, se dibuja solo el tramo del pulso en tránsito), pero atada al turno real, no a la distancia.
+- **Atado a la música real, no animado aparte**: el pulso y el brillo de cada nube siguen el `frames.json` real de
+  la pieza (el mismo pipeline que ya usa `bellPulses.ts` en Slow Drift) — la nube de quien canta se ilumina, la del
+  otro casi se apaga, hasta el próximo turno.
+- **El Shepard, al final y en el preludio, es el toroide.** Las dos nubes y sus pulsos cuentan el diálogo; el
+  Shepard es un evento aparte — en vez de partículas, la cámara revela una forma toroidal apenas insinuada en el
+  fondo todo el tiempo (invisible como forma, como ya establece la firma visual de "creation torus" del proyecto),
+  que durante el preludio (minuto 0, bajo la primera frase de Sofía) gira apenas, casi imperceptible, y durante el
+  vuelo final se abre y se vuelve el evento central — una rotación estilo Escher que nunca termina de subir, el
+  mismo truco perceptivo que el tono Shepard pero en imagen.
 - **Mapeo al arco de la pieza**:
-  - *Pleroma*: solo la nube de Sofía, dispersa y lenta; el Demiurgo todavía no existe (la materia no se manifestó).
-  - *Descent*: el Demiurgo aparece abajo, tenue; las primeras conexiones, escasas.
-  - *Density*: el máximo de conexiones — la red más densa y tensa de toda la pieza.
-  - *Transcendencia*: el Demiurgo se disuelve (sus partículas se apagan, no explotan), las conexiones se cortan una
-    por una, la nube de Sofía sube y se expande, sola.
-  - *Paz*: casi sin partículas, deriva lenta, hasta casi nada.
+  - *Pleroma*: solo la nube de Sofía, dispersa y lenta; el Demiurgo todavía no existe. El toroide del preludio gira
+    apenas, de fondo, bajo su primera frase.
+  - *Descent/Density*: el Demiurgo aparece abajo, oscuro; los pulsos viajeros se vuelven más frecuentes y más
+    cortos hacia Density (turnos de 10 ciclos), sin que haya más partículas — más intercambio, no más densidad visual.
+  - *Transcendencia*: el Demiurgo se disuelve (sus partículas se apagan, no explotan) justo antes de que el
+    toroide del Shepard se abra; la nube de Sofía sube y se expande, sola, mientras el toroide gira.
+  - *Paz*: casi sin partículas, deriva lenta, el toroide se cierra de nuevo hasta casi nada.
 - **Una sola toma continua** (como *The Field*): nunca un corte, solo movimiento 3D — empieza ancha (las dos nubes
   a distancia, Pleroma) y termina cerca, íntima, sobre lo que queda de Sofía.
 - **Rendimiento**: con unos cientos de partículas por nube, la comparación de pares (`O(n²)`) es barata — no hace

@@ -17,9 +17,15 @@ domains:
     file: sounds/gnosis.strudel
     source: strudel
   visual:
-    status: in-progress # tools/visuals/src/compositions/gnosis/ (gnosis.tsx, shaders.ts, timeline.ts) is built but not yet wired to real audio (sync/ hasn't been rendered). The visuals/index.html HyperFrames engine is a separate full-length landscape (3840x2160) exploration, not a short — see deph-shorts skill for the actual Shorts/HyperFrames convention
-    framework: remotion # the channel deliverable; see note above re: visuals/index.html
-    entry: tools/visuals/src/compositions/gnosis/gnosis.tsx
+    status: planned # the toroidal-manifold/grounding-rod visual (gnosis.tsx, shaders.ts, timeline.ts) was deleted
+      # 2026-10-25 at the user's request ("lo que está hecho es horrible, borralo") — built for the old 24:00
+      # narrative, never wired to real audio. Direction now: two particle clouds (Demiurge dark/low, Sophia
+      # luminous/high) connected by travelling pulses on her/his turns (not static proximity-lines, since the
+      # approved gnosis-live.strudel has them alternate, not sound together) — see gnosis.md's "Visual Concept"
+      # for the full writeup. Not built yet. The visuals/index.html HyperFrames engine (media/gnosis/hyperframes-exploration/)
+      # is a separate, unrelated full-landscape exploration — see the deph-shorts skill for the real Shorts convention.
+    framework: remotion # the channel deliverable
+    entry: tools/visuals/src/compositions/gnosis/gnosis.tsx # not created yet; symlink target is an empty placeholder
   sync:
     status: not-built
     output: sync/

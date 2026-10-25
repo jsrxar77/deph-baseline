@@ -652,3 +652,16 @@ Also update the distilled sections above if the decision changes a principle, an
   strudel-compose (checklist items 8-10: no single-period macro-repetition, depth/restraint are independent axes,
   interest never comes from more notes/speed/density) and in this file's earlier entries — read those before
   starting the next piece, not just this line.
+- 2026-10-25 (gnosis, visual direction corrected) — deleted the toroidal-manifold/grounding-rod visual
+  (tools/visuals/src/compositions/gnosis/{gnosis.tsx,shaders.ts,timeline.ts}, ~600 lines, 500k-point Clifford torus)
+  at the user's explicit request: "lo que está hecho es horrible, borralo". It was built for the old 24:00
+  narrative (body as grounding rod), never wired to real audio or registered in the Remotion Root, so deleting it
+  broke nothing. The user clarified an earlier ambiguity: when they said "puntos y líneas" they meant the
+  drawrange-inspired particle-cloud proposal (two clouds, Demiurge dark/low and Sophia luminous/high, from this
+  same session), not the toroidal manifold — don't conflate the two again. Updated the proposal in gnosis.md: since
+  gnosis-live.strudel's approved version has the two voices truly alternate (never sound together), the
+  connection between clouds is now a travelling pulse timed to each turn, not a static proximity-line (which
+  assumed simultaneous sound). The Shepard tone (preludio + flight) gets its own visual device — the deph "creation
+  torus" signature, invisible as a shape except during the flight, where an Escher-style endless rotation mirrors
+  the audio illusion directly. media/gnosis/visuals/ symlink target recreated as an empty placeholder (with
+  .gitkeep) per the project's own convention for an unbuilt visual. Nothing built yet — still a written proposal.
