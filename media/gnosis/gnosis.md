@@ -89,15 +89,29 @@ El usuario notó que al principio cada nota caía exactamente en el pulso — un
 causa real: en el Pleroma la frase de Sofía repartía sus 7 notas en statements de 4 ciclos (una nota casi cada
 segundo exacto), y toda la mezcla de voces heredaba esa misma rejilla pareja. Corregido:
 
-- **Pleroma y Descent alargados a 12 y 15 ciclos por frase** (antes 4 y 5) — ahora una nota de Sofía cada ~3
-  segundos en el Pleroma en vez de cada 1 segundo. La densidad sigue subiendo hacia Density/Transcendencia, pero
-  por capas que entran (el canon) y por adornos, no por una grilla más rápida desde el arranque.
 - **Humanización real**: Sofía, el Demiurgo y las dos voces del canon llevan un corrimiento aleatorio chico en
   cada ataque (0-30 ms a este tempo, la misma técnica del arpegio de `the-field.strudel`). Verificado con el
-  inspector: esas tres voces pasaron de "onsets on a whole-cycle grid" a **"onsets on a non-regular grid"** —
-  no es solo una sensación, la grilla rítmica regular ya no está.
+  inspector: esas voces pasaron de "onsets on a whole-cycle grid" a **"onsets on a non-regular grid"** — no es
+  solo una sensación, la grilla rítmica regular ya no está.
 - **Volumen general, un toque más bajo** (`postgain(0.88)`), como pediste — apenas, sin tocar el balance entre
   el diálogo y el resto que ya habías aprobado.
+
+**Primer intento (12/15 ciclos por frase) se pasó de largo**: el usuario lo reportó como desparejo ("notas muy
+pegadas, otras muy espaciadas") y sin la magia de la versión aprobada. Causa real, encontrada después: el
+mecanismo de adorno metía dos notas en medio espacio (menos de 1 s entre sí) mientras el resto quedaba a 3 s —
+el propio adorno generaba el apelmazamiento, no la duración de frase. Corregido:
+
+- **Se sacó el adorno** (ya no mete dos notas en un espacio). El motivo sigue desarrollándose por transposición,
+  retrógrado y canon — eso no dependía del adorno.
+- **Pleroma a un punto intermedio: 6 ciclos** (no los 4 originales ni los 12 del primer intento) — una nota de
+  Sofía cada ~1,5 s. Descent vuelve a 5 ciclos (el original: el usuario dijo que esa parte "ya mejoraba").
+  Density/Transcendencia/Paz sin cambios.
+- **Contrapunto real en el bajo del Pleroma**: antes solo tocaba la raíz una vez por acorde; ahora se mueve en
+  posiciones que no coinciden con las de Sofía, así cuando ella calla, el bajo sigue — eso es lo que pedía el
+  usuario ("le falta contrapunto"), no simplemente menos silencio.
+
+Verificado con el inspector tras el segundo ajuste: los huecos entre notas de Sofía en el Pleroma son ahora
+parejos (~1,5 s, con la humanización sumando variación chica), no la mezcla de 0,75 s y 3 s de antes.
 
 ### Balance de mezcla: Sofía y el Demiurgo por encima del resto
 

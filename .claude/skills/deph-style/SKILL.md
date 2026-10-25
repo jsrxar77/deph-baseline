@@ -520,3 +520,17 @@ Also update the distilled sections above if the decision changes a principle, an
   regular-grid report) in the inspector's summary is a literal, structural confirmation that a voice will read as
   metric/marching, independent of how it sounds in isolation — check for it on any melodic layer in a piece meant
   to feel beatless or "floating", the same way reverb `size`/shared-orbit bugs get checked, not just by ear.
+- 2026-10-24 (gnosis, rhythm — corrected) — the first rhythm fix (lengthening the opening's statement duration to
+  12/15 cycles) overcorrected: reported as uneven ("notas muy pegadas, otras muy espaciadas") and as having lost
+  the magic of the approved version. Real cause, found on investigation: the ornament mechanism (squeezing two
+  notes into half a mini-notation slot) was creating the unevenness, not the statement length itself — notes under
+  1s apart next to notes 3s apart, regardless of how long the statement was. Fixed by removing ornamentation
+  entirely (motif development still comes from transposition/retrograde/canon, which never depended on it) and
+  moving Pleroma to a middle-ground 6 cycles (not the original 4, not the overcorrected 12); Descent reverted to
+  its original 5 since the user had already said that part "ya mejoraba". Also added real counterpoint: the bass
+  in the Pleroma now moves at positions that don't coincide with Sophia's, so something is always happening when
+  she's silent — the user's own diagnosis ("le falta contrapunto") was correct and more useful than guessing at
+  more gain/timing tweaks. General rule: when a fix is reported as having gone "to the other extreme" or "lost the
+  magic", don't just dial the same knob back partway — find what mechanism is ACTUALLY producing the bad symptom
+  (here: the ornament, not the statement length) before changing anything, the same discipline as any other
+  reported glitch.

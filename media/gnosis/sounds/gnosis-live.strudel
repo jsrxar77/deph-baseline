@@ -10,7 +10,7 @@
 // THE STORY
 // The Demiurge (matter: low, dark, heavy) and Sophia (the spark: a bell-like FM voice, rising) talk. Her phrase
 // asks; his is the same phrase turned upside down, sung from below, three cycles later. The talk deepens — the
-// chords darken, the phrase ornaments, a second and third voice of hers answer each other in canon (5 and 8 cycles
+// chords darken, a second and third voice of hers answer each other in canon (5 and 8 cycles
 // apart, Fibonacci-proportioned, after The Field) — until matter is at its heaviest. Then, with no jump, the
 // Demiurge fades while the canon voices converge and Sophia rises an octave: the chord opens wide, the arpeggio
 // soars, the filter brightens. She wins. What follows is not a triumph but peace: harmless, open, slowing until
@@ -18,8 +18,9 @@
 //
 // MATERIAL
 // - Sophia's phrase S: A B D C B A F (degrees 4 5 7 6 5 4 2), stepwise. Each statement transforms S (transposed,
-//   retrograde, ornamented), chosen to grind least against the chord sounding under it; every third statement is S
-//   itself so it stays recognisable. Statements lengthen with the arc (4, 5, 6, 7.5, 10 cycles).
+//   retrograde), chosen to grind least against the chord sounding under it; every third statement is S itself so
+//   it stays recognisable. Pleroma statements are 6 cycles (a middle ground: not the original tight grid, not the
+//   overcorrected 12); Descent/Density/Transcendence/Peace are 5, 6, 7.5, 10.
 // - The Demiurge: the inversion of her last phrase around A, three cycles later, low. Tintinnabuli (Pärt): the D
 //   minor triad tone above each Sophia note.
 // - Canon: a second voice sings her phrase an octave below, 5 cycles late (Density only); a third sings it an
@@ -37,7 +38,7 @@
 // CHAPTERS (30 cpm, 1 cycle = 2 s) — 360 cycles = 12:00 exact, same proportions as the 24:00 Ableton source, halved.
 //   I   Pleroma          0 -  60   0:00 - 2:00    phrase, pad, bass, arpeggio, binaural from 0:00; tintinnabuli 0:16; his answer 0:24
 //   II  Descent         60 - 135   2:00 - 4:30    the dialogue deepens; he grows; the canon's first voice readies
-//   III Density        135 - 225   4:30 - 7:30    dark chords, ornaments, two-voice canon, Demiurge at his loudest
+//   III Density        135 - 225   4:30 - 7:30    dark chords, two-voice canon, Demiurge at his loudest
 //   IV  Transcendence  225 - 300   7:30 - 10:00   the canon converges; he fades; she rises an octave; the chord opens
 //   V   Eternal peace  300 - 360  10:00 - 12:00   slow phrases, consonance only, everything ebbs to silence at 12:00
 
@@ -122,11 +123,10 @@ const VARIANTS = [
   retro, (a) => shift(retro(a), 1), (a) => shift(retro(a), -1), (a) => shift(retro(a), 2),
 ];
 const triadAbove = (d) => { let x = d + 1; while (![0, 2, 4].includes(((x % 7) + 7) % 7)) x++; return x; };
-// Pleroma and Descent got much longer statements (12, 15 cycles) than Density/Transcendence/Peace (6, 7.5, 10):
-// the opening needs to float, with real space between notes, not a tight grid — density should come later, from
-// more voices entering (the canon) and from ornaments, not from a faster note-rate from the first second.
-const ornamentChance = { 12: 0.05, 15: 0.12, 6: 0.25, 7.5: 0.12, 10: 0 };
-const SECTIONS = [[60, 12], [135, 15], [225, 6], [300, 7.5], [360, 10]];
+// Pleroma gets a statement length between the original tight grid (4 cycles, reported as marching) and the
+// overcorrection (12 cycles, reported as uneven/empty) — 6 is the middle ground. Density/Transcendence/Peace are
+// unchanged; the opening was the only part reported as a problem.
+const SECTIONS = [[60, 6], [135, 5], [225, 6], [300, 7.5], [360, 10]];
 
 // Which transformation of S grinds least against the chords sounding under it? A note grinds when a chord tone sits
 // a semitone from it (pitch class, any octave). Sophia, his mirror and the tintinnabuli are scored together.
@@ -155,8 +155,10 @@ for (const [end, len] of SECTIONS) {
       const options = VARIANTS.map((f) => f(S0)).map((a) => ({ a, cost: slotCost(a, t, len) + phraseRng() * 0.5 }));
       base = options.sort((x, y) => x.cost - y.cost)[0].a;
     }
-    const sophia = base.map((d, i) => (d !== null && i > 0 && phraseRng() < ornamentChance[len] && !grinds(d + 1, chordAt(t + (i * len) / 8)) ? '[' + d + ' ' + (d + 1) + ']' : d));
-    SLOTS.push({ len, sophia: str(sophia), mirror: str(invert(base, 4)), tint: str(num(base, triadAbove)) });
+    // No ornamentation: squeezing two notes into half a slot made some notes land under a second apart while their
+    // neighbours sat whole seconds away — exactly the "muy pegadas... muy espaciadas" unevenness that was reported.
+    // The motif still develops (transposition, retrograde, canon); it just doesn't locally double up like this.
+    SLOTS.push({ len, sophia: str(base), mirror: str(invert(base, 4)), tint: str(num(base, triadAbove)) });
     t += len;
     count++;
   }
@@ -201,7 +203,9 @@ const bassSlot = (c, i) => {
   const next = PROG[Math.min(i + 1, 179)].deg;
   const r = c.deg;
   const fig = [
-    [r, '~', '~', '~', '~', '~', '~', '~'],
+    // Pleroma: the bass moves on its own, at positions that fall between Sophia's notes rather than under them —
+    // something to listen to while she's silent, real counterpoint instead of empty space.
+    [r, '~', r + 4, '~', '~', r + 2, '~', '~'],
     [r, '~', '~', r + 4, '~', '~', '~', '~'],
     [r, '~', '~', r + 4, r + 2, '~', next, '~'],
     [r, '~', '~', '~', r + 4, '~', '~', '~'],
