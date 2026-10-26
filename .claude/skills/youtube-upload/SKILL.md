@@ -69,6 +69,19 @@ Leave these as checked-when-done items for the user in the pack's existing "Uplo
 don't mark them done, and don't attempt to script around the API gap (e.g. browser automation) without
 the user asking for that specifically.
 
+## A matching byte count after a dropped connection doesn't mean the upload is good
+
+Found 2026-10-26: a connection dropped (`BrokenPipeError`) at 70% progress, but `videos.list` afterward
+showed `fileDetails.fileSize` matching the local file exactly and `uploadStatus: uploaded` — looked fine.
+It wasn't: `processingDetails.processingStatus` stayed `processing` at 0%, `contentDetails.definition`
+stayed `"sd"` (not even the base rendition done), for **14 hours** — YouTube had received the right
+number of bytes but the stream itself was broken, and transcoding never moved. Normal processing for a
+12-minute 4K upload finishes in well under 14 hours. If processing is still at 0%/`sd` after a few hours,
+don't keep waiting — delete that video (ask the user to, if `videos.delete` is blocked by the auto-mode
+classifier as an external write) and re-upload. The retry logic above (added the same day) should prevent
+this specific cause going forward, but check processing progress after any upload that had a network blip
+regardless, rather than trusting a matching file size alone.
+
 ## Never upload without the user's go-ahead on the final render
 
 The video stays Private either way (the app isn't Google-audited yet), but "upload" is still a real,

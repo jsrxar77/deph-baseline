@@ -106,5 +106,6 @@ publish:
     # manual Studio steps (playlist, end screen, pinned comment) before going Public
   file: gnosis.youtube.md
   video: renders/gnosis-fixed.mp4 # the chunked render, re-encoded once to fix an audio click + frame drop at the chunk splices
-  url: https://youtu.be/uHlgRLpfhY0 # Private — not yet public
+  url: https://youtu.be/i3NcqCaEsB8 # Private — not yet public. (The first upload, uHlgRLpfhY0, stalled in
+    # YouTube processing at 0% for 14h after a connection drop at 70%; deleted and re-uploaded clean.)
 doc: gnosis.md

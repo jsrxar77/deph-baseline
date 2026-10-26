@@ -1,6 +1,6 @@
 # Gnosis — YouTube publish pack
 
-Status: **uploaded, Private** · https://youtu.be/uHlgRLpfhY0 · last updated 2026-10-26
+Status: **uploaded, Private** · https://youtu.be/i3NcqCaEsB8 · last updated 2026-10-26
 Source video: `media/gnosis/renders/gnosis-fixed.mp4` — 12:06 (726 s), 3840x2160 at 60 fps, H.264 / AAC,
 audio mastered to -16.0 LUFS (true peak -1.0 dBTP) · Channel material: `docs/youtube-channel.md` ·
 Rules: `youtube-publish` skill · Upload mechanism: `youtube-upload` skill.
@@ -137,10 +137,11 @@ Every discarded candidate file was deleted; only the chosen one is kept in the r
       stereo at -16.0 LUFS (true peak -1.0 dBTP), exactly 43560 frames / 726.000s. Re-encoded once from the
       original chunked render to fix an audio click and a frame-count mismatch at the chunk splice points
       (see `youtube-upload` skill).
-- [x] Uploaded `media/gnosis/renders/gnosis-fixed.mp4` via `youtube-upload` — https://youtu.be/uHlgRLpfhY0,
-      **Private**. (The upload itself completed server-side despite a client-side BrokenPipeError at 70%
-      progress — confirmed via `videos.list` before assuming a retry was needed; `upload.py` now retries
-      transient network errors on the same chunk instead of failing outright.)
+- [x] Uploaded `media/gnosis/renders/gnosis-fixed.mp4` via `youtube-upload` — https://youtu.be/i3NcqCaEsB8,
+      **Private**. The first attempt (`uHlgRLpfhY0`) completed server-side (byte count matched) despite a
+      client-side BrokenPipeError at 70%, but then sat stuck in YouTube processing at 0% / `sd` definition
+      for 14 hours — not normal processing, a broken upload despite the matching size. Deleted and
+      re-uploaded clean in one run (video + Spanish + thumbnail, no retries needed this time).
 - [x] Title (EN #1), description (EN) set on upload; chapters are in the description text, not yet
       confirmed as recognized timeline segments — check this once processing finishes.
 - [x] Spanish title + description added as a translation (`localizations.es`) on the same video — confirmed
