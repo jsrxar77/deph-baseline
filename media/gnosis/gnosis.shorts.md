@@ -1,6 +1,6 @@
 # Gnosis — YouTube Short (in progress)
 
-Status: **script final (closed by the user), EN audio generated** · last updated 2026-10-26
+Status: **script final, EN + ES audio generated** · last updated 2026-10-26
 
 First deph Short with a narrated voiceover (The Field's two Shorts had none — see
 `media/the-field/the-field.shorts.md`). Built with `tools/narration/elevenlabs.mjs`; voice options in
@@ -80,10 +80,12 @@ subscribe.
 
 ## Open, blocking the next step
 
-- **Spanish narration**: text above, voice Lionel (`MjtZn5tagxL1RO6w9ER5`), model `eleven_v4` — the user
-  is generating this manually (Lionel is a paid library voice, blocked on the free API tier; see
-  `tools/narration/voices.md`). Save the result to `media/gnosis/shorts/gnosis-short-narration-es.mp3`.
-- **English narration**: done, with George (`JBFqnCBsd6RMkjVDRZzb`), `eleven_v4`, matching the user's
-  final script — `media/gnosis/shorts/gnosis-short-narration-en.mp3`.
+- Both narrations done, matching the user's final script:
+  - EN: George (`JBFqnCBsd6RMkjVDRZzb`), `eleven_v4` — `media/gnosis/shorts/gnosis-short-narration-en.mp3` (39.76s)
+  - ES: Lionel (`MjtZn5tagxL1RO6w9ER5`), `eleven_v4`, generated manually by the user (Lionel is a paid
+    library voice, blocked on the free API tier; see `tools/narration/voices.md`) —
+    `media/gnosis/shorts/gnosis-short-narration-es.mp3` (35.71s)
+- Next: cut the 1080x1920 clip from `gnosis-fixed.mp4` around the gold integration, mix each narration
+  under/over the piece's own music, then show the user both finished shorts before anything uploads.
 - Whether The Field's two Shorts actually had narration (the user believed so; nothing found supports
   it — see `the-field.shorts.md`). Doesn't block Gnosis's own short, just an open question.
