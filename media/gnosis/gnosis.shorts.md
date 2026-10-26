@@ -1,12 +1,12 @@
 # Gnosis — YouTube Short (in progress)
 
-Status: **script approved, voice not yet chosen** · last updated 2026-10-26
+Status: **script closed, voice EN generated** · last updated 2026-10-26
 
 First deph Short with a narrated voiceover (The Field's two Shorts had none — see
 `media/the-field/the-field.shorts.md`). Built with `tools/narration/elevenlabs.mjs`; voice options in
 `tools/narration/voices.md`.
 
-## Plan (approved by the user, not yet executed past the script)
+## Plan (approved by the user, not yet executed past the script + EN narration)
 
 1. 1080x1920 vertical clip, ~46s, cropped from `media/gnosis/renders/gnosis-fixed.mp4` around the gold
    integration (about 8:20-9:10 — the strongest visual moment, same criterion as the thumbnail).
@@ -17,42 +17,46 @@ First deph Short with a narrated voiceover (The Field's two Shorts had none — 
 
 ## Script (closed 2026-10-26, after several revisions — see the conversation for the discarded drafts:
 versions with "she/he" pronouns, with "gold, never white" as the closing line, with "five ancient
-geometries", and a first fully-written draft that opened by just describing the visual instead of hooking
-— "no está dando jugo", the user's words — were all tried and replaced)
+geometries", a first fully-written draft that opened by just describing the visual instead of hooking
+— "no está dando jugo", the user's words — and a `belief-break` draft about "vibration becoming points"
+that the user correctly rejected as generic enough to be any of the pieces, The Field included, with
+nothing specific to Gnosis in it)
 
-**Angle: `belief-break`** (`content-angles` skill, `references/angles-catalog.md`) — challenges the assumption that sound is
-purely auditory and vanishes the instant it stops; the reframe ("it becomes something you can see") is
-literally true for this piece, not a marketing claim, since the visual is built from the same audio data.
+**Angle: `uncomfortable-question`** (`content-angles` skill, `references/angles-catalog.md`) — not
+`belief-break` (that's the discarded draft above). A hypothetical question built to create disonance in
+the first two seconds, needing no evidence at all — written from Gnosis's own actual drama (free vs.
+caged in a changing form) instead of generic science-documentary imagery, so it can't be mistaken for a
+hook that would work for any other piece.
 
 **EN:**
-> You think sound disappears the moment it stops.
-> It doesn't. It becomes something you can see — a vibration, held long enough, turning into points.
-> Thousands of them.
-> And those points become two ideas: one luminous, one dense. One free, the other still searching for its
-> own form.
-> Tuned to 432 Hz, little by little, they find each other. And become one.
-> If this moved something in you, subscribe — there's more waiting for you.
+> What if being free and being trapped were just two notes of the same song?
+> One is pure light, with nothing to hold it down.
+> The other is caged, inside a form that moves through five exact geometries, always changing, still
+> looking for the one that finally fits.
+> Tuned to 432 Hz, their voices rise together, until, just for a moment, they become the same light.
+> If this moved something in you, subscribe. There's more waiting for you.
 
 **ES:**
-> Pensás que el sonido desaparece apenas termina.
-> No es así. Se convierte en algo que podés ver — una vibración, sostenida el tiempo suficiente, se vuelve
-> puntos. Miles de ellos.
-> Y esos puntos se vuelven dos ideas: una luminosa, otra densa. Una libre, la otra todavía buscando su
-> propia forma.
-> Afinada a 432 Hz, poco a poco se encuentran. Y se vuelven una sola.
-> Si esto te movió algo, suscribite — hay más piezas como esta esperándote.
+> ¿Y si ser libre y estar atrapado fueran solo dos notas de la misma canción?
+> Una es pura luz, sin nada que la retenga.
+> La otra está encerrada, dentro de una forma que atraviesa cinco geometrías exactas, cambiando sin parar,
+> todavía buscando la que por fin le quede.
+> Afinada a 432 Hz, sus voces se elevan juntas, hasta que, por un instante, se vuelven la misma luz.
+> Si esto te movió algo, suscribite. Hay más piezas como esta esperándote.
 
-Why this shape: opens with a real hook (a belief challenged, not a description) instead of just promising
-a payoff; stays generic (no "she/he", avoids naming Sofía/the Demiurgo — 46s isn't enough to explain who
-they are); builds the chain belief-break → vibration → points → shapes → two ideas (light/dense) →
-integration, which a viewer with no project context can follow; keeps exactly one grounding technical fact
-(432 Hz); ends on the piece's real visual payoff (many points becoming one) instead of the "gold, never
-white" line, which is an internal project rule a new viewer has no way to understand; closes with a
-subscribe CTA tied to the emotional payoff, not a bare command.
+Why this shape: the hook is Gnosis's actual dramatic premise (one free, one caged in a changing form), not
+reusable generic imagery; no em dashes (read as unnatural spoken aloud — replaced with commas/periods
+throughout); keeps two technical anchors, not one — "five exact geometries" (the Platonic solids, named
+naturally, not as a dry list) and 432 Hz; "become the same light" is the integration payoff without the
+"gold, never white" internal jargon a new viewer can't parse; closes with a subscribe CTA tied to the
+emotional payoff, not a bare command.
 
 ## Open, blocking the next step
 
-- **Which voice** (from `tools/narration/voices.md`): recommended Melody (ES) / George (EN), not yet
-  confirmed by the user.
+- **Spanish narration**: text above, voice Lionel (`MjtZn5tagxL1RO6w9ER5`), model `eleven_v4` — the user
+  is generating this manually (Lionel is a paid library voice, blocked on the free API tier; see
+  `tools/narration/voices.md`). Save the result to `media/gnosis/shorts/gnosis-short-narration-es.mp3`.
+- **English narration**: done, with George (`JBFqnCBsd6RMkjVDRZzb`), `eleven_v4`, matching this final
+  script — `media/gnosis/shorts/gnosis-short-narration-en.mp3`.
 - Whether The Field's two Shorts actually had narration (the user believed so; nothing found supports
   it — see `the-field.shorts.md`). Doesn't block Gnosis's own short, just an open question.
