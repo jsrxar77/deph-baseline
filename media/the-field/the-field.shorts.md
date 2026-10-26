@@ -9,6 +9,13 @@ shorts-specific skill: **none exists.** No HTML/CSS/GSAP source, no render scrip
 produced the final video and uploaded it directly, with nothing left behind to reuse. This file, and the two
 downloaded video files beside it, are the only record that now exists anywhere of how these were shaped.
 
+**Correction (2026-10-26, same day):** an earlier pass of this file wrongly said these had no narration —
+that was based only on the YouTube description text, never on actually looking at the video frames. They
+DO have a full narrated voiceover and a complete on-screen caption system (see below) — likely the output
+of a third-party short-form captioning tool (a plain red "SUBSCRIBE" pill with a generic play-triangle icon
+is a common default in that category of tool, not something built in deph's own brand palette), not a
+custom HyperFrames build either way. No source/template file exists for it anywhere searched.
+
 **Use this as the reference for the next deph Short** (so the format the user already approved on the
 channel — length, structure, two-language split, caption style — doesn't have to be reverse-engineered from
 scratch again), not as a pipeline to re-invoke; there is no pipeline.
@@ -78,6 +85,24 @@ This is music, not medical advice or treatment.
 
 **Tags:** 432 hz, ambient music, binaural beats, chladni, cymatics, frequency, generative art, meditation
 music, shorts, sound design, the field
+
+## On-screen caption system (found 2026-10-26 by actually extracting frames, not just reading the description)
+
+Three card types, consistent across both languages:
+
+1. **Opening card** (first ~2-3s): a small label above the title (the piece name — "THE FIELD" / "EL
+   CAMPO"), the hook question in bold white as the main title, a lighter subtitle line below. Rounded dark
+   semi-transparent rectangle, centered, over the moving background.
+2. **Caption cards** (synced to the narration, one short phrase at a time): same rounded dark card style,
+   bold white text, with exactly one word per card highlighted in a purple/pink accent color — karaoke-style,
+   timed to when that word is actually spoken.
+3. **Closing/CTA card** (near the end): same structure as the opening card — a small label ("EXPERIENCE THE
+   FIELD"), a bold title ("FULL 6-MINUTE PIECE ON CHANNEL"), a subtitle restating the subscribe ask tied to
+   the piece ("And if this resonates with you, subscribe to explore the field.").
+4. **A persistent "SUBSCRIBE"/"SUSCRIBIRSE" pill button**, top-left, red background, white text, a small
+   play-triangle icon — present in every frame checked, both languages, never covering the center content.
+
+No source for this (HTML, template, tool config) was found anywhere — see the correction above.
 
 ## What to copy for the next piece's Short(s)
 

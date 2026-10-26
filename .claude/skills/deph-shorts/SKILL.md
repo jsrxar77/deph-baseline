@@ -80,10 +80,13 @@ context. Mix the narration under/over the piece's own mastered audio (ducked whi
 lines), never replacing the music outright.
 
 Two of the channel's Shorts exist already (The Field, published via Antigravity from a `brandforge-os`
-copy of this project, not this skill) with **no narration at all** — music only. See
-`media/the-field/the-field.shorts.md` for their exact published text and the pattern worth reusing; there
-is no source/script to import from that project, only the finished videos (downloaded locally there as
-reference, git-ignored).
+copy of this project, not this skill), **with full narration and a caption-card system** (a title card, a
+karaoke-highlighted phrase caption synced to the voice, a closing CTA card, and a persistent subscribe pill
+— corrected 2026-10-26 after actually checking the video frames; an earlier pass of this skill wrongly said
+"music only" from reading the YouTube description alone). See `media/the-field/the-field.shorts.md` for the
+exact card layout and the published text; there is no source/script to import from that project, only the
+finished videos (downloaded locally there as reference, git-ignored) — reverse-engineer the look from the
+reference frames if building a caption system for a new Short.
 
 ## Structure contract (so the render tool can drive it)
 
