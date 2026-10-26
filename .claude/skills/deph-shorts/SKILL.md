@@ -15,6 +15,26 @@ stays untouched.
 After a full composition is finished and published (sound done, Remotion video rendered and uploaded per
 `youtube-publish`). A short is a teaser/highlight, not a first draft of the piece's visual identity.
 
+## Pick a hook angle before writing a word of script — standing rule
+
+A short is not a summary of the piece's concept — it needs a real hook, something that makes a scrolling
+viewer stop, or it's just information dumped on screen. Found 2026-10-25 writing Gnosis's first narrated
+short: a first draft that opened by just describing the visual ("watch what happens when...") read as flat
+("no esta dando jugo", the user's words) — it had no actual hook, just a promise.
+
+**Run the `content-angles` skill before drafting any narrated short's script** — it picks the one angle
+the hook is built from (imported 2026-10-26 after this exact gap showed up here). For deph specifically,
+`belief-break` is the strongest default (challenge an everyday assumption about sound/meditation/geometry,
+then reveal the reframe the piece genuinely demonstrates — see that skill for why and for the other angles
+that fit a non-commercial piece).
+
+- Write the hook line(s) first, from the chosen angle, before any of the descriptive/conceptual content —
+  the hook is what earns the next 3 seconds, the rest of the script is what earns the full watch and the
+  click to the full video.
+- End with a subscribe call-to-action tied to the emotional payoff ("if this moved something in you,
+  subscribe"), not a bare command — added 2026-10-26 at the user's request, going forward on every
+  narrated short.
+
 ## Picking the moment
 
 Pick a 15-60 second window from the piece's arc — usually its climax or the single most visually striking
@@ -42,6 +62,28 @@ media/<name>/shorts/<name>-short.mp4      the rendered short (git-ignored, regen
 
 One short per piece to start; if a piece gets more than one cut, suffix with what makes it distinct
 (`<name>-short-climax.html`), never a version number.
+
+## Narrated shorts (ElevenLabs)
+
+A short can carry a spoken voiceover instead of (or alongside) on-screen text — first done for Gnosis,
+2026-10-26. `tools/narration/elevenlabs.mjs` (adapted from a working tool in `brandforge-os`, standalone
+here) does the text-to-speech: `list` to browse the account's voices, `tts --text "..." --voice "<name>" --out
+<path.mp3>`. Needs `ELEVENLABS_API_KEY` in `~/.env` (shared with brandforge-os — already configured with
+full account access as of 2026-10-26). The account's voice catalog, with picks that fit deph's calm,
+narrative tone, is cached in `tools/narration/voices.md` — read that before calling `list` again.
+
+**Write the script per piece, with the user, before anything else** — see `media/gnosis/gnosis.shorts.md`
+for the real back-and-forth that produced one: start generic (no character names/pronouns a 46s clip can't
+explain), build toward one grounding technical fact (432 Hz), and never lean on the piece's own internal
+vocabulary (e.g. "gold, never white") without re-deriving it in plain language — a new viewer has no other
+context. Mix the narration under/over the piece's own mastered audio (ducked while a line plays, up between
+lines), never replacing the music outright.
+
+Two of the channel's Shorts exist already (The Field, published via Antigravity from a `brandforge-os`
+copy of this project, not this skill) with **no narration at all** — music only. See
+`media/the-field/the-field.shorts.md` for their exact published text and the pattern worth reusing; there
+is no source/script to import from that project, only the finished videos (downloaded locally there as
+reference, git-ignored).
 
 ## Structure contract (so the render tool can drive it)
 
