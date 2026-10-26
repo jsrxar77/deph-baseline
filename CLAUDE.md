@@ -109,9 +109,13 @@ the check to run: `visuals-compose`, "Naming, and the consistency check".
     exported mix back into `sync/` (alignment check, mastering, keyframes).
   - `visuals-compose` — building the actual Remotion composition (in `media/<name>/visuals/`,
     wiring in the real `audio.wav`).
-  - `youtube-publish` — the last step of the pipeline: builds and maintains each composition's YouTube publish
-    pack once a video exists (honest claims, verified YouTube rules, EN/ES). **Whenever a video is rendered or
-    changes, create or refresh the pack**; Claude never uploads anything.
+  - `youtube-publish` — builds and maintains each composition's YouTube publish pack once a video exists
+    (honest claims, verified YouTube rules, EN/ES). **Whenever a video is rendered or changes, create or
+    refresh the pack.**
+  - `youtube-upload` — the actual last step, once the pack and the final render are ready and the user asks
+    to upload: pushes the video, the Spanish translation and the thumbnail via the YouTube Data API
+    (`tools/youtube/`), always Private first, same as every piece uploaded by hand before this skill existed
+    (2026-10-26). The playlist, end screen and pinned comment stay manual — the API has no endpoint for them.
   - `deph-style` — not a pipeline step: the accumulating record of deph's evolving style (what the user liked
     and rejected and why, measured findings, how they like to work, open questions, a dated decision log).
     Read it before proposing a creative direction; **append to it after every user-guided creative decision.**

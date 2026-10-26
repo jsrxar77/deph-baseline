@@ -274,7 +274,47 @@ Diseñado de origen para la plantilla estándar de 8 canales de Ableton Live (`S
 
 ---
 
-## Visual Concept (propuesta, sin construir todavía)
+## Visual (estado actual, 2026-10-25)
+
+Construido en Remotion + three.js (`visuals/`). Imagen para meditar: todo orgánico, lento, nunca abrupto.
+
+- **El Demiurgo** (violeta) es una sola forma que se transforma a lo largo de la pieza: tetraedro, hexaedro,
+  octaedro, dodecaedro, icosaedro (`form.ts`). Cada transformación ocurre durante uno de sus turnos (su 2.º turno
+  del Descenso, el 1.º y el 3.º de la Densidad, y su despedida en la Trascendencia), así que ya es icosaedro
+  cuando llega la integración. Las aristas son violetas en todas sus formas y pasan al dorado recién mientras se
+  arma el icosaedro (desde 7:30), hasta el dorado pleno cuando la integración llega a su máximo (8:44).
+- **Un límite que está y no está:** las aristas y los puntos de los vértices quedan siempre. Lo que aparece y
+  desaparece son las paredes, superficies muy tenues, casi transparentes: se cierran cuando habla el Demiurgo (en
+  unos 6 s) y se desvanecen todas juntas, suave pero del todo, cuando habla Sofía (en unos 14 s). Desde que se arma el
+  icosaedro, las paredes quedan hasta el final. Adentro no hay ninguna otra forma: solo sus puntos y conexiones, que rebotan
+  contra las paredes de la forma del momento. Siempre hay un solo contorno: en cada transición, las aristas de la
+  forma que se va y las de la que llega se dibujan sobre la misma superficie, que pasa de una forma a la otra.
+- **Sofía** (azul eléctrico, varios tonos) es libre y orbita la forma, con un núcleo dorado desde el primer
+  segundo; una parte chica de ella queda atrapada adentro y crece de a poco. Sus puntos rebotan contra el borde
+  mismo de la pantalla, sin margen, así que nunca salen de cuadro.
+- **Fondo:** negro absoluto (0,0,0) donde no hay nada dibujado, medido en los cuadros. El borde gris que se ve en
+  Remotion Studio a pantalla completa es el visor de Studio, no el video.
+- **Encuadre:** la cámara orbita el centro de la forma, y la forma está dimensionada para llenar la altura del
+  cuadro sin salirse. La forma gira en los dos ejes, despacio (una vuelta cada ~2 min horizontal, ~3 min vertical).
+- **Integración (Shepard):** dorado, nunca blanco. Sofía y el Demiurgo pasan de a poco a dorado entre 8:20 y
+  10:20 y quedan dorados hasta el final: lo integrado no vuelve a sus colores. El dorado se contagia punto por
+  punto (los de Sofía atrapados adentro primero), y cada punto apaga su color mientras enciende el dorado, sin pasar
+  por la mezcla pálida que se leía como blanco. El resplandor es solo un brillo de pocos píxeles pegado a líneas y
+  puntos, sin halo: alrededor, el fondo sigue en negro absoluto. El dorado sube por adentro siguiendo las notas reales del
+  Shepard; los movimientos se frenan (hasta 40% de su velocidad en el pico) y respiran con cada paso del Shepard.
+- **Comienzo:** la pieza abre con un punto dorado solo en el negro, la forma perfecta (el mismo tamaño en pantalla
+  que el punto del final), que dura poco: aparece en
+  el primer segundo y desde los 2 s Sofía crece de a poco desde él, suave al empezar y al terminar, hasta su nube
+  completa con su segunda frase (0:12,6). Sus líneas aparecen recién cuando los puntos se separan.
+- **Final:** desde las 10:25 la cámara se aleja y el icosaedro se redondea hasta ser una esfera (11:00): sus aristas
+  y vértices se desvanecen y queda una membrana dorada muy tenue, más brillante hacia el borde, con Sofía y el
+  Demiurgo adentro (Sofía llena la esfera de forma pareja, no amontonada). De 11:00 a 11:55, en el silencio después
+  de su última frase, la esfera se achica con todo adentro hasta volver a ser el mismo punto dorado del comienzo,
+  que queda hasta el último cuadro.
+- **Sincronización:** nota por nota desde `frames.json` (`music.ts`): voces de Sofía y del Demiurgo, tintinnabuli
+  (núcleo dorado), arpegio (un punto por nota), bajo, cambios de acorde (onda por la red), Shepard (dorado).
+
+### Propuesta original (histórica, reemplazada por lo de arriba)
 
 **Corrección de tecnología**: el concepto original decía HyperFrames. Eso ya no aplica — por convención del
 proyecto (`CLAUDE.md`, skill `deph-shorts`), HyperFrames quedó reservado únicamente para los shorts verticales;

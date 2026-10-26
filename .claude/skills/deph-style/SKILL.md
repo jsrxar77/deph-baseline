@@ -693,3 +693,62 @@ Also update the distilled sections above if the decision changes a principle, an
   Lesson: a "tested, documented exception" from an earlier session is still worth re-opening when the user says
   so — don't defend a past decision just because it was carefully reasoned at the time; the real fix was one
   symlink away and nobody had looked for it since the original test.
+- 2026-10-25 — Gnosis, motion and edges, several direct corrections in one round: (1) "en todo movimientos sutiles,
+  muchos pero sutiles, es música y visuales para meditar... nunca frenéticos, incluso en la integración" — every small
+  motion (the per-particle dance, Sofía's orbits, the solids' wobble, the cube's crack) slowed to about a third of its
+  speed; the cube spins on BOTH axes continuously, slowly (~2 min per turn left-right, ~3 min vertical) — a vertical
+  "nod" whose period was longer than the piece never read as vertical rotation, and the user had asked for it many times.
+  (2) In the integration the particles' own clock slows to 40% at the flight's peak (an integrated time table, so nothing
+  jumps), and the little dance left there breathes with each Shepard step (one sin² swell per 4 s step) — motion that
+  follows the music instead of an independent wobble. (3) Edges thinner, twice: "si son 3 entonces pon 2", then "más
+  finas todas las aristas" (cube 2.5 -> 1.2 px, solids 1.8 -> 0.9 px, at 1080p). (4) The Demiurgo's cube edges turn from
+  violet to gold as the final integration begins and stay gold: "no se tiene que mantener siempre violeta". Lesson: when
+  the user repeats a request ("lo dije 80 veces"), check whether the earlier implementation was actually VISIBLE on
+  screen, not just present in code — a too-slow sine is the same as not doing it.
+- 2026-10-25 — Gnosis, the Demiurgo becomes ONE transforming form (user's concept, "me parece que la posta"): no cube
+  with solids inside — his single contour goes tetrahedron -> hexahedron -> octahedron -> dodecahedron -> icosahedron,
+  each change during one of his own turns, already the icosahedron at the integration, and the piece ends zooming out
+  on that icosahedron with Sofía, him and the integration inside (replacing "one more, larger cube"). "Interno no
+  debería haber más formas... solo las externas": nothing drawn inside, ever; during a change both solids' edges are
+  drawn on ONE blended surface, never two shells. Edges begin violet and move toward gold with each form, full gold
+  at the integration. Then, framing: "que las figuras estén en el centro... que no se vayan de pantalla... que reboten
+  en el final de la pantalla, sin márgenes" — the camera orbits the form's own center, every solid shares one
+  circumradius sized to fill the frame height (equal volume made the tetrahedron 2.5x too tall), and Sofía's points
+  bounce off the screen edges themselves. The push-in during the integration was removed, since it would crop the form.
+- 2026-10-25 — Gnosis, edge color refined: violet through all of the Demiurgo's forms, gold only as the icosahedron
+  assembles into the integration (7:30 -> 8:44) — "mantener el violeta hasta el final, cuando se arma el icosaedro".
+  Replaces the step-toward-gold-per-form progression from earlier the same day. Color keeps its meaning: violet = him,
+  gold = integration, never mixed earlier.
+- 2026-10-25 — Gnosis, "a boundary that is there and isn't" (user's idea, discussed and approved before building): the
+  Demiurgo's edges are firm while he speaks and dissolve one by one while Sofía speaks; as they go, the faces show as
+  very faint almost-transparent surfaces; the vertex points always stay; firm from the icosahedron to the end. Faces at
+  0.05 of the edge color read as a solid tinted box — 0.02 reads as a veil. His particles still bounce off the
+  invisible walls, so the cage is felt even when not drawn.
+- 2026-10-25 — Gnosis, refinement the same day: "siempre se tienen que mantener las aristas y los puntos; lo que debe
+  aparecer y desaparecer son las paredes, superficies transparentes". Edges and vertex points always drawn; the very
+  faint walls close in while the Demiurgo speaks and fade face by face while Sofía speaks. The edges are the form's
+  identity and must never disappear; the rhythm lives in the walls.
+- 2026-10-25 — Gnosis walls: fade all together, not face by face — "que se desvanezcan todas juntas, no abrupto, pero
+  que desvanezca Sofía es fuerte". Her turn clears the cage's walls completely and gently; staggering read as weaker.
+- 2026-10-25 — Gnosis bookends: the piece opens on one gold point alone in the black (the perfect form) that bursts
+  into Sofía's cloud at 0:08 with the Shepard preludio's entrance (fast then decelerating, 5 s, no flash, lines only
+  once spread); it ends with the icosahedron rounding into a sphere (edges and vertices fading, a faint gold membrane
+  with a soft rim so it reads as a sphere, not a disc), which shrinks with everything inside back into the same gold
+  point, held to the last frame. Measured lesson: shrinking Sofía's orbit to gather her piled her into a white knot
+  (blue + violet + gold additive) — compress only her far points (tanh) so she fills the sphere evenly. The user asked
+  for a sudden burst explicitly; "never abrupt" still holds as no flash and a smooth deceleration.
+- 2026-10-25 — Gnosis opening, corrected: not a burst — "el punto tiene que durar menos y debe crecer de a poco hasta
+  llegar a Sofía... no de un fotograma pasar al todo". The point holds ~2 s; Sofía grows out of it eased in and out
+  from 2 s to her second phrase (12.6 s). A fast-start ease-out (1-(1-u)^3) still read as a jump. For growth, the
+  start must be as gentle as the end.
+- 2026-10-25 — Gnosis: what is integrated stays integrated — Sofía and the Demiurgo (points and their own webs) turn
+  gold gradually through the integration (8:20-10:20) and never return to blue/violet; the sphere and the final point
+  are gold all the way. The blue/violet coming back after the Shepard was an unintended side effect of tying the inner
+  gold only to the Shepard's notes — the user asked "¿cuál es esa idea?"; there was none. The gold point at both ends:
+  larger (80 vs 30) and the same on-screen size at start and end.
+- 2026-10-25 — Gnosis glow and gold, measured fixes: (1) "halo muy muy muy pequeño" — bloom kept to its finest level only
+  (bloomFactors [1,0,0,0,0], radius 0); once everything turned gold, the full five-level bloom summed into a wide halo
+  that lifted the OLED black around the sphere. (2) Never mix a color straight toward gold: blue+gold halfway is pale
+  grey, violet+gold pale lilac, and boosted they read as white. Every move toward gold now dims the own color while
+  the gold rises, and the lasting integration gold spreads particle by particle (short per-particle windows) so only a
+  few are ever mid-way. Residual: hubs where many additive lines meet can still look white-hot during the transition.
