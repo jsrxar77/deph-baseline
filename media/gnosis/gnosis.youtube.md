@@ -1,6 +1,6 @@
 # Gnosis — YouTube publish pack
 
-Status: **ready for upload** · last updated 2026-10-26
+Status: **uploaded, Private** · https://youtu.be/uHlgRLpfhY0 · last updated 2026-10-26
 Source video: `media/gnosis/renders/gnosis-fixed.mp4` — 12:06 (726 s), 3840x2160 at 60 fps, H.264 / AAC,
 audio mastered to -16.0 LUFS (true peak -1.0 dBTP) · Channel material: `docs/youtube-channel.md` ·
 Rules: `youtube-publish` skill · Upload mechanism: `youtube-upload` skill.
@@ -134,19 +134,22 @@ Every discarded candidate file was deleted; only the chosen one is kept in the r
 ## Upload checklist
 
 - [x] Render verified 2026-10-26: H.264 3840x2160 60 fps, yuv420p, BT.709 limited range; AAC-LC 48 kHz
-      stereo at -16.0 LUFS (true peak -1.0 dBTP). Re-encoded once from the original chunked render to fix
-      an audio click and a frame-count mismatch at the chunk splice points (see `youtube-upload` skill).
-- [ ] Watch it once end to end before upload.
-- [ ] Upload `media/gnosis/renders/gnosis-fixed.mp4` via the `youtube-upload` skill — always lands Private
-      first; let processing reach 4K, check audio with headphones (binaural layer).
-- [ ] Title (EN #1), description (EN); check the five chapters appear as segments on the timeline.
-- [ ] Spanish title + description added as a translation (the upload script does this on the same video,
-      never a duplicate upload).
-- [ ] Thumbnail: `gnosis-thumbnail.jpg`, 1280x720, confirmed under 2 MB.
-- [ ] Category **Music**; audience **not made for kids**; comments on; standard license (all set by the
-      upload script).
+      stereo at -16.0 LUFS (true peak -1.0 dBTP), exactly 43560 frames / 726.000s. Re-encoded once from the
+      original chunked render to fix an audio click and a frame-count mismatch at the chunk splice points
+      (see `youtube-upload` skill).
+- [x] Uploaded `media/gnosis/renders/gnosis-fixed.mp4` via `youtube-upload` — https://youtu.be/uHlgRLpfhY0,
+      **Private**. (The upload itself completed server-side despite a client-side BrokenPipeError at 70%
+      progress — confirmed via `videos.list` before assuming a retry was needed; `upload.py` now retries
+      transient network errors on the same chunk instead of failing outright.)
+- [x] Title (EN #1), description (EN) set on upload; chapters are in the description text, not yet
+      confirmed as recognized timeline segments — check this once processing finishes.
+- [x] Spanish title + description added as a translation (`localizations.es`) on the same video — confirmed
+      via the API, not a duplicate upload.
+- [x] Thumbnail: `gnosis-thumbnail.jpg` set via `thumbnails.set`.
+- [x] Category **Music**; audience **not made for kids**; comments on (API default); standard license.
 - [ ] "Altered or synthetic content": **No** (abstract particle geometry and synthesized music, nothing
-      realistic).
+      realistic) — not a settable API field; set it manually in Studio if the question is presented there.
+- [ ] Watch it end to end in Studio once 4K processing finishes; check audio with headphones.
 - [ ] Manual, in Studio (the API has no endpoint for any of these): add to the series playlist "deph —
       generative ambient"; end screen in the last ~20 s; pin a comment.
 - [ ] Switch from Private to Public when the user is ready; note the URL here and in the yaml

@@ -102,7 +102,9 @@ domains:
       - device: "Limiter"
         settings: "Ceiling -1.0 dBTP, Mode True Peak, Lookahead 6ms, Release Auto"
 publish:
-  status: in-progress # pack written 2026-10-26, waiting on upload + the user's open decisions (pinned comment, AI mention)
+  status: in-progress # uploaded Private 2026-10-26 via youtube-upload; waiting on the user to review + the
+    # manual Studio steps (playlist, end screen, pinned comment) before going Public
   file: gnosis.youtube.md
   video: renders/gnosis-fixed.mp4 # the chunked render, re-encoded once to fix an audio click + frame drop at the chunk splices
+  url: https://youtu.be/uHlgRLpfhY0 # Private — not yet public
 doc: gnosis.md

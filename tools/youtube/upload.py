@@ -24,12 +24,23 @@ one, so the user reviews it in Studio before making it public themselves.
 import argparse
 import json
 import os
+import ssl
 import sys
+import time
 
+import httplib2
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
+
+# Transient network errors a resumable upload should retry (NOT restart) through — a dropped connection
+# mid-chunk is routine on a multi-GB upload. Retrying `next_chunk()` on the SAME request object resumes
+# from the server's last confirmed byte; creating a new videos().insert() call would restart at 0%
+# (found 2026-10-26: a BrokenPipeError at 70% with no retry logic meant redoing the whole 7+ GB upload).
+RETRYABLE = (ssl.SSLError, ConnectionError, BrokenPipeError, TimeoutError, httplib2.HttpLib2Error, OSError)
+MAX_RETRIES = 10
 
 HOME = os.path.expanduser("~")
 TOKEN_PATH = os.path.join(HOME, ".config/deph/youtube-token.json")
@@ -90,8 +101,30 @@ def main():
     media = MediaFileUpload(args.video_path, mimetype="video/mp4", resumable=True, chunksize=50 * 1024 * 1024)
     request = yt.videos().insert(part="snippet,status", body=body, media_body=media)
     response = None
+    retries = 0
     while response is None:
-        status, response = request.next_chunk()
+        try:
+            status, response = request.next_chunk()
+            retries = 0
+        except RETRYABLE as e:
+            retries += 1
+            if retries > MAX_RETRIES:
+                raise
+            wait = min(2 ** retries, 60)
+            print(f"  transient error ({e.__class__.__name__}: {e}), retrying chunk in {wait}s "
+                  f"(attempt {retries}/{MAX_RETRIES})...")
+            time.sleep(wait)
+            continue
+        except HttpError as e:
+            if e.resp.status in (500, 502, 503, 504):
+                retries += 1
+                if retries > MAX_RETRIES:
+                    raise
+                wait = min(2 ** retries, 60)
+                print(f"  server error {e.resp.status}, retrying chunk in {wait}s (attempt {retries}/{MAX_RETRIES})...")
+                time.sleep(wait)
+                continue
+            raise
         if status:
             print(f"  {int(status.progress() * 100)}%")
     video_id = response["id"]
