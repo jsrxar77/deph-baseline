@@ -78,14 +78,48 @@ contenida"), closes on an open question instead of a flat statement (lets the vi
 "terminá de crear esta experiencia en tu mente"), and the CTA now asks for a comment too, not just a
 subscribe.
 
-## Open, blocking the next step
+## Status & Rendered Shorts
 
-- Both narrations done, matching the user's final script:
-  - EN: George (`JBFqnCBsd6RMkjVDRZzb`), `eleven_v4` — `media/gnosis/shorts/gnosis-short-narration-en.mp3` (39.76s)
-  - ES: Lionel (`MjtZn5tagxL1RO6w9ER5`), `eleven_v4`, generated manually by the user (Lionel is a paid
-    library voice, blocked on the free API tier; see `tools/narration/voices.md`) —
-    `media/gnosis/shorts/gnosis-short-narration-es.mp3` (35.71s)
-- Next: cut the 1080x1920 clip from `gnosis-fixed.mp4` around the gold integration, mix each narration
-  under/over the piece's own music, then show the user both finished shorts before anything uploads.
-- Whether The Field's two Shorts actually had narration (the user believed so; nothing found supports
-  it — see `the-field.shorts.md`). Doesn't block Gnosis's own short, just an open question.
+- **Status**: **RENDERED & READY FOR REVIEW** (ES + EN) · 2026-10-26
+- **Visual moment**: 2:40 to 3:26 from `media/gnosis/renders/gnosis-fixed.mp4` (tetraedro violeta claro contra la red azul, sin tonos dorados).
+- **Caption System (HyperFrames)**:
+  - Persistent subscribe pill button (top-left).
+  - Opening card (GNOSIS / ¿LIBRE O ATRAPADO? / Dos Caras de la Misma Energía).
+  - Karaoke phrase caption cards (word highlight in luminous violet `#d68bff`).
+  - Closing CTA card (12-minute full piece on channel + subscribe/comment ask).
+- **Files**:
+  - `media/gnosis/shorts/gnosis-short-es.mp4` (46.0s, 1080x1920 30fps, 309 MB)
+  - `media/gnosis/shorts/gnosis-short-en.mp4` (46.0s, 1080x1920 30fps, 309 MB)
+  - `media/gnosis/shorts/gnosis-short-es.html` (HyperFrames source)
+  - `media/gnosis/shorts/gnosis-short-en.html` (HyperFrames source)
+  - `media/gnosis/shorts/gnosis-captions-es.json` & `gnosis-captions-en.json`
+
+## YouTube Publish Data for Shorts
+
+### ES Short
+- **Título**: Gnosis · ¿Y si ser libre y estar atrapado fueran lo mismo? | 432 Hz #Shorts #energia #geometriasagrada
+- **Descripción**:
+  ¿Y si ser libre y estar atrapado fueran solo dos caras de la misma energía?
+  Mirá cómo el sonido a 432 Hz guía la geometría en tiempo real.
+  
+  Mirá la obra completa en 4K (12 min): https://youtu.be/i3NcqCaEsB8
+  Playlist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
+
+  Esto es música, no consejo ni tratamiento médico.
+
+  #Shorts #ambientmusic #432hz #geometriasagrada #gnosis #meditacion
+- **Tags**: 432 hz, ambient music, geometria sagrada, gnosis, meditacion guiada, musica ambiental, musica para meditar, ondas binaurales, relajacion, shorts
+
+### EN Short
+- **Título**: Gnosis · What if Being Free and Trapped Were the Same? | 432 Hz #Shorts #sacredgeometry #ambient
+- **Descripción**:
+  What if being free and being trapped were just two faces of the same energy?
+  Watch sound at 432 Hz guide the shape in real time.
+  
+  Watch the full 12-minute 4K piece: https://youtu.be/i3NcqCaEsB8
+  Series playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
+
+  This is music, not medical advice or treatment.
+
+  #Shorts #ambientmusic #432hz #sacredgeometry #gnosis #meditation
+- **Tags**: 432 hz, ambient music, binaural beats, frequency, generative art, gnosis, meditation music, sacred geometry, shorts, sound design

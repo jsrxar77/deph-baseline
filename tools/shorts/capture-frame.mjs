@@ -29,7 +29,9 @@ if (!args.file || !args.out) {
   process.exit(1);
 }
 
-const browser = await chromium.launch();
+const executablePath = process.env.CHROMIUM_PATH ||
+  '/Users/javier/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell';
+const browser = await chromium.launch({ executablePath });
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 await page.goto(`file://${resolve(args.file)}`);
 
@@ -41,6 +43,6 @@ await page.evaluate((seconds) => {
   if (first && typeof first.seek === 'function') first.seek(seconds);
 }, args.seconds);
 
-await page.screenshot({ path: args.out });
+await page.screenshot({ path: args.out, omitBackground: true });
 await browser.close();
 console.log(`Wrote ${args.out} (1080x1920, t=${args.seconds}s)`);
