@@ -1,0 +1,554 @@
+[
+  {
+    "word": "What",
+    "start": 0.0,
+    "end": 0.2,
+    "probability": 0.618
+  },
+  {
+    "word": "if",
+    "start": 0.2,
+    "end": 0.4,
+    "probability": 0.985
+  },
+  {
+    "word": "being",
+    "start": 0.4,
+    "end": 0.66,
+    "probability": 0.96
+  },
+  {
+    "word": "free",
+    "start": 0.66,
+    "end": 1.1,
+    "probability": 0.98
+  },
+  {
+    "word": "and",
+    "start": 1.1,
+    "end": 1.52,
+    "probability": 0.963
+  },
+  {
+    "word": "being",
+    "start": 1.52,
+    "end": 1.76,
+    "probability": 0.996
+  },
+  {
+    "word": "trapped",
+    "start": 1.76,
+    "end": 2.3,
+    "probability": 0.966
+  },
+  {
+    "word": "were",
+    "start": 2.3,
+    "end": 2.64,
+    "probability": 0.972
+  },
+  {
+    "word": "just",
+    "start": 2.64,
+    "end": 2.84,
+    "probability": 0.993
+  },
+  {
+    "word": "two",
+    "start": 2.84,
+    "end": 3.14,
+    "probability": 0.972
+  },
+  {
+    "word": "faces",
+    "start": 3.14,
+    "end": 3.56,
+    "probability": 0.962
+  },
+  {
+    "word": "of",
+    "start": 3.56,
+    "end": 3.8,
+    "probability": 0.996
+  },
+  {
+    "word": "the",
+    "start": 3.8,
+    "end": 3.94,
+    "probability": 0.998
+  },
+  {
+    "word": "same",
+    "start": 3.94,
+    "end": 4.3,
+    "probability": 0.999
+  },
+  {
+    "word": "energy?",
+    "start": 4.3,
+    "end": 4.72,
+    "probability": 0.998
+  },
+  {
+    "word": "One",
+    "start": 5.48,
+    "end": 5.7,
+    "probability": 0.922
+  },
+  {
+    "word": "is",
+    "start": 5.7,
+    "end": 6.02,
+    "probability": 0.998
+  },
+  {
+    "word": "perpetual",
+    "start": 6.02,
+    "end": 6.54,
+    "probability": 0.976
+  },
+  {
+    "word": "flow,",
+    "start": 6.54,
+    "end": 6.98,
+    "probability": 0.993
+  },
+  {
+    "word": "untamed,",
+    "start": 7.58,
+    "end": 8.22,
+    "probability": 0.982
+  },
+  {
+    "word": "with",
+    "start": 8.52,
+    "end": 8.64,
+    "probability": 0.994
+  },
+  {
+    "word": "no",
+    "start": 8.64,
+    "end": 8.86,
+    "probability": 1.0
+  },
+  {
+    "word": "edges",
+    "start": 8.86,
+    "end": 9.2,
+    "probability": 0.996
+  },
+  {
+    "word": "to",
+    "start": 9.2,
+    "end": 9.48,
+    "probability": 0.995
+  },
+  {
+    "word": "hold",
+    "start": 9.48,
+    "end": 9.64,
+    "probability": 0.998
+  },
+  {
+    "word": "it",
+    "start": 9.64,
+    "end": 9.8,
+    "probability": 0.998
+  },
+  {
+    "word": "back.",
+    "start": 9.8,
+    "end": 10.18,
+    "probability": 1.0
+  },
+  {
+    "word": "The",
+    "start": 10.86,
+    "end": 10.98,
+    "probability": 0.994
+  },
+  {
+    "word": "other",
+    "start": 10.98,
+    "end": 11.28,
+    "probability": 0.982
+  },
+  {
+    "word": "is",
+    "start": 11.28,
+    "end": 11.56,
+    "probability": 0.996
+  },
+  {
+    "word": "contained",
+    "start": 11.56,
+    "end": 11.98,
+    "probability": 0.993
+  },
+  {
+    "word": "form,",
+    "start": 11.98,
+    "end": 12.52,
+    "probability": 0.997
+  },
+  {
+    "word": "rebuilding",
+    "start": 13.04,
+    "end": 13.4,
+    "probability": 0.988
+  },
+  {
+    "word": "itself",
+    "start": 13.4,
+    "end": 13.88,
+    "probability": 0.996
+  },
+  {
+    "word": "again",
+    "start": 13.88,
+    "end": 14.4,
+    "probability": 0.99
+  },
+  {
+    "word": "and",
+    "start": 14.4,
+    "end": 14.72,
+    "probability": 0.986
+  },
+  {
+    "word": "again,",
+    "start": 14.72,
+    "end": 15.04,
+    "probability": 1.0
+  },
+  {
+    "word": "trying",
+    "start": 15.52,
+    "end": 15.72,
+    "probability": 0.997
+  },
+  {
+    "word": "to",
+    "start": 15.72,
+    "end": 15.96,
+    "probability": 0.999
+  },
+  {
+    "word": "integrate.",
+    "start": 15.96,
+    "end": 16.44,
+    "probability": 0.994
+  },
+  {
+    "word": "Sound",
+    "start": 17.28,
+    "end": 17.72,
+    "probability": 0.962
+  },
+  {
+    "word": "guides",
+    "start": 17.72,
+    "end": 18.18,
+    "probability": 0.989
+  },
+  {
+    "word": "the",
+    "start": 18.18,
+    "end": 18.44,
+    "probability": 0.998
+  },
+  {
+    "word": "shape.",
+    "start": 18.44,
+    "end": 18.76,
+    "probability": 0.993
+  },
+  {
+    "word": "Every",
+    "start": 19.38,
+    "end": 19.66,
+    "probability": 0.994
+  },
+  {
+    "word": "pulse",
+    "start": 19.66,
+    "end": 20.0,
+    "probability": 0.991
+  },
+  {
+    "word": "at",
+    "start": 20.0,
+    "end": 20.26,
+    "probability": 0.962
+  },
+  {
+    "word": "432",
+    "start": 20.26,
+    "end": 21.24,
+    "probability": 0.987
+  },
+  {
+    "word": "hertz",
+    "start": 21.24,
+    "end": 21.66,
+    "probability": 0.449
+  },
+  {
+    "word": "transforms",
+    "start": 21.66,
+    "end": 22.5,
+    "probability": 0.984
+  },
+  {
+    "word": "this",
+    "start": 22.5,
+    "end": 22.86,
+    "probability": 0.997
+  },
+  {
+    "word": "image",
+    "start": 22.86,
+    "end": 23.16,
+    "probability": 0.999
+  },
+  {
+    "word": "in",
+    "start": 23.16,
+    "end": 23.42,
+    "probability": 0.997
+  },
+  {
+    "word": "real",
+    "start": 23.42,
+    "end": 23.68,
+    "probability": 0.999
+  },
+  {
+    "word": "time.",
+    "start": 23.68,
+    "end": 24.14,
+    "probability": 0.882
+  },
+  {
+    "word": "And,",
+    "start": 24.68,
+    "end": 25.14,
+    "probability": 0.989
+  },
+  {
+    "word": "for",
+    "start": 25.22,
+    "end": 25.42,
+    "probability": 0.999
+  },
+  {
+    "word": "one",
+    "start": 25.42,
+    "end": 25.64,
+    "probability": 0.993
+  },
+  {
+    "word": "instant,",
+    "start": 25.64,
+    "end": 26.0,
+    "probability": 0.974
+  },
+  {
+    "word": "the",
+    "start": 26.46,
+    "end": 26.52,
+    "probability": 0.997
+  },
+  {
+    "word": "conflict",
+    "start": 26.52,
+    "end": 26.96,
+    "probability": 0.996
+  },
+  {
+    "word": "disappears.",
+    "start": 26.96,
+    "end": 27.66,
+    "probability": 0.996
+  },
+  {
+    "word": "Does",
+    "start": 28.34,
+    "end": 28.64,
+    "probability": 0.302
+  },
+  {
+    "word": "everything",
+    "start": 28.64,
+    "end": 29.16,
+    "probability": 0.975
+  },
+  {
+    "word": "converge",
+    "start": 29.16,
+    "end": 29.68,
+    "probability": 0.967
+  },
+  {
+    "word": "into",
+    "start": 29.68,
+    "end": 30.02,
+    "probability": 0.992
+  },
+  {
+    "word": "a",
+    "start": 30.02,
+    "end": 30.2,
+    "probability": 0.996
+  },
+  {
+    "word": "single",
+    "start": 30.2,
+    "end": 30.48,
+    "probability": 0.994
+  },
+  {
+    "word": "light?",
+    "start": 30.48,
+    "end": 30.84,
+    "probability": 0.989
+  },
+  {
+    "word": "Finish",
+    "start": 31.84,
+    "end": 32.14,
+    "probability": 0.973
+  },
+  {
+    "word": "creating",
+    "start": 32.14,
+    "end": 32.7,
+    "probability": 0.997
+  },
+  {
+    "word": "this",
+    "start": 32.7,
+    "end": 32.94,
+    "probability": 0.998
+  },
+  {
+    "word": "experience",
+    "start": 32.94,
+    "end": 33.48,
+    "probability": 0.997
+  },
+  {
+    "word": "in",
+    "start": 33.48,
+    "end": 33.72,
+    "probability": 0.996
+  },
+  {
+    "word": "your",
+    "start": 33.72,
+    "end": 33.86,
+    "probability": 0.998
+  },
+  {
+    "word": "mind.",
+    "start": 33.86,
+    "end": 34.3,
+    "probability": 0.999
+  },
+  {
+    "word": "If",
+    "start": 34.76,
+    "end": 35.0,
+    "probability": 0.984
+  },
+  {
+    "word": "this",
+    "start": 35.0,
+    "end": 35.16,
+    "probability": 0.998
+  },
+  {
+    "word": "moved",
+    "start": 35.16,
+    "end": 35.56,
+    "probability": 0.98
+  },
+  {
+    "word": "something",
+    "start": 35.56,
+    "end": 35.96,
+    "probability": 0.998
+  },
+  {
+    "word": "in",
+    "start": 35.96,
+    "end": 36.12,
+    "probability": 0.888
+  },
+  {
+    "word": "you,",
+    "start": 36.12,
+    "end": 36.34,
+    "probability": 0.988
+  },
+  {
+    "word": "leave",
+    "start": 36.66,
+    "end": 36.82,
+    "probability": 0.983
+  },
+  {
+    "word": "a",
+    "start": 36.82,
+    "end": 36.98,
+    "probability": 0.998
+  },
+  {
+    "word": "comment",
+    "start": 36.98,
+    "end": 37.26,
+    "probability": 0.997
+  },
+  {
+    "word": "and",
+    "start": 37.26,
+    "end": 37.54,
+    "probability": 0.908
+  },
+  {
+    "word": "subscribe",
+    "start": 37.54,
+    "end": 38.02,
+    "probability": 0.99
+  },
+  {
+    "word": "for",
+    "start": 38.02,
+    "end": 38.32,
+    "probability": 0.961
+  },
+  {
+    "word": "more",
+    "start": 38.32,
+    "end": 38.5,
+    "probability": 0.996
+  },
+  {
+    "word": "pieces",
+    "start": 38.5,
+    "end": 38.86,
+    "probability": 0.941
+  },
+  {
+    "word": "like",
+    "start": 38.86,
+    "end": 39.12,
+    "probability": 0.997
+  },
+  {
+    "word": "this.",
+    "start": 39.12,
+    "end": 39.46,
+    "probability": 0.999
+  }
+]

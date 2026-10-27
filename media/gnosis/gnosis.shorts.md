@@ -96,32 +96,68 @@ subscribe.
   - `media/gnosis/shorts/gnosis-karaoke-es.json` & `gnosis-karaoke-en.json` (word-level alignment)
   - `tools/shorts/build-gnosis-hyperframes.mjs` (automated package generator)
 
+## YouTube Published Videos (Private)
+
+| | ES | EN |
+|---|---|---|
+| **Video ID** | `fJEEjPmf4Ss` | `nMDWT0B-fSU` |
+| **Shorts URL** | https://youtube.com/shorts/fJEEjPmf4Ss | https://youtube.com/shorts/nMDWT0B-fSU |
+| **Studio Edit** | https://studio.youtube.com/video/fJEEjPmf4Ss/edit | https://studio.youtube.com/video/nMDWT0B-fSU/edit |
+| **Portada Nativa (1080x1920)** | `media/gnosis/shorts/thumbnails/gnosis-short-cover-es.jpg` | `media/gnosis/shorts/thumbnails/gnosis-short-cover-en.jpg` |
+| **Status** | **Private** (Listo para revisión del usuario) | **Private** (Listo para revisión del usuario) |
+| **Duración** | 46.0 s | 46.0 s |
+| **Resolución** | 1080x1920 (9:16) | 1080x1920 (9:16) |
+| **Loudness** | -15.1 LUFS (-1.0 dBTP) | -14.9 LUFS (-1.0 dBTP) |
+
 ## YouTube Publish Data for Shorts
 
-### ES Short
-- **Título**: Gnosis · ¿Y si ser libre y estar atrapado fueran lo mismo? | 432 Hz #Shorts #energia #geometriasagrada
+### ES Short (`fJEEjPmf4Ss`)
+- **Título**: `Gnosis · ¿Y si ser libre y estar atrapado fueran lo mismo? | 432 Hz #Shorts #geometriasagrada`
 - **Descripción**:
-  ¿Y si ser libre y estar atrapado fueran solo dos caras de la misma energía?
-  Mirá cómo el sonido a 432 Hz guía la geometría en tiempo real.
-  
-  Mirá la obra completa en 4K (12 min): https://youtu.be/i3NcqCaEsB8
-  Playlist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
+```
+¿Y si ser libre y estar atrapado fueran solo dos caras de la misma energía?
+Mirá cómo el sonido a 432 Hz guía la geometría en tiempo real.
 
-  Esto es música, no consejo ni tratamiento médico.
+Afinada a A = 432 Hz con una capa binaural sutil (mejor con auriculares).
 
-  #Shorts #ambientmusic #432hz #geometriasagrada #gnosis #meditacion
-- **Tags**: 432 hz, ambient music, geometria sagrada, gnosis, meditacion guiada, musica ambiental, musica para meditar, ondas binaurales, relajacion, shorts
+Mirá la obra completa en 4K (12 min): https://youtu.be/i3NcqCaEsB8
+Playlist de la serie: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
 
-### EN Short
-- **Título**: Gnosis · What if Being Free and Trapped Were the Same? | 432 Hz #Shorts #sacredgeometry #ambient
+Esto es música, no consejo ni tratamiento médico.
+
+#Shorts #ambientmusic #432hz #geometriasagrada #gnosis #meditacion
+```
+- **Tags**: `432 hz, ambient music, geometria sagrada, gnosis, meditacion guiada, musica ambiental, musica para meditar, ondas binaurales, relajacion, shorts`
+- **Comentario fijado (Pinned comment)**:
+```
+Con auriculares a 432 Hz. Mirá la integración geométrica completa de 12 minutos en 4K acá: https://youtu.be/i3NcqCaEsB8
+```
+
+### EN Short (`nMDWT0B-fSU`)
+- **Título**: `Gnosis · What if Being Free and Trapped Were the Same? | 432 Hz #Shorts #sacredgeometry #ambient`
 - **Descripción**:
-  What if being free and being trapped were just two faces of the same energy?
-  Watch sound at 432 Hz guide the shape in real time.
-  
-  Watch the full 12-minute 4K piece: https://youtu.be/i3NcqCaEsB8
-  Series playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
+```
+What if being free and being trapped were just two faces of the same energy?
+Watch sound at 432 Hz guide the shape in real time.
 
-  This is music, not medical advice or treatment.
+Tuned to A = 432 Hz with a gentle binaural layer (best with headphones).
 
-  #Shorts #ambientmusic #432hz #sacredgeometry #gnosis #meditation
-- **Tags**: 432 hz, ambient music, binaural beats, frequency, generative art, gnosis, meditation music, sacred geometry, shorts, sound design
+Watch the full 12-minute 4K piece: https://youtu.be/i3NcqCaEsB8
+Series playlist: https://www.youtube.com/playlist?list=PLX0Afm4O4W30
+
+This is music, not medical advice or treatment.
+
+#Shorts #ambientmusic #432hz #sacredgeometry #gnosis #meditation
+```
+- **Tags**: `432 hz, ambient music, binaural beats, frequency, generative art, gnosis, meditation music, sacred geometry, shorts, sound design`
+- **Comentario fijado (Pinned comment)**:
+```
+Headphones on at 432 Hz. Watch the full 12-minute geometric integration in 4K here: https://youtu.be/i3NcqCaEsB8
+```
+
+## Checklist para el creador antes de poner "Público" en YouTube Studio
+1. Entrar a los enlaces de Studio de cada Short.
+2. Verificar la reproducción y el subtitulado en pantalla.
+3. Copiar el comentario fijado correspondiente en cada video y fijarlo (Pin).
+4. Cambiar el estado de **Privado** a **Público**.
+

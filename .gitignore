@@ -25,7 +25,10 @@ media/*/shorts/**/*.mp4
 media/*/shorts/*.mp4
 media/*/shorts/*.mp3
 media/*/shorts/**/*.mp3
-media/*/shorts/verif/
+media/*/shorts/verif*/
+media/*/shorts/covers/
+media/*/shorts/frames/
+media/*/shorts/**/*.png
 .hyperframes/
 
 # Copies of the sync data that Remotion reads from public/ (the originals in media/<name>/sync/ are tracked).

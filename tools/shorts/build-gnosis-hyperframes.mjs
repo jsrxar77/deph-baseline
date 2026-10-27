@@ -4,46 +4,74 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "../..");
 const shortsDir = path.join(root, "media/gnosis/shorts");
 
-function buildPhrasesFromWords(words) {
-  const phrases = [];
-  let chunk = [];
+// Clean scripts
+const SCRIPT_ES = [
+  "¿Y", "si", "ser", "libre", "y", "estar", "atrapado",
+  "fueran", "solo", "dos", "caras", "de", "la", "misma", "energía?",
+  "Una", "es", "flujo", "perpetuo:",
+  "indomable,", "sin", "contornos", "que", "la", "detengan.",
+  "La", "otra", "es", "forma", "contenida:",
+  "reconstruyéndose", "una", "y", "otra", "vez", "en", "el", "intento", "de", "integrarse.",
+  "El", "sonido", "guía", "a", "la", "forma.",
+  "Cada", "pulso", "a", "432", "Hz", "transforma", "esta", "imagen", "en", "tiempo", "real.",
+  "Y,", "por", "un", "instante,", "el", "conflicto", "desaparece.",
+  "¿Acaso", "todo", "converge", "en", "una", "única", "luz?",
+  "Terminá", "de", "crear", "esta", "experiencia", "en", "tu", "mente.",
+  "Si", "te", "movió", "algo,", "dejá", "tu", "comentario", "y", "suscribite", "para", "más", "piezas", "como", "esta."
+];
 
-  for (let i = 0; i < words.length; i++) {
-    const w = { ...words[i], idx: i };
-    chunk.push(w);
-    const isPunct = /[.?!…]/.test(w.word);
-    const isComma = /[,]/.test(w.word);
-    const isColon = /[:]/.test(w.word);
+const ES_PHRASE_DEFS = [
+  { line1: [0, 3],   line2: [4, 6] },   // ¿Y si ser libre / y estar atrapado
+  { line1: [7, 10],  line2: [11, 14] }, // fueran solo dos caras / de la misma energía?
+  { line1: [15, 17], line2: [18, 18] }, // Una es flujo / perpetuo:
+  { line1: [19, 21], line2: [22, 24] }, // indomable, sin contornos / que la detengan.
+  { line1: [25, 27], line2: [28, 29] }, // La otra es / forma contenida:
+  { line1: [30, 31], line2: [32, 34] }, // reconstruyéndose una / y otra vez
+  { line1: [35, 37], line2: [38, 39] }, // en el intento / de integrarse.
+  { line1: [40, 42], line2: [43, 45] }, // El sonido guía / a la forma.
+  { line1: [46, 50], line2: [51, 53] }, // Cada pulso a 432 Hz / transforma esta imagen
+  { line1: [54, 55], line2: [56, 56] }, // en tiempo / real.
+  { line1: [57, 60], line2: [61, 63] }, // Y, por un instante, / el conflicto desaparece.
+  { line1: [64, 66], line2: [67, 70] }, // ¿Acaso todo converge / en una única luz?
+  { line1: [71, 73], line2: [74, 75] }, // Terminá de crear / esta experiencia
+  { line1: [76, 78], line2: [79, 82] }, // en tu mente. / Si te movió algo,
+  { line1: [83, 85], line2: [86, 88] }, // dejá tu comentario / y suscribite para
+  { line1: [89, 90], line2: [91, 92] }, // más piezas / como esta.
+];
 
-    if (isPunct || isColon || (isComma && chunk.length >= 3) || chunk.length >= 6 || i === words.length - 1) {
-      if (chunk.length <= 2 && phrases.length > 0 && !isPunct) {
-        chunk.forEach(cw => {
-          phrases[phrases.length - 1].line2.push(cw);
-          phrases[phrases.length - 1].allWords.push(cw);
-        });
-      } else {
-        let mid = Math.ceil(chunk.length / 2);
-        const line1 = chunk.slice(0, mid);
-        const line2 = chunk.slice(mid);
-        phrases.push({ line1, line2, allWords: chunk });
-      }
-      chunk = [];
-    }
-  }
+const SCRIPT_EN = [
+  "What", "if", "being", "free", "and", "being", "trapped",
+  "were", "just", "two", "faces", "of", "the", "same", "energy?",
+  "One", "is", "perpetual", "flow,",
+  "untamed,", "with", "no", "edges", "to", "hold", "it", "back.",
+  "The", "other", "is", "contained", "form,",
+  "rebuilding", "itself", "again", "and", "again,", "trying", "to", "integrate.",
+  "Sound", "guides", "the", "shape.",
+  "Every", "pulse", "at", "432", "Hz", "transforms", "this", "image", "in", "real", "time.",
+  "And,", "for", "one", "instant,", "the", "conflict", "disappears.",
+  "Does", "everything", "converge", "into", "a", "single", "light?",
+  "Finish", "creating", "this", "experience", "in", "your", "mind.",
+  "If", "this", "moved", "something", "in", "you,", "leave", "a", "comment", "and", "subscribe", "for", "more", "pieces", "like", "this."
+];
 
-  // Ensure every phrase has line2
-  for (const p of phrases) {
-    if (!p.line2 || p.line2.length === 0) {
-      if (p.line1.length > 1) {
-        const mid = Math.ceil(p.line1.length / 2);
-        p.line2 = p.line1.slice(mid);
-        p.line1 = p.line1.slice(0, mid);
-      }
-    }
-  }
-
-  return phrases;
-}
+const EN_PHRASE_DEFS = [
+  { line1: [0, 3],   line2: [4, 6] },   // What if being free / and being trapped
+  { line1: [7, 10],  line2: [11, 14] }, // were just two faces / of the same energy?
+  { line1: [15, 18], line2: [19, 19] }, // One is perpetual flow, / untamed,
+  { line1: [20, 22], line2: [23, 26] }, // with no edges / to hold it back.
+  { line1: [27, 29], line2: [30, 31] }, // The other is / contained form,
+  { line1: [32, 33], line2: [34, 36] }, // rebuilding itself / again and again,
+  { line1: [37, 38], line2: [39, 39] }, // trying to / integrate.
+  { line1: [40, 41], line2: [42, 43] }, // Sound guides / the shape.
+  { line1: [44, 48], line2: [49, 51] }, // Every pulse at 432 Hz / transforms this image
+  { line1: [52, 53], line2: [54, 54] }, // in real / time.
+  { line1: [55, 58], line2: [59, 61] }, // And, for one instant, / the conflict disappears.
+  { line1: [62, 64], line2: [65, 68] }, // Does everything converge / into a single light?
+  { line1: [69, 71], line2: [72, 72] }, // Finish creating this / experience
+  { line1: [73, 75], line2: [76, 78] }, // in your mind. / If this moved
+  { line1: [79, 81], line2: [82, 84] }, // something in you, / leave a comment
+  { line1: [85, 87], line2: [88, 91] }, // and subscribe for / more pieces like this.
+];
 
 export function generateShortPackage(lang) {
   const isEs = lang === "es";
@@ -60,28 +88,39 @@ export function generateShortPackage(lang) {
     }
   }
 
-  // Load karaoke word timing data
-  const rawData = JSON.parse(fs.readFileSync(path.join(shortsDir, `gnosis-karaoke-${lang}.json`), "utf8"));
-  const audioDelay = 0.9;
+  // Load ground-truth Whisper word timings
+  const whisperFile = path.join(shortsDir, `gnosis-whisper-words-${lang}.json`);
+  const whisperWords = JSON.parse(fs.readFileSync(whisperFile, "utf8"));
+  const scriptWords = isEs ? SCRIPT_ES : SCRIPT_EN;
+  const phraseDefs = isEs ? ES_PHRASE_DEFS : EN_PHRASE_DEFS;
+  const audioDelay = 0.9000;
 
-  // Flatten words with audioDelay
-  const rawWords = [];
-  rawData.forEach(item => {
-    (item.words || []).forEach(w => {
-      rawWords.push({
-        word: w.text,
-        startSec: Number((w.start + audioDelay).toFixed(3)),
-        endSec: Number((w.end + audioDelay).toFixed(3))
-      });
-    });
+  // Build word array with exact script text and Whisper timestamps
+  const words = scriptWords.map((sw, idx) => {
+    const ww = whisperWords[idx] || whisperWords[whisperWords.length - 1];
+    return {
+      idx,
+      word: sw,
+      startSec: Number((ww.start + audioDelay).toFixed(3)),
+      endSec: Number((ww.end + audioDelay).toFixed(3))
+    };
   });
 
-  const phrases = buildPhrasesFromWords(rawWords);
+  const phrases = phraseDefs.map((def, pIdx) => {
+    const line1 = words.slice(def.line1[0], def.line1[1] + 1);
+    const line2 = words.slice(def.line2[0], def.line2[1] + 1);
+    return {
+      pIdx,
+      line1,
+      line2,
+      allWords: [...line1, ...line2]
+    };
+  });
 
   // Build HTML for phrases
   let phrasesHtml = "";
-  phrases.forEach((p, pIdx) => {
-    phrasesHtml += `          <div id="phrase-${pIdx}" class="caption-phrase">\n`;
+  phrases.forEach(p => {
+    phrasesHtml += `          <div id="phrase-${p.pIdx}" class="caption-phrase">\n`;
     phrasesHtml += `            <div class="caption-line">\n`;
     p.line1.forEach(w => {
       phrasesHtml += `              <span id="word-${w.idx}" class="caption-word">${w.word}</span>\n`;
@@ -100,22 +139,33 @@ export function generateShortPackage(lang) {
   phrases.forEach((p, pIdx) => {
     const pStart = Math.max(0, p.allWords[0].startSec - 0.04);
     const nextPhrase = phrases[pIdx + 1];
-    const pEnd = nextPhrase
-      ? Math.max(p.allWords[p.allWords.length - 1].endSec + 0.02, nextPhrase.allWords[0].startSec - 0.04)
-      : p.allWords[p.allWords.length - 1].endSec + 0.35;
+    const phraseEnd = p.allWords[p.allWords.length - 1].endSec;
+    // If there is a pause before the next phrase (>0.3s), hide early so captions don't linger in silence!
+    let pEnd;
+    if (nextPhrase) {
+      const gap = nextPhrase.allWords[0].startSec - phraseEnd;
+      if (gap > 0.35) {
+        pEnd = phraseEnd + 0.15;
+      } else {
+        pEnd = Math.max(phraseEnd + 0.02, nextPhrase.allWords[0].startSec - 0.04);
+      }
+    } else {
+      pEnd = phraseEnd + 0.30;
+    }
 
     gsapCaptions += `      // Phrase ${pIdx}: "${p.allWords.map(w => w.word).join(" ")}"\n`;
-    gsapCaptions += `      tl.fromTo("#phrase-${pIdx}", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, ${pStart.toFixed(3)});\n`;
-    gsapCaptions += `      tl.to("#phrase-${pIdx}", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, ${pEnd.toFixed(3)});\n`;
+    gsapCaptions += `      tl.fromTo("#phrase-${pIdx}", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.04, ease: "none", overwrite: "auto" }, ${pStart.toFixed(3)});\n`;
+    gsapCaptions += `      tl.to("#phrase-${pIdx}", { opacity: 0, visibility: "hidden", duration: 0.04, ease: "none", overwrite: "auto" }, ${pEnd.toFixed(3)});\n`;
 
     p.allWords.forEach(w => {
       const wStart = w.startSec;
       const dur = Math.max(0.08, w.endSec - w.startSec);
-      gsapCaptions += `      tl.to("#word-${w.idx}", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, ${wStart.toFixed(3)});\n`;
-      gsapCaptions += `      tl.to("#word-${w.idx}", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, ${(wStart + dur).toFixed(3)});\n`;
+      gsapCaptions += `      tl.to("#word-${w.idx}", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.03, ease: "none", overwrite: "auto" }, ${wStart.toFixed(3)});\n`;
+      gsapCaptions += `      tl.to("#word-${w.idx}", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.05, ease: "none", overwrite: "auto" }, ${(wStart + dur).toFixed(3)});\n`;
     });
   });
 
+  const lastWordEnd = words[words.length - 1].endSec;
   const config = {
     compositionId: `gnosis-short-${lang}`,
     subscribeText: isEs ? "Suscribirse" : "Subscribe",
@@ -125,18 +175,20 @@ export function generateShortPackage(lang) {
     closingBadge: isEs ? "Experimentá Gnosis" : "Experience Gnosis",
     closingTitle: isEs ? "Obra Completa de 12 Minutos en el Canal" : "Full 12-Minute Piece on Channel",
     closingSub: isEs ? "Y si esto te movió algo, dejá tu comentario y suscribite." : "And if this moved something in you, leave a comment and subscribe.",
-    closingStart: isEs ? 36.4 : 41.0,
+    closingStart: Number((lastWordEnd + 0.5).toFixed(2)),
     closingEnd: 45.4,
-    captionsFadeOut: isEs ? 35.8 : 40.5
+    captionsFadeOut: Number((lastWordEnd + 0.1).toFixed(2))
   };
 
   const html = `<!doctype html>
 <!--
   HyperFrames Composition · Gnosis Short (${lang.toUpperCase()})
   Aspect: 9:16 Vertical (1080x1920 @ 30fps)
-  Safe Zones: Strict YouTube Shorts top/bottom clearance
+  Audio: Broadcast Mastered to -14.0 LUFS (-1.0 dBTP)
+  Captions: Exact ground-truth Whisper word alignment
+  Safe Zones: Strict YouTube Shorts clearance (Y:240px subscribe, Y:480px hook, Y:1120px captions)
   Glassmorphism: Translucent 0.35 opacity with authentic backdrop blur
-  Typography: 50px font, STRICTLY 2 lines, word-by-word lilac highlight
+  Typography: 50px font, STRICTLY 2 lines, word-by-word active lilac highlight
 -->
 <html lang="${lang}">
   <head>
@@ -403,7 +455,7 @@ ${phrasesHtml}
       </div>
     </div>
 
-    <!-- Master Audio -->
+    <!-- Mastered Audio (-14.0 LUFS, -1.0 dBTP) -->
     <audio id="masterAudio" src="audio.mp3" data-start="0s" data-duration="46s"></audio>
 
     <script>

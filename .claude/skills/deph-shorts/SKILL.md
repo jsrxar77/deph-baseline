@@ -124,3 +124,27 @@ Before calling a short done: capture 2-3 frames across its duration and look at 
 clipped, safe zone respected, text legible), the same way `visuals-compose` verifies a full render. Check the
 final MP4's resolution is exactly 1080x1920 and its audio matches the chosen window (no drift at the cut
 points).
+
+## Short Covers & Thumbnails Standard (The Field Template)
+
+YouTube Shorts thumbnails require a standard 16:9 canvas (1280x720) for desktop search, playlists, and external embeds, while mobile feeds crop to the central 9:16 vertical pillar.
+
+### Anatomy of the Short Cover:
+1. **Canvas (1280x720)**: Background is the clean 9:16 video frame scaled up to 1280x2275, centered, cropped to 1280x720, with Gaussian blur (`radius: 35px`) and 40% brightness to create the lateral wings.
+2. **Center Pillar (405x720)**: High-resolution crisp 9:16 vertical crop of the piece's peak sacred geometry / visual moment (`gnosis-short-bg.mp4`), centered horizontally (`x: 437.5 to 842.5`).
+3. **Brand Pill (Top)**:
+   - Capsule at `y ≈ 180`, height 32px, `background: rgba(11, 14, 26, 0.75)`, border `1px solid rgba(127, 212, 245, 0.40)`.
+   - Ring icon (4 concentric circles in cyan `#7FD4F5`).
+   - Text: `DEPH · {NN}` in uppercase bold sans.
+4. **Editorial Glass Card (Center)**:
+   - Rounded rectangle (`border-radius: 18px`, width 330px, height 145px) at `y ≈ 230`.
+   - Glassmorphism: `background: rgba(11, 14, 26, 0.65)`, border `1.5px solid rgba(168, 85, 247, 0.35)`, inner top bevel highlight.
+   - **Category Badge**: `• {TOPIC} · 432 HZ` in cyan `#7FD4F5`, uppercase, letter-spacing `0.15em`.
+   - **Hook Title**: Editorial question/title in bold white `#FFFFFF`, uppercase, 2 lines max, tracking `0.02em`.
+   - **Divider Line**: 34px wide, 2px high, `#7FD4F5`.
+   - **Subtitle**: Sub-topic in lilac `#A5B4FC`, uppercase, letter-spacing `0.12em`.
+5. **CRITICAL GOLDEN RULE**: Never include spoken dialogue subtitles, transcriptions, or karaoke highlight cards on the cover image. The cover is an editorial brand poster, not a dialogue frame.
+
+### Generator Script:
+`tools/shorts/generate-editorial-covers.py` automates this composition using Pillow and native fonts, producing `media/<name>/shorts/thumbnails/<name>-short-thumb-{lang}.jpg`.
+
