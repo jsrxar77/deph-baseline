@@ -80,19 +80,21 @@ subscribe.
 
 ## Status & Rendered Shorts
 
-- **Status**: **RENDERED & READY FOR REVIEW** (ES + EN) · 2026-10-26
-- **Visual moment**: 2:40 to 3:26 from `media/gnosis/renders/gnosis-fixed.mp4` (tetraedro violeta claro contra la red azul, sin tonos dorados).
-- **Caption System (HyperFrames)**:
-  - Persistent subscribe pill button (top-left).
-  - Opening card (GNOSIS / ¿LIBRE O ATRAPADO? / Dos Caras de la Misma Energía).
-  - Karaoke phrase caption cards (word highlight in luminous violet `#d68bff`).
-  - Closing CTA card (12-minute full piece on channel + subscribe/comment ask).
+- **Status**: **RENDERED WITH HYPERFRAMES & READY FOR PUBLICATION** (ES + EN) · 2026-10-27
+- **Visual moment**: 2:40 to 3:26 from `media/gnosis/renders/gnosis-fixed.mp4` (translucent geometric net and tetrahedron transformation).
+- **Caption System (HyperFrames — 100% Faithful to The Field Reference)**:
+  - Persistent YouTube Red Subscribe button (top-left, Y: 240px, X: 80px).
+  - Opening Hook card at Y: 480px (`background: rgba(11, 14, 26, 0.35)`, `backdrop-filter: blur(20px) saturate(180%)`, border `rgba(168, 85, 247, 0.30)`, inner bevel highlight).
+  - Dynamic 2-line caption phrase cards at Y: 1120px (max 3-4 words per line, word-by-word active lilac highlight `#C084FC`).
+  - Closing CTA card centered vertically at 50% (channel piece link + comment/subscribe ask).
+  - Native hardware rendering via `hyperframes render` with ANGLE Metal GPU acceleration.
 - **Files**:
-  - `media/gnosis/shorts/gnosis-short-es.mp4` (46.0s, 1080x1920 30fps, 309 MB)
-  - `media/gnosis/shorts/gnosis-short-en.mp4` (46.0s, 1080x1920 30fps, 309 MB)
-  - `media/gnosis/shorts/gnosis-short-es.html` (HyperFrames source)
-  - `media/gnosis/shorts/gnosis-short-en.html` (HyperFrames source)
-  - `media/gnosis/shorts/gnosis-captions-es.json` & `gnosis-captions-en.json`
+  - `media/gnosis/shorts/gnosis-short-es.mp4` (46.0s, 1080x1920 30fps, 474 MB)
+  - `media/gnosis/shorts/gnosis-short-en.mp4` (46.0s, 1080x1920 30fps, 405 MB)
+  - `media/gnosis/shorts/hyperframes-es/` (HyperFrames source: `index.html`, `bg.mp4`, `audio.mp3`)
+  - `media/gnosis/shorts/hyperframes-en/` (HyperFrames source: `index.html`, `bg.mp4`, `audio.mp3`)
+  - `media/gnosis/shorts/gnosis-karaoke-es.json` & `gnosis-karaoke-en.json` (word-level alignment)
+  - `tools/shorts/build-gnosis-hyperframes.mjs` (automated package generator)
 
 ## YouTube Publish Data for Shorts
 

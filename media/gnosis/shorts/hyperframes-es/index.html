@@ -1,0 +1,775 @@
+<!doctype html>
+<!--
+  HyperFrames Composition · Gnosis Short (ES)
+  Aspect: 9:16 Vertical (1080x1920 @ 30fps)
+  Safe Zones: Strict YouTube Shorts top/bottom clearance
+  Glassmorphism: Translucent 0.35 opacity with authentic backdrop blur
+  Typography: 50px font, STRICTLY 2 lines, word-by-word lilac highlight
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Gnosis · YouTube Short</title>
+    <!-- GSAP 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background-color: #050508;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Avenir Next", "Segoe UI", Roboto, sans-serif;
+        color: #FDFBFA;
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background-color: #050508;
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* Background Video Plate */
+      .bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+      }
+
+      /* Cinematic Vignette */
+      .vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(5, 5, 8, 0.02) 40%, rgba(5, 5, 8, 0.60) 100%);
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      /* YouTube Red Subscribe Button (Top Safe Area: X: 80px, Y: 240px) */
+      .yt-subscribe-btn {
+        position: absolute;
+        top: 240px;
+        left: 80px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #ff0000;
+        border-radius: 999px;
+        padding: 14px 28px;
+        z-index: 25;
+        box-shadow: 0 8px 24px rgba(255, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+      }
+      .yt-play-icon {
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 14px solid #ffffff;
+      }
+      .yt-subscribe-text {
+        font-weight: 800;
+        font-size: 24px;
+        letter-spacing: 0.08em;
+        color: #ffffff;
+        text-transform: uppercase;
+      }
+
+      /* Hook Card (0.3s -> 4.3s): Y: 480px, Translucent 0.35 */
+      .hook-card {
+        position: absolute;
+        top: 480px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 860px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: rgba(11, 14, 26, 0.35);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1.5px solid rgba(168, 85, 247, 0.30);
+        border-radius: 20px;
+        padding: 36px 44px;
+        gap: 12px;
+        z-index: 20;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.70), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 28px rgba(168, 85, 247, 0.12);
+        pointer-events: none;
+        opacity: 0;
+      }
+      .hook-badge {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        color: #C084FC;
+        text-transform: uppercase;
+      }
+      .hook-heading {
+        font-weight: 900;
+        font-size: 56px;
+        line-height: 1.15;
+        letter-spacing: 0.02em;
+        color: #FDFBFA;
+        text-transform: uppercase;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.90);
+      }
+      .hook-subtext {
+        font-weight: 600;
+        font-size: 42px;
+        line-height: 1.25;
+        letter-spacing: 0.03em;
+        color: #A5B4FC;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+      }
+
+      /* Dynamic Kinetic Subtitles (SAFE ZONE: Y: 1120px) */
+      /* STRICTLY 2 LINES, Translucent 0.35, ZERO STROKE */
+      .captions-wrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 30;
+        pointer-events: none;
+      }
+      .caption-phrase {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: fit-content;
+        max-width: 860px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: rgba(11, 14, 26, 0.35);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1.5px solid rgba(168, 85, 247, 0.30);
+        border-radius: 20px;
+        padding: 20px 38px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.70), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 24px rgba(168, 85, 247, 0.12);
+        visibility: hidden;
+        opacity: 0;
+      }
+      .caption-line {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        white-space: nowrap;
+        max-width: 820px;
+      }
+      .caption-word {
+        font-size: 50px;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+        font-weight: 800;
+        color: #FDFBFA;
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+        display: inline-block;
+      }
+
+      /* Closing CTA: Centered Vertically and Horizontally, Width 860px */
+      .closing-cta {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 860px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: rgba(11, 14, 26, 0.38);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1.5px solid rgba(168, 85, 247, 0.30);
+        border-radius: 20px;
+        padding: 40px 44px;
+        gap: 14px;
+        z-index: 35;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.70), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 28px rgba(168, 85, 247, 0.12);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .cta-badge {
+        font-weight: 700;
+        font-size: 22px;
+        letter-spacing: 0.16em;
+        color: #C084FC;
+        text-transform: uppercase;
+      }
+      .cta-link {
+        font-weight: 900;
+        font-size: 50px;
+        line-height: 1.15;
+        letter-spacing: 0.02em;
+        color: #FDFBFA;
+        text-transform: uppercase;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.90);
+      }
+      .cta-sub {
+        font-weight: 600;
+        font-size: 38px;
+        line-height: 1.25;
+        letter-spacing: 0.03em;
+        color: #A5B4FC;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="gnosis-short-es" data-width="1080" data-height="1920" data-duration="46">
+      <div class="clip">
+        <!-- 4K Cropped Footage -->
+        <video id="bgVideo" class="bg-video" src="bg.mp4" data-start="0s" data-duration="46s" muted playsinline></video>
+
+        <!-- Vignette -->
+        <div class="vignette"></div>
+
+        <!-- YouTube Subscribe Pill -->
+        <div class="yt-subscribe-btn">
+          <div class="yt-play-icon"></div>
+          <span class="yt-subscribe-text">Suscribirse</span>
+        </div>
+
+        <!-- Hook Card (0.3s -> 4.3s) -->
+        <div id="hookCard" class="hook-card">
+          <div class="hook-badge">GNOSIS</div>
+          <div class="hook-heading">¿LIBRE O ATRAPADO?</div>
+          <div class="hook-subtext">Dos Caras de la Misma Energía</div>
+        </div>
+
+        <!-- Captions Wrap -->
+        <div class="captions-wrap" id="captionsWrap" data-layout-allow-overlap="true">
+          <div id="phrase-0" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-0" class="caption-word">¿Y</span>
+              <span id="word-1" class="caption-word">si</span>
+              <span id="word-2" class="caption-word">ser</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-3" class="caption-word">libre</span>
+              <span id="word-4" class="caption-word">y</span>
+              <span id="word-5" class="caption-word">estar</span>
+            </div>
+          </div>
+          <div id="phrase-1" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-6" class="caption-word">atrapado</span>
+              <span id="word-7" class="caption-word">fueran</span>
+              <span id="word-8" class="caption-word">solo</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-9" class="caption-word">dos</span>
+              <span id="word-10" class="caption-word">caras</span>
+              <span id="word-11" class="caption-word">de</span>
+            </div>
+          </div>
+          <div id="phrase-2" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-12" class="caption-word">la</span>
+              <span id="word-13" class="caption-word">misma</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-14" class="caption-word">energía?</span>
+            </div>
+          </div>
+          <div id="phrase-3" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-15" class="caption-word">Una</span>
+              <span id="word-16" class="caption-word">es</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-17" class="caption-word">flujo</span>
+              <span id="word-18" class="caption-word">perpetuo:</span>
+            </div>
+          </div>
+          <div id="phrase-4" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-19" class="caption-word">indomable,</span>
+              <span id="word-20" class="caption-word">sin</span>
+              <span id="word-21" class="caption-word">contornos</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-22" class="caption-word">que</span>
+              <span id="word-23" class="caption-word">la</span>
+              <span id="word-24" class="caption-word">detengan.</span>
+            </div>
+          </div>
+          <div id="phrase-5" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-25" class="caption-word">La</span>
+              <span id="word-26" class="caption-word">otra</span>
+              <span id="word-27" class="caption-word">es</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-28" class="caption-word">forma</span>
+              <span id="word-29" class="caption-word">contenida:</span>
+            </div>
+          </div>
+          <div id="phrase-6" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-30" class="caption-word">reconstruyéndose</span>
+              <span id="word-31" class="caption-word">una</span>
+              <span id="word-32" class="caption-word">y</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-33" class="caption-word">otra</span>
+              <span id="word-34" class="caption-word">vez</span>
+              <span id="word-35" class="caption-word">en</span>
+            </div>
+          </div>
+          <div id="phrase-7" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-36" class="caption-word">el</span>
+              <span id="word-37" class="caption-word">intento</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-38" class="caption-word">de</span>
+              <span id="word-39" class="caption-word">integrarse.</span>
+            </div>
+          </div>
+          <div id="phrase-8" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-40" class="caption-word">El</span>
+              <span id="word-41" class="caption-word">sonido</span>
+              <span id="word-42" class="caption-word">guía</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-43" class="caption-word">a</span>
+              <span id="word-44" class="caption-word">la</span>
+              <span id="word-45" class="caption-word">forma.</span>
+            </div>
+          </div>
+          <div id="phrase-9" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-46" class="caption-word">Cada</span>
+              <span id="word-47" class="caption-word">pulso</span>
+              <span id="word-48" class="caption-word">a</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-49" class="caption-word">432</span>
+              <span id="word-50" class="caption-word">Hz</span>
+              <span id="word-51" class="caption-word">transforma</span>
+            </div>
+          </div>
+          <div id="phrase-10" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-52" class="caption-word">esta</span>
+              <span id="word-53" class="caption-word">imagen</span>
+              <span id="word-54" class="caption-word">en</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-55" class="caption-word">tiempo</span>
+              <span id="word-56" class="caption-word">real.</span>
+            </div>
+          </div>
+          <div id="phrase-11" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-57" class="caption-word">Y,</span>
+              <span id="word-58" class="caption-word">por</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-59" class="caption-word">un</span>
+              <span id="word-60" class="caption-word">instante,</span>
+            </div>
+          </div>
+          <div id="phrase-12" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-61" class="caption-word">el</span>
+              <span id="word-62" class="caption-word">conflicto</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-63" class="caption-word">desaparece.</span>
+            </div>
+          </div>
+          <div id="phrase-13" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-64" class="caption-word">¿Acaso</span>
+              <span id="word-65" class="caption-word">todo</span>
+              <span id="word-66" class="caption-word">converge</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-67" class="caption-word">en</span>
+              <span id="word-68" class="caption-word">una</span>
+              <span id="word-69" class="caption-word">única</span>
+            </div>
+          </div>
+          <div id="phrase-14" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-70" class="caption-word">luz?</span>
+            </div>
+            <div class="caption-line">
+            </div>
+          </div>
+          <div id="phrase-15" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-71" class="caption-word">Terminá</span>
+              <span id="word-72" class="caption-word">de</span>
+              <span id="word-73" class="caption-word">crear</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-74" class="caption-word">esta</span>
+              <span id="word-75" class="caption-word">experiencia</span>
+              <span id="word-76" class="caption-word">en</span>
+            </div>
+          </div>
+          <div id="phrase-16" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-77" class="caption-word">tu</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-78" class="caption-word">mente.</span>
+            </div>
+          </div>
+          <div id="phrase-17" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-79" class="caption-word">Si</span>
+              <span id="word-80" class="caption-word">te</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-81" class="caption-word">movió</span>
+              <span id="word-82" class="caption-word">algo,</span>
+            </div>
+          </div>
+          <div id="phrase-18" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-83" class="caption-word">dejá</span>
+              <span id="word-84" class="caption-word">tu</span>
+              <span id="word-85" class="caption-word">comentario</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-86" class="caption-word">y</span>
+              <span id="word-87" class="caption-word">suscribite</span>
+              <span id="word-88" class="caption-word">para</span>
+            </div>
+          </div>
+          <div id="phrase-19" class="caption-phrase">
+            <div class="caption-line">
+              <span id="word-89" class="caption-word">más</span>
+              <span id="word-90" class="caption-word">piezas</span>
+            </div>
+            <div class="caption-line">
+              <span id="word-91" class="caption-word">como</span>
+              <span id="word-92" class="caption-word">esta.</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Closing CTA -->
+        <div id="closingCta" class="closing-cta">
+          <div class="cta-badge">Experimentá Gnosis</div>
+          <div class="cta-link">Obra Completa de 12 Minutos en el Canal</div>
+          <div class="cta-sub">Y si esto te movió algo, dejá tu comentario y suscribite.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Master Audio -->
+    <audio id="masterAudio" src="audio.mp3" data-start="0s" data-duration="46s"></audio>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["gnosis-short-es"] = tl;
+
+      // Hook Card Animation
+      tl.fromTo("#hookCard", 
+        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power2.out" },
+        0.3
+      );
+      tl.to("#hookCard", {
+        opacity: 0,
+        y: -20,
+        scale: 0.97,
+        duration: 0.6,
+        ease: "power2.in"
+      }, 4.3);
+
+      // Captions Timeline
+      // Phrase 0: "¿Y si ser libre y estar"
+      tl.fromTo("#phrase-0", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 0.860);
+      tl.to("#phrase-0", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 2.431);
+      tl.to("#word-0", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 0.900);
+      tl.to("#word-0", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.068);
+      tl.to("#word-1", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.068);
+      tl.to("#word-1", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.236);
+      tl.to("#word-2", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.236);
+      tl.to("#word-2", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.488);
+      tl.to("#word-3", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.488);
+      tl.to("#word-3", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.907);
+      tl.to("#word-4", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.907);
+      tl.to("#word-4", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 1.991);
+      tl.to("#word-5", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 1.991);
+      tl.to("#word-5", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 2.411);
+      // Phrase 1: "atrapado fueran solo dos caras de"
+      tl.fromTo("#phrase-1", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 2.371);
+      tl.to("#phrase-1", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 4.782);
+      tl.to("#word-6", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 2.411);
+      tl.to("#word-6", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 3.083);
+      tl.to("#word-7", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 3.083);
+      tl.to("#word-7", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 3.586);
+      tl.to("#word-8", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 3.586);
+      tl.to("#word-8", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 3.922);
+      tl.to("#word-9", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 3.922);
+      tl.to("#word-9", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 4.174);
+      tl.to("#word-10", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 4.174);
+      tl.to("#word-10", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 4.594);
+      tl.to("#word-11", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 4.594);
+      tl.to("#word-11", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 4.762);
+      // Phrase 2: "la misma energía?"
+      tl.fromTo("#phrase-2", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 4.722);
+      tl.to("#phrase-2", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 6.049);
+      tl.to("#word-12", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 4.762);
+      tl.to("#word-12", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 4.930);
+      tl.to("#word-13", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 4.930);
+      tl.to("#word-13", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 5.349);
+      tl.to("#word-14", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 5.349);
+      tl.to("#word-14", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 6.021);
+      // Phrase 3: "Una es flujo perpetuo:"
+      tl.fromTo("#phrase-3", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 6.049);
+      tl.to("#phrase-3", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 7.620);
+      tl.to("#word-15", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 6.089);
+      tl.to("#word-15", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 6.326);
+      tl.to("#word-16", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 6.326);
+      tl.to("#word-16", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 6.484);
+      tl.to("#word-17", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 6.484);
+      tl.to("#word-17", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 6.880);
+      tl.to("#word-18", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 6.880);
+      tl.to("#word-18", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 7.591);
+      // Phrase 4: "indomable, sin contornos que la detengan."
+      tl.fromTo("#phrase-4", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 7.620);
+      tl.to("#phrase-4", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 10.487);
+      tl.to("#word-19", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 7.660);
+      tl.to("#word-19", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.437);
+      tl.to("#word-20", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.437);
+      tl.to("#word-20", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 8.671);
+      tl.to("#word-21", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 8.671);
+      tl.to("#word-21", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 9.370);
+      tl.to("#word-22", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 9.370);
+      tl.to("#word-22", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 9.604);
+      tl.to("#word-23", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 9.604);
+      tl.to("#word-23", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 9.759);
+      tl.to("#word-24", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 9.759);
+      tl.to("#word-24", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 10.459);
+      // Phrase 5: "La otra es forma contenida:"
+      tl.fromTo("#phrase-5", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 10.487);
+      tl.to("#phrase-5", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 12.399);
+      tl.to("#word-25", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 10.527);
+      tl.to("#word-25", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 10.687);
+      tl.to("#word-26", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 10.687);
+      tl.to("#word-26", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 11.008);
+      tl.to("#word-27", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 11.008);
+      tl.to("#word-27", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 11.168);
+      tl.to("#word-28", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 11.168);
+      tl.to("#word-28", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 11.569);
+      tl.to("#word-29", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 11.569);
+      tl.to("#word-29", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 12.371);
+      // Phrase 6: "reconstruyéndose una y otra vez en"
+      tl.fromTo("#phrase-6", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 12.399);
+      tl.to("#phrase-6", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 14.789);
+      tl.to("#word-30", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 12.439);
+      tl.to("#word-30", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 13.724);
+      tl.to("#word-31", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 13.724);
+      tl.to("#word-31", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 13.965);
+      tl.to("#word-32", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 13.965);
+      tl.to("#word-32", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.046);
+      tl.to("#word-33", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.046);
+      tl.to("#word-33", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.367);
+      tl.to("#word-34", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.367);
+      tl.to("#word-34", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.608);
+      tl.to("#word-35", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.608);
+      tl.to("#word-35", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.769);
+      // Phrase 7: "el intento de integrarse."
+      tl.fromTo("#phrase-7", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 14.729);
+      tl.to("#phrase-7", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 16.564);
+      tl.to("#word-36", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.769);
+      tl.to("#word-36", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 14.929);
+      tl.to("#word-37", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 14.929);
+      tl.to("#word-37", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 15.492);
+      tl.to("#word-38", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 15.492);
+      tl.to("#word-38", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 15.652);
+      tl.to("#word-39", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 15.652);
+      tl.to("#word-39", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 16.536);
+      // Phrase 8: "El sonido guía a la forma."
+      tl.fromTo("#phrase-8", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 16.564);
+      tl.to("#phrase-8", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 18.408);
+      tl.to("#word-40", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 16.604);
+      tl.to("#word-40", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 16.773);
+      tl.to("#word-41", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 16.773);
+      tl.to("#word-41", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.280);
+      tl.to("#word-42", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 17.280);
+      tl.to("#word-42", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.618);
+      tl.to("#word-43", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 17.618);
+      tl.to("#word-43", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.703);
+      tl.to("#word-44", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 17.703);
+      tl.to("#word-44", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 17.872);
+      tl.to("#word-45", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 17.872);
+      tl.to("#word-45", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 18.379);
+      // Phrase 9: "Cada pulso a 432 Hz transforma"
+      tl.fromTo("#phrase-9", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 18.408);
+      tl.to("#phrase-9", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 20.530);
+      tl.to("#word-46", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 18.448);
+      tl.to("#word-46", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 18.778);
+      tl.to("#word-47", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 18.778);
+      tl.to("#word-47", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.191);
+      tl.to("#word-48", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.191);
+      tl.to("#word-48", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.273);
+      tl.to("#word-49", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.273);
+      tl.to("#word-49", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.520);
+      tl.to("#word-50", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.520);
+      tl.to("#word-50", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 19.685);
+      tl.to("#word-51", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 19.685);
+      tl.to("#word-51", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 20.510);
+      // Phrase 10: "esta imagen en tiempo real."
+      tl.fromTo("#phrase-10", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 20.470);
+      tl.to("#phrase-10", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 22.436);
+      tl.to("#word-52", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 20.510);
+      tl.to("#word-52", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 20.841);
+      tl.to("#word-53", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 20.841);
+      tl.to("#word-53", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.336);
+      tl.to("#word-54", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.336);
+      tl.to("#word-54", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.501);
+      tl.to("#word-55", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.501);
+      tl.to("#word-55", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 21.996);
+      tl.to("#word-56", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 21.996);
+      tl.to("#word-56", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 22.408);
+      // Phrase 11: "Y, por un instante,"
+      tl.fromTo("#phrase-11", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 22.436);
+      tl.to("#phrase-11", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 23.761);
+      tl.to("#word-57", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 22.476);
+      tl.to("#word-57", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 22.634);
+      tl.to("#word-58", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 22.634);
+      tl.to("#word-58", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 22.871);
+      tl.to("#word-59", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 22.871);
+      tl.to("#word-59", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 23.029);
+      tl.to("#word-60", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 23.029);
+      tl.to("#word-60", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 23.741);
+      // Phrase 12: "el conflicto desaparece."
+      tl.fromTo("#phrase-12", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 23.701);
+      tl.to("#phrase-12", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 25.509);
+      tl.to("#word-61", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 23.741);
+      tl.to("#word-61", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 23.899);
+      tl.to("#word-62", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 23.899);
+      tl.to("#word-62", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 24.610);
+      tl.to("#word-63", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 24.610);
+      tl.to("#word-63", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 25.480);
+      // Phrase 13: "¿Acaso todo converge en una única"
+      tl.fromTo("#phrase-13", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 25.509);
+      tl.to("#phrase-13", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 27.839);
+      tl.to("#word-64", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 25.549);
+      tl.to("#word-64", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 26.035);
+      tl.to("#word-65", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 26.035);
+      tl.to("#word-65", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 26.360);
+      tl.to("#word-66", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 26.360);
+      tl.to("#word-66", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 27.008);
+      tl.to("#word-67", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 27.008);
+      tl.to("#word-67", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 27.170);
+      tl.to("#word-68", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 27.170);
+      tl.to("#word-68", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 27.413);
+      tl.to("#word-69", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 27.413);
+      tl.to("#word-69", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 27.819);
+      // Phrase 14: "luz?"
+      tl.fromTo("#phrase-14", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 27.779);
+      tl.to("#phrase-14", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 28.172);
+      tl.to("#word-70", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 27.819);
+      tl.to("#word-70", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 28.143);
+      // Phrase 15: "Terminá de crear esta experiencia en"
+      tl.fromTo("#phrase-15", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 28.172);
+      tl.to("#phrase-15", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 30.729);
+      tl.to("#word-71", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 28.212);
+      tl.to("#word-71", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 28.776);
+      tl.to("#word-72", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 28.776);
+      tl.to("#word-72", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 28.937);
+      tl.to("#word-73", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 28.937);
+      tl.to("#word-73", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 29.340);
+      tl.to("#word-74", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 29.340);
+      tl.to("#word-74", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 29.662);
+      tl.to("#word-75", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 29.662);
+      tl.to("#word-75", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 30.548);
+      tl.to("#word-76", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 30.548);
+      tl.to("#word-76", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 30.709);
+      // Phrase 16: "tu mente."
+      tl.fromTo("#phrase-16", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 30.669);
+      tl.to("#phrase-16", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 31.381);
+      tl.to("#word-77", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 30.709);
+      tl.to("#word-77", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 30.870);
+      tl.to("#word-78", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 30.870);
+      tl.to("#word-78", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 31.353);
+      // Phrase 17: "Si te movió algo,"
+      tl.fromTo("#phrase-17", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 31.381);
+      tl.to("#phrase-17", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 32.594);
+      tl.to("#word-79", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 31.421);
+      tl.to("#word-79", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 31.586);
+      tl.to("#word-80", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 31.586);
+      tl.to("#word-80", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 31.750);
+      tl.to("#word-81", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 31.750);
+      tl.to("#word-81", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 32.162);
+      tl.to("#word-82", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 32.162);
+      tl.to("#word-82", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 32.574);
+      // Phrase 18: "dejá tu comentario y suscribite para"
+      tl.fromTo("#phrase-18", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 32.534);
+      tl.to("#phrase-18", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 35.147);
+      tl.to("#word-83", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 32.574);
+      tl.to("#word-83", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 32.904);
+      tl.to("#word-84", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 32.904);
+      tl.to("#word-84", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 33.068);
+      tl.to("#word-85", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 33.068);
+      tl.to("#word-85", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 33.892);
+      tl.to("#word-86", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 33.892);
+      tl.to("#word-86", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 33.974);
+      tl.to("#word-87", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 33.974);
+      tl.to("#word-87", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 34.798);
+      tl.to("#word-88", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 34.798);
+      tl.to("#word-88", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 35.127);
+      // Phrase 19: "más piezas como esta."
+      tl.fromTo("#phrase-19", { opacity: 0, visibility: "hidden" }, { opacity: 1, visibility: "visible", duration: 0.05, ease: "none", overwrite: "auto" }, 35.087);
+      tl.to("#phrase-19", { opacity: 0, visibility: "hidden", duration: 0.05, ease: "none", overwrite: "auto" }, 36.960);
+      tl.to("#word-89", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 35.127);
+      tl.to("#word-89", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 35.375);
+      tl.to("#word-90", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 35.375);
+      tl.to("#word-90", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 35.869);
+      tl.to("#word-91", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 35.869);
+      tl.to("#word-91", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 36.198);
+      tl.to("#word-92", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.04, ease: "none", overwrite: "auto" }, 36.198);
+      tl.to("#word-92", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.06, ease: "none", overwrite: "auto" }, 36.610);
+
+
+      // Closing CTA Animation
+      tl.fromTo("#closingCta",
+        { opacity: 0, scale: 0.92, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: "back.out(1.2)" },
+        36.4
+      );
+      tl.to("#closingCta", {
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.8,
+        ease: "power2.in"
+      }, 45.4);
+
+      // Hide Captions completely when speech concludes
+      tl.to("#captionsWrap", { opacity: 0, visibility: "hidden", duration: 0.3, ease: "power2.in" }, 35.8);
+    </script>
+  </body>
+</html>

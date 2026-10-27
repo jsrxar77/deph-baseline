@@ -21,8 +21,12 @@ tools/visuals/public/*.wav
 
 # Rendered videos and stills
 media/*/renders/
+media/*/shorts/**/*.mp4
 media/*/shorts/*.mp4
 media/*/shorts/*.mp3
+media/*/shorts/**/*.mp3
+media/*/shorts/verif/
+.hyperframes/
 
 # Copies of the sync data that Remotion reads from public/ (the originals in media/<name>/sync/ are tracked).
 tools/visuals/public/*-frames.json
