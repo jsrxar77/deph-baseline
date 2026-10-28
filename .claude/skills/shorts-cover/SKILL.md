@@ -111,59 +111,25 @@ La composición consta de **3 elementos balanceados verticalmente**:
 
 ---
 
-## 💎 Glassmorphism Auténtico (Frosted Glass & Difusión)
+## 🚀 Pipeline Canónico de Render (Motor HyperFrames / Chrome Headless)
 
-El glassmorphism **NO ES un rectángulo con color plano semitransparente**. Exige recrear el comportamiento óptico de un cristal esmerilado real sobre el metraje:
+Para garantizar un glassmorphism 100% auténtico con `backdrop-filter: blur(28px) saturate(180%)` y aceleración de hardware sin cortes ni costuras, **las portadas de Shorts se renderizan a través del motor Chromium**:
 
-1. **Backdrop Blur (Difusión del Fondo)**:
-   * Se recorta la porción exacta del fondo que se ubica detrás del panel (con un padding de seguridad de 35px para evitar bordes oscuros).
-   * Se aplica un **Gaussian Blur de 32px** (`ImageFilter.GaussianBlur(32)` o `backdrop-filter: blur(32px)`).
-   * Se potencia la saturación de los colores del fondo desenfocado a un 180% (`ImageEnhance.Color.enhance(1.8)` o `saturate(180%)`) para que el brillo de las geometrías y luces subyacentes vibren a través del vidrio.
-2. **Tinte Índigo Translúcido**:
-   * Sobre el fondo desenfocado se funde un degradado azul índigo profundo (`rgba(14, 24, 64, 0.55)` a `rgba(10, 16, 48, 0.70)`), permitiendo que la energía del metraje se trasluzca de forma orgánica.
-3. **Brillo Especular (Glass Sheen)**:
-   * Los primeros 100px a 120px superiores del panel llevan un reflejo de luz blanca hiper-sutil (`rgba(255, 255, 255, 0.10)` decreciendo a `0.0`), simulando el ángulo de incidencia de la luz sobre el cristal.
-4. **Sombra Ambiental Profunda**:
-   * Sombra difusa multicapa bajo el card (`offset y=16px`, `GaussianBlur(24px)`, opacidad `195`), proyectando el card hacia adelante en el espacio 3D.
-5. **Máscara de Esquinas Suaves**:
-   * Se recorta el panel con una máscara alfa de esquinas redondeadas (`radius: 24px` en el Card, `38px` en píldora superior, `42px` en píldora inferior) **sin ningún trazo perimetral (0px stroke)**.
+1. **Plantilla HTML/CSS (Exacta a HyperFrames)**:
+   * Lienzo: 1080 x 1920 px.
+   * Píldora Superior: `top: 350px`, centrada, glifo de 4 anillos concéntricos + `DEPH · {N}`.
+   * Card Central (`.hook-card`): `top: 480px`, `width: 860px`, `padding: 40px 48px`, `border-radius: 24px`, `background: rgba(11, 14, 26, 0.45)`, `backdrop-filter: blur(28px) saturate(180%)`.
+   * Tercio inferior: Despejado para protagonismo de la geometría sagrada.
+2. **Ejecución vía Google Chrome Headless**:
+   ```bash
+   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+     --headless --disable-gpu=false --virtual-time-budget=2000 \
+     --window-size=1080,1920 --screenshot="cover.png" "file://cover.html"
+   ```
+3. **Conversión a JPEG Broadcast**:
+   ```bash
+   ffmpeg -i "cover.png" -q:v 2 "cover.jpg" -y
+   ```
 
----
-
-## 🛠️ Script Canónico en Python (Generador Fiel al Píxel)
-
-```python
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
-
-def make_frosted_panel(base, box, radius, tint_rgb, alpha_range, blur_rad=32, sat=1.8):
-    x0, y0, x1, y1 = box
-    w, h = x1 - x0, y1 - y0
-    pad = blur_rad + 6
-    
-    # 1. Recorte con padding y desenfoque gausiano (difusión)
-    crop_box = (max(0, x0 - pad), max(0, y0 - pad), min(base.width, x1 + pad), min(base.height, y1 + pad))
-    patch = base.crop(crop_box).filter(ImageFilter.GaussianBlur(blur_rad))
-    blurred = ImageEnhance.Color(patch).enhance(sat).crop((pad, pad, pad + w, pad + h))
-    
-    # 2. Tinte índigo translúcido
-    tint = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    t_draw = ImageDraw.Draw(tint)
-    a_start, a_end = alpha_range
-    for y in range(h):
-        t = y / h
-        a = int(a_start * (1 - t) + a_end * t)
-        t_draw.line([0, y, w, y], fill=(tint_rgb[0], tint_rgb[1], tint_rgb[2], a))
-    
-    # 3. Reflejo especular superior
-    for y in range(min(120, h)):
-        t = y / min(120, h)
-        alpha = int(24 * (1.0 - t))
-        t_draw.line([0, y, w, y], fill=(255, 255, 255, alpha))
-    
-    glass = Image.alpha_composite(blurred.convert("RGBA"), tint)
-    
-    # 4. Máscara redondeada sin borde
-    mask = Image.new("L", (w, h), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, w, h], radius=radius, fill=255)
-    return glass, mask
-```
+Script canónico registrado en el repositorio:
+`tools/shorts/generate-hyperframes-covers.mjs`
