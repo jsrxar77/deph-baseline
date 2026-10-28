@@ -34,7 +34,7 @@ Estado general: **Gnosis (Obra 04) - Completada, Masterizada y Subida en Privado
 * **YouTube Video ID**: [`fJEEjPmf4Ss`](https://youtube.com/shorts/fJEEjPmf4Ss) (Estado: **Privado**).
 * **Edición en Studio**: [https://studio.youtube.com/video/fJEEjPmf4Ss/edit](https://studio.youtube.com/video/fJEEjPmf4Ss/edit).
 * **Descripción**: Publicada en YouTube con la estructura idéntica de 5 bloques de *The Field*.
-* **Portada Oficial (Estilo *The Field*)**: `media/gnosis/shorts/thumbnails/gnosis-short-thumb-es.jpg` (1280x720, pastilla `DEPH · 04`, tarjeta glassmorphism con categoría `• GEOMETRÍA SAGRADA · 432 HZ`, título y subtítulo, cero diálogo).
+* **Portada Nativa 1080x1920 (Estilo *The Field*)**: `media/gnosis/shorts/thumbnails/gnosis-short-cover-es.jpg` (1080x1920 vertical puro, cápsula `DEPH · 04`, tarjeta central glassmorphism `¿Y SI SER LIBRE Y ESTAR ATRAPADO FUERAN LO MISMO?`, sin botón de suscribirse, cero diálogo ni karaoke).
 * **Comentario Fijado Pendiente**:
   ```text
   Con auriculares a 432 Hz. Mirá la integración geométrica completa de 12 minutos en 4K acá: https://youtu.be/i3NcqCaEsB8
@@ -49,7 +49,7 @@ Estado general: **Gnosis (Obra 04) - Completada, Masterizada y Subida en Privado
 * **YouTube Video ID**: [`nMDWT0B-fSU`](https://youtube.com/shorts/nMDWT0B-fSU) (Estado: **Privado**).
 * **Edición en Studio**: [https://studio.youtube.com/video/nMDWT0B-fSU/edit](https://studio.youtube.com/video/nMDWT0B-fSU/edit).
 * **Descripción**: Publicada en YouTube con la estructura idéntica de 5 bloques de *The Field*.
-* **Portada Oficial (Estilo *The Field*)**: `media/gnosis/shorts/thumbnails/gnosis-short-thumb-en.jpg` (1280x720, pastilla `DEPH · 04`, tarjeta glassmorphism con categoría `• SACRED GEOMETRY · 432 HZ`, título y subtítulo, cero diálogo).
+* **Portada Nativa 1080x1920 (Estilo *The Field*)**: `media/gnosis/shorts/thumbnails/gnosis-short-cover-en.jpg` (1080x1920 vertical puro, cápsula `DEPH · 04`, tarjeta central glassmorphism `WHAT IF BEING FREE AND TRAPPED WERE THE SAME?`, sin botón de suscribirse, cero diálogo ni karaoke).
 * **Comentario Fijado Pendiente**:
   ```text
   Headphones on at 432 Hz. Watch the full 12-minute geometric integration in 4K here: https://youtu.be/i3NcqCaEsB8
