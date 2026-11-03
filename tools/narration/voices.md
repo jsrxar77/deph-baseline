@@ -15,9 +15,9 @@ with a 401 until then).
 | EN (primary) | **George — Warm, Captivating Storyteller** | `JBFqnCBsd6RMkjVDRZzb` | British, male, mature, `narrative_story`, warm. |
 | EN (alt) | River — Relaxed, Neutral, Informative | `SAz9YHcvj6GT2YYXdXww` | Gender-neutral, calm, conversational — less "performed" than George. |
 
-Not yet confirmed against The Field's two Shorts: those appear to have **no spoken narration at all**
-(music only) — nothing in `brandforge-os` or this project documents a voice track for them, and no
-ElevenLabs output file exists for that piece. Asked the user to confirm 2026-10-26; unresolved.
+**Correction (2026-10-26, same day):** The Field's two Shorts were later confirmed (by extracting frames,
+not just reading the description) to have full narration after all — made in Antigravity, not with this
+tool, so no ElevenLabs output file exists for them. See `media/the-field/the-field.shorts.md`.
 
 ## Full catalog
 

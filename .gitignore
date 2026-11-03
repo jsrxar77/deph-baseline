@@ -51,3 +51,9 @@ Icon?
 
 # Graphify knowledge graph outputs
 graphify-out/
+tools/shorts/.venv/
+
+# Shorts: intermediate .wav mixes are regenerable (tools/shorts/mix-short-audio.mjs); only the mastered
+# .m4a/.mp3 are kept, same convention as Gnosis's shorts. HyperFrames' own scrubber-preview cache.
+media/*/shorts/**/*.wav
+media/*/shorts/**/.thumbnails/

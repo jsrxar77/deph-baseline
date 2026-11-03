@@ -1,0 +1,25 @@
+{
+  "durationSeconds": 46,
+  "es": {
+    "script": "¿Hace cuánto no mirás algo que no se repite ni una sola vez? Esta figura es un fractal real, no una animación en loop. Cuatro sonidos giran en ciclos que nunca coinciden, y la forma sigue desviándose, cuadro a cuadro, durante seis minutos. Cada campana que escuchás levanta exactamente el punto donde sonó, en el instante en que sonó. Afinada a 432 Hz, con una capa binaural que baja de alfa a theta mientras la pieza avanza. La forma exacta que ves en este segundo no vuelve a aparecer en los próximos seis minutos. Si eso te detuvo un segundo, mirá la pieza completa y suscribite para más.",
+    "openingLabel": "SLOW DRIFT",
+    "openingTitle": "NUNCA SE REPITE",
+    "openingSub": "Seis Minutos Sin Loop",
+    "coverTopic": "FRACTAL",
+    "closingLabel": "EXPERIMENTÁ SLOW DRIFT",
+    "closingTitle": "OBRA COMPLETA DE 6 MINUTOS EN EL CANAL",
+    "closingSub": "Si esto te detuvo, mirala completa y suscribite.",
+    "subscribeText": "SUSCRIBIRSE"
+  },
+  "en": {
+    "script": "How long since you watched something that never repeats, not even once? This shape is a real fractal, not a looping animation. Four sounds spin in cycles that never align, and the shape keeps drifting, frame by frame, for six minutes straight. Every bell you hear lifts exactly the point where it rang, at the instant it rang. Tuned to 432 Hz, with a binaural layer easing from alpha to theta as the piece unfolds. The exact shape you're seeing right now will not appear again in the next six minutes. If that stopped you for a second, watch the full piece, and subscribe for more.",
+    "openingLabel": "SLOW DRIFT",
+    "openingTitle": "IT NEVER REPEATS",
+    "openingSub": "Six Minutes, No Loop",
+    "coverTopic": "FRACTAL",
+    "closingLabel": "EXPERIENCE SLOW DRIFT",
+    "closingTitle": "FULL 6-MINUTE PIECE ON CHANNEL",
+    "closingSub": "If this stopped you, watch it in full and subscribe.",
+    "subscribeText": "SUBSCRIBE"
+  }
+}

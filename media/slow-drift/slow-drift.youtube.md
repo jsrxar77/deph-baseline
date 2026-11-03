@@ -1,6 +1,7 @@
 # Slow Drift — YouTube publish pack
 
-Status: **draft, needs the user's decisions** (see the end) · last updated 2026-09-23
+Status: **published** — https://youtu.be/QpT1q2BYEf0 (confirmed by the user 2026-11-03; this pack and the
+yaml had gone stale saying "draft" with no video ID — fixed here, not re-derived).
 Source video: `media/slow-drift/renders/slow-drift.mp4` — 6:08 (368 s), 1920x1080 at 60 fps, H.264 / AAC,
 audio mastered to -16 LUFS · Channel material: `docs/youtube-channel.md` · Rules: `youtube-publish` skill.
 Chapter times are computed from the composition yaml (arc 12/24/72/48/24 cycles at 30 cpm); re-check them if

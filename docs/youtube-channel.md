@@ -28,6 +28,16 @@ about generative music and code-made art; listeners who follow 432 Hz and binaur
 Primary phrases: "ambient meditation music", "432 Hz music", "binaural beats", "generative ambient",
 "música para meditar". Language: English for reach, Spanish as a translation (see decisions below).
 
+**Promotion/ad affinity audiences** (user-set 2026-11-03, for targeting paid promotion of deph videos —
+e.g. YouTube Ads affinity categories, not organic search targeting above):
+- Electronica & Dance Music Fans
+- World Music Fans
+- Green Living Enthusiasts
+- Health & Fitness Buffs
+- Art & Theater Aficionados
+- Sci-Fi & Fantasy Movie Fans
+- Technophiles
+
 ## Channel description (draft)
 
 **EN**
