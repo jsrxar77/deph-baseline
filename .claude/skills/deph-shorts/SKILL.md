@@ -138,10 +138,13 @@ one-off script found still hardcoded to a single piece's name.
    word count matches the script's (`<script>.trim().split(/\s+/).length`) before building the HyperFrames
    composition — a mismatch misaligns every karaoke highlight after the first gap (step 7's schema note).
 7. **Build the HyperFrames composition**: write `media/<name>/shorts/<name>-short.json` (schema below), then
-   `node tools/shorts/build-short-hyperframes.mjs --name <name> --all` — writes
+   `node tools/shorts/build-short-hyperframes.mjs --name <name> --all [--highlight-color <#hex>]` — writes
    `media/<name>/shorts/hyperframes-<lang>/index.html`, auto-grouping the script's words into 2-line karaoke
    caption cards from the Whisper timings (no hand-authored line-break indices needed, unlike the first,
-   Gnosis-only version of this script).
+   Gnosis-only version of this script). The chrome (cards, badges, subscribe pill) stays Gnosis's exact
+   layout and colors on every piece by design — but `--highlight-color` lets the karaoke word-glow carry
+   that piece's own accent (e.g. Musica Universalis's cyan, pulled from its own shader's `TURQ` color,
+   `#1AD9DB`) instead of the default purple, so the Short still reads as that piece, not a reskin.
 8. **Render**: `npx hyperframes render media/<name>/shorts/hyperframes-<lang>/ --fps 30 --quality delivery
    --output media/<name>/shorts/<name>-short-<lang>.mp4` for each language. **This consumes HyperFrames
    render credits — confirm with the user before running it**, same caution as any paid API call.

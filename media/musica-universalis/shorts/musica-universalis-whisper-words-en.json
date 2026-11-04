@@ -1,0 +1,536 @@
+[
+  {
+    "word": "How",
+    "start": 0.0,
+    "end": 0.18,
+    "probability": 0.546
+  },
+  {
+    "word": "long",
+    "start": 0.18,
+    "end": 0.4,
+    "probability": 0.996
+  },
+  {
+    "word": "has",
+    "start": 0.4,
+    "end": 0.56,
+    "probability": 0.994
+  },
+  {
+    "word": "it",
+    "start": 0.56,
+    "end": 0.72,
+    "probability": 0.997
+  },
+  {
+    "word": "been",
+    "start": 0.72,
+    "end": 0.88,
+    "probability": 0.999
+  },
+  {
+    "word": "since",
+    "start": 0.88,
+    "end": 1.14,
+    "probability": 0.987
+  },
+  {
+    "word": "your",
+    "start": 1.14,
+    "end": 1.4,
+    "probability": 0.983
+  },
+  {
+    "word": "idea",
+    "start": 1.4,
+    "end": 1.7,
+    "probability": 0.993
+  },
+  {
+    "word": "of",
+    "start": 1.7,
+    "end": 1.98,
+    "probability": 0.995
+  },
+  {
+    "word": "the",
+    "start": 1.98,
+    "end": 2.1,
+    "probability": 0.993
+  },
+  {
+    "word": "order",
+    "start": 2.1,
+    "end": 2.36,
+    "probability": 0.887
+  },
+  {
+    "word": "of",
+    "start": 2.36,
+    "end": 2.54,
+    "probability": 0.998
+  },
+  {
+    "word": "things",
+    "start": 2.54,
+    "end": 2.84,
+    "probability": 0.995
+  },
+  {
+    "word": "had",
+    "start": 2.84,
+    "end": 3.28,
+    "probability": 0.977
+  },
+  {
+    "word": "to",
+    "start": 3.28,
+    "end": 3.44,
+    "probability": 0.999
+  },
+  {
+    "word": "tune",
+    "start": 3.44,
+    "end": 3.68,
+    "probability": 0.993
+  },
+  {
+    "word": "itself",
+    "start": 3.68,
+    "end": 4.02,
+    "probability": 0.997
+  },
+  {
+    "word": "against",
+    "start": 4.02,
+    "end": 4.38,
+    "probability": 0.998
+  },
+  {
+    "word": "something",
+    "start": 4.38,
+    "end": 4.74,
+    "probability": 0.996
+  },
+  {
+    "word": "larger",
+    "start": 4.74,
+    "end": 5.06,
+    "probability": 0.998
+  },
+  {
+    "word": "than",
+    "start": 5.06,
+    "end": 5.34,
+    "probability": 0.993
+  },
+  {
+    "word": "you?",
+    "start": 5.34,
+    "end": 5.6,
+    "probability": 0.99
+  },
+  {
+    "word": "This",
+    "start": 6.26,
+    "end": 6.54,
+    "probability": 0.989
+  },
+  {
+    "word": "piece",
+    "start": 6.54,
+    "end": 6.8,
+    "probability": 0.99
+  },
+  {
+    "word": "doesn't",
+    "start": 6.8,
+    "end": 7.22,
+    "probability": 0.996
+  },
+  {
+    "word": "illustrate",
+    "start": 7.22,
+    "end": 7.62,
+    "probability": 0.987
+  },
+  {
+    "word": "an",
+    "start": 7.62,
+    "end": 7.82,
+    "probability": 0.999
+  },
+  {
+    "word": "idea.",
+    "start": 7.82,
+    "end": 8.16,
+    "probability": 0.995
+  },
+  {
+    "word": "It",
+    "start": 8.74,
+    "end": 8.86,
+    "probability": 0.994
+  },
+  {
+    "word": "builds",
+    "start": 8.86,
+    "end": 9.16,
+    "probability": 0.998
+  },
+  {
+    "word": "one,",
+    "start": 9.16,
+    "end": 9.44,
+    "probability": 0.983
+  },
+  {
+    "word": "the",
+    "start": 9.86,
+    "end": 9.96,
+    "probability": 0.921
+  },
+  {
+    "word": "cosmos",
+    "start": 9.96,
+    "end": 10.3,
+    "probability": 0.925
+  },
+  {
+    "word": "as",
+    "start": 10.3,
+    "end": 10.62,
+    "probability": 0.912
+  },
+  {
+    "word": "a",
+    "start": 10.62,
+    "end": 10.7,
+    "probability": 0.998
+  },
+  {
+    "word": "single",
+    "start": 10.7,
+    "end": 11.0,
+    "probability": 0.999
+  },
+  {
+    "word": "composition,",
+    "start": 11.0,
+    "end": 11.64,
+    "probability": 0.991
+  },
+  {
+    "word": "tuned",
+    "start": 12.32,
+    "end": 12.56,
+    "probability": 0.99
+  },
+  {
+    "word": "in",
+    "start": 12.56,
+    "end": 12.74,
+    "probability": 0.998
+  },
+  {
+    "word": "fourths",
+    "start": 12.74,
+    "end": 13.22,
+    "probability": 0.907
+  },
+  {
+    "word": "and",
+    "start": 13.22,
+    "end": 13.3,
+    "probability": 0.994
+  },
+  {
+    "word": "fifths",
+    "start": 13.3,
+    "end": 13.78,
+    "probability": 0.998
+  },
+  {
+    "word": "at",
+    "start": 13.78,
+    "end": 14.12,
+    "probability": 0.585
+  },
+  {
+    "word": "432",
+    "start": 14.12,
+    "end": 15.04,
+    "probability": 0.955
+  },
+  {
+    "word": "hertz,",
+    "start": 15.04,
+    "end": 15.38,
+    "probability": 0.175
+  },
+  {
+    "word": "the",
+    "start": 15.92,
+    "end": 16.02,
+    "probability": 0.994
+  },
+  {
+    "word": "frequency",
+    "start": 16.02,
+    "end": 16.46,
+    "probability": 0.996
+  },
+  {
+    "word": "it",
+    "start": 16.46,
+    "end": 16.7,
+    "probability": 0.996
+  },
+  {
+    "word": "chose",
+    "start": 16.7,
+    "end": 16.94,
+    "probability": 0.959
+  },
+  {
+    "word": "to",
+    "start": 16.94,
+    "end": 17.14,
+    "probability": 0.999
+  },
+  {
+    "word": "listen",
+    "start": 17.14,
+    "end": 17.36,
+    "probability": 0.995
+  },
+  {
+    "word": "at.",
+    "start": 17.36,
+    "end": 17.64,
+    "probability": 0.908
+  },
+  {
+    "word": "The",
+    "start": 18.28,
+    "end": 18.46,
+    "probability": 0.977
+  },
+  {
+    "word": "lights",
+    "start": 18.46,
+    "end": 18.64,
+    "probability": 0.97
+  },
+  {
+    "word": "you're",
+    "start": 18.64,
+    "end": 18.92,
+    "probability": 0.965
+  },
+  {
+    "word": "watching",
+    "start": 18.92,
+    "end": 19.2,
+    "probability": 0.999
+  },
+  {
+    "word": "turn",
+    "start": 19.2,
+    "end": 19.56,
+    "probability": 0.99
+  },
+  {
+    "word": "on",
+    "start": 19.56,
+    "end": 19.78,
+    "probability": 0.992
+  },
+  {
+    "word": "orbits",
+    "start": 19.78,
+    "end": 20.1,
+    "probability": 0.973
+  },
+  {
+    "word": "that",
+    "start": 20.1,
+    "end": 20.38,
+    "probability": 0.988
+  },
+  {
+    "word": "turn.",
+    "start": 20.38,
+    "end": 20.7,
+    "probability": 0.996
+  },
+  {
+    "word": "Nothing",
+    "start": 21.38,
+    "end": 21.78,
+    "probability": 0.984
+  },
+  {
+    "word": "returns",
+    "start": 21.78,
+    "end": 22.16,
+    "probability": 0.991
+  },
+  {
+    "word": "to",
+    "start": 22.16,
+    "end": 22.46,
+    "probability": 0.996
+  },
+  {
+    "word": "exactly",
+    "start": 22.46,
+    "end": 22.88,
+    "probability": 0.997
+  },
+  {
+    "word": "the",
+    "start": 22.88,
+    "end": 23.08,
+    "probability": 0.999
+  },
+  {
+    "word": "same",
+    "start": 23.08,
+    "end": 23.32,
+    "probability": 0.999
+  },
+  {
+    "word": "place,",
+    "start": 23.32,
+    "end": 23.72,
+    "probability": 0.997
+  },
+  {
+    "word": "neither",
+    "start": 24.18,
+    "end": 24.4,
+    "probability": 0.996
+  },
+  {
+    "word": "do",
+    "start": 24.4,
+    "end": 24.58,
+    "probability": 0.917
+  },
+  {
+    "word": "you,",
+    "start": 24.58,
+    "end": 24.88,
+    "probability": 0.998
+  },
+  {
+    "word": "while",
+    "start": 25.2,
+    "end": 25.34,
+    "probability": 0.997
+  },
+  {
+    "word": "you",
+    "start": 25.34,
+    "end": 25.5,
+    "probability": 0.997
+  },
+  {
+    "word": "listen",
+    "start": 25.5,
+    "end": 25.74,
+    "probability": 0.993
+  },
+  {
+    "word": "to",
+    "start": 25.74,
+    "end": 25.9,
+    "probability": 0.998
+  },
+  {
+    "word": "this.",
+    "start": 25.9,
+    "end": 26.18,
+    "probability": 0.998
+  },
+  {
+    "word": "If",
+    "start": 26.74,
+    "end": 26.98,
+    "probability": 0.99
+  },
+  {
+    "word": "something",
+    "start": 26.98,
+    "end": 27.28,
+    "probability": 0.999
+  },
+  {
+    "word": "shifted,",
+    "start": 27.28,
+    "end": 27.76,
+    "probability": 0.991
+  },
+  {
+    "word": "stay",
+    "start": 28.12,
+    "end": 28.34,
+    "probability": 0.99
+  },
+  {
+    "word": "for",
+    "start": 28.34,
+    "end": 28.52,
+    "probability": 0.94
+  },
+  {
+    "word": "the",
+    "start": 28.52,
+    "end": 28.62,
+    "probability": 0.988
+  },
+  {
+    "word": "full",
+    "start": 28.62,
+    "end": 28.82,
+    "probability": 0.993
+  },
+  {
+    "word": "piece.",
+    "start": 28.82,
+    "end": 29.22,
+    "probability": 0.988
+  },
+  {
+    "word": "Subscribe",
+    "start": 29.22,
+    "end": 30.0,
+    "probability": 0.346
+  },
+  {
+    "word": "for",
+    "start": 30.0,
+    "end": 30.36,
+    "probability": 0.922
+  },
+  {
+    "word": "what",
+    "start": 30.36,
+    "end": 30.52,
+    "probability": 0.785
+  },
+  {
+    "word": "comes",
+    "start": 30.52,
+    "end": 30.78,
+    "probability": 0.993
+  },
+  {
+    "word": "next.",
+    "start": 30.78,
+    "end": 31.12,
+    "probability": 0.997
+  }
+]

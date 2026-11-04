@@ -1,6 +1,7 @@
 # Musica Universalis — YouTube publish pack
 
-Status: **draft, needs the user's decisions** (see the end) · last updated 2026-09-28
+Status: **published** — https://youtu.be/OalleY7mVl4 (confirmed via the YouTube API 2026-11-04; this file
+and the yaml had gone stale saying "ready, not uploaded" — fixed here, not re-derived).
 Source video: `media/musica-universalis/renders/musica-universalis.mp4` — 6:08 (368.04 s), 3840x2160 at 60 fps,
 H.264 / AAC, audio mastered to -14 LUFS · Channel material: `docs/youtube-channel.md` · Rules: `youtube-publish` skill.
 Chapter times are computed from the composition yaml (arc 8/24/40/32/48/28 cycles at 30 cpm = 2 s/cycle); re-check

@@ -39,13 +39,25 @@ function parseArgs(argv) {
 
 const args = parseArgs(process.argv.slice(2));
 if (!args.name) {
-  console.error("Usage: node build-short-hyperframes.mjs --name <piece> --lang <es|en|all>");
+  console.error("Usage: node build-short-hyperframes.mjs --name <piece> --lang <es|en|all> [--highlight-color <#hex>]");
   process.exit(1);
 }
 
 const root = path.resolve(import.meta.dirname, "../..");
 const shortsDir = path.join(root, "media", args.name, "shorts");
 const audioDelay = Number(args.audioDelay || 0.9);
+
+// Per-piece karaoke highlight color: the chrome (cards, badges, subscribe pill) stays identical across
+// pieces by design (see the deph-shorts skill — Gnosis's exact layout, not reinvented per piece), but the
+// active-word glow can carry a piece's own accent so the Short still reads as that piece, not a reskin —
+// first done for Musica Universalis (cyan, pulled from its own shader's TURQ color), 2026-11-03.
+function hexToRgb(hex) {
+  const h = hex.replace("#", "");
+  return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+}
+const highlightHex = args["highlight-color"] || "#C084FC";
+const [hr, hg, hb] = hexToRgb(highlightHex);
+const highlightShadow = `0 0 24px rgba(${hr}, ${hg}, ${hb}, 0.95), 0 0 38px rgba(${hr}, ${hg}, ${hb}, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)`;
 
 // Groups a script's words (in reading order) into 2-line phrase cards, matched 1:1 against Whisper
 // word timings. Breaks a line after MAX_LINE_WORDS words or MAX_LINE_CHARS characters (whichever first),
@@ -167,7 +179,7 @@ function buildHtmlForLang(lang, config) {
     p.allWords.forEach((w) => {
       const wStart = w.startSec;
       const dur = Math.max(0.08, w.endSec - w.startSec);
-      gsapCaptions += `      tl.to("#word-${w.idx}", { color: "#C084FC", textShadow: "0 0 24px rgba(168, 85, 247, 0.95), 0 0 38px rgba(147, 51, 234, 0.75), 0 3px 12px rgba(0, 0, 0, 0.90)", duration: 0.03, ease: "none", overwrite: "auto" }, ${wStart.toFixed(3)});\n`;
+      gsapCaptions += `      tl.to("#word-${w.idx}", { color: "${highlightHex}", textShadow: "${highlightShadow}", duration: 0.03, ease: "none", overwrite: "auto" }, ${wStart.toFixed(3)});\n`;
       gsapCaptions += `      tl.to("#word-${w.idx}", { color: "#FDFBFA", textShadow: "0 3px 12px rgba(0, 0, 0, 0.85)", duration: 0.05, ease: "none", overwrite: "auto" }, ${(wStart + dur).toFixed(3)});\n`;
     });
   });

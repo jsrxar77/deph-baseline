@@ -36,6 +36,7 @@ domains:
     status: done # audio.wav (7 layers rendered in parallel with --only, summed), audio-master.wav (-16 LUFS), audio-youtube.wav (-14 LUFS, for the video), frames.json + manifest.json, analysis.json
     output: sync/
 publish:
-  status: ready # titles, description, chapters, hashtags, tags, thumbnail (musica-universalis-thumbnail.jpg) done; waiting on the user's open decisions and to actually upload
+  status: done # published — confirmed via the YouTube API 2026-11-04; was stale at "ready, not uploaded"
+  video_url: https://youtu.be/OalleY7mVl4
   file: musica-universalis.youtube.md
 doc: musica-universalis.md

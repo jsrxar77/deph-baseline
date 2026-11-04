@@ -1,0 +1,518 @@
+[
+  {
+    "word": "Cuando",
+    "start": 0.0,
+    "end": 0.22,
+    "probability": 0.655
+  },
+  {
+    "word": "fue",
+    "start": 0.22,
+    "end": 0.46,
+    "probability": 0.988
+  },
+  {
+    "word": "la",
+    "start": 0.46,
+    "end": 0.58,
+    "probability": 0.986
+  },
+  {
+    "word": "última",
+    "start": 0.58,
+    "end": 0.84,
+    "probability": 0.995
+  },
+  {
+    "word": "vez",
+    "start": 0.84,
+    "end": 1.16,
+    "probability": 0.999
+  },
+  {
+    "word": "que",
+    "start": 1.16,
+    "end": 1.42,
+    "probability": 0.948
+  },
+  {
+    "word": "tu",
+    "start": 1.42,
+    "end": 1.56,
+    "probability": 0.985
+  },
+  {
+    "word": "idea",
+    "start": 1.56,
+    "end": 1.76,
+    "probability": 0.95
+  },
+  {
+    "word": "del",
+    "start": 1.76,
+    "end": 2.04,
+    "probability": 0.664
+  },
+  {
+    "word": "orden",
+    "start": 2.04,
+    "end": 2.22,
+    "probability": 0.991
+  },
+  {
+    "word": "de",
+    "start": 2.22,
+    "end": 2.38,
+    "probability": 0.998
+  },
+  {
+    "word": "las",
+    "start": 2.38,
+    "end": 2.5,
+    "probability": 0.991
+  },
+  {
+    "word": "cosas,",
+    "start": 2.5,
+    "end": 2.86,
+    "probability": 0.992
+  },
+  {
+    "word": "tuvo",
+    "start": 3.18,
+    "end": 3.28,
+    "probability": 0.847
+  },
+  {
+    "word": "que",
+    "start": 3.28,
+    "end": 3.44,
+    "probability": 1.0
+  },
+  {
+    "word": "afinarse",
+    "start": 3.44,
+    "end": 4.0,
+    "probability": 0.809
+  },
+  {
+    "word": "contra",
+    "start": 4.0,
+    "end": 4.3,
+    "probability": 0.987
+  },
+  {
+    "word": "algo",
+    "start": 4.3,
+    "end": 4.54,
+    "probability": 0.997
+  },
+  {
+    "word": "más",
+    "start": 4.54,
+    "end": 4.78,
+    "probability": 0.972
+  },
+  {
+    "word": "grande",
+    "start": 4.78,
+    "end": 5.1,
+    "probability": 0.996
+  },
+  {
+    "word": "que",
+    "start": 5.1,
+    "end": 5.26,
+    "probability": 0.977
+  },
+  {
+    "word": "vos.",
+    "start": 5.26,
+    "end": 5.54,
+    "probability": 0.976
+  },
+  {
+    "word": "Esta",
+    "start": 6.44,
+    "end": 6.7,
+    "probability": 0.873
+  },
+  {
+    "word": "pieza",
+    "start": 6.7,
+    "end": 7.06,
+    "probability": 0.964
+  },
+  {
+    "word": "no",
+    "start": 7.06,
+    "end": 7.4,
+    "probability": 0.969
+  },
+  {
+    "word": "ilustra",
+    "start": 7.4,
+    "end": 7.86,
+    "probability": 0.958
+  },
+  {
+    "word": "una",
+    "start": 7.86,
+    "end": 8.0,
+    "probability": 0.927
+  },
+  {
+    "word": "idea,",
+    "start": 8.0,
+    "end": 8.24,
+    "probability": 0.996
+  },
+  {
+    "word": "la",
+    "start": 8.82,
+    "end": 8.94,
+    "probability": 0.964
+  },
+  {
+    "word": "construye.",
+    "start": 8.94,
+    "end": 9.58,
+    "probability": 0.983
+  },
+  {
+    "word": "El",
+    "start": 10.14,
+    "end": 10.3,
+    "probability": 0.953
+  },
+  {
+    "word": "cosmos",
+    "start": 10.3,
+    "end": 10.64,
+    "probability": 0.651
+  },
+  {
+    "word": "como",
+    "start": 10.64,
+    "end": 11.06,
+    "probability": 0.648
+  },
+  {
+    "word": "una",
+    "start": 11.06,
+    "end": 11.3,
+    "probability": 0.997
+  },
+  {
+    "word": "sola",
+    "start": 11.3,
+    "end": 11.6,
+    "probability": 0.991
+  },
+  {
+    "word": "composición,",
+    "start": 11.6,
+    "end": 12.3,
+    "probability": 0.991
+  },
+  {
+    "word": "afinada",
+    "start": 12.78,
+    "end": 13.14,
+    "probability": 0.634
+  },
+  {
+    "word": "en",
+    "start": 13.14,
+    "end": 13.26,
+    "probability": 0.929
+  },
+  {
+    "word": "cuartas",
+    "start": 13.26,
+    "end": 13.7,
+    "probability": 0.871
+  },
+  {
+    "word": "y",
+    "start": 13.7,
+    "end": 13.84,
+    "probability": 0.994
+  },
+  {
+    "word": "quintas,",
+    "start": 13.84,
+    "end": 14.34,
+    "probability": 0.944
+  },
+  {
+    "word": "a",
+    "start": 14.54,
+    "end": 14.62,
+    "probability": 0.995
+  },
+  {
+    "word": "432",
+    "start": 14.62,
+    "end": 15.7,
+    "probability": 0.974
+  },
+  {
+    "word": "sercios,",
+    "start": 15.7,
+    "end": 16.22,
+    "probability": 0.596
+  },
+  {
+    "word": "la",
+    "start": 16.66,
+    "end": 16.74,
+    "probability": 0.995
+  },
+  {
+    "word": "frecuencia",
+    "start": 16.74,
+    "end": 17.24,
+    "probability": 0.986
+  },
+  {
+    "word": "que",
+    "start": 17.24,
+    "end": 17.4,
+    "probability": 0.99
+  },
+  {
+    "word": "eligió",
+    "start": 17.4,
+    "end": 17.66,
+    "probability": 0.67
+  },
+  {
+    "word": "escuchar.",
+    "start": 17.66,
+    "end": 18.14,
+    "probability": 0.984
+  },
+  {
+    "word": "Las",
+    "start": 18.76,
+    "end": 18.9,
+    "probability": 0.928
+  },
+  {
+    "word": "luces",
+    "start": 18.9,
+    "end": 19.16,
+    "probability": 0.965
+  },
+  {
+    "word": "que",
+    "start": 19.16,
+    "end": 19.34,
+    "probability": 0.998
+  },
+  {
+    "word": "ves",
+    "start": 19.34,
+    "end": 19.5,
+    "probability": 0.957
+  },
+  {
+    "word": "giran",
+    "start": 19.5,
+    "end": 20.02,
+    "probability": 0.651
+  },
+  {
+    "word": "en",
+    "start": 20.02,
+    "end": 20.16,
+    "probability": 0.346
+  },
+  {
+    "word": "órbitas",
+    "start": 20.16,
+    "end": 20.58,
+    "probability": 0.937
+  },
+  {
+    "word": "que",
+    "start": 20.58,
+    "end": 20.74,
+    "probability": 0.882
+  },
+  {
+    "word": "también",
+    "start": 20.74,
+    "end": 21.12,
+    "probability": 0.965
+  },
+  {
+    "word": "giran.",
+    "start": 21.12,
+    "end": 21.64,
+    "probability": 0.985
+  },
+  {
+    "word": "Nada",
+    "start": 22.08,
+    "end": 22.36,
+    "probability": 0.975
+  },
+  {
+    "word": "vuelve",
+    "start": 22.36,
+    "end": 22.74,
+    "probability": 0.985
+  },
+  {
+    "word": "exactamente",
+    "start": 22.74,
+    "end": 23.18,
+    "probability": 0.949
+  },
+  {
+    "word": "al",
+    "start": 23.18,
+    "end": 23.52,
+    "probability": 0.979
+  },
+  {
+    "word": "mismo",
+    "start": 23.52,
+    "end": 23.76,
+    "probability": 0.999
+  },
+  {
+    "word": "lugar.",
+    "start": 23.76,
+    "end": 24.04,
+    "probability": 0.997
+  },
+  {
+    "word": "Vos",
+    "start": 24.66,
+    "end": 24.78,
+    "probability": 0.64
+  },
+  {
+    "word": "tampoco,",
+    "start": 24.78,
+    "end": 25.0,
+    "probability": 0.942
+  },
+  {
+    "word": "mientras",
+    "start": 25.5,
+    "end": 25.68,
+    "probability": 0.996
+  },
+  {
+    "word": "escuchas",
+    "start": 25.68,
+    "end": 26.14,
+    "probability": 0.86
+  },
+  {
+    "word": "esto.",
+    "start": 26.14,
+    "end": 26.5,
+    "probability": 0.956
+  },
+  {
+    "word": "Si",
+    "start": 26.98,
+    "end": 27.26,
+    "probability": 0.686
+  },
+  {
+    "word": "algo",
+    "start": 27.26,
+    "end": 27.44,
+    "probability": 0.986
+  },
+  {
+    "word": "se",
+    "start": 27.44,
+    "end": 27.6,
+    "probability": 0.997
+  },
+  {
+    "word": "movió",
+    "start": 27.6,
+    "end": 27.86,
+    "probability": 0.958
+  },
+  {
+    "word": "de",
+    "start": 27.86,
+    "end": 27.96,
+    "probability": 0.549
+  },
+  {
+    "word": "lugar,",
+    "start": 27.96,
+    "end": 28.24,
+    "probability": 0.978
+  },
+  {
+    "word": "quédate",
+    "start": 28.7,
+    "end": 28.98,
+    "probability": 0.926
+  },
+  {
+    "word": "con",
+    "start": 28.98,
+    "end": 29.12,
+    "probability": 0.988
+  },
+  {
+    "word": "la",
+    "start": 29.12,
+    "end": 29.24,
+    "probability": 0.996
+  },
+  {
+    "word": "obra",
+    "start": 29.24,
+    "end": 29.4,
+    "probability": 0.998
+  },
+  {
+    "word": "completa.",
+    "start": 29.4,
+    "end": 29.9,
+    "probability": 0.993
+  },
+  {
+    "word": "Suscríbete",
+    "start": 30.42,
+    "end": 30.94,
+    "probability": 0.914
+  },
+  {
+    "word": "para",
+    "start": 30.94,
+    "end": 31.14,
+    "probability": 0.983
+  },
+  {
+    "word": "las",
+    "start": 31.14,
+    "end": 31.3,
+    "probability": 0.968
+  },
+  {
+    "word": "próximas",
+    "start": 31.3,
+    "end": 31.76,
+    "probability": 0.984
+  },
+  {
+    "word": "piezas.",
+    "start": 31.76,
+    "end": 32.12,
+    "probability": 0.99
+  }
+]
